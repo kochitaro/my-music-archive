@@ -35,6 +35,14 @@ html,body{width:100%;max-width:100%;overflow-x:clip}body{position:relative}
 .field[type="date"]::-webkit-date-and-time-value{text-align:left;min-height:1em}
 #search-form .grow{min-width:0;width:0;flex:1 1 auto}
 @media(max-width:540px){.shell{width:100%;max-width:100vw}.panel{width:100%}.result{gap:8px;padding:9px}.result .art{width:52px;height:52px}.result .btn{flex:none;white-space:nowrap;padding:9px 7px;font-size:12px}}
+
+/* MMA 0.3.6.1: prevent Safari document horizontal panning.
+   Keep touch gestures available on sliders and controls. */
+html { overflow-x: hidden !important; overscroll-behavior-x: none; }
+body { overflow-x: hidden !important; overscroll-behavior-x: none; }
+.shell { overflow-x: clip; max-width: 100%; }
+.panel, #library, #search-results { max-width: 100%; min-width: 0; }
+.covergrid, .filter-fields { min-width: 0; max-width: 100%; }
 </style></head><body><main class="shell"><h1>My Music Archive</h1>
 <div class="langbar"><label for="ui-language">Language / 言語</label><select aria-label="Language" class="lang-select" id="ui-language"><option value="en">English</option><option value="ja">日本語</option></select></div>
 <nav aria-label="Archives" class="tabbar" id="sections"><button class="tab active" data-section="listening">Listening</button><button class="tab" data-section="collection">Collection</button><button class="tab" data-section="live">Live</button></nav>
