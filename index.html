@@ -65,7 +65,7 @@ body { overflow-x: hidden !important; overscroll-behavior-x: none; }
 /* v0.3.10 consistent controls */
 /* v0.3.11: editable album title and partial-safe release date selects */
 /* v0.3.12: manual Listening entry, matching Collection */
-#sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}#sections .tab{text-align:center;min-width:0}#search-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}#search-form .field,#search-btn{height:44px}#grid-tab,#list-tab{min-width:92px;flex:1;text-align:center}.filter-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}.filter-actions .btn{width:100%;height:39px}.date-parts{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:6px}.date-parts .field{padding:10px 4px;text-align:center;font-size:15px}#sort-wrap,#filters-wrap{width:100%}@media(max-width:540px){#grid-tab,#list-tab{min-width:68px}.filter-actions .btn{font-size:12px!important}#search-btn{padding-inline:12px}.panel>.row.between.wrap{gap:10px}}
+#sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}#sections .tab{text-align:center;min-width:0}#search-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}#search-form .field,#search-btn{height:44px}#grid-tab,#list-tab{min-width:92px;flex:1;text-align:center}.filter-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}.filter-actions .btn{width:100%;height:39px}.date-parts{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:6px}.date-parts .field{padding:10px 4px;text-align:center;font-size:15px}.date-parts .date-year-input{min-width:0;padding-inline:6px;font-variant-numeric:tabular-nums}#sort-wrap,#filters-wrap{width:100%}@media(max-width:540px){#grid-tab,#list-tab{min-width:68px}.filter-actions .btn{font-size:12px!important}#search-btn{padding-inline:12px}.panel>.row.between.wrap{gap:10px}}
 </style></head><body><main class="shell"><div class="brand"><div class="brandmark"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="レコード収納箱"><path d="M7 37 14 27v10H7Zm58 0-7-10v10h7Z" fill="#60788a"/><circle cx="36" cy="32" r="29" fill="#17232d"/><path d="M11 26A26 26 0 0 1 27 7M15 29A22 22 0 0 1 29 11M19 31A18 18 0 0 1 31 15" fill="none" stroke="#e8eef0" stroke-linecap="round" stroke-width="1.6"/><circle cx="36" cy="32" r="10.5" fill="#b45d4e" stroke="#e8eef0" stroke-width="1.8"/><circle cx="36" cy="32" r="1.8" fill="#f6f4ee"/><rect x="6" y="35" width="60" height="35" fill="#62798a"/><path d="M6 35h60" stroke="#f0f2f2" stroke-width="1.6"/><rect x="26" y="44" width="20" height="6" rx="2" fill="#f0f2f2"/></svg></div><h1>MY MUSIC ARCHIVE</h1></div>
 <div class="langbar"><label for="ui-language">Language / 言語</label><select aria-label="Language" class="lang-select" id="ui-language"><option value="en">English</option><option value="ja">日本語</option></select></div>
 <nav aria-label="Archives" class="tabbar" id="sections"><button class="tab active" data-section="listening">Listening</button><button class="tab" data-section="collection">Collection</button><button class="tab" data-section="live">Live</button></nav>
@@ -163,51 +163,66 @@ function validateRating(v){if(v==='')return '';const n=Number(v);if(!Number.isFi
 function toggleCondition(){$('condition-row').classList.toggle('hidden',section!=='collection'||$('format').value==='Digital')};$('format').onchange=toggleCondition;
 function resizePhoto(file){return new Promise((resolve,reject)=>{if(!file){resolve('');return}if(!file.type.startsWith('image/')){reject(Error('Please select an image.'));return}const image=new Image(),url=URL.createObjectURL(file);image.onload=()=>{try{const scale=Math.min(1,900/Math.max(image.width,image.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);URL.revokeObjectURL(url);resolve(canvas.toDataURL('image/jpeg',.7))}catch(e){reject(e)}};image.onerror=()=>{URL.revokeObjectURL(url);reject(Error('Cannot read this image.'))};image.src=url})}
 
-// Three-part date picker: explicit day selection, no silent adoption of today's day.
+// v0.3.13: Type any four-digit year; keep month/day dropdowns.
+// The stored format is unchanged: YYYY-MM-DD for events, YYYY[-MM[-DD]] for releases.
 const DATE_FIELDS=['date','live-date','e-live-date','release-edit'];
+const validYear=y=>/^\d{4}$/.test(y)&&Number(y)>0;
+const daysInMonth=(y,m)=>new Date(Number(y),Number(m),0).getDate();
 function refreshDateSelect(id){
  const input=$(id),wrap=$(id+'-parts');if(!wrap)return;
- const [y,m,d]=(input.value||'').split('-');const sels=[...wrap.querySelectorAll('select')];
- // Keep uncommon historic or future release years without silently erasing data.
- if(id==='release-edit'&&y&&/^\d{4}$/.test(y)&&![...sels[0].options].some(o=>o.value===y)){
-  sels[0].add(new Option(y,y));
- }
- sels[0].value=y||'';sels[1].value=m||'';
- const limit=y&&m?new Date(+y,+m,0).getDate():31;
- sels[2].replaceChildren(new Option(isJapanese()?'日':'day',''),...Array.from({length:limit},(_,i)=>new Option(String(i+1).padStart(2,'0'),String(i+1).padStart(2,'0'))));
- sels[2].value=d&&+d<=limit?d:'';
- if(id==='release-edit'){sels[1].disabled=!sels[0].value;sels[2].disabled=!sels[0].value||!sels[1].value;}
+ const [y='',m='',d='']=(input.value||'').split('-');
+ const [year,month,day]=wrap.querySelectorAll('.date-part');
+ year.value=y;month.value=m;
+ const limit=validYear(y)&&m?daysInMonth(y,m):31;
+ day.replaceChildren(new Option(isJapanese()?'日':'day',''),...Array.from({length:limit},(_,i)=>new Option(String(i+1).padStart(2,'0'),String(i+1).padStart(2,'0'))));
+ day.value=d&&Number(d)<=limit?d:'';
+ month.disabled=!validYear(y);day.disabled=!validYear(y)||!month.value;
+}
+function updateDateSelect(id){
+ const input=$(id),wrap=$(id+'-parts');
+ const [year,month,day]=wrap.querySelectorAll('.date-part');
+ const y=year.value.trim(),m=month.value;
+ const limit=validYear(y)&&m?daysInMonth(y,m):31,old=day.value;
+ day.replaceChildren(new Option(isJapanese()?'日':'day',''),...Array.from({length:limit},(_,i)=>new Option(String(i+1).padStart(2,'0'),String(i+1).padStart(2,'0'))));
+ day.value=old&&Number(old)<=limit?old:'';
+ month.disabled=!validYear(y);day.disabled=!validYear(y)||!m;
+ if(!validYear(y)){input.value='';return;}
+ input.value=id==='release-edit'
+  ?y+(m?'-'+m:'')+(day.value?'-'+day.value:'')
+  :(m&&day.value?[y,m,day.value].join('-'):'');
+}
+function validateDateSelect(id){
+ const [year,month,day]=$(id+'-parts').querySelectorAll('.date-part');
+ const y=year.value.trim(),m=month.value,d=day.value;
+ const what=isJapanese()?(id==='release-edit'?'発売日':'日付'):(id==='release-edit'?'release date':'date');
+ if(!y&&!m&&!d)return;
+ if(!validYear(y))throw Error(isJapanese()?what+'の年を4桁の数字で入力してください。':'Enter a valid four-digit year for the '+what+'.');
+ if(id!=='release-edit'&&(!m||!d))throw Error(isJapanese()?what+'の月と日を選択してください。':'Select a month and day for the '+what+'.');
+ if(d&&!m)throw Error(isJapanese()?what+'の月を選択してください。':'Select a month for the '+what+'.');
+ if(d&&Number(d)>daysInMonth(y,m))throw Error(isJapanese()?what+'を確認してください。':'Check the '+what+'.');
 }
 function setupDateSelects(){
  for(const id of DATE_FIELDS){
-  const input=$(id),wrap=text('div','date-parts');wrap.id=id+'-parts';const now=new Date().getFullYear();
-  for(let p=0;p<3;p++){
+  const input=$(id),wrap=text('div','date-parts');wrap.id=id+'-parts';
+  const year=document.createElement('input');
+  year.type='text';year.className='field date-part date-year-input';
+  year.setAttribute('aria-label',isJapanese()?'年':'year');
+  year.inputMode='numeric';year.maxLength=4;year.autocomplete='off';
+  year.placeholder=isJapanese()?'年（4桁）':'YYYY';
+  year.setAttribute('pattern','[0-9]{4}');
+  if(id==='release-edit')year.id='release-edit-year';
+  wrap.append(year);
+  for(let p=1;p<3;p++){
    const sel=document.createElement('select');sel.className='field date-part';
-   sel.setAttribute('aria-label',['year','month','day'][p]);
-   if(id==='release-edit'&&p===0)sel.id='release-edit-year';
+   sel.setAttribute('aria-label',isJapanese()?['年','月','日'][p]:['year','month','day'][p]);
    sel.append(new Option(isJapanese()?['年','月','日'][p]:['year','month','day'][p],''));
-   if(p===0){for(let y=now+2;y>=1900;y--)sel.add(new Option(String(y),String(y)))}
-   else if(p===1){for(let m=1;m<=12;m++)sel.add(new Option(String(m).padStart(2,'0'),String(m).padStart(2,'0')))}
+   if(p===1)for(let m=1;m<=12;m++)sel.add(new Option(String(m).padStart(2,'0'),String(m).padStart(2,'0')));
    wrap.append(sel);
-   sel.onchange=()=>{
-    const parts=[...wrap.querySelectorAll('select')];
-    if(p!==2){
-     const yy=parts[0].value,mm=parts[1].value;
-     const max=yy&&mm?new Date(+yy,+mm,0).getDate():31,old=parts[2].value;
-     parts[2].replaceChildren(new Option(isJapanese()?'日':'day',''),...Array.from({length:max},(_,i)=>new Option(String(i+1).padStart(2,'0'),String(i+1).padStart(2,'0'))));
-     parts[2].value=old&&+old<=max?old:'';
-    }
-    if(id==='release-edit'){
-     // A partial date is valid. Never invent a month or day.
-     if(!parts[0].value){parts[1].value='';parts[2].value='';}
-     if(!parts[1].value)parts[2].value='';
-     parts[1].disabled=!parts[0].value;
-     parts[2].disabled=!parts[0].value||!parts[1].value;
-     input.value=parts[0].value+(parts[1].value?'-'+parts[1].value:'')+(parts[2].value?'-'+parts[2].value:'');
-    }else input.value=parts.every(x=>x.value)?parts.map(x=>x.value).join('-'):'';
-   };
   }
-  input.insertAdjacentElement('afterend',wrap);refreshDateSelect(id);
+  input.insertAdjacentElement('afterend',wrap);
+  year.addEventListener('input',()=>updateDateSelect(id));
+  for(const sel of wrap.querySelectorAll('select'))sel.addEventListener('change',()=>updateDateSelect(id));
+  refreshDateSelect(id);
  }
 }
 setupDateSelects();
@@ -220,10 +235,10 @@ setupSuggestions();
 function prepareAlbumHelpers(creating,manual){for(const field of HELP_FIELDS){$(field+'-suggest').dataset.expanded='0';refreshSuggestion(field)}$('artwork-reveal').classList.toggle('hidden',manual);$('artwork-controls').classList.toggle('hidden',!manual);$('artwork-reveal').textContent=isJapanese()?'アートワークを変更':'Change artwork'}
 $('artwork-reveal').onclick=()=>{$('artwork-controls').classList.remove('hidden');$('artwork-reveal').classList.add('hidden')};
 
-$('save').onclick=async()=>{const isNew=section!=='live'&&!!pendingRecord;const r=isNew?pendingRecord:db[section].find(x=>(x.entryId||x.id)===editing);if(!r)return;try{const update={memo:$('memo').value};if(section==='live'){if(!$('e-live-title').value.trim())throw Error('Artist / Event Title is required.');Object.assign(update,{date:$('e-live-date').value,title:$('e-live-title').value.trim(),venue:$('e-live-venue').value,rating:validateRating($('e-live-rating').value)});if($('e-live-photo').files[0])update.photo=await resizePhoto($('e-live-photo').files[0])}else{update.artist=$('manual-artist').value.trim();update.title=$('manual-title').value.trim();if(!update.title||!update.artist)throw Error(isJapanese()?'アルバム名とアーティスト名を入力してください。':'Enter an album title and artist.');const rel=$('release-edit').value.trim();if(rel&&!/^\d{4}(-\d{2}(-\d{2})?)?$/.test(rel))throw Error(isJapanese()?'発売日の入力を確認してください。':'Check the release date.');update.release=rel;for(const k of ['date','label'])update[k]=$(k).value;update.rating=validateRating($('rating').value);update.tags=parseTags($('tags').value);update.genre='';if($('album-photo').files[0])update.photo=await resizePhoto($('album-photo').files[0]);if(section==='collection')for(const k of ['store','format','price','condition'])update[k]=$(k).value;if(update.format==='Digital')update.condition='';}const previous={...r};Object.assign(r,update);if(isNew)db[section].unshift(r);if(!saveDB()){if(isNew)db[section].shift();else Object.assign(r,previous);return}if(isNew)clearSearch();render();close()}catch(e){alert(e.message)}};
+$('save').onclick=async()=>{const isNew=section!=='live'&&!!pendingRecord;const r=isNew?pendingRecord:db[section].find(x=>(x.entryId||x.id)===editing);if(!r)return;try{validateDateSelect(section==='live'?'e-live-date':'date');if(section!=='live')validateDateSelect('release-edit');const update={memo:$('memo').value};if(section==='live'){if(!$('e-live-title').value.trim())throw Error('Artist / Event Title is required.');Object.assign(update,{date:$('e-live-date').value,title:$('e-live-title').value.trim(),venue:$('e-live-venue').value,rating:validateRating($('e-live-rating').value)});if($('e-live-photo').files[0])update.photo=await resizePhoto($('e-live-photo').files[0])}else{update.artist=$('manual-artist').value.trim();update.title=$('manual-title').value.trim();if(!update.title||!update.artist)throw Error(isJapanese()?'アルバム名とアーティスト名を入力してください。':'Enter an album title and artist.');const rel=$('release-edit').value.trim();if(rel&&!/^\d{4}(-\d{2}(-\d{2})?)?$/.test(rel))throw Error(isJapanese()?'発売日の入力を確認してください。':'Check the release date.');update.release=rel;for(const k of ['date','label'])update[k]=$(k).value;update.rating=validateRating($('rating').value);update.tags=parseTags($('tags').value);update.genre='';if($('album-photo').files[0])update.photo=await resizePhoto($('album-photo').files[0]);if(section==='collection')for(const k of ['store','format','price','condition'])update[k]=$(k).value;if(update.format==='Digital')update.condition='';}const previous={...r};Object.assign(r,update);if(isNew)db[section].unshift(r);if(!saveDB()){if(isNew)db[section].shift();else Object.assign(r,previous);return}if(isNew)clearSearch();render();close()}catch(e){alert(e.message)}};
 function close(){$('modal').classList.remove('open');editing=null;pendingRecord=null}$('close').onclick=close;$('modal').onclick=e=>{if(e.target===$('modal'))close()};$('remove-photo').onclick=()=>{const r=db.live.find(x=>x.entryId===editing);if(!r)return;const previous=r.photo;r.photo='';if(!saveDB()){r.photo=previous;return}$('existing-photo').classList.add('hidden');$('remove-photo').classList.add('hidden')};$('remove-album-photo').onclick=()=>{const r=db[section].find(x=>(x.entryId||x.id)===editing);if(!r)return;const previous=r.photo;r.photo='';if(!saveDB()){r.photo=previous;return}$('existing-album-photo').classList.add('hidden');$('remove-album-photo').classList.add('hidden')};function askDelete(){return new Promise(resolve=>{const dialog=$('delete-confirm-modal'),finish=choice=>{dialog.classList.remove('open');$('delete-accept').onclick=null;$('delete-cancel').onclick=null;resolve(choice)};$('delete-prompt').textContent=isJapanese()?'この記録を削除しますか？':'Delete this record?';$('delete-cancel').textContent=isJapanese()?'キャンセル':'Cancel';$('delete-accept').textContent=isJapanese()?'削除':'Delete';dialog.classList.add('open');$('delete-accept').onclick=()=>finish(true);$('delete-cancel').onclick=()=>finish(false)})}
 $('delete').onclick=async()=>{if(!await askDelete())return;db[section]=db[section].filter(x=>(x.entryId||x.id)!==editing);if(!saveDB())return;render();close()};
-$('live-form').onsubmit=async e=>{e.preventDefault();try{const title=$('live-title').value.trim();if(!title)return;const photo=await resizePhoto($('live-photo').files[0]);const r={entryId:newId(),title,date:$('live-date').value,venue:$('live-venue').value,rating:validateRating($('live-rating').value),memo:$('live-notes').value,photo,added:new Date().toISOString()};db.live.unshift(r);if(!saveDB()){db.live.shift();return}$('live-form').reset();refreshDateSelect('live-date');prepareRating('live-rating','');$('live-create-modal').classList.remove('open');render()}catch(err){alert(err.message)}};
+$('live-form').onsubmit=async e=>{e.preventDefault();try{validateDateSelect('live-date');const title=$('live-title').value.trim();if(!title)return;const photo=await resizePhoto($('live-photo').files[0]);const r={entryId:newId(),title,date:$('live-date').value,venue:$('live-venue').value,rating:validateRating($('live-rating').value),memo:$('live-notes').value,photo,added:new Date().toISOString()};db.live.unshift(r);if(!saveDB()){db.live.shift();return}$('live-form').reset();refreshDateSelect('live-date');prepareRating('live-rating','');$('live-create-modal').classList.remove('open');render()}catch(err){alert(err.message)}};
 const actions=text('div','filter-actions');const oldButton=$('filters-toggle');oldButton.parentElement.insertBefore(actions,oldButton);actions.append(oldButton);const sortButton=text('button','btn ghost',isJapanese()?'↕ 並べ替え':'↕ Sort');sortButton.id='sort-toggle';sortButton.type='button';sortButton.setAttribute('aria-expanded','false');sortButton.setAttribute('aria-controls','sort-wrap');actions.insertBefore(sortButton,oldButton);const sortWrap=text('div','hidden');sortWrap.id='sort-wrap';$('filters-wrap').before(sortWrap);sortWrap.append($('sort'),$('group'));oldButton.setAttribute('aria-controls','filters-wrap');oldButton.innerHTML='☷ <span id="filter-label">Filter</span> <span id="filters-icon">＋</span>';function closeSort(){sortWrap.classList.add('hidden');sortButton.setAttribute('aria-expanded','false')}function closeFilter(){$('filters-wrap').classList.add('hidden');oldButton.setAttribute('aria-expanded','false');$('filters-icon').textContent='＋'}sortButton.onclick=()=>{const open=sortWrap.classList.contains('hidden');closeFilter();sortWrap.classList.toggle('hidden',!open);sortButton.setAttribute('aria-expanded',String(open))};oldButton.onclick=()=>{const open=$('filters-wrap').classList.contains('hidden');closeSort();$('filters-wrap').classList.toggle('hidden',!open);oldButton.setAttribute('aria-expanded',String(open));$('filters-icon').textContent=open?'−':'＋'};function refreshFilterButtons(){sortButton.textContent=isJapanese()?'↕ 並べ替え':'↕ Sort';$('filter-label').textContent=isJapanese()?'絞り込み':'Filter'}document.getElementById('ui-language').addEventListener('change',refreshFilterButtons);refreshFilterButtons();
 for(const k of ['sort','group','artist-filter','genre-filter','tag-filter','label-filter','store-filter'])$(k).onchange=render;$('year-filter').oninput=render;$('release-year-filter').oninput=render;function view(v){mode=v;$('grid-tab').classList.toggle('active',v==='grid');$('list-tab').classList.toggle('active',v==='list');render()}$('grid-tab').onclick=()=>view('grid');$('list-tab').onclick=()=>view('list');
 function download(name,data,type){const url=URL.createObjectURL(new Blob([data],{type})),a=text('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000)}$('export-json').onclick=()=>download('my-music-archive-backup-v0310.json',JSON.stringify(db,null,2),'application/json');$('export-csv').onclick=()=>{const columns=['archive','title','artist','release','date','added','genre','label','rating','tags','store','format','price','condition','venue','memo','id'];const rows=Object.keys({listening:1,collection:1,live:1}).flatMap(k=>db[k].map(x=>columns.map(c=>c==='archive'?k:c==='tags'?parseTags(x.tags).join('; '):c==='id'?(x.entryId||x.id):x[c]??'')));const csv=[columns,...rows].map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');download('my-music-archive.csv','\uFEFF'+csv,'text/csv;charset=utf-8')};$('import-json').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{const incoming=migrate(JSON.parse(await f.text()));for(const k of ['listening','collection','live'])incoming[k]=incoming[k].map(x=>({...x,entryId:x.entryId||newId()}));if(!confirm(isJapanese()?'現在の記録をバックアップの内容に置き換えます。事前にバックアップを保存しましたか？':'Import '+(incoming.listening.length+incoming.collection.length+incoming.live.length)+' records? Current archive data will be replaced. Export a backup first.'))return;const old=db;db=incoming;if(!saveDB()){db=old;return}render();alert('Import completed.')}catch(err){alert('Import failed: '+err.message)}finally{e.target.value=''}};
@@ -257,9 +272,10 @@ function refreshCustomControls(){
  if(filterLabel&&filterLabel.textContent!==(ja?'絞り込み':'Filter'))filterLabel.textContent=ja?'絞り込み':'Filter';
  for(const id of ['date','live-date','e-live-date','release-edit']){
   const wrap=document.getElementById(id+'-parts');if(!wrap)continue;
-  [...wrap.querySelectorAll('select')].forEach((sel,i)=>{
-   const first=sel.options[0];if(first&&first.value===''){const desired=ja?['年','月','日'][i]:['year','month','day'][i];if(first.textContent!==desired)first.textContent=desired;}
-   const aria=ja?['年','月','日'][i]:['year','month','day'][i];if(sel.getAttribute('aria-label')!==aria)sel.setAttribute('aria-label',aria);
+  [...wrap.querySelectorAll('.date-part')].forEach((part,i)=>{
+   if(i===0)part.placeholder=ja?'年（4桁）':'YYYY';
+   else {const first=part.options[0];if(first&&first.value===''){const desired=ja?['年','月','日'][i]:['year','month','day'][i];if(first.textContent!==desired)first.textContent=desired;}}
+   const aria=ja?['年','月','日'][i]:['year','month','day'][i];if(part.getAttribute('aria-label')!==aria)part.setAttribute('aria-label',aria);
   });
  }
 }
