@@ -54,8 +54,15 @@ function mb(url){
 }
 function status(s,isError=false){$('status').textContent=s;$('status').className='status'+(isError?' error':'')}
 function query(q){return encodeURIComponent(q)}
+// MusicBrainzの別名に読みが登録されていない場合の最小限の補助辞書。
+// 作品情報は引き続きMusicBrainzから取得し、辞書は名前の解決だけに使用する。
+const artistReadingOverrides=[{reading:'おぶくろなりあき',artist:'小袋成彬'}];
+const kanaToHiragana=s=>s.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60));
 async function artistSearch(q){
   const n=norm(q);
+  const reading=kanaToHiragana(n.replace(/\s+/g,''));
+  const override=artistReadingOverrides.find(x=>reading.length>=4&&x.reading.startsWith(reading));
+  if(override&&norm(q)!==norm(override.artist))return artistSearch(override.artist);
   const escapeLucene=s=>s.replace(/[+\-!(){}\[\]^"~*?:\\/|&]/g,'\\$&');
   // MusicBrainzの「artist」検索では日本語の別名を拾えないため「alias」も明示検索。
   // 検索レスポンスにaliases配列がない場合でも、aliasヒットを候補として扱う。
