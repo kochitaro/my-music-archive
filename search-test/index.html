@@ -54,37 +54,51 @@ function mb(url){
 }
 function status(s,isError=false){$('status').textContent=s;$('status').className='status'+(isError?' error':'')}
 function query(q){return encodeURIComponent(q)}
-// MusicBrainzの別名に読みが登録されていない場合の最小限の補助辞書。
-// 作品情報は引き続きMusicBrainzから取得し、辞書は名前の解決だけに使用する。
-const artistReadingOverrides=[{reading:'おぶくろなりあき',artist:'小袋成彬'}];
+// 個別アーティスト辞書には依存せず、MusicBrainzに登録された名前・別名・ソート名を検索する。
 const kanaToHiragana=s=>s.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60));
+const hiraganaToKana=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));
+const searchNorm=s=>kanaToHiragana(norm(s)).replace(/\s+/g,'');
+const luceneEscape=s=>s.replace(/[+\-!(){}\[\]^"~*?:\\/|&]/g,'\\$&');
 async function artistSearch(q){
-  const n=norm(q);
-  const reading=kanaToHiragana(n.replace(/\s+/g,''));
-  const override=artistReadingOverrides.find(x=>reading.length>=4&&x.reading.startsWith(reading));
-  if(override&&norm(q)!==norm(override.artist))return artistSearch(override.artist);
-  const escapeLucene=s=>s.replace(/[+\-!(){}\[\]^"~*?:\\/|&]/g,'\\$&');
-  // MusicBrainzの「artist」検索では日本語の別名を拾えないため「alias」も明示検索。
-  // 検索レスポンスにaliases配列がない場合でも、aliasヒットを候補として扱う。
-  const phrase=escapeLucene(q.trim());
-  const exactQuery=`artist:"${phrase}" OR alias:"${phrase}"`;
-  const exactData=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(exactQuery)}&fmt=json&limit=50`);
-  const candidates=exactData.artists||[];
-  const exact=candidates.filter(a=>norm(a.name)===n||(a.aliases||[]).some(x=>norm(x.name)===n));
-  if(exact.length)return exact.sort((a,b)=>(b.score||0)-(a.score||0));
-  // Luceneの別名一致で高評価の候補を採用する（別名配列が返らない場合の対策）。
-  const high=candidates.filter(a=>Number(a.score||0)>=85);
-  if(high.length)return high.slice(0,8);
-  if(n.length<3)return [];
-  // 英語名などの先頭部分一致も残す。
-  const words=n.split(/\s+/).filter(Boolean);
-  if(words.length>8)return [];
-  const lucene=words.map(w=>`(artist:${escapeLucene(w)}* OR alias:${escapeLucene(w)}*)`).join(' AND ');
-  const data=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(lucene)}&fmt=json&limit=100`);
-  return (data.artists||[]).filter(a=>[a.name,...(a.aliases||[]).map(x=>x.name)].some(name=>norm(name).startsWith(n))||Number(a.score||0)>=90).sort((a,b)=>{
-    const rank=a=>norm(a.name).startsWith(n)?0:1;
-    return rank(a)-rank(b)||(b.score||0)-(a.score||0);
-  }).slice(0,15);
+  const term=q.trim(), n=searchNorm(term);
+  if(!n)return [];
+  const variants=[...new Set([term,kanaToHiragana(term),hiraganaToKana(term)])];
+  const fields=['artist','alias','sortname'];
+  const namesOf=a=>[a.name,a['sort-name'],...(a.aliases||[]).flatMap(x=>[x.name,x['sort-name']])].filter(Boolean);
+  const quality=a=>{
+    const names=namesOf(a).map(searchNorm);
+    if(names.some(v=>v===n))return 3;
+    if(names.some(v=>v.startsWith(n)))return 2;
+    return 0;
+  };
+  const raw=[];
+  const collect=arr=>{for(const a of arr||[])if(a?.id&&!raw.some(x=>x.id===a.id))raw.push(a)};
+  // Generic searchable fields: primary names, aliases, and main artist sort names.
+  const quoted=variants.map(v=>'('+fields.map(f=>`${f}:"${luceneEscape(v)}"`).join(' OR ')+')').join(' OR ');
+  collect((await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(quoted)}&fmt=json&limit=100`)).artists);
+  if(!raw.some(a=>quality(a)>=2)&&n.length>=2){
+    const pref=variants.map(v=>'('+v.split(/\s+/).filter(Boolean).map(w=>'('+fields.map(f=>`${f}:${luceneEscape(w)}*`).join(' OR ')+')').join(' AND ')+')').join(' OR ');
+    collect((await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(pref)}&fmt=json&limit=100`)).artists);
+  }
+  // Search response aliases can be missing/incomplete; enrich only plausible top candidates.
+  const candidates=raw.sort((a,b)=>Number(b.score||0)-Number(a.score||0)).slice(0,15);
+  const detailed=[];
+  for(const a of candidates){
+    let v=a;
+    // One artist per lookup; MusicBrainz may expose alias sort names here even if not in search results.
+    if(!Array.isArray(a.aliases)){
+      const details=await mb(`https://musicbrainz.org/ws/2/artist/${encodeURIComponent(a.id)}?inc=aliases&fmt=json`);
+      v={...a,aliases:details.aliases||[]};
+    }
+    if(quality(v))detailed.push(v);
+  }
+  // The server may find a spelling variant without sending a matching alias. Preserve strong
+  // results as a fallback, but never mistake unrelated low-score hits for the right artist.
+  if(!detailed.length){
+    const strong=candidates.filter(a=>Number(a.score||0)>=95);
+    return strong.slice(0,5);
+  }
+  return detailed.sort((a,b)=>quality(b)-quality(a)||Number(b.score||0)-Number(a.score||0)).slice(0,15);
 }
 async function browseArtist(id,seq){let all=[];for(let offset=0;offset<600;offset+=100){const data=await mb(`https://musicbrainz.org/ws/2/release-group/?artist=${encodeURIComponent(id)}&fmt=json&limit=100&offset=${offset}`);if(seq!==state.request)return null;all.push(...(data['release-groups']||[]));if((data['release-groups']||[]).length<100)break;}const seen=new Set();return all.filter(x=>{if(!['Album','EP','Single'].includes(x['primary-type']))return false;if(seen.has(x.id))return false;seen.add(x.id);return true}).sort(sorter)}
 async function titleSearch(q){const data=await mb(`https://musicbrainz.org/ws/2/release-group/?query=${query('releasegroup:"'+q.replace(/"/g,'')+'"')}&fmt=json&limit=100`);const arr=data['release-groups']||[];arr.sort((a,b)=>Number(norm(b.title)===norm(q))-Number(norm(a.title)===norm(q))||(b.score||0)-(a.score||0)||sorter(a,b));return arr}
