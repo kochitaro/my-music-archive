@@ -16,17 +16,25 @@ function status(s,isError=false){$('status').textContent=s;$('status').className
 function query(q){return encodeURIComponent(q)}
 async function artistSearch(q){
   const n=norm(q);
-  const exactData=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query('artist:"'+q.replace(/"/g,'')+'"')}&fmt=json&limit=25`);
-  const exact=(exactData.artists||[]).filter(x=>norm(x.name)===n||(x.aliases||[]).some(a=>norm(a.name)===n));
-  if(exact.length)return exact.sort((a,b)=>(b.score||0)-(a.score||0));
-  // 該当なしの場合、名前の先頭数語から検索。例: "cho co pa" → "cho co pa co cho co quin quin"。
-  // 前方一致の最終判定はクライアント側で実行し、部分文字列の誤一致を防ぐ。
-  const words=n.split(/\s+/).filter(Boolean);
-  if(n.length<3||words.length>8)return [];
   const escapeLucene=s=>s.replace(/[+\-!(){}\[\]^"~*?:\\/|&]/g,'\\$&');
-  const lucene=words.map(w=>'artist:'+escapeLucene(w)+'*').join(' AND ');
+  // MusicBrainzの「artist」検索では日本語の別名を拾えないため「alias」も明示検索。
+  // 検索レスポンスにaliases配列がない場合でも、aliasヒットを候補として扱う。
+  const phrase=escapeLucene(q.trim());
+  const exactQuery=`artist:"${phrase}" OR alias:"${phrase}"`;
+  const exactData=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(exactQuery)}&fmt=json&limit=50`);
+  const candidates=exactData.artists||[];
+  const exact=candidates.filter(a=>norm(a.name)===n||(a.aliases||[]).some(x=>norm(x.name)===n));
+  if(exact.length)return exact.sort((a,b)=>(b.score||0)-(a.score||0));
+  // Luceneの別名一致で高評価の候補を採用する（別名配列が返らない場合の対策）。
+  const high=candidates.filter(a=>Number(a.score||0)>=85);
+  if(high.length)return high.slice(0,8);
+  if(n.length<3)return [];
+  // 英語名などの先頭部分一致も残す。
+  const words=n.split(/\s+/).filter(Boolean);
+  if(words.length>8)return [];
+  const lucene=words.map(w=>`(artist:${escapeLucene(w)}* OR alias:${escapeLucene(w)}*)`).join(' AND ');
   const data=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(lucene)}&fmt=json&limit=100`);
-  return (data.artists||[]).filter(a=>[a.name,...(a.aliases||[]).map(x=>x.name)].some(name=>norm(name).startsWith(n))).sort((a,b)=>{
+  return (data.artists||[]).filter(a=>[a.name,...(a.aliases||[]).map(x=>x.name)].some(name=>norm(name).startsWith(n))||Number(a.score||0)>=90).sort((a,b)=>{
     const rank=a=>norm(a.name).startsWith(n)?0:1;
     return rank(a)-rank(b)||(b.score||0)-(a.score||0);
   }).slice(0,15);
