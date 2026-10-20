@@ -14,7 +14,23 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));let lastCall=0;
 async function mb(url){const delay=Math.max(0,1100-(Date.now()-lastCall));if(delay)await sleep(delay);lastCall=Date.now();const res=await fetch(url,{headers:{Accept:'application/json'}});if(!res.ok)throw new Error(`MusicBrainz HTTP ${res.status}`);return res.json()}
 function status(s,isError=false){$('status').textContent=s;$('status').className='status'+(isError?' error':'')}
 function query(q){return encodeURIComponent(q)}
-async function artistSearch(q){const data=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query('artist:"'+q.replace(/"/g,'')+'"')}&fmt=json&limit=15`);return (data.artists||[]).filter(x=>norm(x.name)===norm(q)|| (x.aliases||[]).some(a=>norm(a.name)===norm(q))).sort((a,b)=>(b.score||0)-(a.score||0))}
+async function artistSearch(q){
+  const n=norm(q);
+  const exactData=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query('artist:"'+q.replace(/"/g,'')+'"')}&fmt=json&limit=25`);
+  const exact=(exactData.artists||[]).filter(x=>norm(x.name)===n||(x.aliases||[]).some(a=>norm(a.name)===n));
+  if(exact.length)return exact.sort((a,b)=>(b.score||0)-(a.score||0));
+  // 該当なしの場合、名前の先頭数語から検索。例: "cho co pa" → "cho co pa co cho co quin quin"。
+  // 前方一致の最終判定はクライアント側で実行し、部分文字列の誤一致を防ぐ。
+  const words=n.split(/\s+/).filter(Boolean);
+  if(n.length<3||words.length>8)return [];
+  const escapeLucene=s=>s.replace(/[+\-!(){}\[\]^"~*?:\\/|&]/g,'\\$&');
+  const lucene=words.map(w=>'artist:'+escapeLucene(w)+'*').join(' AND ');
+  const data=await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(lucene)}&fmt=json&limit=100`);
+  return (data.artists||[]).filter(a=>[a.name,...(a.aliases||[]).map(x=>x.name)].some(name=>norm(name).startsWith(n))).sort((a,b)=>{
+    const rank=a=>norm(a.name).startsWith(n)?0:1;
+    return rank(a)-rank(b)||(b.score||0)-(a.score||0);
+  }).slice(0,15);
+}
 async function browseArtist(id,seq){let all=[];for(let offset=0;offset<600;offset+=100){const data=await mb(`https://musicbrainz.org/ws/2/release-group/?artist=${encodeURIComponent(id)}&fmt=json&limit=100&offset=${offset}`);if(seq!==state.request)return null;all.push(...(data['release-groups']||[]));if((data['release-groups']||[]).length<100)break;}const seen=new Set();return all.filter(x=>{if(!['Album','EP','Single'].includes(x['primary-type']))return false;if(seen.has(x.id))return false;seen.add(x.id);return true}).sort(sorter)}
 async function titleSearch(q){const data=await mb(`https://musicbrainz.org/ws/2/release-group/?query=${query('releasegroup:"'+q.replace(/"/g,'')+'"')}&fmt=json&limit=100`);const arr=data['release-groups']||[];arr.sort((a,b)=>Number(norm(b.title)===norm(q))-Number(norm(a.title)===norm(q))||(b.score||0)-(a.score||0)||sorter(a,b));return arr}
 function render(){const items=state.items.slice(0,state.visible);const root=$('results');root.replaceChildren();for(const item of items){const article=document.createElement('article');article.className='result';const ttl=document.createElement('div');ttl.className='title';ttl.textContent=item.title||'(no title)';const m=document.createElement('div');m.className='meta';const artist=(item['artist-credit']||[]).map(x=>typeof x==='string'?x:(x.name||x.artist?.name||'')).join('');m.textContent=[artist,item['primary-type']||'Unknown',item['first-release-date']||'発売日不明'].filter(Boolean).join(' · ');article.append(ttl,m);root.append(article)}$('loadMore').style.display=state.items.length>state.visible?'block':'none';if(state.items.length)status(`${state.mode}：${state.items.length}件を取得・整理、${items.length}件表示`);else if(state.mode)status('該当する作品が見つかりませんでした。')}
