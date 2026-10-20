@@ -10,8 +10,48 @@ const norm=s=>(s||'').normalize('NFKC').toLocaleLowerCase().replace(/[’‘]/g,
 const date=s=>/^\d{4}(-\d{2}){0,2}$/.test(s||'')?s:'';
 const typeRank=t=>({Album:0,EP:1,Single:2})[t]??3;
 const sorter=(a,b)=>typeRank(a['primary-type'])-typeRank(b['primary-type'])||date(b['first-release-date']).localeCompare(date(a['first-release-date']))||a.title.localeCompare(b.title);
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));let lastCall=0;
-async function mb(url){const delay=Math.max(0,1100-(Date.now()-lastCall));if(delay)await sleep(delay);lastCall=Date.now();const res=await fetch(url,{headers:{Accept:'application/json'}});if(!res.ok)throw new Error(`MusicBrainz HTTP ${res.status}`);return res.json()}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+// API呼び出しは検索ボタンの連打や再試行も含めて直列化する。
+let lastCall=0,apiQueue=Promise.resolve();
+const apiCache=new Map(),pending=new Map(),CACHE_MS=5*60*1000,CACHE_LIMIT=180;
+let retryNotice='';
+function mb(url){
+  const cached=apiCache.get(url);
+  if(cached&&Date.now()-cached.at<CACHE_MS)return Promise.resolve(cached.data);
+  if(pending.has(url))return pending.get(url);
+  const job=apiQueue.catch(()=>{}).then(async()=>{
+    for(let attempt=0;attempt<4;attempt++){
+      const interval=Math.max(0,1250-(Date.now()-lastCall));
+      if(interval)await sleep(interval);
+      lastCall=Date.now();
+      let response;
+      try{response=await fetch(url,{headers:{Accept:'application/json'}})}
+      catch(e){
+        if(attempt===3)throw new Error('通信できません。接続を確認して再検索してください');
+        retryNotice=`通信が不安定です。${attempt+1}/3 回目の再試行を待っています…`;
+        status(retryNotice);await sleep(2000*(attempt+1));continue;
+      }
+      if(response.ok){
+        const data=await response.json();
+        apiCache.set(url,{data,at:Date.now()});
+        if(apiCache.size>CACHE_LIMIT)apiCache.delete(apiCache.keys().next().value);
+        retryNotice='';return data;
+      }
+      if(![429,502,503,504].includes(response.status)||attempt===3){
+        throw new Error(`MusicBrainz HTTP ${response.status}${attempt===3?'（再試行しても復旧しませんでした）':''}`);
+      }
+      const retryAfter=response.headers.get('Retry-After');
+      const numeric=retryAfter&&/^\d+(?:\.\d+)?$/.test(retryAfter.trim())?Number(retryAfter)*1000:null;
+      const wait=Math.min(15000,Math.max(2000*(attempt+1),numeric||0));
+      retryNotice=`MusicBrainzが混雑しています（HTTP ${response.status}）。${attempt+1}/3 回目の再試行まで約${Math.ceil(wait/1000)}秒…`;
+      status(retryNotice);await sleep(wait);
+    }
+  });
+  apiQueue=job.catch(()=>{});
+  pending.set(url,job);
+  job.finally(()=>pending.delete(url)).catch(()=>{});
+  return job;
+}
 function status(s,isError=false){$('status').textContent=s;$('status').className='status'+(isError?' error':'')}
 function query(q){return encodeURIComponent(q)}
 async function artistSearch(q){
