@@ -12,6 +12,13 @@ const sort=(a,b)=>rank(a)-rank(b)||(b['first-release-date']||'').localeCompare(a
 const unique=items=>{const seen=new Set();return items.filter(r=>r?.id&&!seen.has(r.id)&&seen.add(r.id))};
 function credit(r){return (r['artist-credit']||[]).map(a=>typeof a==='string'?a:(a.name||a.artist?.name||'')+(a.joinphrase||'')).join('').trim()}
 function current(ctx){if(ctx?.isCurrent&&!ctx.isCurrent())throw new Error('Search superseded')}
+function artistQuality(q,a){
+  const n=searchNorm(q),names=[a.name,a['sort-name'],...(a.aliases||[]).flatMap(x=>[x.name,x['sort-name']])].filter(Boolean).map(searchNorm);
+  if(names.some(v=>v===n))return 3;
+  // Short prefixes still require a registered name match. Ambiguous matches are selected by the user.
+  const ratios=n.length>=2?names.filter(v=>v.startsWith(n)).map(v=>n.length/v.length):[];
+  return ratios.length?1+Math.max(...ratios):0;
+}
 function url(entity,params){return BASE+entity+'?'+new URLSearchParams({...params,fmt:'json'})}
 let queue=Promise.resolve(),lastCall=0;
 const cache=new Map(),pending=new Map();
@@ -56,26 +63,26 @@ function request(address,ctx){
 async function artistSearch(q,ctx){
   const term=norm(q),n=searchNorm(term);if(!n)return [];
   const variants=[...new Set([term,hira(term),kata(term)])],fields=['artist','alias','sortname'];
-  const names=a=>[a.name,a['sort-name'],...(a.aliases||[]).flatMap(x=>[x.name,x['sort-name']])].filter(Boolean).map(searchNorm);
-  const quality=a=>names(a).some(v=>v===n)?3:(n.length>=4&&names(a).some(v=>v.startsWith(n)&&n.length/v.length>=0.6)&&Number(a.score)>=90?2:0);
+  const quality=a=>artistQuality(q,a);
+  const ordered=arr=>unique(arr).filter(a=>quality(a)).sort((a,b)=>quality(b)-quality(a)||Number(b.score||0)-Number(a.score||0));
   const quoted=variants.map(v=>'('+fields.map(f=>`${f}:"${escape(v)}"`).join(' OR ')+')').join(' OR ');
   let raw=(await request(url('artist/',{query:quoted,limit:100}),ctx)).artists||[];current(ctx);
   if(!raw.some(a=>quality(a))&&n.length>=2){
     const prefix=variants.map(v=>'('+v.split(/\s+/).filter(Boolean).map(w=>'('+fields.map(f=>`${f}:${escape(w)}*`).join(' OR ')+')').join(' AND ')+')').join(' OR ');
     raw=unique([...raw,...((await request(url('artist/',{query:prefix,limit:100}),ctx)).artists||[])]);current(ctx);
   }
-  if(raw.some(a=>quality(a)===3))return raw.filter(a=>quality(a)).sort((a,b)=>quality(b)-quality(a)||Number(b.score||0)-Number(a.score||0)).slice(0,15);
-  const detailed=[];
+  if(raw.some(a=>quality(a)===3))return ordered(raw);
+  const detailed=raw.filter(a=>quality(a));
   for(const a of raw.sort((a,b)=>Number(b.score||0)-Number(a.score||0)).slice(0,15)){
     let v=a;
     if(!Array.isArray(a.aliases)){
       const details=await request(url('artist/'+encodeURIComponent(a.id),{inc:'aliases'}),ctx);current(ctx);
       v={...a,...details,score:a.score};
     }
-    if(quality(v))detailed.push(v);
+    if(quality(v)){const i=detailed.findIndex(x=>x.id===v.id);if(i>=0)detailed[i]=v;else detailed.push(v)}
   }
   // A server score alone cannot establish an artist match (e.g. a band containing a person's name).
-  return detailed.sort((a,b)=>quality(b)-quality(a)||Number(b.score||0)-Number(a.score||0)).slice(0,15);
+  return ordered(detailed);
 }
 async function browseArtist(id,ctx){
   let all=[],offset=0;
@@ -91,11 +98,16 @@ async function titlePage(q,offset=0,ctx){
   const query=`releasegroup:"${escape(q.trim())}" AND (primarytype:album OR primarytype:ep OR primarytype:single)`;
   const data=await request(url('release-group/',{query,limit:100,offset}),ctx);current(ctx);
   const raw=data['release-groups']||[],next=offset+raw.length,total=Number(data.count??data['release-group-count']);
-  return {items:unique(raw),offset:next,exhausted:!raw.length||(Number.isFinite(total)?next>=total:raw.length<100)};
+  const items=unique(raw).sort((a,b)=>Number(searchNorm(b.title)===searchNorm(q))-Number(searchNorm(a.title)===searchNorm(q))||Number(b.score||0)-Number(a.score||0));
+  return {items,offset:next,exhausted:!raw.length||(Number.isFinite(total)?next>=total:raw.length<100)};
 }
-async function start(q,ctx){
+async function start(q,ctx,mode='auto'){
+  if(mode==='title')return {mode:'title',...(await titlePage(q,0,ctx))};
   const artists=await artistSearch(q,ctx);current(ctx);
-  if(artists.length)return {mode:'artist',artist:artists[0],items:await browseArtist(artists[0].id,ctx),offset:0,exhausted:true};
+  const exact=artists.filter(a=>artistQuality(q,a)===3),choices=exact.length?exact:artists;
+  if(choices.length>1)return {mode:'candidates',candidates:choices,items:[],offset:0,exhausted:true};
+  if(choices.length)return {mode:'artist',artist:choices[0],items:await browseArtist(choices[0].id,ctx),offset:0,exhausted:true};
+  if(mode==='artist')return {mode:'artist',items:[],offset:0,exhausted:true};
   return {mode:'title',...(await titlePage(q,0,ctx))};
 }
 async function ensureCredit(r,ctx){

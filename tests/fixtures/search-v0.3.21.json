@@ -1,0 +1,1795 @@
+{
+  "MMA nonexistent qzxvkwp 0321": {
+    "count": 0,
+    "offset": 0,
+    "created": "2026-10-21T06:44:40.159Z",
+    "release-groups": []
+  },
+  "Hard Life": {
+    "count": 34,
+    "offset": 0,
+    "created": "2026-10-21T06:44:38.351Z",
+    "release-groups": [
+      {
+        "id": "ba57aa52-a77d-4610-a0cb-6b4b879b0b83",
+        "title": "Hard Life",
+        "score": 100,
+        "primary-type": "EP",
+        "first-release-date": "2017-08-25",
+        "artist-credit": [
+          {
+            "name": "The Barefoot Bandit"
+          }
+        ]
+      },
+      {
+        "id": "38ba30ca-9121-4f73-bd68-93beb098f194",
+        "title": "HARD LIFE",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2025-03-27",
+        "artist-credit": [
+          {
+            "name": "NLE Choppa",
+            "joinphrase": " feat. "
+          },
+          {
+            "name": "Carey Washington"
+          }
+        ]
+      },
+      {
+        "id": "8403c72a-7b86-49ae-9851-ecde401e6f47",
+        "title": "Hard Life",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2021-07-07",
+        "artist-credit": [
+          {
+            "name": "Pip Millett"
+          }
+        ]
+      },
+      {
+        "id": "31ea1682-6670-41de-9c54-ae31c4d345d4",
+        "title": "Hard Life",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2012-05-03",
+        "artist-credit": [
+          {
+            "name": "Clarkson"
+          }
+        ]
+      },
+      {
+        "id": "730dc435-4ea6-4dc3-a7cd-adb26ccc21ca",
+        "title": "Hard Life",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2021-10-08",
+        "artist-credit": [
+          {
+            "name": "Y.E.B.O.K"
+          }
+        ]
+      },
+      {
+        "id": "77260831-c7f3-4ffa-9e12-9ef0e720acab",
+        "title": "Hard Life",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2019-04-19",
+        "artist-credit": [
+          {
+            "name": "The YD"
+          }
+        ]
+      },
+      {
+        "id": "0a98aef3-f59d-3636-912e-f5184682d7d3",
+        "title": "Hard Life",
+        "score": 90,
+        "primary-type": "Album",
+        "first-release-date": "1998-07-20",
+        "artist-credit": [
+          {
+            "name": "Sharkey"
+          }
+        ]
+      },
+      {
+        "id": "9444f7d0-da97-4e24-bf06-4b58dfdf1880",
+        "title": "Hard Life",
+        "score": 90,
+        "primary-type": "Album",
+        "first-release-date": "2003",
+        "artist-credit": [
+          {
+            "name": "Mick Ronson"
+          }
+        ]
+      },
+      {
+        "id": "cda89808-ae0f-4103-a050-4a87c3c87db1",
+        "title": "Hard Life",
+        "score": 90,
+        "primary-type": "Album",
+        "first-release-date": "2014-08-22",
+        "artist-credit": [
+          {
+            "name": "Section 5"
+          }
+        ]
+      },
+      {
+        "id": "9d70b2b8-3236-48d8-a706-da2882fb3d9e",
+        "title": "Hard Life",
+        "score": 90,
+        "primary-type": "Album",
+        "first-release-date": "2016-03-10",
+        "artist-credit": [
+          {
+            "name": "Danny Vash and Nite Wolf"
+          }
+        ]
+      },
+      {
+        "id": "80532e5a-4aab-4e25-a20f-a475fc417898",
+        "title": "Hard Life",
+        "score": 90,
+        "primary-type": "Album",
+        "first-release-date": "1989",
+        "artist-credit": [
+          {
+            "name": "The Jokers"
+          }
+        ]
+      },
+      {
+        "id": "e5282d0f-f1ad-4deb-a7f2-7611ba68bb01",
+        "title": "Hard Life",
+        "score": 90,
+        "primary-type": "Album",
+        "first-release-date": "2011-08-16",
+        "artist-credit": [
+          {
+            "name": "Big Eyes"
+          }
+        ]
+      },
+      {
+        "id": "73714ff9-11a6-4a71-8abf-af9466156b4c",
+        "title": "Hard Life",
+        "score": 90,
+        "primary-type": "Album",
+        "first-release-date": "2026-09-11",
+        "artist-credit": [
+          {
+            "name": "The Tubs"
+          }
+        ]
+      },
+      {
+        "id": "395242d6-8b4c-41ef-9039-4b2b57fc762f",
+        "title": "Hard Life EP",
+        "score": 89,
+        "primary-type": "EP",
+        "first-release-date": "1992",
+        "artist-credit": [
+          {
+            "name": "Atomic Blue"
+          }
+        ]
+      },
+      {
+        "id": "0fa24234-3d23-4726-815e-be0328aab23d",
+        "title": "Livin' the Hard Life",
+        "score": 80,
+        "primary-type": "EP",
+        "first-release-date": "2007-07",
+        "artist-credit": [
+          {
+            "name": "T-Junction",
+            "joinphrase": " & "
+          },
+          {
+            "name": "Osiris"
+          }
+        ]
+      },
+      {
+        "id": "edabb555-81b3-4546-a9cc-d6dd4a99ad06",
+        "title": "Hard Life Blues",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2000-10-24",
+        "artist-credit": [
+          {
+            "name": "Roy Lanham & the Whippoorwills"
+          }
+        ]
+      },
+      {
+        "id": "3c240b2b-9273-4d13-bb4c-e4ee8da64658",
+        "title": "The Hard Life",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2007",
+        "artist-credit": [
+          {
+            "name": "Stallion"
+          }
+        ]
+      },
+      {
+        "id": "1e4db97b-2247-44b5-9467-2c15783928fd",
+        "title": "GOOD GUY HARD LIFE",
+        "score": 75,
+        "primary-type": "Single",
+        "first-release-date": "2023-03-30",
+        "artist-credit": [
+          {
+            "name": "Hank Heaven"
+          }
+        ]
+      },
+      {
+        "id": "d21665e2-abc7-3abe-b2d4-d25b17ccd258",
+        "title": "It's a Hard Life",
+        "score": 75,
+        "primary-type": "Single",
+        "first-release-date": "1984",
+        "artist-credit": [
+          {
+            "name": "Omega Tribe"
+          }
+        ]
+      },
+      {
+        "id": "b551809a-e3a6-3cc7-8639-704fc3aacafa",
+        "title": "It’s a Hard Life",
+        "score": 75,
+        "primary-type": "Single",
+        "first-release-date": "1984-07-06",
+        "artist-credit": [
+          {
+            "name": "Queen"
+          }
+        ]
+      },
+      {
+        "id": "4a431ebf-00f6-4a5e-9c0f-8d60c49e299d",
+        "title": "It’s a Hard Life",
+        "score": 71,
+        "primary-type": "Album",
+        "first-release-date": "2019-03-01",
+        "artist-credit": [
+          {
+            "name": "Ruby Lovett"
+          }
+        ]
+      },
+      {
+        "id": "b420c50a-498e-40d4-ab8f-000253fea168",
+        "title": "It's A Hard Life",
+        "score": 71,
+        "primary-type": "Album",
+        "first-release-date": "2024-09-17",
+        "artist-credit": [
+          {
+            "name": "The Atlantics",
+            "joinphrase": " with "
+          },
+          {
+            "name": "Johnny Rebb"
+          }
+        ]
+      },
+      {
+        "id": "e3b3436b-79b7-4c8a-bc79-ecc5a3cdcfb0",
+        "title": "Hard Life Rockin' Chair",
+        "score": 71,
+        "primary-type": "Album",
+        "first-release-date": "1973",
+        "artist-credit": [
+          {
+            "name": "Paul Geremia"
+          }
+        ]
+      },
+      {
+        "id": "3439e605-a672-3930-8172-e006b411d512",
+        "title": "Hard Life Heavy Music",
+        "score": 71,
+        "primary-type": "Album",
+        "first-release-date": "2001",
+        "artist-credit": [
+          {
+            "name": "Various Artists"
+          }
+        ]
+      },
+      {
+        "id": "d0daf10d-4c40-48f0-9905-be3a1ebe2027",
+        "title": "The Medley / Hard Life",
+        "score": 68,
+        "primary-type": "Single",
+        "first-release-date": "2000",
+        "artist-credit": [
+          {
+            "name": "Nigel Richards"
+          }
+        ]
+      },
+      {
+        "id": "01080fb6-fb63-452a-b500-488c636b06ea",
+        "title": "Knock Hard... Life Is Deaf",
+        "score": 64,
+        "primary-type": "Album",
+        "first-release-date": "1997",
+        "artist-credit": [
+          {
+            "name": "Chumbawamba"
+          }
+        ]
+      },
+      {
+        "id": "c39d67f8-77c0-4704-8f5d-c7d770f5ae50",
+        "title": "It's a Hard Life, Chief",
+        "score": 64,
+        "primary-type": "Album",
+        "first-release-date": "2022-06-07",
+        "artist-credit": [
+          {
+            "name": "Mok"
+          }
+        ]
+      },
+      {
+        "id": "09be6904-89cd-36b9-8cf2-2c3705285580",
+        "title": "Hard Life Heavy Music II",
+        "score": 64,
+        "primary-type": "Album",
+        "first-release-date": "2003",
+        "artist-credit": [
+          {
+            "name": "Various Artists"
+          }
+        ]
+      },
+      {
+        "id": "e4a2edd6-09e0-4af5-b03a-c050f51af422",
+        "title": "Hard Life / Theme for Thelma",
+        "score": 63,
+        "primary-type": "Single",
+        "first-release-date": "1981",
+        "artist-credit": [
+          {
+            "name": "The Clue"
+          }
+        ]
+      },
+      {
+        "id": "b047bb26-7fd5-4fba-8d90-a7253f94c344",
+        "title": "It's A Hard Life Wherever You Go",
+        "score": 58,
+        "primary-type": "Single",
+        "first-release-date": "1989",
+        "artist-credit": [
+          {
+            "name": "Nanci Griffith"
+          }
+        ]
+      },
+      {
+        "id": "59206024-22cf-4178-9c72-ae4e970b4dd4",
+        "title": "the hard life of a yaoi fangirl",
+        "score": 58,
+        "primary-type": "Single",
+        "first-release-date": "2009-01-18",
+        "artist-credit": [
+          {
+            "name": "maychanxfate"
+          }
+        ]
+      },
+      {
+        "id": "e396fd97-9982-4ffb-bfcc-a3c6db0cebe5",
+        "title": "It's a Hard Life (live in Paderborn)",
+        "score": 58,
+        "primary-type": "Single",
+        "first-release-date": "2026-05-05",
+        "artist-credit": [
+          {
+            "name": "FEX"
+          }
+        ]
+      },
+      {
+        "id": "d0af11d2-6720-328c-ad71-64fe77ad0e2f",
+        "title": "Hard Life Heavy Music - Metallection III",
+        "score": 54,
+        "primary-type": "Album",
+        "first-release-date": "2004",
+        "artist-credit": [
+          {
+            "name": "Various Artists"
+          }
+        ]
+      },
+      {
+        "id": "e054b8ba-8e3e-36ba-b583-4995d381c029",
+        "title": "The Hard Life / That’s When Your Heartaches Begin",
+        "score": 51,
+        "primary-type": "Single",
+        "first-release-date": "1966",
+        "artist-credit": [
+          {
+            "name": "The Goodtimes"
+          }
+        ]
+      }
+    ]
+  },
+  "Punisher": {
+    "count": 58,
+    "offset": 0,
+    "created": "2026-10-21T06:44:36.190Z",
+    "release-groups": [
+      {
+        "id": "32fe7e03-f89a-3540-8736-40e2a6154b84",
+        "title": "Punisher",
+        "score": 100,
+        "primary-type": "EP",
+        "first-release-date": "1991",
+        "artist-credit": [
+          {
+            "name": "Underground Resistance"
+          }
+        ]
+      },
+      {
+        "id": "cbc7efa6-502c-4ca7-8202-4257a7d90810",
+        "title": "Punisher",
+        "score": 100,
+        "primary-type": "EP",
+        "first-release-date": "2025-10-10",
+        "artist-credit": [
+          {
+            "name": "Zigi SC",
+            "joinphrase": ", "
+          },
+          {
+            "name": "Prdk",
+            "joinphrase": " & "
+          },
+          {
+            "name": "Phenom & Discharge"
+          }
+        ]
+      },
+      {
+        "id": "78a1a4ba-d151-3274-9126-90954f11dd43",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2006-09-04",
+        "artist-credit": [
+          {
+            "name": "Pinch"
+          }
+        ]
+      },
+      {
+        "id": "0e06d2df-887e-4202-8248-acee8d42fb4c",
+        "title": "punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2020-01-17",
+        "artist-credit": [
+          {
+            "name": "Gabriel Black"
+          }
+        ]
+      },
+      {
+        "id": "35cc078d-4a22-4875-afd1-bd533076a4a4",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2021-05-25",
+        "artist-credit": [
+          {
+            "name": "Brojob",
+            "joinphrase": " feat. "
+          },
+          {
+            "name": "John Robert C."
+          }
+        ]
+      },
+      {
+        "id": "f4a86f51-4b4b-44aa-afea-8c4c7d6b84a7",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2020-04-17",
+        "artist-credit": [
+          {
+            "name": "Armin van Buuren",
+            "joinphrase": " & "
+          },
+          {
+            "name": "Fatum"
+          }
+        ]
+      },
+      {
+        "id": "710a20b8-d37f-45c7-b968-b4c87ac61240",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2017-09-22",
+        "artist-credit": [
+          {
+            "name": "The Scratch"
+          }
+        ]
+      },
+      {
+        "id": "d477c201-79f9-421c-8ef0-c2e000286594",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2005-07",
+        "artist-credit": [
+          {
+            "name": "Digital Kid",
+            "joinphrase": " Vs "
+          },
+          {
+            "name": "Danny B"
+          }
+        ]
+      },
+      {
+        "id": "05859050-44a7-4e97-bafe-77da4832d09e",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2020-04-24",
+        "artist-credit": [
+          {
+            "name": "Dollie Rot"
+          }
+        ]
+      },
+      {
+        "id": "9279e8b5-66a8-46e8-9bdb-829f5882e7c2",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2025-07-17",
+        "artist-credit": [
+          {
+            "name": "TRAKA",
+            "joinphrase": " + "
+          },
+          {
+            "name": "Oddkut"
+          }
+        ]
+      },
+      {
+        "id": "95042d2d-111c-4b95-8445-7d511977e563",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2025-09-09",
+        "artist-credit": [
+          {
+            "name": "Devi McCallion"
+          }
+        ]
+      },
+      {
+        "id": "45bbc452-d18d-424d-b900-8deb2d0fb513",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2026-09-04",
+        "artist-credit": [
+          {
+            "name": "Tyrant"
+          }
+        ]
+      },
+      {
+        "id": "71771f45-9909-43a4-a747-4c00f1d95db0",
+        "title": "Punisher",
+        "score": 94,
+        "primary-type": "Single",
+        "first-release-date": "2026-06-12",
+        "artist-credit": [
+          {
+            "name": "Mercy Girl"
+          }
+        ]
+      },
+      {
+        "id": "c5ffbd40-96f2-4a75-96ed-cf86c44a39bc",
+        "title": "Punisher",
+        "score": 91,
+        "primary-type": "Album",
+        "first-release-date": "2004",
+        "artist-credit": [
+          {
+            "name": "Narkoleptik"
+          }
+        ]
+      },
+      {
+        "id": "d4a037ce-9fea-4831-ad99-1776e3b9fade",
+        "title": "Punisher",
+        "score": 91,
+        "primary-type": "Album",
+        "first-release-date": "2020-11-29",
+        "artist-credit": [
+          {
+            "name": "Stefan Biniak"
+          }
+        ]
+      },
+      {
+        "id": "cf75fd5a-ca84-4371-94d7-27410360f06b",
+        "title": "Punisher",
+        "score": 91,
+        "primary-type": "Album",
+        "first-release-date": "2020-06-18",
+        "artist-credit": [
+          {
+            "name": "Phoebe Bridgers"
+          }
+        ]
+      },
+      {
+        "id": "84b1fd78-e811-4535-83a0-7856e13a77e6",
+        "title": "Capital Punisher",
+        "score": 87,
+        "primary-type": "EP",
+        "first-release-date": "2017-12-05",
+        "artist-credit": [
+          {
+            "name": "Monument of Misanthropy"
+          }
+        ]
+      },
+      {
+        "id": "807a1ef3-9714-4fb3-a85b-3f9235f0343b",
+        "title": "Punisher EP",
+        "score": 87,
+        "primary-type": "EP",
+        "first-release-date": "2017-06-05",
+        "artist-credit": [
+          {
+            "name": "Prophet"
+          }
+        ]
+      },
+      {
+        "id": "43a11a1d-63d2-4c00-9eb2-c0c91d1791fd",
+        "title": "Street Punisher",
+        "score": 87,
+        "primary-type": "EP",
+        "first-release-date": "2023-07-18",
+        "artist-credit": [
+          {
+            "name": "Mark Cronenberg"
+          }
+        ]
+      },
+      {
+        "id": "c6c760c1-11c0-3399-b811-227c8f30f15a",
+        "title": "The Punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2006-09-12",
+        "artist-credit": [
+          {
+            "name": "Zen-Kei"
+          }
+        ]
+      },
+      {
+        "id": "46fefcfd-9545-4f81-a552-3a35d17076c8",
+        "title": "Punisher (Remixes)",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2006-11-27",
+        "artist-credit": [
+          {
+            "name": "Pinch"
+          }
+        ]
+      },
+      {
+        "id": "289def8d-b18e-434c-a24d-97e1cc14a225",
+        "title": "The Punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2006",
+        "artist-credit": [
+          {
+            "name": "Midgard"
+          }
+        ]
+      },
+      {
+        "id": "fdc8864d-fb23-4228-a143-cd75a279b1e4",
+        "title": "The Punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2010-04-09",
+        "artist-credit": [
+          {
+            "name": "The Satan"
+          }
+        ]
+      },
+      {
+        "id": "0f3cb89a-f212-4956-8bca-787953aa1e85",
+        "title": "Blaue Punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2022-08-05",
+        "artist-credit": [
+          {
+            "name": "Teuterekordz"
+          }
+        ]
+      },
+      {
+        "id": "5f9e55ca-0991-4462-9b46-63c5da22ea2d",
+        "title": "Каратель (Punisher)",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2020-12-01",
+        "artist-credit": [
+          {
+            "name": "Война Осколков"
+          }
+        ]
+      },
+      {
+        "id": "570f3877-7a7e-4a2a-b823-3c9c42a4dba3",
+        "title": "Палач (Punisher)",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2019-07-24",
+        "artist-credit": [
+          {
+            "name": "Война Осколков"
+          }
+        ]
+      },
+      {
+        "id": "fbc7e5d0-7adb-4ca9-9d43-db6257b4f1a2",
+        "title": "The Punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2016-11-04",
+        "artist-credit": [
+          {
+            "name": "Lucius"
+          }
+        ]
+      },
+      {
+        "id": "224fb5b5-4782-4068-959d-f18625552a96",
+        "title": "Pussy Punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2020-05-02",
+        "artist-credit": [
+          {
+            "name": "J-Pimp"
+          }
+        ]
+      },
+      {
+        "id": "35c6efb5-6d14-455c-9718-c7e37865aae3",
+        "title": "the punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2026-02-27",
+        "artist-credit": [
+          {
+            "name": "LØLØ"
+          }
+        ]
+      },
+      {
+        "id": "47f6b2a6-757d-4cb2-adc8-5c79e16f48b3",
+        "title": "SHOOTER (Punisher)",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2026-09-25",
+        "artist-credit": [
+          {
+            "name": "Rustage",
+            "joinphrase": " feat. "
+          },
+          {
+            "name": "DizzyEight"
+          }
+        ]
+      },
+      {
+        "id": "5a0161a4-9635-4755-8277-a870e82af08d",
+        "title": "Heaven Punisher",
+        "score": 82,
+        "primary-type": "Single",
+        "first-release-date": "2026",
+        "artist-credit": [
+          {
+            "name": "Dusqk"
+          }
+        ]
+      },
+      {
+        "id": "6219c587-f9a6-31c4-b504-76cc72f23e59",
+        "title": "The Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2004-06-15",
+        "artist-credit": [
+          {
+            "name": "Carlo Siliotto"
+          }
+        ]
+      },
+      {
+        "id": "a2232b51-92f4-4cb4-9b09-fedd5be299c2",
+        "title": "The Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2016-08-10",
+        "artist-credit": [
+          {
+            "name": "Seventh Sense"
+          }
+        ]
+      },
+      {
+        "id": "a107762d-25a5-4d9a-a37f-6d390d251043",
+        "title": "Polish Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2025-01-31",
+        "artist-credit": [
+          {
+            "name": "Rewind"
+          }
+        ]
+      },
+      {
+        "id": "ebec13d9-a0ca-4cab-80a3-f5210eaf0267",
+        "title": "The Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2017-11-17",
+        "artist-credit": [
+          {
+            "name": "Tyler Bates"
+          }
+        ]
+      },
+      {
+        "id": "3668e4bc-d37a-4b9f-8e18-01aa7df83598",
+        "title": "The Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2018-05-19",
+        "artist-credit": [
+          {
+            "name": "下村陽子",
+            "joinphrase": " & "
+          },
+          {
+            "name": "阿部功"
+          }
+        ]
+      },
+      {
+        "id": "ba1a1c65-ea53-48ab-b4e8-cd06b506f756",
+        "title": "The Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2005-10-18",
+        "artist-credit": [
+          {
+            "name": "Dennis Dreith"
+          }
+        ]
+      },
+      {
+        "id": "abee9611-a6b0-4d79-a02b-621634fae8fa",
+        "title": "Party Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2025-05-23",
+        "artist-credit": [
+          {
+            "name": "Cool Sounds"
+          }
+        ]
+      },
+      {
+        "id": "080f1775-f2b2-4d98-bcf9-a9bf941f1fa2",
+        "title": "Sco Punisher",
+        "score": 79,
+        "primary-type": "Album",
+        "first-release-date": "2018-01-17",
+        "artist-credit": [
+          {
+            "name": "Brasco"
+          }
+        ]
+      },
+      {
+        "id": "3c5c46bd-0eaa-4864-a88b-eadb23542424",
+        "title": "Ski Masked Punisher",
+        "score": 77,
+        "primary-type": "EP",
+        "first-release-date": "2021",
+        "artist-credit": [
+          {
+            "name": "Subservient Perversity"
+          }
+        ]
+      },
+      {
+        "id": "910c3a9f-15b2-4489-9e0d-2e38c5328017",
+        "title": "PunisHER Volume 2",
+        "score": 77,
+        "primary-type": "EP",
+        "first-release-date": "2020-10-31",
+        "artist-credit": [
+          {
+            "name": "Lil MC"
+          }
+        ]
+      },
+      {
+        "id": "c1f46316-71fe-408e-9d04-01e329724230",
+        "title": "Night City Punisher",
+        "score": 72,
+        "primary-type": "Single",
+        "first-release-date": "2013-10-26",
+        "artist-credit": [
+          {
+            "name": "Beatbox Machinery"
+          }
+        ]
+      },
+      {
+        "id": "845097f4-0a8f-485d-ae22-e65253c20cca",
+        "title": "JACKAL & PUNISHER",
+        "score": 72,
+        "primary-type": "Single",
+        "first-release-date": "2026-08-05",
+        "artist-credit": [
+          {
+            "name": "Dani Kiyoko",
+            "joinphrase": " feat. "
+          },
+          {
+            "name": "d0llywood1"
+          }
+        ]
+      },
+      {
+        "id": "c3b158f7-9895-4d34-8cc7-a6e231843dd4",
+        "title": "Excessive Size Punisher",
+        "score": 69,
+        "primary-type": "Album",
+        "first-release-date": "2000",
+        "artist-credit": [
+          {
+            "name": "Cock E.S.P."
+          }
+        ]
+      },
+      {
+        "id": "a693cff7-9e9a-4446-9df1-1f948f23294a",
+        "title": "Punisher: War Zone",
+        "score": 69,
+        "primary-type": "Album",
+        "first-release-date": "2008-12-30",
+        "artist-credit": [
+          {
+            "name": "Michael Wandmacher"
+          }
+        ]
+      },
+      {
+        "id": "c1b91b94-45ae-4fb0-b809-a6096867ae78",
+        "title": "Beat Punisher 2",
+        "score": 69,
+        "primary-type": "Album",
+        "first-release-date": "2021-01-18",
+        "artist-credit": [
+          {
+            "name": "Stu Bangas"
+          }
+        ]
+      },
+      {
+        "id": "dc5b3da3-cd9f-41cf-b404-04526d045425",
+        "title": "Polish Punisher II",
+        "score": 69,
+        "primary-type": "Album",
+        "first-release-date": "2026-06-01",
+        "artist-credit": [
+          {
+            "name": "Polish Punisher"
+          }
+        ]
+      },
+      {
+        "id": "3aeb049f-5aaf-366c-ad13-48e5c86c8fb4",
+        "title": "Punisher: War Zone",
+        "score": 69,
+        "primary-type": "Album",
+        "first-release-date": "2008-11-25",
+        "artist-credit": [
+          {
+            "name": "Various Artists"
+          }
+        ]
+      },
+      {
+        "id": "ee20e519-64f7-4f51-8d20-6d8c36eccb2a",
+        "title": "Tormentor❌Punisher Official Soundtrack",
+        "score": 62,
+        "primary-type": "Album",
+        "first-release-date": "2017-05-31",
+        "artist-credit": [
+          {
+            "name": "Joonas Turner"
+          }
+        ]
+      },
+      {
+        "id": "978a4fb6-12b6-4fa8-a5c4-62a718f154fe",
+        "title": "Call to the Punisher",
+        "score": 62,
+        "primary-type": "Album",
+        "first-release-date": "2008-10-29",
+        "artist-credit": [
+          {
+            "name": "Sin Starlett"
+          }
+        ]
+      },
+      {
+        "id": "e6b53bd1-f1a2-4e84-9981-c62c254281e0",
+        "title": "The Punisher: Season 2",
+        "score": 62,
+        "primary-type": "Album",
+        "first-release-date": "2019-01-18",
+        "artist-credit": [
+          {
+            "name": "Tyler Bates"
+          }
+        ]
+      },
+      {
+        "id": "87e25af4-bc06-386f-95e0-1787a81d5b67",
+        "title": "The Punisher: The Album",
+        "score": 62,
+        "primary-type": "Album",
+        "first-release-date": "2004-03-22",
+        "artist-credit": [
+          {
+            "name": "Various Artists"
+          }
+        ]
+      },
+      {
+        "id": "6b7143ce-439f-420b-badf-ffca08a95eb6",
+        "title": "Punisher / Carsick (softer version)",
+        "score": 59,
+        "primary-type": "Single",
+        "first-release-date": "2024-10-15",
+        "artist-credit": [
+          {
+            "name": "K.Flay"
+          }
+        ]
+      },
+      {
+        "id": "d4f2f8c7-5ee3-4ed7-aa74-e4a3c2bac905",
+        "title": "The Beat Punisher, Vol. 1",
+        "score": 56,
+        "primary-type": "Album",
+        "first-release-date": "2019-09-30",
+        "artist-credit": [
+          {
+            "name": "Stu Bangas"
+          }
+        ]
+      },
+      {
+        "id": "d67b4e26-9961-41fc-a7fe-f9150f96307d",
+        "title": "Drugs (D.K. the Punisher remix)",
+        "score": 54,
+        "primary-type": "Single",
+        "first-release-date": "2015-08-27",
+        "artist-credit": [
+          {
+            "name": "Anderson .Paak"
+          }
+        ]
+      },
+      {
+        "id": "a05086d3-2835-467f-ac91-6a9a84a19b66",
+        "title": "THE PUNISHER Original Video Game Soundtrack",
+        "score": 51,
+        "primary-type": "Album",
+        "first-release-date": "2006",
+        "artist-credit": [
+          {
+            "name": "Sonic Fuel"
+          }
+        ]
+      },
+      {
+        "id": "1f319d9c-2f53-4f7d-96a2-435dbca3ec12",
+        "title": "Bong‐Ra vs. Gore Tech vs. Author & Punisher",
+        "score": 49,
+        "primary-type": "EP",
+        "first-release-date": "2014-05-16",
+        "artist-credit": [
+          {
+            "name": "Bong‐Ra",
+            "joinphrase": " vs. "
+          },
+          {
+            "name": "Gore Tech",
+            "joinphrase": " vs. "
+          },
+          {
+            "name": "Author & Punisher"
+          }
+        ]
+      },
+      {
+        "id": "6e407bad-77db-4826-8102-8dd515e071db",
+        "title": "The Punisher: One Last Kill (Original Soundtrack)",
+        "score": 47,
+        "primary-type": "Album",
+        "first-release-date": "2026-05-15",
+        "artist-credit": [
+          {
+            "name": "Kris Bowers"
+          }
+        ]
+      }
+    ]
+  },
+  "大比良-prefix": {
+    "count": 0,
+    "offset": 0,
+    "created": "2026-10-21T06:44:34.527Z",
+    "artists": []
+  },
+  "大比良": {
+    "count": 1,
+    "offset": 0,
+    "created": "2026-10-21T06:44:32.807Z",
+    "artists": [
+      {
+        "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+        "name": "大比良瑞希",
+        "sort-name": "Ohira, Mizuki",
+        "score": 100
+      }
+    ]
+  },
+  "大比良瑞希": {
+    "count": 1,
+    "offset": 0,
+    "created": "2026-10-21T06:44:30.829Z",
+    "artists": [
+      {
+        "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+        "name": "大比良瑞希",
+        "sort-name": "Ohira, Mizuki",
+        "score": 100
+      }
+    ]
+  },
+  "ナンバーガール": {
+    "count": 1,
+    "offset": 0,
+    "created": "2026-10-21T06:44:29.233Z",
+    "artists": [
+      {
+        "id": "808fe413-ff00-4a68-99fe-0ab265a7e2be",
+        "name": "NUMBER GIRL",
+        "sort-name": "NUMBER GIRL",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "ナンバーガール",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "ナンバーガール",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "NUMBERGIRL",
+            "name": "NUMBERGIRL",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Number Girl",
+            "name": "Number Girl",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ],
+        "country": "JP"
+      }
+    ]
+  },
+  "Number Girl": {
+    "count": 1,
+    "offset": 0,
+    "created": "2026-10-21T06:44:27.431Z",
+    "artists": [
+      {
+        "id": "808fe413-ff00-4a68-99fe-0ab265a7e2be",
+        "name": "NUMBER GIRL",
+        "sort-name": "NUMBER GIRL",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "ナンバーガール",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "ナンバーガール",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "NUMBERGIRL",
+            "name": "NUMBERGIRL",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Number Girl",
+            "name": "Number Girl",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ],
+        "country": "JP"
+      }
+    ]
+  },
+  "Haruomi Hosono": {
+    "count": 2,
+    "offset": 0,
+    "created": "2026-10-21T06:44:25.360Z",
+    "artists": [
+      {
+        "id": "5ec5826a-b5a8-4f72-8ef4-ecf195eeadb7",
+        "name": "細野晴臣＆イエロー・マジック・バンド",
+        "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono and The Yellow Magic Band",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          }
+        ],
+        "country": "JP",
+        "disambiguation": "precursor to Hosono’s Yellow Magic Orchestra"
+      },
+      {
+        "id": "078be324-de92-4c72-9371-65bdcf324154",
+        "name": "細野晴臣",
+        "sort-name": "Hosono, Haruomi",
+        "score": 97,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "fr",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Harry",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Harry Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ホソノ ハルオミ",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "細野晴臣",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Nishihara, Shuna",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "西原朱夏",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Uno, Shusui",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "宇野主水",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほそのはるおみ",
+            "name": "ほそのはるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "細野 晴臣",
+            "name": "細野 晴臣",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "HOSONO Haruomi",
+            "name": "HOSONO Haruomi",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほその はるおみ",
+            "name": "ほその はるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ],
+        "country": "JP"
+      }
+    ]
+  },
+  "細野晴臣": {
+    "count": 2,
+    "offset": 0,
+    "created": "2026-10-21T06:44:23.193Z",
+    "artists": [
+      {
+        "id": "078be324-de92-4c72-9371-65bdcf324154",
+        "name": "細野晴臣",
+        "sort-name": "Hosono, Haruomi",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "fr",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Harry",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Harry Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ホソノ ハルオミ",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "細野晴臣",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Nishihara, Shuna",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "西原朱夏",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Uno, Shusui",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "宇野主水",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほそのはるおみ",
+            "name": "ほそのはるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "細野 晴臣",
+            "name": "細野 晴臣",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "HOSONO Haruomi",
+            "name": "HOSONO Haruomi",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほその はるおみ",
+            "name": "ほその はるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ],
+        "country": "JP"
+      },
+      {
+        "id": "5ec5826a-b5a8-4f72-8ef4-ecf195eeadb7",
+        "name": "細野晴臣＆イエロー・マジック・バンド",
+        "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+        "score": 52,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono and The Yellow Magic Band",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          }
+        ],
+        "country": "JP",
+        "disambiguation": "precursor to Hosono’s Yellow Magic Orchestra"
+      }
+    ]
+  },
+  "ohira-works": {
+    "release-group-count": 10,
+    "release-group-offset": 0,
+    "release-groups": [
+      {
+        "id": "34889e69-849f-411e-8511-6f7991644d73",
+        "title": "Little Woman",
+        "primary-type": "Album",
+        "first-release-date": "2022-03-30",
+        "artist-credit": [
+          {
+            "joinphrase": "",
+            "name": "大比良瑞希",
+            "artist": {
+              "sort-name": "Ohira, Mizuki",
+              "country": "JP",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "name": "大比良瑞希",
+              "type": "Person",
+              "disambiguation": "",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c"
+            }
+          }
+        ]
+      },
+      {
+        "id": "3fa6bb84-3455-40fb-bbee-e1f8e8a60885",
+        "title": "After All, All Mine",
+        "primary-type": "Album",
+        "first-release-date": "2025-02-19",
+        "artist-credit": [
+          {
+            "joinphrase": "",
+            "name": "大比良瑞希",
+            "artist": {
+              "type": "Person",
+              "name": "大比良瑞希",
+              "sort-name": "Ohira, Mizuki",
+              "country": "JP",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "disambiguation": "",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5370cea9-18ba-427a-a8d0-9777682a95bd",
+        "title": "HOWLING LOVE",
+        "primary-type": "Album",
+        "first-release-date": "2023-09-27",
+        "artist-credit": [
+          {
+            "artist": {
+              "disambiguation": "",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+              "name": "大比良瑞希",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "country": "JP",
+              "sort-name": "Ohira, Mizuki",
+              "type": "Person"
+            },
+            "joinphrase": "",
+            "name": "大比良瑞希"
+          }
+        ]
+      },
+      {
+        "id": "5f8ce88b-02fe-40d0-83b0-92ee86ef8c9e",
+        "title": "TRUE ROMANCE",
+        "primary-type": "Album",
+        "first-release-date": "2016-07-06",
+        "artist-credit": [
+          {
+            "artist": {
+              "disambiguation": "",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "country": "JP",
+              "sort-name": "Ohira, Mizuki",
+              "name": "大比良瑞希",
+              "type": "Person"
+            },
+            "name": "大比良瑞希",
+            "joinphrase": ""
+          }
+        ]
+      },
+      {
+        "id": "63c7a28d-a029-4912-b5fe-16dd4087182d",
+        "title": "LOVEBIRDS",
+        "primary-type": "Single",
+        "first-release-date": "2023-02-22",
+        "artist-credit": [
+          {
+            "artist": {
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+              "disambiguation": "",
+              "type": "Person",
+              "name": "大比良瑞希",
+              "sort-name": "Ohira, Mizuki",
+              "country": "JP",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+            },
+            "joinphrase": "",
+            "name": "大比良瑞希"
+          }
+        ]
+      },
+      {
+        "id": "90e454c2-eb41-4615-b512-c524050c9052",
+        "title": "理想の沼",
+        "primary-type": "Single",
+        "first-release-date": "2023-09-13",
+        "artist-credit": [
+          {
+            "joinphrase": " feat. ",
+            "name": "大比良瑞希",
+            "artist": {
+              "disambiguation": "",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+              "name": "大比良瑞希",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "country": "JP",
+              "sort-name": "Ohira, Mizuki",
+              "type": "Person"
+            }
+          },
+          {
+            "artist": {
+              "name": "CHICO CARLITO",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "country": null,
+              "sort-name": "CHICO CARLITO",
+              "type": "Person",
+              "id": "503b0813-6e52-457f-ab11-e0360e4d70a9",
+              "disambiguation": ""
+            },
+            "name": "CHICO CARLITO",
+            "joinphrase": ""
+          }
+        ]
+      },
+      {
+        "id": "97f26d93-be91-4366-b18d-0fe95d675da9",
+        "title": "いとしさ",
+        "primary-type": "Single",
+        "first-release-date": "2023-07-05",
+        "artist-credit": [
+          {
+            "artist": {
+              "type": "Person",
+              "name": "大比良瑞希",
+              "sort-name": "Ohira, Mizuki",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "country": "JP",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+              "disambiguation": ""
+            },
+            "joinphrase": "",
+            "name": "大比良瑞希"
+          }
+        ]
+      },
+      {
+        "id": "ac942d15-97a7-4d4a-837e-8e9d3766746b",
+        "title": "unify",
+        "primary-type": "EP",
+        "first-release-date": "2018-09-05",
+        "artist-credit": [
+          {
+            "artist": {
+              "name": "大比良瑞希",
+              "sort-name": "Ohira, Mizuki",
+              "country": "JP",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "type": "Person",
+              "disambiguation": "",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c"
+            },
+            "joinphrase": "",
+            "name": "大比良瑞希"
+          }
+        ]
+      },
+      {
+        "id": "b4873e34-f23d-4c7a-a3c4-220220d4ee62",
+        "title": "I WANNA 罠?",
+        "primary-type": "Single",
+        "first-release-date": "2023-08-02",
+        "artist-credit": [
+          {
+            "artist": {
+              "name": "大比良瑞希",
+              "country": "JP",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "sort-name": "Ohira, Mizuki",
+              "type": "Person",
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+              "disambiguation": ""
+            },
+            "name": "大比良瑞希",
+            "joinphrase": ""
+          }
+        ]
+      },
+      {
+        "id": "cc3483a0-588e-49c6-bacc-80fc2b89f9a7",
+        "title": "IN ANY WAY",
+        "primary-type": "Album",
+        "first-release-date": "2020-06-03",
+        "artist-credit": [
+          {
+            "artist": {
+              "id": "40e0546a-9359-4d1f-b085-bebbbc8ac46c",
+              "disambiguation": "",
+              "type": "Person",
+              "name": "大比良瑞希",
+              "country": "JP",
+              "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+              "sort-name": "Ohira, Mizuki"
+            },
+            "joinphrase": "",
+            "name": "大比良瑞希"
+          }
+        ]
+      }
+    ]
+  }
+}
