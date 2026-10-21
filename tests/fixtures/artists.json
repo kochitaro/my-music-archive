@@ -1,0 +1,334 @@
+{
+  "Number Girl": {
+    "artists": [
+      {
+        "id": "808fe413-ff00-4a68-99fe-0ab265a7e2be",
+        "name": "NUMBER GIRL",
+        "sort-name": "NUMBER GIRL",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "ナンバーガール",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "ナンバーガール",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "NUMBERGIRL",
+            "name": "NUMBERGIRL",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Number Girl",
+            "name": "Number Girl",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ]
+      }
+    ]
+  },
+  "ナンバーガール": {
+    "artists": [
+      {
+        "id": "808fe413-ff00-4a68-99fe-0ab265a7e2be",
+        "name": "NUMBER GIRL",
+        "sort-name": "NUMBER GIRL",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "ナンバーガール",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "ナンバーガール",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "NUMBERGIRL",
+            "name": "NUMBERGIRL",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Number Girl",
+            "name": "Number Girl",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ]
+      }
+    ]
+  },
+  "細野晴臣": {
+    "artists": [
+      {
+        "id": "078be324-de92-4c72-9371-65bdcf324154",
+        "name": "細野晴臣",
+        "sort-name": "Hosono, Haruomi",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "fr",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Harry",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Harry Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ホソノ ハルオミ",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "細野晴臣",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Nishihara, Shuna",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "西原朱夏",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Uno, Shusui",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "宇野主水",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほそのはるおみ",
+            "name": "ほそのはるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "細野 晴臣",
+            "name": "細野 晴臣",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "HOSONO Haruomi",
+            "name": "HOSONO Haruomi",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほその はるおみ",
+            "name": "ほその はるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ]
+      },
+      {
+        "id": "5ec5826a-b5a8-4f72-8ef4-ecf195eeadb7",
+        "name": "細野晴臣＆イエロー・マジック・バンド",
+        "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+        "score": 52,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono and The Yellow Magic Band",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          }
+        ]
+      }
+    ]
+  },
+  "Haruomi Hosono": {
+    "artists": [
+      {
+        "id": "5ec5826a-b5a8-4f72-8ef4-ecf195eeadb7",
+        "name": "細野晴臣＆イエロー・マジック・バンド",
+        "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+        "score": 100,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi and The Yellow Magic Band",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono and The Yellow Magic Band",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          }
+        ]
+      },
+      {
+        "id": "078be324-de92-4c72-9371-65bdcf324154",
+        "name": "細野晴臣",
+        "sort-name": "Hosono, Haruomi",
+        "score": 96,
+        "aliases": [
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "fr",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Harry",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Harry Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ホソノ ハルオミ",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "細野晴臣",
+            "locale": "ja",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Hosono, Haruomi",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "Haruomi Hosono",
+            "locale": "en",
+            "type": "Artist name",
+            "primary": true,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Nishihara, Shuna",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "西原朱夏",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "Uno, Shusui",
+            "type-id": "894afba6-2816-3c24-8072-eadb66bd04bc",
+            "name": "宇野主水",
+            "locale": null,
+            "type": "Artist name",
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほそのはるおみ",
+            "name": "ほそのはるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "細野 晴臣",
+            "name": "細野 晴臣",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "HOSONO Haruomi",
+            "name": "HOSONO Haruomi",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          },
+          {
+            "sort-name": "ほその はるおみ",
+            "name": "ほその はるおみ",
+            "locale": null,
+            "type": null,
+            "primary": null,
+            "begin-date": null,
+            "end-date": null
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "without-credit": {
+    "secondary-type-ids": [],
+    "first-release-date": "2023-11-24",
+    "title": "Turquois",
+    "secondary-types": [],
+    "id": "01fd1645-379e-4782-9fe3-de7712382d10",
+    "disambiguation": "",
+    "primary-type-id": "d6038452-8ee0-3f68-affc-2de9a1ede0b9",
+    "primary-type": "Single"
+  },
+  "with-credit": {
+    "artist-credit": [
+      {
+        "artist": {
+          "country": "JP",
+          "id": "078be324-de92-4c72-9371-65bdcf324154",
+          "name": "細野晴臣",
+          "disambiguation": "",
+          "type": "Person",
+          "sort-name": "Hosono, Haruomi",
+          "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+        },
+        "name": "Haruomi Hosono & Yasuhiko Terada",
+        "joinphrase": ""
+      }
+    ],
+    "title": "Turquois",
+    "first-release-date": "2023-11-24",
+    "disambiguation": "",
+    "secondary-types": [],
+    "id": "01fd1645-379e-4782-9fe3-de7712382d10",
+    "primary-type": "Single",
+    "secondary-type-ids": [],
+    "primary-type-id": "d6038452-8ee0-3f68-affc-2de9a1ede0b9"
+  }
+}
