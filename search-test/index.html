@@ -3,110 +3,50 @@
 <span class="tag">SEARCH TEST · データ保存なし</span><h1>MY MUSIC ARCHIVE / Search Lab</h1><p>MusicBrainz検索ロジックの検証専用ページ。通常版MMAの保存データは読み書きしません。</p>
 <label for="q">アーティスト名または作品名</label><form id="searchForm" class="line"><input id="q" type="search" placeholder="phoebe bridgers" required autocomplete="off"><button id="submit" type="submit">検索</button></form>
 <div id="status" class="status">例：phoebe bridgers / porridge radio / punisher / radiohead</div><div id="mode" class="pills" hidden></div><div id="results"></div><button id="loadMore" class="ghost" type="button">さらに30件</button><p class="help">※ 本ページは検証用です。MusicBrainzのAPI応答や通信環境によって結果が変わることがあります。短時間の連続検索は避けてください。</p>
-<script>
+<script src="../search.js"></script><script>
 'use strict';
-const $=id=>document.getElementById(id);let state={query:'',items:[],visible:30,request:0,mode:'',artist:null};
-const norm=s=>(s||'').normalize('NFKC').toLocaleLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim();
-const date=s=>/^\d{4}(-\d{2}){0,2}$/.test(s||'')?s:'';
-const typeRank=t=>({Album:0,EP:1,Single:2})[t]??3;
-const sorter=(a,b)=>typeRank(a['primary-type'])-typeRank(b['primary-type'])||date(b['first-release-date']).localeCompare(date(a['first-release-date']))||a.title.localeCompare(b.title);
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-// API呼び出しは検索ボタンの連打や再試行も含めて直列化する。
-let lastCall=0,apiQueue=Promise.resolve();
-const apiCache=new Map(),pending=new Map(),CACHE_MS=5*60*1000,CACHE_LIMIT=180;
-let retryNotice='';
-function mb(url){
-  const cached=apiCache.get(url);
-  if(cached&&Date.now()-cached.at<CACHE_MS)return Promise.resolve(cached.data);
-  if(pending.has(url))return pending.get(url);
-  const job=apiQueue.catch(()=>{}).then(async()=>{
-    for(let attempt=0;attempt<4;attempt++){
-      const interval=Math.max(0,1250-(Date.now()-lastCall));
-      if(interval)await sleep(interval);
-      lastCall=Date.now();
-      let response;
-      try{response=await fetch(url,{headers:{Accept:'application/json'}})}
-      catch(e){
-        if(attempt===3)throw new Error('通信できません。接続を確認して再検索してください');
-        retryNotice=`通信が不安定です。${attempt+1}/3 回目の再試行を待っています…`;
-        status(retryNotice);await sleep(2000*(attempt+1));continue;
-      }
-      if(response.ok){
-        const data=await response.json();
-        apiCache.set(url,{data,at:Date.now()});
-        if(apiCache.size>CACHE_LIMIT)apiCache.delete(apiCache.keys().next().value);
-        retryNotice='';return data;
-      }
-      if(![429,502,503,504].includes(response.status)||attempt===3){
-        throw new Error(`MusicBrainz HTTP ${response.status}${attempt===3?'（再試行しても復旧しませんでした）':''}`);
-      }
-      const retryAfter=response.headers.get('Retry-After');
-      const numeric=retryAfter&&/^\d+(?:\.\d+)?$/.test(retryAfter.trim())?Number(retryAfter)*1000:null;
-      const wait=Math.min(15000,Math.max(2000*(attempt+1),numeric||0));
-      retryNotice=`MusicBrainzが混雑しています（HTTP ${response.status}）。${attempt+1}/3 回目の再試行まで約${Math.ceil(wait/1000)}秒…`;
-      status(retryNotice);await sleep(wait);
-    }
-  });
-  apiQueue=job.catch(()=>{});
-  pending.set(url,job);
-  job.finally(()=>pending.delete(url)).catch(()=>{});
-  return job;
-}
+const $=id=>document.getElementById(id);
+const state={query:'',items:[],visible:30,request:0,mode:'',artist:null,offset:0,exhausted:true,loading:false};
 function status(s,isError=false){$('status').textContent=s;$('status').className='status'+(isError?' error':'')}
-function query(q){return encodeURIComponent(q)}
-// 個別アーティスト辞書には依存せず、MusicBrainzに登録された名前・別名・ソート名を検索する。
-const kanaToHiragana=s=>s.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60));
-const hiraganaToKana=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));
-const searchNorm=s=>kanaToHiragana(norm(s)).replace(/\s+/g,'');
-const luceneEscape=s=>s.replace(/[+\-!(){}\[\]^"~*?:\\/|&]/g,'\\$&');
-async function artistSearch(q){
-  const term=q.trim(), n=searchNorm(term);
-  if(!n)return [];
-  const variants=[...new Set([term,kanaToHiragana(term),hiraganaToKana(term)])];
-  const fields=['artist','alias','sortname'];
-  const namesOf=a=>[a.name,a['sort-name'],...(a.aliases||[]).flatMap(x=>[x.name,x['sort-name']])].filter(Boolean);
-  const quality=a=>{
-    const names=namesOf(a).map(searchNorm);
-    if(names.some(v=>v===n))return 3;
-    if(names.some(v=>v.startsWith(n)))return 2;
-    return 0;
-  };
-  const raw=[];
-  const collect=arr=>{for(const a of arr||[])if(a?.id&&!raw.some(x=>x.id===a.id))raw.push(a)};
-  // Generic searchable fields: primary names, aliases, and main artist sort names.
-  const quoted=variants.map(v=>'('+fields.map(f=>`${f}:"${luceneEscape(v)}"`).join(' OR ')+')').join(' OR ');
-  collect((await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(quoted)}&fmt=json&limit=100`)).artists);
-  if(!raw.some(a=>quality(a)>=2)&&n.length>=2){
-    const pref=variants.map(v=>'('+v.split(/\s+/).filter(Boolean).map(w=>'('+fields.map(f=>`${f}:${luceneEscape(w)}*`).join(' OR ')+')').join(' AND ')+')').join(' OR ');
-    collect((await mb(`https://musicbrainz.org/ws/2/artist/?query=${query(pref)}&fmt=json&limit=100`)).artists);
-  }
-  // Search response aliases can be missing/incomplete; enrich only plausible top candidates.
-  const candidates=raw.sort((a,b)=>Number(b.score||0)-Number(a.score||0)).slice(0,15);
-  const detailed=[];
-  for(const a of candidates){
-    let v=a;
-    // One artist per lookup; MusicBrainz may expose alias sort names here even if not in search results.
-    if(!Array.isArray(a.aliases)){
-      const details=await mb(`https://musicbrainz.org/ws/2/artist/${encodeURIComponent(a.id)}?inc=aliases&fmt=json`);
-      v={...a,aliases:details.aliases||[]};
-    }
-    if(quality(v))detailed.push(v);
-  }
-  // The server may find a spelling variant without sending a matching alias. Preserve strong
-  // results as a fallback, but never mistake unrelated low-score hits for the right artist.
-  if(!detailed.length){
-    const strong=candidates.filter(a=>Number(a.score||0)>=95);
-    return strong.slice(0,5);
-  }
-  return detailed.sort((a,b)=>quality(b)-quality(a)||Number(b.score||0)-Number(a.score||0)).slice(0,15);
+function context(seq){return {isCurrent:()=>seq===state.request,onRetry:({code,attempt,delay})=>status(`再試行中（${code?'HTTP '+code:'通信エラー'}）：${attempt}/3、約${Math.ceil(delay/1000)}秒後…`)}}
+function render(){
+ const items=state.items.slice(0,state.visible),root=$('results');root.replaceChildren();
+ for(const item of items){
+  const article=document.createElement('article');article.className='result';const ttl=document.createElement('div');ttl.className='title';ttl.textContent=item.title||'(no title)';
+  const m=document.createElement('div');m.className='meta';m.textContent=[MMASearch.credit(item)||'アーティスト情報なし',item['primary-type']||'Unknown',item['first-release-date']||'発売日不明'].join(' · ');article.append(ttl,m);root.append(article);
+ }
+ $('loadMore').style.display=state.items.length>state.visible||!state.exhausted?'block':'none';
+ status(items.length?`${state.mode}：${state.items.length}件を取得・整理、${items.length}件表示`:'該当する作品が見つかりませんでした。');
 }
-async function browseArtist(id,seq){let all=[];for(let offset=0;offset<600;offset+=100){const data=await mb(`https://musicbrainz.org/ws/2/release-group/?artist=${encodeURIComponent(id)}&fmt=json&limit=100&offset=${offset}`);if(seq!==state.request)return null;all.push(...(data['release-groups']||[]));if((data['release-groups']||[]).length<100)break;}const seen=new Set();return all.filter(x=>{if(!['Album','EP','Single'].includes(x['primary-type']))return false;if(seen.has(x.id))return false;seen.add(x.id);return true}).sort(sorter)}
-async function titleSearch(q){const data=await mb(`https://musicbrainz.org/ws/2/release-group/?query=${query('releasegroup:"'+q.replace(/"/g,'')+'"')}&fmt=json&limit=100`);const arr=data['release-groups']||[];arr.sort((a,b)=>Number(norm(b.title)===norm(q))-Number(norm(a.title)===norm(q))||(b.score||0)-(a.score||0)||sorter(a,b));return arr}
-function render(){const items=state.items.slice(0,state.visible);const root=$('results');root.replaceChildren();for(const item of items){const article=document.createElement('article');article.className='result';const ttl=document.createElement('div');ttl.className='title';ttl.textContent=item.title||'(no title)';const m=document.createElement('div');m.className='meta';const artist=(item['artist-credit']||[]).map(x=>typeof x==='string'?x:(x.name||x.artist?.name||'')).join('');m.textContent=[artist,item['primary-type']||'Unknown',item['first-release-date']||'発売日不明'].filter(Boolean).join(' · ');article.append(ttl,m);root.append(article)}$('loadMore').style.display=state.items.length>state.visible?'block':'none';if(state.items.length)status(`${state.mode}：${state.items.length}件を取得・整理、${items.length}件表示`);else if(state.mode)status('該当する作品が見つかりませんでした。')}
-function modes(artists,q){const el=$('mode');el.replaceChildren();el.hidden=false;const title=document.createElement('button');title.className='ghost';title.textContent='作品名で検索';title.onclick=()=>runTitle(q);el.append(title);for(const a of artists.slice(0,4)){const b=document.createElement('button');b.textContent=`アーティスト：${a.name}${a.disambiguation?' ('+a.disambiguation+')':''}`;b.className=state.artist?.id===a.id?'chosen':'ghost';b.onclick=()=>runArtist(a);el.append(b)}}
-async function runArtist(a){const seq=++state.request;state.artist=a;state.items=[];state.visible=30;state.mode=`${a.name} の作品`;status(`${a.name} の作品を取得しています…（作品数によって時間がかかります）`);$('results').replaceChildren();try{const records=await browseArtist(a.id,seq);if(seq!==state.request)return;state.items=records||[];render()}catch(e){if(seq===state.request)status('アーティスト作品取得エラー：'+e.message,true)}}
-async function runTitle(q){const seq=++state.request;state.artist=null;state.items=[];state.visible=30;state.mode='作品名検索';status('作品名を検索中…');$('results').replaceChildren();try{const records=await titleSearch(q);if(seq!==state.request)return;state.items=records;render()}catch(e){if(seq===state.request)status('作品名検索エラー：'+e.message,true)}}
-async function search(q){const seq=++state.request;state.query=q;state.items=[];state.artist=null;state.visible=30;state.mode='';$('mode').hidden=true;$('results').replaceChildren();$('loadMore').style.display='none';status('アーティスト名を照合しています…');$('submit').disabled=true;try{const artists=await artistSearch(q);if(seq!==state.request)return;modes(artists,q);if(artists.length){await runArtist(artists[0])}else{await runTitle(q)}}catch(e){if(seq===state.request)status('検索エラー：'+e.message+'。しばらくして再試行してください。',true)}finally{$('submit').disabled=false}}
+function begin(){const seq=++state.request;Object.assign(state,{items:[],visible:30,offset:0,exhausted:true,loading:true});$('results').replaceChildren();$('loadMore').style.display='none';return seq}
+function modes(artists,q){
+ const el=$('mode');el.replaceChildren();el.hidden=false;
+ const title=document.createElement('button');title.className='ghost';title.textContent='作品名で検索';title.onclick=()=>runTitle(q);el.append(title);
+ for(const a of artists.slice(0,4)){const b=document.createElement('button');b.className='ghost';b.textContent=`アーティスト：${a.name}${a.disambiguation?' ('+a.disambiguation+')':''}`;b.onclick=()=>runArtist(a);el.append(b)}
+}
+async function runArtist(a){
+ const seq=begin(),ctx=context(seq);state.artist=a;state.mode=`${a.name} の作品`;status('作品を取得しています…');
+ try{const items=await MMASearch.browseArtist(a.id,ctx);if(!ctx.isCurrent())return;state.items=items;render()}
+ catch(e){if(ctx.isCurrent())status('検索エラー：'+e.message+'。再検索できます。',true)}finally{if(ctx.isCurrent())state.loading=false}
+}
+async function runTitle(q){
+ const seq=begin(),ctx=context(seq);state.artist=null;state.mode='作品名検索';state.query=q;status('作品名で検索しています…');
+ try{const page=await MMASearch.titlePage(q,0,ctx);if(!ctx.isCurrent())return;Object.assign(state,page);render()}
+ catch(e){if(ctx.isCurrent())status('検索エラー：'+e.message+'。再検索できます。',true)}finally{if(ctx.isCurrent())state.loading=false}
+}
+async function search(q){
+ const seq=begin(),ctx=context(seq);state.query=q;state.artist=null;state.mode='';$('mode').hidden=true;status('アーティスト名を照合しています…');
+ try{const artists=await MMASearch.artistSearch(q,ctx);if(!ctx.isCurrent())return;modes(artists,q);if(artists.length)await runArtist(artists[0]);else await runTitle(q)}
+ catch(e){if(ctx.isCurrent())status('検索エラー：'+e.message+'。再検索できます。',true)}finally{if(ctx.isCurrent())state.loading=false}
+}
 $('searchForm').onsubmit=e=>{e.preventDefault();const q=$('q').value.trim();if(q)search(q)};
-$('loadMore').onclick=()=>{state.visible+=30;render()};
+$('loadMore').onclick=async()=>{
+ if(state.loading)return;const seq=state.request,ctx=context(seq),visible=state.visible+30;state.loading=true;$('loadMore').disabled=true;
+ try{
+  let next={items:[...state.items],offset:state.offset,exhausted:state.exhausted};
+  while(next.items.length<visible&&!next.exhausted){const page=await MMASearch.titlePage(state.query,next.offset,ctx);next={...page,items:MMASearch.unique([...next.items,...page.items])}}
+  if(!ctx.isCurrent())return;Object.assign(state,next,{visible});render();
+ }catch(e){if(ctx.isCurrent())status('検索エラー：'+e.message+'。もう一度「さらに30件」を押してください。',true)}
+ finally{if(ctx.isCurrent())state.loading=false;$('loadMore').disabled=false}
+};
 </script></body></html>
