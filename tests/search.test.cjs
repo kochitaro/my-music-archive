@@ -85,3 +85,39 @@ test('a timed-out fetch aborts, retries, and recovers',async()=>{
  const h=harness((u,n,options)=>n===1?new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>{aborted=true;reject(Error('timeout'))})):response({ok:true}),true);
  assert.equal((await h.api.request('https://example.test/timeout')).ok,true);assert.equal(aborted,true);assert.equal(h.calls.length,2);
 });
+
+const modeFixtures=require('./fixtures/search-v0.3.21.json');
+for(const q of ['細野晴臣','Haruomi Hosono','Number Girl','ナンバーガール','大比良瑞希','大比良'])test(`v0.3.21 live artist response: ${q}`,async()=>{
+ const fixture=modeFixtures[q],expected=['大比良','大比良瑞希'].includes(q)?'40e0546a-9359-4d1f-b085-bebbbc8ac46c':(q.includes('Girl')||q.includes('ガール')?'808fe413-ff00-4a68-99fe-0ab265a7e2be':'078be324-de92-4c72-9371-65bdcf324154');
+ const h=harness(u=>u.pathname.includes('/artist/')?response(fixture):response({'release-group-count':1,'release-groups':[{id:'work','title':'Work','primary-type':'Album','artist-credit':[{name:'Artist'}]}]}));
+ const result=await h.api.start(q,undefined,'artist');assert.equal(result.artist.id,expected);assert.equal(result.mode,'artist');assert.equal(h.calls.at(-1).url.searchParams.get('artist'),expected);
+});
+for(const [q,name] of [['Punisher','Phoebe Bridgers'],['Hard Life','The Tubs']])test(`album mode directly searches actual title response: ${q}`,async()=>{
+ const h=harness(u=>{assert.ok(u.pathname.includes('/release-group/'));assert.ok(u.searchParams.get('query').startsWith(`releasegroup:"${q}"`));return response(modeFixtures[q])});
+ const found=await h.api.start(q,undefined,'title');assert.equal(found.mode,'title');assert.equal(h.calls.length,1);
+ assert.ok(found.items.slice(0,30).some(r=>r.title===q&&h.api.credit(r)===name));assert.ok(found.items.filter(r=>h.api.searchNorm(r.title)===h.api.searchNorm(q)).length>1);
+});
+test('nonexistent album response is empty; explicit artist mode does not return album results',async()=>{
+ const h=harness(()=>response(modeFixtures['MMA nonexistent qzxvkwp 0321']));const found=await h.api.start('MMA nonexistent qzxvkwp 0321',undefined,'title');assert.equal(found.items.length,0);assert.equal(found.exhausted,true);
+ const artist=harness(()=>response({artists:[]}));assert.equal((await artist.api.start('No Artist',undefined,'artist')).items.length,0);assert.ok(artist.calls.every(c=>c.url.pathname.includes('/artist/')));
+});
+test('multiple short prefix matches require selection; exact names take precedence over scores',async()=>{
+ const matches=[{id:'a',name:'大比良瑞希',score:70,aliases:[]},{id:'b',name:'大比良一郎',score:100,aliases:[]},{id:'wrong',name:'無関係',score:100,aliases:[]}];
+ const h=harness(()=>response({artists:matches}));const result=await h.api.start('大比良',undefined,'artist');assert.equal(result.mode,'candidates');assert.equal(result.items.length,0);assert.equal(result.candidates.length,2);assert.ok(h.calls.every(c=>c.url.pathname.includes('/artist/')));
+ const exact=harness(u=>u.pathname.includes('/artist/')?response({artists:matches}):response({'release-group-count':0,'release-groups':[]}));assert.equal((await exact.api.start('大比良瑞希',undefined,'artist')).artist.id,'a');
+});
+test('duplicate exact names require selection, and prefix retrieval uses registered aliases/sort names',async()=>{
+ const duplicates=harness(()=>response({artists:[{id:'a',name:'Twin',aliases:[]},{id:'b',name:'Twin',aliases:[]}]}));assert.equal((await duplicates.api.start('Twin',undefined,'artist')).mode,'candidates');
+ const prefix=harness(u=>response({artists:u.searchParams.get('query').includes('*')?[{id:'p',name:'English Name',aliases:[{name:'日本語名称'}],score:60}]:[]}));assert.equal((await prefix.api.artistSearch('日本'))[0].id,'p');assert.equal(prefix.calls.length,2);
+});
+test('album title exact match ranks above a higher-scoring partial title and preserves duplicate-name works',async()=>{
+ const h=harness(()=>response({count:4,'release-groups':[{id:'long',title:'Hard Life Live',score:100},{id:'exact',title:'Hard Life',score:80},{id:'exact2',title:'HARD LIFE',score:90},{id:'exact',title:'Hard Life',score:80}]}));
+ const page=await h.api.titlePage('Hard Life');assert.deepEqual(Array.from(page.items,r=>r.id),['exact2','exact','long']);assert.equal(page.offset,4);
+});
+test('full and partial Ohira names reach the same actual ten-work catalog',async()=>{
+ for(const q of ['大比良','大比良瑞希']){
+  const h=harness(u=>response(u.pathname.includes('/artist/')?modeFixtures[q]:modeFixtures['ohira-works']));
+  const found=await h.api.start(q,undefined,'artist');assert.equal(found.items.length,10);assert.ok(found.items.every(r=>h.api.credit(r).includes('大比良瑞希')));
+  assert.equal(h.calls.at(-1).url.searchParams.get('inc'),'artist-credits');
+ }
+});
