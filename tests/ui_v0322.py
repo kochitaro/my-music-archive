@@ -138,6 +138,7 @@ def main():
                     assert max(t['y'], h['y']) < min(t['y']+t['height'], h['y']+h['height'])
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                     if section != 'live':
+                        expect(trigger).to_have_text('＋ 手動で追加' if language == 'ja' else '＋ Add Manually')
                         style = trigger.evaluate('(el)=>({bg:getComputedStyle(el).backgroundColor,border:getComputedStyle(el).borderWidth,color:getComputedStyle(el).color})')
                         assert style == dict(bg='rgba(0, 0, 0, 0)', border='0px', color='rgb(198, 231, 239)')
                         search = page.locator('#search-btn').bounding_box()
@@ -307,22 +308,22 @@ def main():
             clear_filters(page)
         print('PASS manual save/edit/delete in both archives; counts update and zero-match selections survive redraw/tab changes')
 
-        # Live still uses gold, with its existing creation/edit/delete/sort/view controls.
+        # Live shares album colors, with its existing creation/edit/delete/sort/view controls.
         page.locator('[data-section=live]').click()
         page.locator('#grid-tab').click()
-        assert_stars(record(page, 'Existing Live'), GOLD, 100)
+        assert_stars(record(page, 'Existing Live'), ROSE, 100)
         page.locator('#add-live-trigger').click()
         page.locator('#live-title').fill('New Live')
         page.locator('#live-venue').fill('Osaka')
         live_slider = page.locator('[data-target=live-rating] .star-rating')
         live_slider.press('End')
-        assert_stars(live_slider, GOLD, 100)
+        assert_stars(live_slider, ROSE, 100)
         page.locator('#live-form > button').click()
         expect(page.locator('#live-create-modal')).not_to_have_class('modal open')
         assert len(stored(page)['live']) == 2
         page.locator('#list-tab').click()
         edit(page, 'New Live')
-        assert_stars(page.locator('[data-target=e-live-rating] .star-rating'), GOLD, 100)
+        assert_stars(page.locator('[data-target=e-live-rating] .star-rating'), ROSE, 100)
         page.locator('#e-live-venue').fill('Kyoto')
         save(page)
         assert stored(page)['live'][0]['venue'] == 'Kyoto'
@@ -334,7 +335,7 @@ def main():
         page.locator('#delete-accept').click()
         expect(page.locator('#modal')).not_to_have_class('modal open')
         assert stored(page)['live'] == SEED['live']
-        print('PASS Live create/edit/delete, gold at 5.0, list/grid, sorting and existing record intact')
+        print('PASS Live create/edit/delete, rose at 5.0, list/grid, sorting and existing record intact')
 
         # JSON round-trip, cancelled import, and CSV export preserve the current storage format.
         current = stored(page)
