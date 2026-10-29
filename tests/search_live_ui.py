@@ -98,7 +98,7 @@ def main():
                 assert page.locator('[data-target=rating] .heart-symbol').count() == 0
                 page.locator('#close').click()
         assert stored(page) == seed
-        print('PASS 1: JA/EN create/edit/detail/list/grid/sort labels, pink hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes')
+        print('PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes')
 
         page.locator('[data-section=listening]').click()
         page.locator('[data-search-mode=title]').click()
