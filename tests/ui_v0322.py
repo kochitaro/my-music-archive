@@ -106,6 +106,14 @@ def assert_stars(root, color, final_fraction=None):
     assert root.locator('.star-symbol>svg path').evaluate_all('(els)=>els.map(e=>e.getAttribute("fill"))') == ['#596675'] * 5
 
 
+def assert_hearts(root, color=ROSE, final_fraction=None):
+    assert color == ROSE
+    assert_stars(root, ROSE, final_fraction)
+    assert root.locator('.heart-symbol').count() == 5
+    paths = root.locator('.star-fill path').evaluate_all('(els)=>els.map(e=>e.getAttribute("d"))')
+    assert all(path.startswith('M12 21') for path in paths)
+
+
 def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), QuietHandler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -137,6 +145,8 @@ def main():
                     assert h['x'] + h['width'] <= t['x'] - 3, (language, width, section, h, t)
                     assert max(t['y'], h['y']) < min(t['y']+t['height'], h['y']+h['height'])
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+                    style = trigger.evaluate('(el)=>({bg:getComputedStyle(el).backgroundColor,border:getComputedStyle(el).borderWidth,color:getComputedStyle(el).color,underline:getComputedStyle(el).textDecorationLine})')
+                    assert style == dict(bg='rgba(0, 0, 0, 0)', border='0px', color='rgb(198, 231, 239)', underline='none')
                     if section != 'live':
                         expect(trigger).to_have_text('＋ 手動で追加' if language == 'ja' else '＋ Add Manually')
                         style = trigger.evaluate('(el)=>({bg:getComputedStyle(el).backgroundColor,border:getComputedStyle(el).borderWidth,color:getComputedStyle(el).color})')
@@ -151,7 +161,7 @@ def main():
                         page.locator('#close').click()
                         expect(page.locator('#query')).to_have_value('preserve input')
                     else:
-                        expect(trigger).to_have_text('＋ 追加' if language == 'ja' else '+ Add')
+                        expect(trigger).to_have_text('＋ ライブを追加' if language == 'ja' else '＋ Add Live')
                         trigger.click()
                         expect(page.locator('#live-create-modal')).to_have_class('modal open')
                         page.locator('#close-live-create').click()
@@ -308,22 +318,22 @@ def main():
             clear_filters(page)
         print('PASS manual save/edit/delete in both archives; counts update and zero-match selections survive redraw/tab changes')
 
-        # Live shares album colors, with its existing creation/edit/delete/sort/view controls.
+        # Live uses pink hearts, with its existing creation/edit/delete/sort/view controls.
         page.locator('[data-section=live]').click()
         page.locator('#grid-tab').click()
-        assert_stars(record(page, 'Existing Live'), ROSE, 100)
+        assert_hearts(record(page, 'Existing Live'), ROSE, 100)
         page.locator('#add-live-trigger').click()
         page.locator('#live-title').fill('New Live')
         page.locator('#live-venue').fill('Osaka')
         live_slider = page.locator('[data-target=live-rating] .star-rating')
         live_slider.press('End')
-        assert_stars(live_slider, ROSE, 100)
+        assert_hearts(live_slider, ROSE, 100)
         page.locator('#live-form > button').click()
         expect(page.locator('#live-create-modal')).not_to_have_class('modal open')
         assert len(stored(page)['live']) == 2
         page.locator('#list-tab').click()
         edit(page, 'New Live')
-        assert_stars(page.locator('[data-target=e-live-rating] .star-rating'), ROSE, 100)
+        assert_hearts(page.locator('[data-target=e-live-rating] .star-rating'), ROSE, 100)
         page.locator('#e-live-venue').fill('Kyoto')
         save(page)
         assert stored(page)['live'][0]['venue'] == 'Kyoto'

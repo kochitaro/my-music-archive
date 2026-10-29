@@ -47,7 +47,9 @@ def mock(route):
  route.fulfill(json={'count':135,'release-groups':records[off:off+100]})
 
 def search(page,q,count=30):
- page.locator('#query').fill(q);page.locator('#search-btn').click();expect(page.locator('#results .result')).to_have_count(count,timeout=30000)
+ page.locator('#query').fill(q);page.locator('#search-btn').click()
+ try:expect(page.locator('#results .result')).to_have_count(count,timeout=30000)
+ except AssertionError as e:raise AssertionError(f'{q}: {page.locator("#status").text_content()}; JS errors={errors}') from e
  expect(page.locator('#status')).to_contain_text('追加' if page.locator('#ui-language').input_value()=='ja' else 'Select',timeout=30000)
 def stored(page):return page.evaluate('(key)=>JSON.parse(localStorage.getItem(key))',KEY)
 with sync_playwright() as p:
