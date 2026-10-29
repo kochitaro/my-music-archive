@@ -9,7 +9,7 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import (SEED, KEY, GOLD, ROSE, QuietHandler, album, stored, options,
-                     unset_value, open_filters, choose, titles, record, edit, save, assert_stars)
+                     unset_value, open_filters, choose, titles, record, edit, save, assert_stars, assert_hearts)
 
 
 def main():
@@ -154,47 +154,47 @@ def main():
         print('PASS store counts refresh on registration/edit/delete, unset updates, zero-count selection/tab preservation and dynamic identifier collisions')
 
         page.locator('[data-section=live]').click()
-        cases = [('0.0', GOLD, 0), ('4.2', GOLD, 20), ('4.3', ROSE, 30), ('4.5', ROSE, 50), ('5.0', ROSE, 100)]
+        cases = [('0.0', ROSE, 0), ('4.2', ROSE, 20), ('4.3', ROSE, 30), ('4.5', ROSE, 50), ('5.0', ROSE, 100)]
         for mode in ['grid', 'list']:
             page.locator(f'#{mode}-tab').click()
             for score, color, fraction in cases:
-                assert_stars(record(page, f'Live {score}'), color, fraction)
+                assert_hearts(record(page, f'Live {score}'), color, fraction)
             assert record(page, 'Live unrated').locator('.star-symbol').count() == 0
         for score, color, fraction in cases:
             record(page, f'Live {score}').click()
-            assert_stars(page.locator('#view-content'), color, fraction)
+            assert_hearts(page.locator('#view-content'), color, fraction)
             page.locator('#view-edit').click()
-            assert_stars(page.locator('[data-target=e-live-rating] .star-rating'), color, fraction)
+            assert_hearts(page.locator('[data-target=e-live-rating] .star-rating'), color, fraction)
             page.locator('#close').click()
         record(page, 'Live unrated').click()
         assert page.locator('#view-content .star-symbol').count() == 0
         page.locator('#view-edit').click()
         slider = page.locator('[data-target=e-live-rating] .star-rating')
-        assert_stars(slider, GOLD, 0)
+        assert_hearts(slider, ROSE, 0)
         expect(slider).to_have_attribute('aria-valuetext', 'Unrated')
         page.locator('#close').click()
         edit(page, 'Live 4.2')
         slider.press('ArrowRight')
         expect(slider).to_have_attribute('aria-valuenow', '4.3')
-        assert_stars(slider, ROSE, 30)
+        assert_hearts(slider, ROSE, 30)
         save(page)
-        assert_stars(record(page, 'Live 4.2'), ROSE, 30)
+        assert_hearts(record(page, 'Live 4.2'), ROSE, 30)
         assert next(r for r in stored(page)['live'] if r['title'] == 'Live 4.2')['rating'] == '8.6'
         edit(page, 'Live 4.2')
         slider.press('ArrowLeft')
-        assert_stars(slider, GOLD, 20)
+        assert_hearts(slider, ROSE, 20)
         save(page)
-        assert_stars(record(page, 'Live 4.2'), GOLD, 20)
+        assert_hearts(record(page, 'Live 4.2'), ROSE, 20)
         # Creation UI shares the same criterion, including clearing back to unrated.
         page.locator('#add-live-trigger').click()
         slider = page.locator('[data-target=live-rating] .star-rating')
         slider.press('End')
-        assert_stars(slider, ROSE, 100)
+        assert_hearts(slider, ROSE, 100)
         page.locator('[data-target=live-rating] .rating-clear').click()
-        assert_stars(slider, GOLD, 0)
+        assert_hearts(slider, ROSE, 0)
         page.locator('#close-live-create').click()
         assert stored(page) == seed
-        print('PASS Live 0/4.2/4.3/4.5/5 in grid/list/detail/edit, unchanged fractional masks/unrated, 0.1 edit/save colors and creation UI')
+        print('PASS Live 0/4.2/4.3/4.5/5 in grid/list/detail/edit, unchanged fractional masks/unrated, 0.1 edit/save pink hearts and creation UI')
 
         # No saved data changes remain; JSON round-trip must preserve every record exactly.
         with page.expect_download() as download:
