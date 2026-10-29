@@ -11,6 +11,7 @@ from playwright.sync_api import sync_playwright, expect
 ROOT = Path(__file__).resolve().parents[1]
 KEY = 'my-music-archive-pilot-v03'
 GOLD, ROSE = '#e9bc78', '#E08AA1'
+LIVE_CORAL, LIVE_GOLD = '#F07870', '#E9BC64'
 
 
 def album(title, **fields):
@@ -106,9 +107,17 @@ def assert_stars(root, color, final_fraction=None):
     assert root.locator('.star-symbol>svg path').evaluate_all('(els)=>els.map(e=>e.getAttribute("fill"))') == ['#596675'] * 5
 
 
-def assert_hearts(root, color=ROSE, final_fraction=None):
-    assert color == ROSE
-    assert_stars(root, ROSE, final_fraction)
+def assert_hearts(root, color=None, final_fraction=None):
+    if color is None:
+        # Derive expected color from the displayed score, never from the SVG fill.
+        slider = root.locator('.star-rating')
+        score = root.get_attribute('aria-valuenow')
+        if score is None and slider.count():
+            score = slider.first.get_attribute('aria-valuenow')
+        if score is None:
+            score = root.locator('.rating-number').first.text_content().split('/')[0]
+        color = LIVE_GOLD if float(score) >= 4.5 else LIVE_CORAL
+    assert_stars(root, color, final_fraction)
     assert root.locator('.heart-symbol').count() == 5
     paths = root.locator('.star-fill path').evaluate_all('(els)=>els.map(e=>e.getAttribute("d"))')
     assert all(path.startswith('M12 21') for path in paths)
@@ -318,22 +327,22 @@ def main():
             clear_filters(page)
         print('PASS manual save/edit/delete in both archives; counts update and zero-match selections survive redraw/tab changes')
 
-        # Live uses pink hearts, with its existing creation/edit/delete/sort/view controls.
+        # Live uses Live coral/gold hearts, with its existing creation/edit/delete/sort/view controls.
         page.locator('[data-section=live]').click()
         page.locator('#grid-tab').click()
-        assert_hearts(record(page, 'Existing Live'), ROSE, 100)
+        assert_hearts(record(page, 'Existing Live'), LIVE_GOLD, 100)
         page.locator('#add-live-trigger').click()
         page.locator('#live-title').fill('New Live')
         page.locator('#live-venue').fill('Osaka')
         live_slider = page.locator('[data-target=live-rating] .star-rating')
         live_slider.press('End')
-        assert_hearts(live_slider, ROSE, 100)
+        assert_hearts(live_slider, LIVE_GOLD, 100)
         page.locator('#live-form > button').click()
         expect(page.locator('#live-create-modal')).not_to_have_class('modal open')
         assert len(stored(page)['live']) == 2
         page.locator('#list-tab').click()
         edit(page, 'New Live')
-        assert_hearts(page.locator('[data-target=e-live-rating] .star-rating'), ROSE, 100)
+        assert_hearts(page.locator('[data-target=e-live-rating] .star-rating'), LIVE_GOLD, 100)
         page.locator('#e-live-venue').fill('Kyoto')
         save(page)
         assert stored(page)['live'][0]['venue'] == 'Kyoto'
@@ -345,7 +354,7 @@ def main():
         page.locator('#delete-accept').click()
         expect(page.locator('#modal')).not_to_have_class('modal open')
         assert stored(page)['live'] == SEED['live']
-        print('PASS Live create/edit/delete, rose at 5.0, list/grid, sorting and existing record intact')
+        print('PASS Live create/edit/delete, Live gold at 5.0, list/grid, sorting and existing record intact')
 
         # JSON round-trip, cancelled import, and CSV export preserve the current storage format.
         current = stored(page)
