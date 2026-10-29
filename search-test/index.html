@@ -44,7 +44,7 @@ $('loadMore').onclick=async()=>{
  if(state.loading)return;const seq=state.request,ctx=context(seq),visible=state.visible+30;state.loading=true;$('loadMore').disabled=true;
  try{
   let next={items:[...state.items],offset:state.offset,exhausted:state.exhausted};
-  while(next.items.length<visible&&!next.exhausted){const page=await MMASearch.titlePage(state.query,next.offset,ctx);next={...page,items:MMASearch.unique([...next.items,...page.items])}}
+  while(next.items.length<visible&&!next.exhausted){const page=await MMASearch.titlePage(state.query,next.offset,ctx);next={...page,items:MMASearch.sortTitles(MMASearch.unique([...next.items,...page.items]),state.query)}}
   if(!ctx.isCurrent())return;Object.assign(state,next,{visible});render();
  }catch(e){if(ctx.isCurrent())status('検索エラー：'+e.message+'。もう一度「さらに30件」を押してください。',true)}
  finally{if(ctx.isCurrent())state.loading=false;$('loadMore').disabled=false}

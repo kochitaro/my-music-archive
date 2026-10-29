@@ -172,7 +172,7 @@ function renderResults(){
  $('result-count').textContent=lastResults.length?(isJapanese()?lastResults.length+' 件':lastResults.length+' results'):'';
  for(const r of lastResults){
   const card=text('div','result');card.append(art(r));const mid=text('div','grow');
-  mid.append(text('div','title',r.title),text('div','muted small',artist(r)),text('div','muted small',r['first-release-date']||(isJapanese()?'発売日不明':'Release date unknown')));card.append(mid);
+  mid.append(text('div','title',r.title),text('div','muted small',artist(r)),text('div','muted small',[r['first-release-date']||(isJapanese()?'発売日不明':'Release date unknown'),['Album','EP','Single'].includes(r['primary-type'])?r['primary-type']:''].filter(Boolean).join(' · ')));card.append(mid);
   const already=section==='listening'&&db.listening.some(x=>x.id===r.id);
   const b=text('button','btn',already?(isJapanese()?'追加済み':'Added'):(isJapanese()?'＋ 追加':'+ Add'));b.disabled=already;b.onclick=()=>addAlbum(r);card.append(b);$('results').append(card);
  }
@@ -192,6 +192,7 @@ async function fetchSearch(more=false,chosenArtist=null){
   const visible=more?searchVisible+30:30;
   while(next.items.length<visible&&!next.exhausted){const page=await MMASearch.titlePage(q,next.offset,ctx);next={...next,...page,items:MMASearch.unique([...next.items,...page.items])}}
   if(!ctx.isCurrent())return;
+  if(next.mode==='title')next.items=MMASearch.sortTitles(next.items,q);
   searchState=next;searchVisible=Math.min(visible,next.items.length);renderResults();
   status(lastResults.length?(isJapanese()?'作品を選んで追加してください。':'Select an album to add.'):(isJapanese()?'作品が見つかりませんでした。':(searchMode==='artist'?'No artists found. Try another spelling.':'No albums found. Try another spelling.')));
  }catch(err){if(ctx.isCurrent())status((isJapanese()?'検索失敗：':'Search failed: ')+err.message+(isJapanese()?'。再検索できます。':' — please try again.'))}
