@@ -9,6 +9,11 @@ const searchNorm=s=>hira(norm(s)).replace(/\s+/g,'');
 const escape=s=>s.replace(/[+\-!(){}\[\]^"~*?:\\/|&]/g,'\\$&');
 const rank=r=>({Album:0,EP:1,Single:2})[r['primary-type']]??3;
 const sort=(a,b)=>rank(a)-rank(b)||(b['first-release-date']||'').localeCompare(a['first-release-date']||'')||(a.title||'').localeCompare(b.title||'')||a.id.localeCompare(b.id);
+// Title searches use the existing normalization, independently of artist type priority.
+function sortTitles(items,q){
+ const query=searchNorm(q),match=r=>{const title=searchNorm(r.title);return title===query?0:title.includes(query)?1:2};
+ return [...items].sort((a,b)=>match(a)-match(b)||(b['first-release-date']||'').localeCompare(a['first-release-date']||'')||(a.title||'').localeCompare(b.title||'')||a.id.localeCompare(b.id));
+}
 const unique=items=>{const seen=new Set();return items.filter(r=>r?.id&&!seen.has(r.id)&&seen.add(r.id))};
 function credit(r){return (r['artist-credit']||[]).map(a=>typeof a==='string'?a:(a.name||a.artist?.name||'')+(a.joinphrase||'')).join('').trim()}
 function current(ctx){if(ctx?.isCurrent&&!ctx.isCurrent())throw new Error('Search superseded')}
@@ -98,7 +103,7 @@ async function titlePage(q,offset=0,ctx){
   const query=`releasegroup:"${escape(q.trim())}" AND (primarytype:album OR primarytype:ep OR primarytype:single)`;
   const data=await request(url('release-group/',{query,limit:100,offset}),ctx);current(ctx);
   const raw=data['release-groups']||[],next=offset+raw.length,total=Number(data.count??data['release-group-count']);
-  const items=unique(raw).sort((a,b)=>Number(searchNorm(b.title)===searchNorm(q))-Number(searchNorm(a.title)===searchNorm(q))||Number(b.score||0)-Number(a.score||0));
+  const items=sortTitles(unique(raw),q);
   return {items,offset:next,exhausted:!raw.length||(Number.isFinite(total)?next>=total:raw.length<100)};
 }
 async function start(q,ctx,mode='auto'){
@@ -115,5 +120,5 @@ async function ensureCredit(r,ctx){
   const details=await request(url('release-group/'+encodeURIComponent(r.id),{inc:'artist-credits'}),ctx);current(ctx);
   return {...r,...details};
 }
-window.MMASearch={request,artistSearch,browseArtist,titlePage,start,ensureCredit,credit,unique,sort,searchNorm};
+window.MMASearch={request,artistSearch,browseArtist,titlePage,start,ensureCredit,credit,unique,sort,sortTitles,searchNorm};
 })();

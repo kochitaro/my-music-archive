@@ -112,7 +112,7 @@ test('duplicate exact names require selection, and prefix retrieval uses registe
 });
 test('album title exact match ranks above a higher-scoring partial title and preserves duplicate-name works',async()=>{
  const h=harness(()=>response({count:4,'release-groups':[{id:'long',title:'Hard Life Live',score:100},{id:'exact',title:'Hard Life',score:80},{id:'exact2',title:'HARD LIFE',score:90},{id:'exact',title:'Hard Life',score:80}]}));
- const page=await h.api.titlePage('Hard Life');assert.deepEqual(Array.from(page.items,r=>r.id),['exact2','exact','long']);assert.equal(page.offset,4);
+ const page=await h.api.titlePage('Hard Life');assert.deepEqual(Array.from(page.items,r=>r.id),['exact','exact2','long']);assert.equal(page.offset,4);
 });
 test('full and partial Ohira names reach the same actual ten-work catalog',async()=>{
  for(const q of ['大比良','大比良瑞希']){
@@ -120,4 +120,30 @@ test('full and partial Ohira names reach the same actual ten-work catalog',async
   const found=await h.api.start(q,undefined,'artist');assert.equal(found.items.length,10);assert.ok(found.items.every(r=>h.api.credit(r).includes('大比良瑞希')));
   assert.equal(h.calls.at(-1).url.searchParams.get('inc'),'artist-credits');
  }
+});
+
+test('title ordering: normalized exact, partial, other; date descending with unknown last in each group',async()=>{
+ const rows=[
+  {id:'p0',title:'Hard Life Live',score:100},
+  {id:'e0',title:'Hard Life',score:100},
+  {id:'p1',title:'Hard Life Live','first-release-date':'2026'},
+  {id:'e1',title:'ＨＡＲＤ　ＬＩＦＥ','first-release-date':'2020-01-02','primary-type':'Single'},
+  {id:'e2',title:'hard life','first-release-date':'2025','primary-type':'EP'},
+  {id:'p2',title:'A Hard Life','first-release-date':'2024-03'},
+  {id:'other',title:'Unrelated','first-release-date':'2027'}
+ ];
+ const h=harness(()=>response({count:rows.length,'release-groups':rows}));
+ assert.deepEqual(Array.from((await h.api.titlePage('Hard Life')).items,r=>r.id),['e2','e1','e0','p1','p2','p0','other']);
+ assert.equal(h.api.sortTitles([{id:'a',title:'ナンバー ガール'},{id:'b',title:'なんばーがーる live'}],'なんばーがーる')[0].id,'a');
+});
+test('title pages merge and re-sort all loaded works without extra requests; artist priority is unchanged',async()=>{
+ const rows=Array.from({length:103},(_,i)=>({id:String(i),title:i===101?'Title':'Title Live','first-release-date':i===102?'':String(2000+i),'primary-type':i%2?'Single':'Album'}));
+ rows[100]=rows[1];
+ const h=harness(u=>{const off=Number(u.searchParams.get('offset'));return response({count:103,'release-groups':rows.slice(off,off+100)})});
+ const a=await h.api.start('Title',undefined,'title'),b=await h.api.titlePage('Title',a.offset);
+ const all=h.api.sortTitles(h.api.unique([...a.items,...b.items]),'Title');
+ assert.equal(all[0].id,'101');assert.equal(all[1].id,'99');assert.equal(all.at(-1).id,'102');assert.equal(all.length,102);
+ assert.equal(b.offset,103);assert.equal(b.exhausted,true);assert.equal(h.calls.length,2);
+ const artist=[{id:'s',title:'Title','primary-type':'Single','first-release-date':'2026'},{id:'e',title:'Title','primary-type':'EP','first-release-date':'2025'},{id:'a',title:'Title','primary-type':'Album','first-release-date':'2020'}].sort(h.api.sort);
+ assert.deepEqual(artist.map(r=>r.id),['a','e','s']);
 });
