@@ -91,9 +91,9 @@ def main():
             expect(page.locator('#sort option[value=rating-desc]')).to_have_text('スコア：高い順' if ja else 'Score: High to Low')
             for section in ['listening', 'collection']:
                 page.locator(f'[data-section={section}]').click()
-                expect(page.locator('#sort option[value=rating-desc]')).to_have_text(('評価：高い順' if ja else 'Rating: High to Low') if section == 'collection' else ('スコア：高い順' if ja else 'Score: High to Low'))
+                expect(page.locator('#sort option[value=rating-desc]')).to_have_text('スコア：高い順' if ja else 'Score: High to Low')
                 edit(page, 'Score 4.2' if section == 'listening' else 'C 4.2')
-                expect(page.locator('label[for=rating]')).to_contain_text(('評価' if ja else 'Rating') if section == 'collection' else ('スコア' if ja else 'Score'))
+                expect(page.locator('label[for=rating]')).to_contain_text('スコア' if ja else 'Score')
                 assert_stars(page.locator('[data-target=rating]'), GOLD, 20)
                 assert page.locator('[data-target=rating] .heart-symbol').count() == 0
                 page.locator('#close').click()

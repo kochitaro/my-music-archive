@@ -50,7 +50,7 @@ def main():
             page.set_viewport_size(dict(width=390, height=844))
             for section in ['listening', 'collection', 'live']:
                 page.locator(f'[data-section={section}]').click()
-                term = ('評価' if lang == 'ja' else 'Rating') if section == 'collection' else ('スコア' if lang == 'ja' else 'Score')
+                term = 'スコア' if lang == 'ja' else 'Score'
                 expect(page.locator('#sort option[value=rating-desc]')).to_contain_text(term)
                 title = {'listening':'Score 4.2','collection':'C 4.2','live':'Existing Live'}[section]
                 record(page, title).click()
@@ -84,7 +84,7 @@ def main():
             page.locator('#ui-language').select_option('en' if lang == 'ja' else 'ja')
             page.locator('[data-section=collection]').click()
             edit(page, 'C 4.2')
-            expect(page.locator('label[for=rating]')).to_contain_text('Rating' if lang == 'ja' else '評価')
+            expect(page.locator('label[for=rating]')).to_contain_text('Score' if lang == 'ja' else 'スコア')
             page.locator('#close').click()
             assert stored(page) == SEED
             print('PASS branding, widths, legacy key, bilingual labels/a11y, Collection, star boundaries:', lang)
