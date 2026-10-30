@@ -68,13 +68,13 @@ def main():
 
             page.locator('[data-section=live]').click()
             edit(page, 'live')
-            expect(page.locator('label[for=e-live-rating]')).to_contain_text('満足度' if ja else 'Satisfaction')
+            expect(page.locator('label[for=e-live-rating]')).to_contain_text('スコア' if ja else 'Score')
             slider = page.locator('[data-target=e-live-rating] .star-rating')
             assert_hearts(slider, final_fraction=20)
             before_writes = page.evaluate('writes.length')
             page.locator('#e-live-rating').evaluate('(e)=>e.value="11"')
             page.locator('#save').click()
-            assert alerts[-1] == ('満足度は0.0〜5.0の範囲で0.1刻みで指定してください。' if ja else 'Satisfaction must be between 0.0 and 5.0 in steps of 0.1.')
+            assert alerts[-1] == ('スコアは0.0〜5.0の範囲で0.1刻みで指定してください。' if ja else 'Score must be between 0.0 and 5.0 in steps of 0.1.')
             assert page.evaluate('writes.length') == before_writes
             same_as(seed)
             page.locator('#close').click()
@@ -109,12 +109,12 @@ def main():
             assert stored(page)['live'][0]['rating'] == ''
             assert record(page, 'live').locator('.heart-symbol').count() == 0
             page.locator('#add-live-trigger').click()
-            page.locator('#live-title').fill('New Satisfaction')
+            page.locator('#live-title').fill('New Score')
             page.locator('[data-target=live-rating] .star-rating').press('End')
             page.locator('#live-form > button').click()
             expect(page.locator('#live-create-modal')).not_to_have_class('modal open')
             assert stored(page)['live'][0]['rating'] == '10.0'
-            assert_hearts(record(page, 'New Satisfaction'), final_fraction=100)
+            assert_hearts(record(page, 'New Score'), final_fraction=100)
             current = stored(page)
             exported = backup(page)
             assert exported == current
