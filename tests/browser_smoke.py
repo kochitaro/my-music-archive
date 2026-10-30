@@ -56,7 +56,8 @@ with sync_playwright() as p:
  browser=p.chromium.launch(headless=True,executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox'])
  context=browser.new_context(viewport={'width':390,'height':844},device_scale_factor=3,is_mobile=True,has_touch=True,locale='ja-JP')
  context.route('https://musicbrainz.org/**',mock);context.route('https://coverartarchive.org/**',lambda r:r.abort())
- context.add_init_script('''const nativeTimeout=window.setTimeout;window.setTimeout=(fn,ms,...args)=>nativeTimeout(fn,ms>=1000?Math.min(ms,15):ms,...args);''')
+ # Accelerate retry/spacing waits, preserving the 20s request-abort timeout.
+ context.add_init_script('''const nativeTimeout=window.setTimeout;window.setTimeout=(fn,ms,...args)=>nativeTimeout(fn,ms>=1000&&ms<20000?Math.min(ms,15):ms,...args);''')
  page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
  print('Loading MMA',flush=True);page.goto(BASE);print('Loaded MMA',flush=True);page.evaluate('([key,seed])=>localStorage.setItem(key,JSON.stringify(seed))',[KEY,SEED]);page.reload()
  assert stored(page)==SEED
