@@ -1,0 +1,9 @@
+2026-11-01 UTC / synthetic isolated Chromium profiles
+Review base: edad82132cadc788d35964a491fdf0089af19c0c
+Main: 6b52d1bc36c13c350165d3a44b92d350c5370628
+PR-A migrate unchanged: PASS
+commitDB Web Locks/raw boundary unchanged: PASS
+one DB-key write: PASS
+git diff --check: PASS
+Before: intentional regression failures; after: all 36 scenarios pass.
+Safari hardware, real quota exhaustion, freeze/resume: not tested.

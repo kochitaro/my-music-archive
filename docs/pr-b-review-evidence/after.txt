@@ -1,0 +1,37 @@
+PASS listening A repeated failure / exact retry
+PASS listening B photo success without previous draft
+PASS listening B pending processed photo
+PASS listening C hide/edit/reopen/navigation
+PASS listening C new file invalidates processed photo
+PASS listening D failed download / unrelated success
+PASS listening D deletion cannot discard draft
+PASS listening boundary confirmed then edited
+PASS listening boundary conversion failed early
+PASS listening boundary delayed completion / double click
+PASS listening boundary deletion confirmation / second failure
+PASS listening boundary input changed during photo conversion
+PASS collection A repeated failure / exact retry
+PASS collection B photo success without previous draft
+PASS collection B pending processed photo
+PASS collection C hide/edit/reopen/navigation
+PASS collection C new file invalidates processed photo
+PASS collection D failed download / unrelated success
+PASS collection D deletion cannot discard draft
+PASS collection boundary confirmed then edited
+PASS collection boundary conversion failed early
+PASS collection boundary delayed completion / double click
+PASS collection boundary deletion confirmation / second failure
+PASS collection boundary input changed during photo conversion
+PASS live A repeated failure / exact retry
+PASS live B photo success without previous draft
+PASS live B pending processed photo
+PASS live C hide/edit/reopen/navigation
+PASS live C new file invalidates processed photo
+PASS live D failed download / unrelated success
+PASS live D deletion cannot discard draft
+PASS live boundary confirmed then edited
+PASS live boundary conversion failed early
+PASS live boundary delayed completion / double click
+PASS live boundary deletion confirmation / second failure
+PASS live boundary input changed during photo conversion
+TOTAL success=36 failure=0 unexecuted=0

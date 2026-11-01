@@ -1,0 +1,42 @@
+✔ 429: max four attempts, notices, spacing, then queue recovers (21.178483ms)
+✔ 502: max four attempts, notices, spacing, then queue recovers (12.689318ms)
+✔ 503: max four attempts, notices, spacing, then queue recovers (45.307783ms)
+✔ 504: max four attempts, notices, spacing, then queue recovers (10.568706ms)
+✔ network: max four attempts, notices, spacing, then queue recovers (10.132437ms)
+✔ Retry-After is honoured above 15 seconds, malformed values use backoff (18.923469ms)
+✔ non-retryable HTTP errors and failed body reads (8.133029ms)
+✔ serialized requests, in-flight deduplication, five-minute cache expiry (7.932286ms)
+✔ stale requests skip queued calls; deduplicated current caller receives retry notice (31.471544ms)
+✔ actual API artist fixture: Number Girl (11.197245ms)
+✔ actual API artist fixture: ナンバーガール (6.607235ms)
+✔ actual API artist fixture: 細野晴臣 (4.083354ms)
+✔ actual API artist fixture: Haruomi Hosono (12.65079ms)
+✔ kana normalization, alias sort names, and name agreement outrank server score (14.465299ms)
+✔ missing aliases are enriched; high-score unrelated artists fall back to title search (59.577377ms)
+✔ browse consumes more than 600 raw records, sorts entire catalog, deduplicates by MBID (95.033535ms)
+✔ title pagination uses raw offsets and count, not displayed/deduplicated length (22.044492ms)
+✔ actual Unknown Artist reproduction and credit repair preserve credited name and joinphrases (10.020198ms)
+✔ a timed-out fetch aborts, retries, and recovers (6.463969ms)
+✔ v0.3.21 live artist response: 細野晴臣 (49.129482ms)
+✔ v0.3.21 live artist response: Haruomi Hosono (9.284467ms)
+✔ v0.3.21 live artist response: Number Girl (9.784633ms)
+✔ v0.3.21 live artist response: ナンバーガール (7.994369ms)
+✔ v0.3.21 live artist response: 大比良瑞希 (11.998063ms)
+✔ v0.3.21 live artist response: 大比良 (4.366903ms)
+✔ album mode directly searches actual title response: Punisher (45.181759ms)
+✔ album mode directly searches actual title response: Hard Life (7.138708ms)
+✔ nonexistent album response is empty; explicit artist mode does not return album results (8.835289ms)
+✔ multiple short prefix matches require selection; exact names take precedence over scores (12.71756ms)
+✔ duplicate exact names require selection, and prefix retrieval uses registered aliases/sort names (8.947388ms)
+✔ album title exact match ranks above a higher-scoring partial title and preserves duplicate-name works (8.017916ms)
+✔ full and partial Ohira names reach the same actual ten-work catalog (12.698361ms)
+✔ title ordering: normalized exact, partial, other; date descending with unknown last in each group (42.061501ms)
+✔ title pages merge and re-sort all loaded works without extra requests; artist priority is unchanged (14.062912ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 711.090384

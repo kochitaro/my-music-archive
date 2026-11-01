@@ -1,0 +1,37 @@
+PASS listening A repeated failure / exact retry
+FAIL listening B photo success without previous draft AssertionError memo lost after close/reopen; DB still contains Original
+FAIL listening B pending processed photo AssertionError ('edit', 'photo-remove')
+PASS listening C hide/edit/reopen/navigation
+FAIL listening C new file invalidates processed photo AssertionError old processed photo falsely assigned to new file
+FAIL listening D failed download / unrelated success AssertionError unrelated save cleared draft; memo lost after close/reopen
+FAIL listening D deletion cannot discard draft AssertionError delete destroyed unrecovered edits
+PASS listening boundary confirmed then edited
+FAIL listening boundary conversion failed early AssertionError draft disappeared
+FAIL listening boundary delayed completion / double click AssertionError draft disappeared
+FAIL listening boundary deletion confirmation / second failure AssertionError another operation replaced recovery during deletion confirmation
+FAIL listening boundary input changed during photo conversion AssertionError AssertionError()
+PASS collection A repeated failure / exact retry
+FAIL collection B photo success without previous draft AssertionError memo lost after close/reopen; DB still contains Original
+FAIL collection B pending processed photo AssertionError ('edit', 'photo-remove')
+PASS collection C hide/edit/reopen/navigation
+FAIL collection C new file invalidates processed photo AssertionError old processed photo falsely assigned to new file
+FAIL collection D failed download / unrelated success AssertionError unrelated save cleared draft; memo lost after close/reopen
+FAIL collection D deletion cannot discard draft AssertionError delete destroyed unrecovered edits
+PASS collection boundary confirmed then edited
+FAIL collection boundary conversion failed early AssertionError draft disappeared
+FAIL collection boundary delayed completion / double click AssertionError draft disappeared
+FAIL collection boundary deletion confirmation / second failure AssertionError another operation replaced recovery during deletion confirmation
+FAIL collection boundary input changed during photo conversion AssertionError AssertionError()
+PASS live A repeated failure / exact retry
+FAIL live B photo success without previous draft AssertionError memo lost after close/reopen; DB still contains Original
+FAIL live B pending processed photo AssertionError ('edit', 'photo-remove')
+PASS live C hide/edit/reopen/navigation
+FAIL live C new file invalidates processed photo AssertionError old processed photo falsely assigned to new file
+FAIL live D failed download / unrelated success AssertionError unrelated save cleared draft; memo lost after close/reopen
+FAIL live D deletion cannot discard draft AssertionError delete destroyed unrecovered edits
+PASS live boundary confirmed then edited
+FAIL live boundary conversion failed early AssertionError draft disappeared
+FAIL live boundary delayed completion / double click AssertionError draft disappeared
+FAIL live boundary deletion confirmation / second failure AssertionError another operation replaced recovery during deletion confirmation
+FAIL live boundary input changed during photo conversion AssertionError AssertionError()
+TOTAL success=9 failure=27 unexecuted=0

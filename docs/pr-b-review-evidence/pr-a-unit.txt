@@ -1,0 +1,27 @@
+✔ reject null (13.321733ms)
+✔ reject {} (41.347894ms)
+✔ reject {"version":2,"listening":[]} (0.825616ms)
+✔ reject {"version":3,"listening":[]} (1.015783ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":null} (0.647378ms)
+✔ reject {"version":3,"listening":[null],"collection":[],"live":[]} (3.230467ms)
+✔ reject {"version":3,"listening":[{"title":"Title","artist":"Artist","entryId":"a","date":123}],"collection":[],"live":[]} (1.434015ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","artists":"A"}]} (0.779047ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":"NaN"}]} (3.573575ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":11}]} (1.705004ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title"}]} (6.909831ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a"},{"title":"Title","entryId":"a"}]} (1.017727ms)
+✔ legacy invalid row refuses whole array (1.011257ms)
+✔ v3 preserves unknown root and special keys (0.953759ms)
+✔ legacy manual entry, order, optional values retained (1.127683ms)
+✔ overflowing JSON number refuses unknown property conversion to null (0.780158ms)
+✔ nonempty legacy ID is preserved verbatim, including whitespace (1.977045ms)
+✔ v3 optional and score variants remain exact without mutating frozen source (4.253091ms)
+✔ properties only known in another area remain arbitrary JSON (1.275646ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.176263
