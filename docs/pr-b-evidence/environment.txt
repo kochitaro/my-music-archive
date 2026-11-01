@@ -1,0 +1,12 @@
+2026-11-01 UTC / isolated synthetic profiles; no real user archive data.
+Base: 6b52d1bc36c13c350165d3a44b92d350c5370628
+Node v24.19.0 / Python 3.12.14 / Chromium 154.0.8037.57 (Debian 13)
+Unit commands: node tests/pr_a.test.cjs; node tests/pr_a_required.test.cjs; node tests/search.test.cjs
+Browser commands: python -u tests/<name>.py
+Names: pr_b_before, pr_b_browser, pr_a_browser, data_preservation,
+       ui_v0322, ui_v0322_followup, search_live_ui, browser_smoke
+External API requests blocked or served from fixtures. HTTP only on loopback.
+DB-key writes audit: one localStorage.setItem(KEY,raw), inside commitDB's exclusive lock callback.
+UI language key is separate. No DB removeItem/clear/write bypass in the application.
+git diff --check: passed.
+iPhone Safari, actual quota exhaustion, OS file-save completion and freeze/resume: NOT tested.

@@ -1,0 +1,1 @@
+REPRODUCED on 6b52d1b: Tab B reports success and silently loses Tab A Listening change while saving Collection.
