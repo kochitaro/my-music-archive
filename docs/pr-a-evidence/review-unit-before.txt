@@ -1,0 +1,367 @@
+✖ listening.title: missing (3.235544ms)
+✖ listening.title: null (0.705844ms)
+✔ listening.title: empty (1.860312ms)
+✔ listening.title: whitespace (0.903191ms)
+✔ listening.title: number (0.89652ms)
+✔ listening.title: boolean (0.737972ms)
+✔ listening.title: array (0.536538ms)
+✔ listening.title: object (0.668507ms)
+✖ listening.artist: missing (0.905053ms)
+✖ listening.artist: null (0.702418ms)
+✔ listening.artist: empty (0.600154ms)
+✔ listening.artist: whitespace (0.463508ms)
+✔ listening.artist: number (0.705703ms)
+✔ listening.artist: boolean (0.485622ms)
+✔ listening.artist: array (0.717621ms)
+✔ listening.artist: object (0.492111ms)
+✖ collection.title: missing (0.546003ms)
+✖ collection.title: null (0.545141ms)
+✔ collection.title: empty (0.50452ms)
+✔ collection.title: whitespace (0.527344ms)
+✔ collection.title: number (0.482066ms)
+✔ collection.title: boolean (0.602868ms)
+✔ collection.title: array (0.514074ms)
+✔ collection.title: object (0.594004ms)
+✖ collection.artist: missing (0.59772ms)
+✖ collection.artist: null (0.767877ms)
+✔ collection.artist: empty (0.488716ms)
+✔ collection.artist: whitespace (0.558191ms)
+✔ collection.artist: number (0.585161ms)
+✔ collection.artist: boolean (0.536208ms)
+✔ collection.artist: array (0.545252ms)
+✔ collection.artist: object (0.525121ms)
+✖ live.title: missing (0.703199ms)
+✖ live.title: null (0.538391ms)
+✖ live.title: empty (0.565972ms)
+✖ live.title: whitespace (0.576248ms)
+✔ live.title: number (1.135951ms)
+✔ live.title: boolean (0.442377ms)
+✔ live.title: array (0.47096ms)
+✔ live.title: object (0.433333ms)
+✔ live.artist: missing (0.478701ms)
+✔ live.artist: null (0.535216ms)
+✔ live.artist: empty (0.473574ms)
+✔ live.artist: whitespace (0.467234ms)
+✔ live.artist: number (0.601616ms)
+✔ live.artist: boolean (0.500964ms)
+✔ live.artist: array (0.55729ms)
+✔ live.artist: object (0.522126ms)
+✔ legacy.title: missing (0.73729ms)
+✔ legacy.title: null (0.581526ms)
+✖ legacy.title: empty (0.479733ms)
+✖ legacy.title: whitespace (0.679434ms)
+✔ legacy.title: number (0.66365ms)
+✔ legacy.title: boolean (0.421615ms)
+✔ legacy.title: array (0.704221ms)
+✔ legacy.title: object (0.415766ms)
+✖ legacy.artist: missing (0.805183ms)
+✖ legacy.artist: null (0.629248ms)
+✔ legacy.artist: empty (0.466142ms)
+✔ legacy.artist: whitespace (0.520805ms)
+✔ legacy.artist: number (0.428575ms)
+✔ legacy.artist: boolean (0.607175ms)
+✔ legacy.artist: array (4.432272ms)
+✔ legacy.artist: object (0.487976ms)
+✔ historical v3 direct album producer preserves empty title and whitespace credits (6.26684ms)
+✖ official legacy import saved empty artist and whitespace title (4.389242ms)
+ℹ tests 66
+ℹ suites 0
+ℹ pass 49
+ℹ fail 17
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 67.107772
+
+✖ failing tests:
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ listening.title: missing (3.235544ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ listening.title: null (0.705844ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ listening.artist: missing (0.905053ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ listening.artist: null (0.702418ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ collection.title: missing (0.546003ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ collection.title: null (0.545141ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ collection.artist: missing (0.59772ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ collection.artist: null (0.767877ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ live.title: missing (0.703199ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ live.title: null (0.538391ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ live.title: empty (0.565972ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:9:123
+✖ live.title: whitespace (0.576248ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:16:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Function (anonymous)],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:19:71
+✖ legacy.title: empty (0.479733ms)
+  ArchiveValidationError: Listening[1]: invalid legacy id/title / 旧形式のid・titleが不正です
+      at fail (evalmachine.<anonymous>:3:35)
+      at record (evalmachine.<anonymous>:12:107)
+      at evalmachine.<anonymous>:26:24
+      at Array.forEach (<anonymous>)
+      at Object.migrate (evalmachine.<anonymous>:26:9)
+      at migrate (/workspace/my-music-archive/tests/pr_a_required.test.cjs:7:156)
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:21:84)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+
+test at tests/pr_a_required.test.cjs:19:71
+✖ legacy.title: whitespace (0.679434ms)
+  ArchiveValidationError: Listening[1]: invalid legacy id/title / 旧形式のid・titleが不正です
+      at fail (evalmachine.<anonymous>:3:35)
+      at record (evalmachine.<anonymous>:12:107)
+      at evalmachine.<anonymous>:26:24
+      at Array.forEach (<anonymous>)
+      at Object.migrate (evalmachine.<anonymous>:26:9)
+      at migrate (/workspace/my-music-archive/tests/pr_a_required.test.cjs:7:156)
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:21:84)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+
+test at tests/pr_a_required.test.cjs:19:71
+✖ legacy.artist: missing (0.805183ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:21:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:19:71
+✖ legacy.artist: null (0.629248ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:21:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/pr_a_required.test.cjs:32:1
+✖ official legacy import saved empty artist and whitespace title (4.389242ms)
+  ArchiveValidationError: Listening[1]: invalid legacy id/title / 旧形式のid・titleが不正です
+      at fail (evalmachine.<anonymous>:3:35)
+      at record (evalmachine.<anonymous>:12:107)
+      at evalmachine.<anonymous>:26:24
+      at Array.forEach (<anonymous>)
+      at Object.migrate (evalmachine.<anonymous>:26:9)
+      at migrate (/workspace/my-music-archive/tests/pr_a_required.test.cjs:7:156)
+      at TestContext.<anonymous> (/workspace/my-music-archive/tests/pr_a_required.test.cjs:39:17)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

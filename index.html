@@ -139,7 +139,11 @@ function migrate(value){
   if(!object(r))fail(path,'record must be an object / 記録はオブジェクトが必要です');
   if(r.entryId!=null&&r.entryId!==''&&typeof r.entryId!=='string')fail(path+'.entryId','expected string / 文字列が必要です');
   if(!legacy&&(typeof r.entryId!=='string'||!r.entryId.length))fail(path+'.entryId','missing internal ID / 内部IDがありません');
-  if(legacy&&(!Object.hasOwn(r,'id')||typeof r.id!=='string'||typeof r.title!=='string'||!r.title.trim()))fail(path,'invalid legacy id/title / 旧形式のid・titleが不正です');
+  if(legacy&&(!Object.hasOwn(r,'id')||typeof r.id!=='string'))fail(path,'invalid legacy id / 旧形式のidが不正です');
+  // Historical album producers/importers did not guarantee nonblank strings.
+  // Require their presence/type, preserving string values verbatim for compatibility.
+  for(const k of album?['title','artist']:['title'])if(!Object.hasOwn(r,k)||typeof r[k]!=='string')fail(path+'.'+k,'required string / 必須の文字列です');
+  if(!album&&!r.title.trim())fail(path+'.title','title must not be blank / タイトルを空白にはできません');
   for(const k of ['title','date','added','memo','photo',...(album?['id','artist','release','genre','label']:['venue']),...(legacy?['listened']:[]),...(area==='collection'?['store','format','condition']:[])])if(r[k]!=null&&typeof r[k]!=='string')fail(path+'.'+k,'expected string or null / 文字列またはnullが必要です');
   for(const k of ['date','added',...(album?['release']:[]),...(legacy?['listened']:[])])if(r[k]){
    if(!Number.isFinite(Date.parse(r[k])))fail(path+'.'+k,'invalid date / 日付が不正です');

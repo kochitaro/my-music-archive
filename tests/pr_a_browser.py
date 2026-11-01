@@ -19,7 +19,7 @@ def main():
     base = f'http://127.0.0.1:{server.server_port}'
     seam = """window.a={db:()=>JSON.parse(JSON.stringify(db)),migrate,saveDB,openEdit,operationRecord,newId,setSection,
     mutate:f=>f(db),pausePhoto:()=>{resizePhoto=()=>new Promise(resolve=>window.finishPhoto=resolve)},renderFailure:v=>{render=v?()=>{throw Error('INTERNAL_SECRET')}:originalRender}};const originalRender=render;"""
-    html = (ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();", seam+"setSection('listening');showStorageState();")
+    html = Path(os.environ.get('MLA_TEST_HTML', ROOT/'index.html')).read_text().replace("setSection('listening');showStorageState();", seam+"setSection('listening');showStorageState();")
     count = 0
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'), args=['--no-sandbox'])
@@ -39,8 +39,45 @@ def main():
         def state():return [raw(),memory(page),page.evaluate('writes.length')]
         def imp(raw):
             page.evaluate("async raw=>{const el=document.getElementById('import-json');await el.onchange({target:{files:[{text:async()=>raw}],value:'x'}})}",raw)
+        required_count=0
+        for area in ['listening','collection','live']:
+            for field in ['title','artist']:
+                for name,value in [('missing',None),('null',None),('empty',''),('whitespace',' \t '),('number',7),('boolean',False),('array',[]),('object',{})]:
+                    candidate=copy.deepcopy(seed)
+                    if name=='missing':candidate[area][0].pop(field,None)
+                    else:candidate[area][0][field]=value
+                    required=field=='title' or area!='live'
+                    reject=required and (not isinstance(value,str) or (area=='live' and not value.strip()))
+                    reset();before=state();imp(json.dumps(candidate));imported=state()!=before
+                    if not os.environ.get('MLA_REQUIRED_OBSERVE'):
+                        if reject:
+                            assert state()==before,(area,field,name,alerts[-1])
+                            assert area+'[1].'+field in alerts[-1]
+                        else:assert stored(page)==candidate and memory(page)==candidate
+                    reset();before=state();saved=page.evaluate('(v)=>a.saveDB(v)',candidate)
+                    if not os.environ.get('MLA_REQUIRED_OBSERVE'):
+                        assert saved is not reject,(area,field,name)
+                        if reject:assert state()==before
+                        else:assert stored(page)==candidate and memory(page)==candidate
+                    reset(candidate);stopped=page.locator('#storage-state').is_visible()
+                    if os.environ.get('MLA_REQUIRED_OBSERVE'):
+                        print('OBSERVE',area,field,name,'import=',imported,'save=',saved,'startup_stopped=',stopped,'expect_reject=',reject)
+                    else:
+                        assert stopped is reject,(area,field,name)
+                        assert raw()==json.dumps(candidate) and page.evaluate('writes.length')==0
+                        if reject:
+                            assert memory(page)==dict(version=3,listening=[],collection=[],live=[])
+                            with page.expect_download() as dl:page.locator('#recover-source').click()
+                            assert Path(dl.value.path()).read_bytes()==json.dumps(candidate).encode()
+                            assert page.evaluate('a.saveDB(a.db())') is False
+                            assert raw()==json.dumps(candidate) and page.evaluate('writes.length')==0
+                        else:assert memory(page)==candidate and backup(page)==candidate
+                    required_count+=3
+        if os.environ.get('MLA_REQUIRED_OBSERVE'):
+            browser.close();server.shutdown();return
+        print('PASS required-field matrix: import/save/startup + exact recovery:',required_count)
         invalid=['{', 'null','[]x',json.dumps(dict(version=1,listening=[],collection=[],live=[])),json.dumps(dict(listening=[]))]
-        for k,v in [('live',None),('collection',{}),('listening',[None]),('live',[dict(entryId=42)]),('live',[dict(entryId='a',date='2026-02-30')]),('live',[dict(entryId='a',artists=None)]),('live',[dict(entryId='a',rating='abc')]),('live',[dict(entryId='a',rating=-1)]),('live',[dict(entryId='a'),dict(entryId='a')]),('live',[dict(title='missing')])]:
+        for k,v in [('live',None),('collection',{}),('listening',[None]),('live',[dict(entryId=42,title='Live')]),('live',[dict(entryId='a',title='Live',date='2026-02-30')]),('live',[dict(entryId='a',title='Live',artists=None)]),('live',[dict(entryId='a',title='Live',rating='abc')]),('live',[dict(entryId='a',title='Live',rating=-1)]),('live',[dict(entryId='a',title='Live'),dict(entryId='a',title='Live')]),('live',[dict(title='missing')])]:
             d=copy.deepcopy(seed);d[k]=v;invalid.append(json.dumps(d))
         d=copy.deepcopy(seed);del d['live'];invalid.append(json.dumps(d))
         for bad in invalid:
@@ -58,14 +95,14 @@ def main():
         for i,score in enumerate([0,10,8.5,'8.5','8.55','',None]):
             r=dict(entryId=str(i),id='',title='Manual',artist='A',rating=score,date='2020/01/02',tags=[' a ','a',''],photo='data:image/png;base64,a',memo=None,extra={'__proto__':1})
             variants['listening'].append(r)
-        for tags in ['a, b',None]:variants['listening'].append(dict(entryId='tags'+str(tags),title='Tags',tags=tags))
-        variants['listening'].append(dict(entryId='missing',title='Missing'))
+        for tags in ['a, b',None]:variants['listening'].append(dict(entryId='tags'+str(tags),title='Tags',artist='Artist',tags=tags))
+        variants['listening'].append(dict(entryId='missing',title='Missing',artist='Artist'))
         variants['live']=[dict(entryId='0',title='Old'),dict(entryId='empty',title='Empty',artists=[]),dict(entryId='multi',title='Multi',artists=['B','A','B'])]
         reset();imp(json.dumps(variants));assert stored(page)==variants, (stored(page),variants);assert memory(page)==variants;assert backup(page)==variants
         assert page.evaluate('a.saveDB(a.db())');page.reload();assert backup(page)==variants;count+=1
         assert page.evaluate("a.operationRecord('listening','0').title")=='Manual';assert page.evaluate("a.operationRecord('live','0').title")=='Old';count+=1
         print('PASS compatibility exact import/save/reload/export; cross-area IDs')
-        legacy=[dict(id='',title='Manual',listened='2020/01/02',rating='4.25',tags=None,extra=1),dict(id='same',title='First',entryId='keep',rating=1),dict(id='same',title='Second',rating=5)]
+        legacy=[dict(id='',title='Manual',artist='Artist',listened='2020/01/02',rating='4.25',tags=None,extra=1),dict(id='same',title='First',artist='Artist',entryId='keep',rating=1),dict(id='same',title='Second',artist='Artist',rating=5)]
         for old in [False,True]:
             reset(legacy if old else seed,old=old)
             if not old:imp(json.dumps(legacy))
@@ -118,7 +155,7 @@ def main():
         reset()
         result=page.evaluate("""()=>{const original=crypto.randomUUID;let ids=['listening','unique'];crypto.randomUUID=()=>ids.shift();const id=a.newId();crypto.randomUUID=original;return id}""")
         assert result=='unique';count+=1
-        result=page.evaluate("""()=>{const original=crypto.randomUUID;let ids=['keep','fresh','fresh','other'];crypto.randomUUID=()=>ids.shift();const out=a.migrate([{id:'',title:'A'},{id:'',title:'B',entryId:'keep'},{id:'',title:'C'}]);crypto.randomUUID=original;return out.listening.map(r=>r.entryId)}""")
+        result=page.evaluate("""()=>{const original=crypto.randomUUID;let ids=['keep','fresh','fresh','other'];crypto.randomUUID=()=>ids.shift();const out=a.migrate([{id:'',title:'A',artist:'Artist'},{id:'',title:'B',artist:'Artist',entryId:'keep'},{id:'',title:'C',artist:'Artist'}]);crypto.randomUUID=original;return out.listening.map(r=>r.entryId)}""")
         assert result==['fresh','keep','other'];count+=1
         assert all('INTERNAL_SECRET' not in a for a in alerts);assert not errors,errors
         print('PASS ID guards/deletion recheck/generation; total scenarios:',count)
