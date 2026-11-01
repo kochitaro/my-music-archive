@@ -2,6 +2,13 @@
 
 ①開発・検証ルーム #2 向け。2026-11-01。対象 v0.3.22 / DB version 3。
 
+## PR情報
+
+- PR: [#13](https://github.com/kochitaro/my-music-archive/pull/13)（open / レビュー可能、未マージ）
+- 実装・検証コミット: `0a45a736c1cc1be1e349915d5d7f8db0f2b26f10`
+- mainとの差分: [比較](https://github.com/kochitaro/my-music-archive/compare/main...codex/pr-b-dp05)。アプリ1ファイル、テスト4ファイル、報告/証跡13ファイルの計18ファイル。報告へのPR情報追記は後続の文書コミット。
+- 最終自動試験: 単体119件、PR-A/PR-Bブラウザ計271シナリオ、既存保全/UI/検索37グループ、失敗0。改修前消失の再現1件も確認。
+
 ## 基準・作業範囲
 
 - GitHub main: `6b52d1bc36c13c350165d3a44b92d350c5370628`。指定基準と一致。
