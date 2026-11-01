@@ -1,0 +1,15 @@
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: listening
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: collection
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: live
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{broken\r\n 日本語' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{ "unrecognized": tr' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' all
+PASS all group 1 injected-exception tests; real device quota and iPhone Safari NOT tested

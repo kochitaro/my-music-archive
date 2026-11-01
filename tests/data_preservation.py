@@ -13,7 +13,7 @@ from ui_v0322 import ROOT, KEY, QuietHandler, stored, edit, record
 
 OLD = 'my-music-archive-pilot-v1'
 PHOTO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII='
-SEAM = "window.testDB=()=>JSON.parse(JSON.stringify(db));window.testSave=saveDB;"
+SEAM = "window.testDB=()=>JSON.parse(JSON.stringify(db));window.testSave=saveDB;window.testBusy=()=>operationBusy;"
 
 
 def seed_data(missing=False):
@@ -30,6 +30,7 @@ def seed_data(missing=False):
 
 
 def backup(page):
+    page.wait_for_function('!window.testBusy?.()')
     with page.expect_download() as dl:
         page.locator('#export-json').evaluate('(e)=>e.onclick()')
     return json.loads(Path(dl.value.path()).read_text())
@@ -38,6 +39,14 @@ def backup(page):
 def fail_writes(page, fail):
     page.evaluate('(v)=>window.failWrite=v', fail)
 
+
+def recover_before_close(page):
+    # PR-B intentionally preserves failed forms until recovery is acknowledged.
+    if page.locator('#draft-text').input_value():
+        page.locator('#draft-open').evaluate('(e)=>e.onclick()')
+        with page.expect_download() as dl: page.locator('#draft-export').click()
+        assert json.loads(Path(dl.value.path()).read_text())['format']=='mla-unsaved-input'
+        page.locator('#draft-confirm').click()
 
 def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), QuietHandler)
@@ -74,6 +83,7 @@ def main():
             edit(page, other)
             page.locator('#memo').fill('Later successful save')
             page.locator('#save').click()
+            expect(page.locator('#modal')).not_to_have_class('modal open')
             assert stored(page)[section] == seed[section]
             assert page.evaluate('testDB()')[section] == seed[section]
             assert backup(page)[section] == seed[section]
@@ -89,7 +99,7 @@ def main():
             page.locator('#delete').click(); page.locator('#delete-accept').click()
             preserved(seed)
             expect(page.locator('#modal')).to_have_class('modal open')
-            page.locator('#close').click()
+            recover_before_close(page); page.locator('#close').click()
             record(page, section).click()
             expect(page.locator('#view-content')).to_contain_text('Original')
             page.locator('#view-close').click()
@@ -111,14 +121,14 @@ def main():
                 page.locator('#save').click()
                 preserved(seed)
                 expect(page.locator('#memo')).to_have_value('FAILED memo')
-                page.locator('#close').click()
+                recover_before_close(page); page.locator('#close').click()
                 edit(page, section)
                 expect(page.locator('#memo')).to_have_value('' if missing else 'Original')
                 # Photo removal, including absent-property path via direct handler.
                 remove = '#remove-photo' if section == 'live' else '#remove-album-photo'
                 page.locator(remove).evaluate('(e)=>e.onclick()')
                 preserved(seed)
-                page.locator('#close').click()
+                recover_before_close(page); page.locator('#close').click()
                 fail_writes(page, False)
                 later_save(seed, section)
                 # Retry the failed edit and real image resize, then successful removal.
@@ -135,7 +145,7 @@ def main():
                 page.locator(f'[data-section={section}]').click(); edit(page, section)
                 page.locator(remove).evaluate('(e)=>e.onclick()')
                 assert stored(page)[section][0]['photo'] == ''
-                page.locator('#close').click()
+                recover_before_close(page); page.locator('#close').click()
                 print('PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence:', section, 'missing=', missing)
 
         for raw, read_error in [('{broken\r\n 日本語', False), ('{ "unrecognized": true }\n', False), ('', False), (json.dumps(seed_data()), True), (json.dumps(seed_data()), 'all')]:

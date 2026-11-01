@@ -1,0 +1,7 @@
+PASS sequential same/different-area operation matrix: 45
+PASS lock/absent/insecure/exceptions/release/raw guards; cumulative: 57
+PASS all areas create/edit recovery + photos/download/fallback/restore rejection; cumulative: 63
+PASS slow photo
+PASS delete
+PASS retry
+PASS asynchronous operations/retry/migration races; total scenarios: 70

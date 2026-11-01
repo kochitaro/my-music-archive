@@ -1,0 +1,6 @@
+PASS 30 heading layouts (2 languages × 5 widths × 3 tabs), 44px targets, search separation, all creation dialogs; no archive writes
+PASS full-archive counts, legacy genres/string tags, duplicate tags, blanks/null/missing fields, collisions, compound filters, tab/view/language preservation
+PASS gold at 0/4.2, exact rose at 4.3/4.5/5, fractional masks, both archives/views/details/editing and clearing
+PASS manual save/edit/delete in both archives; counts update and zero-match selections survive redraw/tab changes
+PASS Live create/edit/delete, Live gold at 5.0, list/grid, sorting and existing record intact
+PASS exact JSON backup/restore, cancelled import, CSV, reload persistence, unrelated fields/records intact; no JS errors

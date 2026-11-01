@@ -116,7 +116,7 @@ body { overflow-x: hidden !important; overscroll-behavior-x: none; }
 .live-artists{margin:12px 0}.live-artist-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}.live-artist-row input{flex:1;min-width:0;font-size:16px}.live-artist-row button{flex:none;min-height:44px}.live-artist-list{margin:0;padding-left:20px;white-space:pre-wrap}
 </style></head><body><main class="shell"><div class="brand"><div class="brandmark"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="レコード収納箱"><path d="M7 37 14 27v10H7Zm58 0-7-10v10h7Z" fill="#60788a"/><circle cx="36" cy="32" r="29" fill="#17232d"/><path d="M11 26A26 26 0 0 1 27 7M15 29A22 22 0 0 1 29 11M19 31A18 18 0 0 1 31 15" fill="none" stroke="#e8eef0" stroke-linecap="round" stroke-width="1.6"/><circle cx="36" cy="32" r="10.5" fill="#b45d4e" stroke="#e8eef0" stroke-width="1.8"/><circle cx="36" cy="32" r="1.8" fill="#f6f4ee"/><rect x="6" y="35" width="60" height="35" fill="#62798a"/><path d="M6 35h60" stroke="#f0f2f2" stroke-width="1.6"/><rect x="26" y="44" width="20" height="6" rx="2" fill="#f0f2f2"/></svg></div><h1>My Listening Archive</h1></div>
 <div class="langbar"><label for="ui-language">Language / 言語</label><select aria-label="Language" class="lang-select" id="ui-language"><option value="en">English</option><option value="ja">日本語</option></select></div>
-<section class="panel" id="storage-state" role="alert" hidden><p id="storage-reason"></p><p id="recovery-info"></p><button class="btn" id="recover-source" type="button"></button></section>
+<p id="tab-change" role="alert" hidden></p><button class="btn ghost" id="draft-open" type="button">未保存入力の回収 / Recover unsaved input</button><section id="unsaved-recovery" class="panel" hidden role="region" aria-label="Unsaved input recovery"><p id="draft-reason"></p><p id="draft-info"></p><textarea id="draft-text" class="field" readonly rows="12" aria-label="Unsaved input JSON"></textarea><button class="btn" id="draft-export" type="button"></button> <button class="btn alt" id="draft-hide" type="button"></button> <button class="btn ghost" id="draft-confirm" type="button"></button></section><section class="panel" id="storage-state" role="alert" hidden><p id="storage-reason"></p><p id="recovery-info"></p><button class="btn" id="recover-source" type="button"></button></section>
 <nav aria-label="Archives" class="tabbar" id="sections"><button class="tab active" data-section="listening">Listening</button><button class="tab" data-section="collection">Collection</button><button class="tab" data-section="live">Live</button></nav>
 <section class="panel" id="search-panel"><div class="panel-heading"><h2 id="search-title">Search Albums</h2><button class="manual-add-link" id="manual-add-trigger" type="button">＋ Add Manually</button></div><div class="view-segments search-modes" id="search-modes" role="group" aria-label="Search mode"><button class="tab active" type="button" data-search-mode="artist" aria-pressed="true">Artist</button><button class="tab" type="button" data-search-mode="title" aria-pressed="false">Album Title</button></div><form class="row" id="search-form"><input autocomplete="off" class="field grow" id="query" minlength="2" aria-label="Artist name" required=""/><button class="btn" id="search-btn">Search</button></form><div class="status" id="status" role="status"></div><div class="row between"><span class="small muted" id="result-count"></span><button class="btn ghost hidden" id="clear-search" type="button">Clear Results ×</button></div><div class="search-candidates hidden" id="artist-candidates"></div><div class="results" id="results"></div><div style="margin:10px 0;text-align:center"><button class="btn ghost hidden" id="more-results" type="button">Load 30 more</button></div></section>
 <section class="panel"><div class="panel-heading"><h2><span id="library-title">Listening Archive</span> <span class="muted small" id="count">0</span></h2><button class="manual-add-link hidden" id="add-live-trigger" type="button">＋ Add Live</button></div><div aria-labelledby="library-title" class="view-segments" role="group"><button class="tab active" id="grid-tab" type="button">▦ Grid</button><button class="tab" id="list-tab" type="button">☷ List</button></div><div class="filter-control"><button aria-controls="sort-wrap" aria-expanded="false" class="btn ghost" id="filters-toggle" type="button">⚙ Sort &amp; Filter <span id="filters-icon">＋</span></button></div><div class="filter-fields hidden" id="filters-wrap"><select class="field w200" id="sort"><option value="release-desc">Release: Newest</option><option value="release-asc">Release: Oldest</option><option value="date-desc">Listened: Newest</option><option value="date-asc">Listened: Oldest</option><option value="rating-desc">Score: High to Low</option><option value="rating-asc">Score: Low to High</option><option value="label-asc">Label: A–Z</option><option value="artist-asc">Artist: A–Z</option><option value="artist-desc">Artist: Z–A</option></select><select class="field w200" id="group"><option value="year">Group: Release Year</option><option value="week">Group: Release Week</option><option value="month">Group: Release Month</option><option value="day">Group: Release Day</option><option value="none">No Grouping</option></select><select class="field w200" id="artist-filter"><option value="">All Artists</option></select><select class="field hidden" id="genre-filter" aria-hidden="true"><option value="">All Genres</option></select><select class="field w200" id="label-filter"><option value="">All Labels</option></select><select class="field w200 hidden" id="store-filter"><option value="">All Stores</option></select><select class="field w200" id="tag-filter"><option value="">All Tags</option></select><input class="field w200" id="year-filter" inputmode="numeric" maxlength="4" placeholder="Filter listened year"/><input class="field w200" id="release-year-filter" inputmode="numeric" maxlength="4" placeholder="Filter release year"/></div><div id="library"></div></section>
@@ -174,23 +174,132 @@ function validationMessage(e){return (isJapanese()?'データが不正なため�
 $('ui-language').value=(navigator.language||'en').toLowerCase().startsWith('ja')?'ja':'en';
 try{const preference=localStorage.getItem('mma-ui-language');if(['ja','en'].includes(preference))$('ui-language').value=preference}catch(e){}
 // A failed read is never an empty archive. Keep the exact source for recovery.
-let loadFailed=false,rawSource=null,sourceKey=KEY,loadReason='';
+let loadFailed=false,rawSource=null,sourceKey=KEY,loadReason='',baseRaw=null,migrationCandidate=null;
+let saving=false,externalChanged=false,operationBusy=false,draft=null,activeOperation=null,draftRecovered=false;
+let formSession=0,formOwner=null,formBaseline=null,draftContext=null,draftPhotoFiles=null;
 try{
- rawSource=localStorage.getItem(KEY);
+ rawSource=localStorage.getItem(KEY);baseRaw=rawSource;
  if(rawSource!==null){db=migrate(JSON.parse(rawSource))}
- else{sourceKey=OLD;rawSource=localStorage.getItem(OLD);if(rawSource!==null){const migrated=migrate(JSON.parse(rawSource));commitDB(migrated)}}
+ else{sourceKey=OLD;rawSource=localStorage.getItem(OLD);if(rawSource!==null){migrationCandidate=migrate(JSON.parse(rawSource))}}
 }catch(e){loadFailed=true;if(e instanceof ArchiveValidationError)loadReason=e.message}
 function storageStoppedMessage(){return isJapanese()?'保存データを読み込めなかったため、上書きを防ぐ目的で保存を停止しています。現在の状態で新しい記録を保存できません。':'Saved data could not be read. Saving is stopped to prevent overwriting it. New records cannot be saved in the current state.'}
 function canSave(){if(!loadFailed)return true;alert(storageStoppedMessage());return false}
-// Shared synchronous persistence boundary. PR-B can wrap validation/write/adoption in a lock.
-// Callers build a separate candidate; saved records are adopted only after writing.
-function commitDB(candidate){const validated=migrate(candidate);localStorage.setItem(KEY,JSON.stringify(validated));db=validated}
-function saveDB(candidate=db){if(!canSave())return false;try{commitDB(candidate);return true}catch(e){if(e instanceof ArchiveValidationError){alert(validationMessage(e));return false}alert(isJapanese()?'保存できず、変更は反映されていません。端末の保存領域が不足しているか、利用できません。再試行またはキャンセルしてください。':'Could not save. Changes have not been applied. Device storage is full or unavailable. Retry or cancel.');return false}}
+// All archive writes, including startup migration, use this cooperative lock.
+const DB_LOCK='mla:'+KEY+':write';
+class SaveStopped extends Error {}
+function stopped(reason){return new SaveStopped(reason)}
+function conflictMessage(){return isJapanese()?'別タブまたは外部で保存内容が変更されたため保存を停止しました。未保存入力を回収してから再読み込みしてください。':'Saved content changed in another tab or externally. Saving stopped. Recover unsaved input before reloading.'}
+async function commitDB(candidate,operation={},migration=false){
+ if(saving)throw stopped('A save is already running / 保存処理中です');
+ // Snapshot before waiting: no caller can change the candidate during lock acquisition.
+ const snapshot=migrate(candidate);saving=true;
+ try{
+  if(!globalThis.isSecureContext||!navigator.locks?.request)throw stopped(isJapanese()?'安全な排他保存を利用できません。この環境では保存できません。入力を回収してください。':'Safe exclusive saving is unavailable in this environment. Recover your input.');
+  await navigator.locks.request(DB_LOCK,{mode:'exclusive',ifAvailable:true},lock=>{
+   if(!lock)throw stopped(isJapanese()?'別タブが保存中です。入力を保持したまま再試行するか回収してください。':'Another tab holds the save lock. Retry with your input intact, or recover it.');
+   if(loadFailed)throw stopped(storageStoppedMessage());
+   const currentRaw=localStorage.getItem(KEY);
+   if(externalChanged||currentRaw!==baseRaw)throw stopped(conflictMessage());
+   if(migration&&localStorage.getItem(OLD)!==rawSource)throw stopped(isJapanese()?'旧形式の移行元が変更されました。原本を回収し再読み込みしてください。':'Legacy migration source changed. Recover the original and reload.');
+   if(operation.record){const found=db[operation.area]?.filter(r=>r.entryId===operation.id);if(found?.length!==1||found[0]!==operation.record)throw stopped('Operation target mismatch / 操作対象が一致しません')}
+   const validated=migrate(snapshot),raw=JSON.stringify(validated);
+   localStorage.setItem(KEY,raw);
+   db=validated;baseRaw=raw; // Never roll back storage on failure.
+  });
+ }finally{saving=false}
+}
+function sameFiles(a,b){return !!a&&!!b&&a.length===b.length&&a.every((file,i)=>file===b[i])}
+function sameForm(a,b){return !!a&&!!b&&JSON.stringify(a.input)===JSON.stringify(b.input)&&sameFiles(a.fileRefs,b.fileRefs)}
+function formState(operation={}){
+ const op={...(formOwner||{}),...operation},fields={},files=[],fileRefs=[];
+ const root=op.kind==='create-live'?$('live-form'):$('modal').classList.contains('open')?$('modal'):null;
+ const relevant=el=>!(op.area==='live'&&root===$('modal')&&el.closest('#album-fields'))&&!(op.area!=='live'&&el.closest('#live-edit-fields'))&&!(op.area!=='collection'&&el.closest('.collection-only'));
+ if(root)for(const el of root.querySelectorAll('input,select,textarea')){
+  if(el.closest('#unsaved-recovery')||!relevant(el))continue;
+  if(el.type==='file'){for(const f of el.files){fileRefs.push(f);files.push({name:f.name,type:f.type,size:f.size})}continue}
+  if(el.id)fields[el.id]=el.value;
+ }
+ if(root)fields.dateParts=Object.fromEntries([...root.querySelectorAll('.date-parts')].filter(relevant).map(w=>[w.id,[...w.querySelectorAll('.date-part')].map(el=>el.value)]));
+ if(op.area==='live'&&root)fields.performingArtists=[...$(op.kind==='create-live'?'live-artists':'e-live-artists').querySelectorAll('input')].map(el=>el.value);
+ return {input:fields,files,fileRefs};
+}
+function ownsForm(operation){return formOwner&&operation.area===formOwner.area&&(formOwner.kind!=='edit'||operation.id===formOwner.id)}
+function pendingDraft(){return draft&&!draftRecovered}
+function keepDraftMessage(){return isJapanese()?'未回収の入力があります。入力全体を再保存するか、回収内容を確認してから別の操作をしてください。':'Unrecovered input remains. Save the entire form, or verify recovery before another operation.'}
+function preserveDraft(){showDraft();alert(keepDraftMessage());return false}
+async function saveDB(candidate=db,operation={}){
+ if(!canSave())return false;
+ const full=['edit','create','create-live'].includes(operation.kind),owned=ownsForm(operation);
+ const sameRestore=operation.kind==='restore'&&draft?.operation==='restore'&&draftContext?.restoreRaw===JSON.stringify(candidate);
+ // A second operation cannot replace or settle another form's recovery state.
+ if(saving||(operationBusy&&operation.operationToken!==activeOperation)){alert(isJapanese()?'別の保存処理中のため停止しました。入力を保持したまま完了を待ってください。':'Another save operation is running. Input is retained; wait for it to finish.');return false}
+ if(pendingDraft()&&!sameRestore&&(!owned||draftContext?.session!==formSession||(!full&&operation.kind!=='photo-remove')||full&&operation.operationToken!==activeOperation||draft.operation==='delete'&&operation.kind!=='delete'))return preserveDraft();
+ const attempt=owned?(activeOperation?.session===formSession?activeOperation.form:formState()):null,session=formSession;
+ try{
+  await commitDB(candidate,operation);
+  if(sameRestore){draft=null;draftContext=null;draftPhotoFiles=null;draftRecovered=false;showDraft();return true}
+  if(full&&owned){
+   const persisted=db[operation.area]?.find(r=>r.entryId===operation.id);
+   if(session!==formSession||!sameForm(attempt,formState())||JSON.stringify(persisted)!==JSON.stringify(operation.proposed)){
+    captureDraft(operation,isJapanese()?'保存した内容とは別の入力が残っています。現在の入力を回収または再保存してください。':'Saved content differs from remaining input. Recover or save the current form.',attempt.fileRefs);return false;
+   }
+   // The same form, unchanged through the await, was completely persisted.
+   if(!draft||draftRecovered||draftContext?.session===session){draft=null;draftContext=null;draftPhotoFiles=null;draftRecovered=false}
+   formBaseline=formState();showDraft();return true;
+  }
+  if(operation.kind==='photo-remove'&&owned){
+   if(!sameForm(formBaseline,formState())){
+    captureDraft({...operation,proposed:draftContext?.session===session?draft?.proposedRecord:null},isJapanese()?'写真の削除は保存済みです。その他の入力は未保存です。入力全体を保存するか回収してください。':'Photo removal was saved. Other form input is still unsaved. Save the whole form or recover it.');
+    draft.photoState.savedPhotoRemoved=true;
+    if(!formState().fileRefs.length&&draft.proposedRecord)draft.proposedRecord.photo='';
+   }else if(draftContext?.session===session){draft=null;draftContext=null;draftPhotoFiles=null;draftRecovered=false}
+  }
+  showDraft();return true;
+ }catch(e){
+  const reason=e instanceof ArchiveValidationError?validationMessage(e):e instanceof SaveStopped?e.message:(isJapanese()?'保存できず、変更は反映されていません。保存領域または排他ロックを利用できません。再試行または入力回収をしてください。':'Could not save. Changes have not been applied. Storage or exclusive locking is unavailable. Retry or recover input.');
+  captureDraft(operation,reason,full&&operation.proposed?attempt?.fileRefs:null);if(operation.kind==='restore')draftContext.restoreRaw=JSON.stringify(candidate);alert(reason);return false;
+ }
+}
+// One recovery owner per form session. No history or archive-wide copies.
+function captureDraft(operation,reason,processedFiles=null){
+ const op={...(formOwner||{}),...(activeOperation||{}),...operation};
+ if(pendingDraft()&&draftContext&&(draftContext.session!==formSession||draft.area!==op.area))return preserveDraft();
+ const previous=draftContext?.session===formSession?draft:null,state=formState(op);
+ let proposed=op.proposed?JSON.parse(JSON.stringify(op.proposed)):previous?.proposedRecord?JSON.parse(JSON.stringify(previous.proposedRecord)):null;
+ if(op.kind==='photo-remove')proposed=previous?.proposedRecord?JSON.parse(JSON.stringify(previous.proposedRecord)):proposed;
+ if(processedFiles)draftPhotoFiles=processedFiles;
+ // A new File must never inherit converted bytes from an older selection.
+ const photoUnavailable=!!draftPhotoFiles?.length&&!sameFiles(draftPhotoFiles,state.fileRefs)||!!state.fileRefs.length&&!sameFiles(draftPhotoFiles,state.fileRefs);
+ if(photoUnavailable&&proposed)proposed.photo=null;
+ draftRecovered=false;
+ draftContext={session:formSession,input:state.input,fileRefs:state.fileRefs};
+ draft={format:'mla-unsaved-input',formatVersion:1,createdAt:new Date().toISOString(),area:op.area||null,operation:op.kind||'save',recordId:op.id||null,reason,base:{key:KEY,present:baseRaw!==null},input:state.input,proposedRecord:proposed,files:state.files,
+  photoState:{savedPhotoRemoved:previous?.photoState?.savedPhotoRemoved||false,pendingFileProcessed:!!state.fileRefs.length&&sameFiles(draftPhotoFiles,state.fileRefs)&&!!proposed?.photo},
+  limitations:photoUnavailable&&!state.files.length?'The processed photo no longer matches the current selection and is unavailable. / 処理済み写真は現在の選択と一致しないため回収データに含めません。':state.files.length?'Original photo files are not embedded. Keep the originals. Only a matching processed selection is included; otherwise current photo data is unavailable. / 元写真ファイルは含まれません。原本を保管してください。選択ファイルと対応する処理済み写真のみ含み、それ以外の現在の写真データは回収できません。':op.kind==='restore'?'Keep the selected backup file; its archive content is not duplicated here. / 選択したバックアップ原本を保管してください。':''};
+ showDraft();return true;
+}
+function canReplaceForm(){if(operationBusy)return false;if(pendingDraft())return preserveDraft();return true}
+function beginForm(kind){
+ if(draftRecovered){draft=null;draftContext=null;draftPhotoFiles=null;draftRecovered=false;showDraft()}
+ formSession++;formOwner={session:formSession,area:section,id:pendingRecord?.entryId||editing,kind};formBaseline=formState();
+}
+function showDraft(){
+ const panel=$('unsaved-recovery');panel.hidden=!draft;if(!draft)return;
+ const dialog=document.querySelector('#modal.open .dialog,#live-create-modal.open .dialog');if(dialog)dialog.append(panel);else $('storage-state').before(panel);
+ $('draft-reason').textContent=draft.reason;
+ $('draft-info').textContent=(isJapanese()?'未保存入力専用です。通常のDBバックアップや自動再実行用ではありません。保存先でファイルを確認するか、下のテキストをコピーしてから再読み込みしてください。':'Unsaved input only; not a DB backup or an executable operation. Verify the downloaded file or copy the text below before reloading.')+' '+draft.limitations;
+ $('draft-text').value=JSON.stringify(draft,null,2);
+ $('draft-export').textContent=isJapanese()?'未保存入力をJSONで回収':'Export unsaved input JSON';
+ $('draft-hide').textContent=isJapanese()?'入力へ戻る':'Return to input';
+ $('draft-confirm').textContent=isJapanese()?'回収内容を確認済み・閉じる操作を許可':'Recovery verified: allow closing';
+}
+window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&(e.key===KEY||e.key===null)&&e.newValue!==baseRaw){externalChanged=true;$('tab-change').hidden=false;$('tab-change').textContent=conflictMessage()}});
+window.addEventListener('beforeunload',e=>{if(operationBusy||draft||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')){e.preventDefault();e.returnValue=''}});
 function operationRecord(target,id,expected){
  const rows=db[target];const found=Array.isArray(rows)&&typeof id==='string'&&id.length?rows.filter(r=>r.entryId===id):[];
  if(found.length!==1||(expected&&found[0]!==expected)){alert(isJapanese()?'内部記録IDの重複または操作対象の不一致のため停止しました。画面を開き直し、原本を保管して確認してください。':'Operation stopped: duplicate internal ID or target mismatch. Reopen the record; keep and check the original data.');return null}return found[0];
 }
-function saveRecord(target,record,replacement){if(!operationRecord(target,record.entryId,record))return false;return saveDB({...db,[target]:db[target].map(x=>x===record?replacement:x)})}
+async function saveRecord(target,record,replacement){if(!operationRecord(target,record.entryId,record))return false;return saveDB({...db,[target]:db[target].map(x=>x===record?replacement:x)},{operationToken:activeOperation,area:target,id:record.entryId,record,kind:"photo-remove",proposed:replacement})}
 function showStorageState(){
  const panel=$('storage-state');panel.hidden=!loadFailed;if(!loadFailed)return;
  $('storage-reason').textContent=storageStoppedMessage()+(loadReason?' '+loadReason:'');
@@ -229,7 +338,7 @@ async function addAlbum(release){
  if(!canSave())return;
  const target=section,seq=++addRequest,request=searchRequest;
  if(!['listening','collection'].includes(target))return;
- const ctx={...searchContext(request),isCurrent:()=>seq===addRequest&&request===searchRequest&&target===section};
+ const ctx={...searchContext(request),isCurrent:()=>seq===addRequest&&request===searchRequest&&target===section&&!operationBusy};
  let r=release;
  status(isJapanese()?'アーティスト情報を確認中…':'Checking artist metadata…');
  try{r=await MMASearch.ensureCredit(r,ctx)}catch(e){if(!ctx.isCurrent())return}
@@ -371,6 +480,7 @@ for(const control of document.querySelectorAll('.rating-widget')){
  const update=n=>{
   const score=Math.max(0,Math.min(5,Math.round(n*10)/10));
   prepareRating(id,(score*2).toFixed(1));
+  $(id).dispatchEvent(new Event('input',{bubbles:true}));
  };
  const fromPointer=e=>{
   const rect=slider.getBoundingClientRect();if(!rect.width)return;
@@ -542,10 +652,10 @@ setupSuggestions();
 function prepareAlbumHelpers(creating,manual){$('artwork-row').before($('memo').closest('.group'));for(const field of HELP_FIELDS){$(field+'-suggest').dataset.expanded='0';refreshSuggestion(field)}$('artwork-reveal').classList.toggle('hidden',manual);$('artwork-controls').classList.toggle('hidden',!manual);$('artwork-reveal').textContent=isJapanese()?'アートワークを変更':'Change artwork'}
 $('artwork-reveal').onclick=()=>{$('artwork-controls').classList.remove('hidden');$('artwork-reveal').classList.add('hidden')};
 
-$('save').onclick=async()=>{if(!canSave())return;const target=section;if(editingSection!==target){operationRecord('',editing);return}const isNew=section!=='live'&&!!pendingRecord;const r=isNew?pendingRecord:operationRecord(section,editing);if(!r)return;try{validateDateSelect(section==='live'?'e-live-date':'date');if(section!=='live')validateDateSelect('release-edit');const update={memo:$('memo').value};if(section==='live'){if(!$('e-live-title').value.trim())throw Error('Artist / Event Title is required.');const artists=readLiveArtists('e-live-artists');if(artists.length||Object.hasOwn(r,'artists'))update.artists=artists;Object.assign(update,{date:$('e-live-date').value,title:$('e-live-title').value.trim(),venue:$('e-live-venue').value,rating:validateRating($('e-live-rating').value)});if($('e-live-photo').files[0])update.photo=await resizePhoto($('e-live-photo').files[0])}else{update.artist=$('manual-artist').value.trim();update.title=$('manual-title').value.trim();if(!update.title||!update.artist||(isNew&&r.id&&update.artist==='Unknown Artist'))throw Error(isJapanese()?'アルバム名とアーティスト名を入力してください。':'Enter an album title and artist.');const rel=$('release-edit').value.trim();if(rel&&!/^\d{4}(-\d{2}(-\d{2})?)?$/.test(rel))throw Error(isJapanese()?'発売日の入力を確認してください。':'Check the release date.');update.release=rel;for(const k of ['date','label'])update[k]=$(k).value;update.rating=validateRating($('rating').value);update.tags=parseTags($('tags').value);update.genre='';if($('album-photo').files[0])update.photo=await resizePhoto($('album-photo').files[0]);if(section==='collection')for(const k of ['store','format','price','condition'])update[k]=$(k).value;if(update.format==='Digital')update.condition='';}if(section!==target||(!isNew&&!operationRecord(target,r.entryId,r)))return;const replacement={...r,...update};const candidate={...db,[target]:isNew?[replacement,...db[target]]:db[target].map(x=>x===r?replacement:x)};if(!saveDB(candidate))return;if(isNew)clearSearch();render();close()}catch(e){alert(e.message)}};
-function close(){$('modal').classList.remove('open');editing=null;pendingRecord=null}$('close').onclick=close;$('modal').onclick=e=>{if(e.target===$('modal'))close()};$('remove-photo').onclick=()=>{if(!canSave())return;if(editingSection!==section){operationRecord('',editing);return}const r=section==='live'?operationRecord('live',editing):null;if(!r)return;if(!saveRecord(section,r,{...r,photo:''}))return;$('existing-photo').classList.add('hidden');$('remove-photo').classList.add('hidden')};$('remove-album-photo').onclick=()=>{if(!canSave())return;if(editingSection!==section){operationRecord('',editing);return}const r=operationRecord(section,editing);if(!r)return;if(!saveRecord(section,r,{...r,photo:''}))return;$('existing-album-photo').classList.add('hidden');$('remove-album-photo').classList.add('hidden')};function askDelete(){return new Promise(resolve=>{const dialog=$('delete-confirm-modal'),finish=choice=>{dialog.classList.remove('open');$('delete-accept').onclick=null;$('delete-cancel').onclick=null;resolve(choice)};$('delete-prompt').textContent=isJapanese()?'この記録を削除しますか？':'Delete this record?';$('delete-cancel').textContent=isJapanese()?'キャンセル':'Cancel';$('delete-accept').textContent=isJapanese()?'削除':'Delete';dialog.classList.add('open');$('delete-accept').onclick=()=>finish(true);$('delete-cancel').onclick=()=>finish(false)})}
-$('delete').onclick=async()=>{if(!canSave())return;const target=section,id=editing;if(editingSection!==target){operationRecord('',id);return}const r=operationRecord(target,id);if(!r)return;if(!await askDelete())return;if(!operationRecord(target,id,r))return;if(!saveDB({...db,[target]:db[target].filter(x=>x!==r)}))return;render();close()};
-$('live-form').onsubmit=async e=>{e.preventDefault();if(!canSave())return;try{validateDateSelect('live-date');const title=$('live-title').value.trim();if(!title)return;const photo=await resizePhoto($('live-photo').files[0]);const r={entryId:newId(),title,artists:readLiveArtists('live-artists'),date:$('live-date').value,venue:$('live-venue').value,rating:validateRating($('live-rating').value),memo:$('live-notes').value,photo,added:new Date().toISOString()};if(!saveDB({...db,live:[r,...db.live]}))return;$('live-form').reset();artistEditor('live-artists');refreshDateSelect('live-date');prepareRating('live-rating','');$('live-create-modal').classList.remove('open');render()}catch(err){alert(err.message)}};
+$('save').onclick=async()=>{if(!canSave())return;const target=section;if(editingSection!==target){operationRecord('',editing);return}const isNew=section!=='live'&&!!pendingRecord;const r=isNew?pendingRecord:operationRecord(section,editing);if(!r)return;try{validateDateSelect(section==='live'?'e-live-date':'date');if(section!=='live')validateDateSelect('release-edit');const update={memo:$('memo').value};if(section==='live'){if(!$('e-live-title').value.trim())throw Error('Artist / Event Title is required.');const artists=readLiveArtists('e-live-artists');if(artists.length||Object.hasOwn(r,'artists'))update.artists=artists;Object.assign(update,{date:$('e-live-date').value,title:$('e-live-title').value.trim(),venue:$('e-live-venue').value,rating:validateRating($('e-live-rating').value)});if($('e-live-photo').files[0])update.photo=await resizePhoto($('e-live-photo').files[0])}else{update.artist=$('manual-artist').value.trim();update.title=$('manual-title').value.trim();if(!update.title||!update.artist||(isNew&&r.id&&update.artist==='Unknown Artist'))throw Error(isJapanese()?'アルバム名とアーティスト名を入力してください。':'Enter an album title and artist.');const rel=$('release-edit').value.trim();if(rel&&!/^\d{4}(-\d{2}(-\d{2})?)?$/.test(rel))throw Error(isJapanese()?'発売日の入力を確認してください。':'Check the release date.');update.release=rel;for(const k of ['date','label'])update[k]=$(k).value;update.rating=validateRating($('rating').value);update.tags=parseTags($('tags').value);update.genre='';if($('album-photo').files[0])update.photo=await resizePhoto($('album-photo').files[0]);if(section==='collection')for(const k of ['store','format','price','condition'])update[k]=$(k).value;if(update.format==='Digital')update.condition='';}if(section!==target||(!isNew&&!operationRecord(target,r.entryId,r)))return;const replacement={...r,...update};const candidate={...db,[target]:isNew?[replacement,...db[target]]:db[target].map(x=>x===r?replacement:x)};if(!await saveDB(candidate,{operationToken:activeOperation,area:target,id:r.entryId,record:isNew?null:r,kind:isNew?"create":"edit",proposed:replacement}))return;if(isNew)clearSearch();render();close()}catch(e){captureDraft(activeOperation||{},e.message);alert(e.message)}};
+function close(){if(pendingDraft()){preserveDraft();return}$('modal').classList.remove('open');editing=null;pendingRecord=null}$('close').onclick=close;$('modal').onclick=e=>{if(e.target===$('modal'))close()};$('remove-photo').onclick=async()=>{if(!canSave())return;if(editingSection!==section){operationRecord('',editing);return}const r=section==='live'?operationRecord('live',editing):null;if(!r)return;if(!await saveRecord(section,r,{...r,photo:''}))return;$('existing-photo').classList.add('hidden');$('remove-photo').classList.add('hidden')};$('remove-album-photo').onclick=async()=>{if(!canSave())return;if(editingSection!==section){operationRecord('',editing);return}const r=operationRecord(section,editing);if(!r)return;if(!await saveRecord(section,r,{...r,photo:''}))return;$('existing-album-photo').classList.add('hidden');$('remove-album-photo').classList.add('hidden')};function askDelete(){return new Promise(resolve=>{const dialog=$('delete-confirm-modal'),finish=choice=>{dialog.classList.remove('open');$('delete-accept').onclick=null;$('delete-cancel').onclick=null;resolve(choice)};$('delete-prompt').textContent=isJapanese()?'この記録を削除しますか？':'Delete this record?';$('delete-cancel').textContent=isJapanese()?'キャンセル':'Cancel';$('delete-accept').textContent=isJapanese()?'削除':'Delete';dialog.classList.add('open');$('delete-accept').onclick=()=>finish(true);$('delete-cancel').onclick=()=>finish(false)})}
+$('delete').onclick=async()=>{if(!canSave())return;const target=section,id=editing;if(editingSection!==target){operationRecord('',id);return}const r=operationRecord(target,id);if(!r)return;if(!await askDelete())return;if(!operationRecord(target,id,r))return;if(!await saveDB({...db,[target]:db[target].filter(x=>x!==r)},{operationToken:activeOperation,area:target,id,record:r,kind:"delete"}))return;render();close()};
+$('live-form').onsubmit=async e=>{e.preventDefault();if(!canSave())return;try{validateDateSelect('live-date');const title=$('live-title').value.trim();if(!title)return;const photo=await resizePhoto($('live-photo').files[0]);const r={entryId:newId(),title,artists:readLiveArtists('live-artists'),date:$('live-date').value,venue:$('live-venue').value,rating:validateRating($('live-rating').value),memo:$('live-notes').value,photo,added:new Date().toISOString()};if(!await saveDB({...db,live:[r,...db.live]},{operationToken:activeOperation,area:"live",id:r.entryId,kind:"create-live",proposed:r}))return;$('live-form').reset();artistEditor('live-artists');refreshDateSelect('live-date');prepareRating('live-rating','');$('live-create-modal').classList.remove('open');render()}catch(err){captureDraft(activeOperation||{},err.message);alert(err.message)}};
 const actions=text('div','filter-actions');const oldButton=$('filters-toggle');oldButton.parentElement.insertBefore(actions,oldButton);actions.append(oldButton);const sortButton=text('button','btn ghost',isJapanese()?'↕ 並べ替え':'↕ Sort');sortButton.id='sort-toggle';sortButton.type='button';sortButton.setAttribute('aria-expanded','false');sortButton.setAttribute('aria-controls','sort-wrap');actions.insertBefore(sortButton,oldButton);const sortWrap=text('div','hidden');sortWrap.id='sort-wrap';$('filters-wrap').before(sortWrap);sortWrap.append($('sort'),$('group'));oldButton.setAttribute('aria-controls','filters-wrap');oldButton.innerHTML='☷ <span id="filter-label">Filter</span> <span id="filters-icon">＋</span>';function closeSort(){sortWrap.classList.add('hidden');sortButton.setAttribute('aria-expanded','false')}function closeFilter(){$('filters-wrap').classList.add('hidden');oldButton.setAttribute('aria-expanded','false');$('filters-icon').textContent='＋'}sortButton.onclick=()=>{const open=sortWrap.classList.contains('hidden');closeFilter();sortWrap.classList.toggle('hidden',!open);sortButton.setAttribute('aria-expanded',String(open))};oldButton.onclick=()=>{const open=$('filters-wrap').classList.contains('hidden');closeSort();$('filters-wrap').classList.toggle('hidden',!open);oldButton.setAttribute('aria-expanded',String(open));$('filters-icon').textContent=open?'−':'＋'};function refreshFilterButtons(){sortButton.textContent=isJapanese()?'↕ 並べ替え':'↕ Sort';$('filter-label').textContent=isJapanese()?'絞り込み':'Filter'}document.getElementById('ui-language').addEventListener('change',refreshFilterButtons);refreshFilterButtons();
 for(const k of ['sort','group','artist-filter','genre-filter','tag-filter','label-filter','store-filter'])$(k).onchange=render;$('year-filter').oninput=render;$('release-year-filter').oninput=render;function view(v){mode=v;$('grid-tab').classList.toggle('active',v==='grid');$('list-tab').classList.toggle('active',v==='list');render()}$('grid-tab').onclick=()=>view('grid');$('list-tab').onclick=()=>view('list');
 function download(name,data,type){const url=URL.createObjectURL(new Blob([data],{type})),a=text('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000)}$('export-json').onclick=()=>{if(loadFailed){canSave();return}download('my-music-archive-backup-v0310.json',JSON.stringify(db,null,2),'application/json')};$('export-csv').onclick=()=>{if(loadFailed){canSave();return}const columns=['archive','title','artist','release','date','added','genre','label','rating','rating_5','tags','store','format','price','condition','venue','memo','id'];const rows=Object.keys({listening:1,collection:1,live:1}).flatMap(k=>db[k].map(x=>columns.map(c=>c==='archive'?k:c==='rating_5'?(rate(x)===null?'':fiveScore(rate(x)).toFixed(1)):c==='tags'?parseTags(x.tags).join('; '):c==='id'?x.entryId:x[c]??'')));const csv=[columns,...rows].map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');download('my-music-archive.csv','\uFEFF'+csv,'text/csv;charset=utf-8')};$('import-json').onchange=async e=>{
@@ -554,12 +664,48 @@ function download(name,data,type){const url=URL.createObjectURL(new Blob([data],
   let raw;try{raw=await f.text()}catch(err){alert(isJapanese()?'ファイルを読み込めませんでした。元の記録は変更されていません。ファイルを確認し再試行してください。':'File could not be read. Existing records are unchanged. Check the file and retry.');return}
   let incoming;try{let parsed;try{parsed=JSON.parse(raw)}catch(err){throw new ArchiveValidationError('JSON: invalid syntax / JSON構文が不正です')}incoming=migrate(parsed)}catch(err){alert(validationMessage(err));return}
   if(!confirm(isJapanese()?'現在の記録をバックアップの内容に置き換えます。事前にバックアップを保存しましたか？':'Import '+(incoming.listening.length+incoming.collection.length+incoming.live.length)+' records? Current archive data will be replaced. Export a backup first.')){alert(isJapanese()?'復元を取り消しました。元の記録は変更されていません。':'Import cancelled. Existing records are unchanged.');return}
-  if(!saveDB(incoming))return;
+  if(!await saveDB(incoming,{operationToken:activeOperation,kind:"restore"}))return;
   try{render()}catch(err){alert(isJapanese()?'保存は完了しましたが、画面反映に失敗しました。再読み込みしてください。':'Saving completed, but the display could not be updated. Reload the page.');return}
   alert(isJapanese()?'復元が完了しました。':'Import completed.');
- }finally{e.target.value=''}
+ }finally{if(!draft)e.target.value=''}
 };
+
+for(const [open,kind,replace] of [[openEdit,'edit',v=>openEdit=v],[openCreateListening,'create',v=>openCreateListening=v],[openCreatePurchase,'create',v=>openCreatePurchase=v]]){
+ replace((...args)=>{if(!canReplaceForm())return;open(...args);if($('modal').classList.contains('open'))beginForm(kind)});
+}
+const originalLiveCreate=$('add-live-trigger').onclick;
+$('add-live-trigger').onclick=e=>{if(!canReplaceForm())return;originalLiveCreate(e);if($('live-create-modal').classList.contains('open'))beginForm('create-live')};
+const originalSetSection=setSection;
+setSection=next=>{if(next!==section&&!canReplaceForm())return;originalSetSection(next)};
+for(const [id,event] of [['save','onclick'],['delete','onclick'],['remove-photo','onclick'],['remove-album-photo','onclick'],['live-form','onsubmit'],['import-json','onchange']]){
+ const el=$(id),handler=el[event];el[event]=async function(e){
+  e?.preventDefault?.();if(operationBusy)return;
+  if(pendingDraft()&&(id==='delete'||id==='import-json'&&draft.operation!=='restore'))return preserveDraft();
+  operationBusy=true;activeOperation={session:formSession,control:id,area:id==='live-form'?'live':section,id:pendingRecord?.entryId||editing,kind:id==='live-form'?'create-live':id==='import-json'?'restore':id==='delete'?'delete':'edit'};
+  activeOperation.form=formState();
+  const controls=[...document.querySelectorAll('input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')].filter(x=>!x.closest('#unsaved-recovery'));
+  controls.forEach(x=>x.disabled=true);
+  try{return await handler.call(this,e)}finally{controls.forEach(x=>x.disabled=false);operationBusy=false;activeOperation=null}
+ };
+}
+for(const event of ['click','keydown','pointerdown','pointermove'])document.addEventListener(event,e=>{
+ if(operationBusy&&!e.target.closest('#delete-confirm-modal,#unsaved-recovery')){e.preventDefault();e.stopImmediatePropagation();return}
+ // Failed drafts cannot be silently replaced by closing/reopening a form.
+ if(draft&&!draftRecovered&&!e.target.closest('#unsaved-recovery')&&(e.target.closest('#close,#close-live-create,#sections,#manual-add-trigger,#add-live-trigger')||e.target===$('modal')||e.target===$('live-create-modal'))){e.preventDefault();e.stopImmediatePropagation();showDraft()}
+},true);
+$('draft-export').onclick=()=>{try{download('mla-unsaved-input-'+Date.now()+'.json',$('draft-text').value,'application/json')}catch(e){$('draft-info').textContent=isJapanese()?'ファイル出力に失敗しました。下の全文を選択してコピーしてください。入力は保持しています。':'File export failed. Select and copy all text below. Your input is retained.'}};
+$('draft-confirm').textContent=isJapanese()?'回収内容を確認済み・閉じる操作を許可':'Recovery verified: allow closing';
+$('draft-confirm').onclick=()=>{draftRecovered=true;$('unsaved-recovery').hidden=true};
+$('draft-hide').onclick=()=>$('unsaved-recovery').hidden=true;
+$('draft-open').onclick=()=>{if(!draft&&($('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')))captureDraft({area:section,id:editing,kind:$('live-create-modal').classList.contains('open')?'create-live':pendingRecord?'create':'edit'},isJapanese()?'未保存入力の手動回収':'Manual unsaved input recovery');else showDraft()};
+$('ui-language').addEventListener('change',()=>{if(draft)showDraft()});
+for(const event of ['input','change','click'])document.addEventListener(event,e=>{if(draft&&!operationBusy&&e.target.closest('#modal.open,#live-create-modal.open')&&!e.target.closest('#unsaved-recovery')&&!sameForm(draftContext,formState()))captureDraft({area:draft.area,id:draft.recordId,kind:draft.operation,proposed:draft.proposedRecord},draft.reason)});
 setSection('listening');showStorageState();
+if(migrationCandidate){
+ operationBusy=true;
+ commitDB(migrationCandidate,{},true).then(()=>{render()}).catch(e=>{loadFailed=true;loadReason=(isJapanese()?'旧形式の移行を中断しました。原本を回収し、再読み込みで再試行してください。':'Legacy migration stopped. Recover the original; reload to retry.')+(e instanceof SaveStopped?' '+e.message:'');showStorageState()}).finally(()=>operationBusy=false);
+}
+
 })();
 </script>
 <script>

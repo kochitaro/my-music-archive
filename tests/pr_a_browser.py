@@ -143,11 +143,13 @@ def main():
         for area in ['listening','collection','live']:shared[area][0]['entryId']='same'
         shared['listening'][0]['id']=shared['listening'][1]['id']='same-work'
         reset(shared);page.evaluate("a.openEdit('same')");page.locator('#memo').fill('Only selected record');page.locator('#save').click()
+        page.wait_for_function("!document.getElementById('modal').classList.contains('open')")
         assert stored(page)['listening'][0]['memo']=='Only selected record'
         assert stored(page)['listening'][1]==shared['listening'][1]
         for area in ['collection','live']:assert stored(page)[area]==shared[area]
         count+=1
         page.evaluate("a.openEdit('same');void document.getElementById('delete').onclick()");page.locator('#delete-accept').click()
+        page.wait_for_function("!document.getElementById('modal').classList.contains('open')")
         assert stored(page)['listening']==[shared['listening'][1]]
         for area in ['collection','live']:assert stored(page)[area]==shared[area]
         count+=1

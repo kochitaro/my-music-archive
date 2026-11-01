@@ -1,0 +1,15 @@
+✔ same file name cannot substitute for actual selected File identity (2.466329ms)
+✔ unrelated operation preserves draft bytes without a write (1.144065ms)
+✔ only the current operation token can run during an asynchronous save (1.132728ms)
+✔ exact whole-form retry settles only after actual persistence (1.786434ms)
+✔ late input after save started remains recoverable despite a successful write (1.754876ms)
+✔ same failed restore can settle its own recovery (0.668979ms)
+✔ different restore cannot replace unacknowledged failed restore (0.71584ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18.063047
