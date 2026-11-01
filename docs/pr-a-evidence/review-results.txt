@@ -1,0 +1,149 @@
+2026-11-01 PR #12 first review follow-up. Synthetic data only.
+
+node tests/pr_a_required.test.cjs
+✔ listening.title: missing (3.154852ms)
+✔ listening.title: null (0.638071ms)
+✔ listening.title: empty (1.358806ms)
+✔ listening.title: whitespace (0.613494ms)
+✔ listening.title: number (0.6045ms)
+✔ listening.title: boolean (0.561055ms)
+✔ listening.title: array (0.554836ms)
+✔ listening.title: object (0.496508ms)
+✔ listening.artist: missing (0.562998ms)
+✔ listening.artist: null (0.589849ms)
+✔ listening.artist: empty (0.637009ms)
+✔ listening.artist: whitespace (0.478521ms)
+✔ listening.artist: number (0.518861ms)
+✔ listening.artist: boolean (0.514005ms)
+✔ listening.artist: array (0.462326ms)
+✔ listening.artist: object (0.521957ms)
+✔ collection.title: missing (0.444399ms)
+✔ collection.title: null (0.561897ms)
+✔ collection.title: empty (3.160601ms)
+✔ collection.title: whitespace (0.718883ms)
+✔ collection.title: number (0.498491ms)
+✔ collection.title: boolean (0.673825ms)
+✔ collection.title: array (0.559122ms)
+✔ collection.title: object (0.628737ms)
+✔ collection.artist: missing (0.605792ms)
+✔ collection.artist: null (0.672182ms)
+✔ collection.artist: empty (0.735448ms)
+✔ collection.artist: whitespace (0.621736ms)
+✔ collection.artist: number (0.540694ms)
+✔ collection.artist: boolean (0.476398ms)
+✔ collection.artist: array (0.608647ms)
+✔ collection.artist: object (0.559523ms)
+✔ live.title: missing (0.6835ms)
+✔ live.title: null (0.656539ms)
+✔ live.title: empty (0.549608ms)
+✔ live.title: whitespace (0.566423ms)
+✔ live.title: number (1.528713ms)
+✔ live.title: boolean (0.652893ms)
+✔ live.title: array (0.574656ms)
+✔ live.title: object (0.567976ms)
+✔ live.artist: missing (0.558621ms)
+✔ live.artist: null (0.662719ms)
+✔ live.artist: empty (0.939105ms)
+✔ live.artist: whitespace (0.476248ms)
+✔ live.artist: number (0.488325ms)
+✔ live.artist: boolean (0.476497ms)
+✔ live.artist: array (0.905704ms)
+✔ live.artist: object (0.588477ms)
+✔ legacy.title: missing (0.732474ms)
+✔ legacy.title: null (0.524069ms)
+✔ legacy.title: empty (0.773486ms)
+✔ legacy.title: whitespace (0.595848ms)
+✔ legacy.title: number (0.889279ms)
+✔ legacy.title: boolean (0.806084ms)
+✔ legacy.title: array (0.510279ms)
+✔ legacy.title: object (0.420794ms)
+✔ legacy.artist: missing (0.525672ms)
+✔ legacy.artist: null (0.662819ms)
+✔ legacy.artist: empty (0.554926ms)
+✔ legacy.artist: whitespace (0.595577ms)
+✔ legacy.artist: number (0.487244ms)
+✔ legacy.artist: boolean (0.579232ms)
+✔ legacy.artist: array (1.617186ms)
+✔ legacy.artist: object (0.745594ms)
+✔ historical v3 direct album producer preserves empty title and whitespace credits (6.658882ms)
+✔ official legacy import saved empty artist and whitespace title (4.203642ms)
+ℹ tests 66
+ℹ suites 0
+ℹ pass 66
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.455745
+
+node tests/pr_a.test.cjs
+✔ reject null (4.009298ms)
+✔ reject {} (7.876342ms)
+✔ reject {"version":2,"listening":[]} (1.139206ms)
+✔ reject {"version":3,"listening":[]} (1.792179ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":null} (1.77911ms)
+✔ reject {"version":3,"listening":[null],"collection":[],"live":[]} (2.287565ms)
+✔ reject {"version":3,"listening":[{"title":"Title","artist":"Artist","entryId":"a","date":123}],"collection":[],"live":[]} (0.644441ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","artists":"A"}]} (0.839635ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":"NaN"}]} (0.764602ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":11}]} (37.346445ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title"}]} (4.974442ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a"},{"title":"Title","entryId":"a"}]} (2.282938ms)
+✔ legacy invalid row refuses whole array (2.2711ms)
+✔ v3 preserves unknown root and special keys (0.918593ms)
+✔ legacy manual entry, order, optional values retained (6.42772ms)
+✔ overflowing JSON number refuses unknown property conversion to null (1.370404ms)
+✔ nonempty legacy ID is preserved verbatim, including whitespace (1.365406ms)
+✔ v3 optional and score variants remain exact without mutating frozen source (2.371092ms)
+✔ properties only known in another area remain arbitrary JSON (3.265448ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 115.893457
+
+python -u tests/pr_a_browser.py
+PASS required-field matrix: import/save/startup + exact recovery: 144
+PASS invalid import + startup exact raw recovery: 32
+PASS compatibility exact import/save/reload/export; cross-area IDs
+PASS legacy import/startup count/order/IDs/scores and whole rejection
+PASS cancel/read/write/render boundaries + subsequent save/reload
+PASS ID guards/deletion recheck/generation; total scenarios: 57
+
+python -u tests/data_preservation.py
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: listening
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: collection
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: live
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{broken\r\n 日本語' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{ "unrecognized": tr' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' all
+PASS all group 1 injected-exception tests; real device quota and iPhone Safari NOT tested
+
+python -u tests/integration_pr6_pr7.py
+PASS create failures preserve all original values/JSON in three archives: ja
+PASS Live validation messages, failed heart edit preserves exact rating/JSON after later save and reload: ja
+PASS normal Live heart create/edit/re-edit/clear and full JSON restore/reload: ja
+PASS stopped render/edit/create/common-save guards and original recovery/no writes: ja
+PASS create failures preserve all original values/JSON in three archives: en
+PASS Live validation messages, failed heart edit preserves exact rating/JSON after later save and reload: en
+PASS normal Live heart create/edit/re-edit/clear and full JSON restore/reload: en
+PASS stopped render/edit/create/common-save guards and original recovery/no writes: en
+
+python -u tests/ui_v0322.py
+PASS 30 heading layouts (2 languages × 5 widths × 3 tabs), 44px targets, search separation, all creation dialogs; no archive writes
+PASS full-archive counts, legacy genres/string tags, duplicate tags, blanks/null/missing fields, collisions, compound filters, tab/view/language preservation
+PASS gold at 0/4.2, exact rose at 4.3/4.5/5, fractional masks, both archives/views/details/editing and clearing
+PASS manual save/edit/delete in both archives; counts update and zero-match selections survive redraw/tab changes
+PASS Live create/edit/delete, Live gold at 5.0, list/grid, sorting and existing record intact
+PASS exact JSON backup/restore, cancelled import, CSV, reload persistence, unrelated fields/records intact; no JS errors

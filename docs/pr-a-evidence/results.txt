@@ -1,0 +1,167 @@
+2026-11-01 Synthetic isolated tests; no real user data.
+
+node tests/pr_a.test.cjs
+✔ reject null (3.861368ms)
+✔ reject {} (1.83194ms)
+✔ reject {"version":2,"listening":[]} (0.92321ms)
+✔ reject {"version":3,"listening":[]} (1.203744ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":null} (0.978324ms)
+✔ reject {"version":3,"listening":[null],"collection":[],"live":[]} (1.011564ms)
+✔ reject {"version":3,"listening":[{"entryId":"a","date":123}],"collection":[],"live":[]} (0.710691ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"entryId":"a","artists":"A"}]} (0.718112ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"entryId":"a","rating":"NaN"}]} (0.7037ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"entryId":"a","rating":11}]} (4.062641ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{}]} (1.288702ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"entryId":"a"},{"entryId":"a"}]} (1.422924ms)
+✔ legacy invalid row refuses whole array (0.916802ms)
+✔ v3 preserves unknown root and special keys (1.027408ms)
+✔ legacy manual entry, order, optional values retained (0.791512ms)
+✔ overflowing JSON number refuses unknown property conversion to null (0.759514ms)
+✔ nonempty legacy ID is preserved verbatim, including whitespace (0.767246ms)
+✔ v3 optional and score variants remain exact without mutating frozen source (1.20791ms)
+✔ properties only known in another area remain arbitrary JSON (0.68366ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 34.826313
+
+python -u tests/pr_a_browser.py
+PASS invalid import + startup exact raw recovery: 32
+PASS compatibility exact import/save/reload/export; cross-area IDs
+PASS legacy import/startup count/order/IDs/scores and whole rejection
+PASS cancel/read/write/render boundaries + subsequent save/reload
+PASS ID guards/deletion recheck/generation; total scenarios: 57
+
+node tests/search.test.cjs
+✔ 429: max four attempts, notices, spacing, then queue recovers (9.766251ms)
+✔ 502: max four attempts, notices, spacing, then queue recovers (6.025659ms)
+✔ 503: max four attempts, notices, spacing, then queue recovers (5.665907ms)
+✔ 504: max four attempts, notices, spacing, then queue recovers (6.915621ms)
+✔ network: max four attempts, notices, spacing, then queue recovers (7.270788ms)
+✔ Retry-After is honoured above 15 seconds, malformed values use backoff (9.812981ms)
+✔ non-retryable HTTP errors and failed body reads (22.292766ms)
+✔ serialized requests, in-flight deduplication, five-minute cache expiry (5.632676ms)
+✔ stale requests skip queued calls; deduplicated current caller receives retry notice (3.349202ms)
+✔ actual API artist fixture: Number Girl (2.516456ms)
+✔ actual API artist fixture: ナンバーガール (1.122392ms)
+✔ actual API artist fixture: 細野晴臣 (0.920559ms)
+✔ actual API artist fixture: Haruomi Hosono (1.07429ms)
+✔ kana normalization, alias sort names, and name agreement outrank server score (2.652681ms)
+✔ missing aliases are enriched; high-score unrelated artists fall back to title search (11.473877ms)
+✔ browse consumes more than 600 raw records, sorts entire catalog, deduplicates by MBID (35.11768ms)
+✔ title pagination uses raw offsets and count, not displayed/deduplicated length (5.914401ms)
+✔ actual Unknown Artist reproduction and credit repair preserve credited name and joinphrases (0.929873ms)
+✔ a timed-out fetch aborts, retries, and recovers (4.94253ms)
+✔ v0.3.21 live artist response: 細野晴臣 (3.091142ms)
+✔ v0.3.21 live artist response: Haruomi Hosono (2.558669ms)
+✔ v0.3.21 live artist response: Number Girl (3.727422ms)
+✔ v0.3.21 live artist response: ナンバーガール (1.397868ms)
+✔ v0.3.21 live artist response: 大比良瑞希 (1.874988ms)
+✔ v0.3.21 live artist response: 大比良 (13.296485ms)
+✔ album mode directly searches actual title response: Punisher (7.868859ms)
+✔ album mode directly searches actual title response: Hard Life (6.43768ms)
+✔ nonexistent album response is empty; explicit artist mode does not return album results (6.168394ms)
+✔ multiple short prefix matches require selection; exact names take precedence over scores (5.20408ms)
+✔ duplicate exact names require selection, and prefix retrieval uses registered aliases/sort names (3.948486ms)
+✔ album title exact match ranks above a higher-scoring partial title and preserves duplicate-name works (1.870351ms)
+✔ full and partial Ohira names reach the same actual ten-work catalog (8.158316ms)
+✔ title ordering: normalized exact, partial, other; date descending with unknown last in each group (3.06999ms)
+✔ title pages merge and re-sort all loaded works without extra requests; artist priority is unchanged (8.876669ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 232.495552
+
+python -u tests/data_preservation.py
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: listening
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: collection
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: live
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{broken\r\n 日本語' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{ "unrecognized": tr' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' all
+PASS all group 1 injected-exception tests; real device quota and iPhone Safari NOT tested
+
+python -u tests/integration_pr6_pr7.py
+PASS create failures preserve all original values/JSON in three archives: ja
+PASS Live validation messages, failed heart edit preserves exact rating/JSON after later save and reload: ja
+PASS normal Live heart create/edit/re-edit/clear and full JSON restore/reload: ja
+PASS stopped render/edit/create/common-save guards and original recovery/no writes: ja
+PASS create failures preserve all original values/JSON in three archives: en
+PASS Live validation messages, failed heart edit preserves exact rating/JSON after later save and reload: en
+PASS normal Live heart create/edit/re-edit/clear and full JSON restore/reload: en
+PASS stopped render/edit/create/common-save guards and original recovery/no writes: en
+
+python -u tests/ui_v0322.py
+PASS 30 heading layouts (2 languages × 5 widths × 3 tabs), 44px targets, search separation, all creation dialogs; no archive writes
+PASS full-archive counts, legacy genres/string tags, duplicate tags, blanks/null/missing fields, collisions, compound filters, tab/view/language preservation
+PASS gold at 0/4.2, exact rose at 4.3/4.5/5, fractional masks, both archives/views/details/editing and clearing
+PASS manual save/edit/delete in both archives; counts update and zero-match selections survive redraw/tab changes
+PASS Live create/edit/delete, Live gold at 5.0, list/grid, sorting and existing record intact
+PASS exact JSON backup/restore, cancelled import, CSV, reload persistence, unrelated fields/records intact; no JS errors
+
+python -u tests/ui_v0322_followup.py
+PASS Japanese/English manual action on both tabs, repeated language changes, persisted language/reload, unchanged modal route/data
+PASS Collection-only counts, blanks/null/missing stores, raw values/collisions, compound filters, stable counts and tab/view/language selection
+PASS store counts refresh on registration/edit/delete, unset updates, zero-count selection/tab preservation and dynamic identifier collisions
+PASS Live 0/4.2/4.3/4.5/5 in grid/list/detail/edit, unchanged fractional masks/unrated, 0.1 edit/save Live coral/gold hearts and creation UI
+PASS exact original records/storage and JSON backup/restore/reload, refreshed counts; no external requests or JavaScript errors
+
+python -u tests/browser_smoke.py
+Loading MMA
+Loaded MMA
+PASS modes, short prefix, candidate choice, input preservation, actual album fixtures and nonexistent title
+Searching Number Girl
+Searching ナンバーガール
+Searching 細野晴臣
+Searching Haruomi Hosono
+PASS actual artist fixtures, same artist IDs, whole-catalog sorting, 390px width
+PASS Listening/Collection saves, metadata/date inheritance, Japanese/English, existing data intact
+PASS missing-credit guard/manual correction, extra metadata lookup, title mode and 30-item pagination
+PASS failed next page preserves offset/results and can retry without duplicates
+PASS final API failure/re-search, stale-result race, tab reset, manual entry, no page errors
+PASS Punisher/Hard Life from API fixtures save correct artists and release dates in Listening/Collection
+PASS Search Lab shared core, artist credits, pagination and title-mode switch
+
+python -u tests/search_live_ui.py
+PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes
+PASS 2: two raw pages, four display batches, global re-sort, exact/partial dates/unknown, all types/unclassified, add album metadata and unchanged saved schema
+PASS 3: artist mode retains Album/EP/Single priority and displays type beside release date
+PASS 4: exact JSON export/restore/reload and all original Live rating values; no JS errors
+
+python -u tests/live_artists_colors.py
+PASS artists: legacy/no conversion, one/multiple, add/edit/remove/empty, failure/retry/cancel, detail, reload, JSON: ja
+PASS colors: 0/4.4/4.5/5/unrated, edit/save/reload/grid/list/detail: ja
+PASS artists: legacy/no conversion, one/multiple, add/edit/remove/empty, failure/retry/cancel, detail, reload, JSON: en
+PASS colors: 0/4.4/4.5/5/unrated, edit/save/reload/grid/list/detail: en
+
+python -u tests/mla_update.py
+PASS branding, widths, legacy key, bilingual labels/a11y, Collection, star boundaries: ja
+PASS branding, widths, legacy key, bilingual labels/a11y, Collection, star boundaries: en
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: listening False
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: listening True
+PASS release precision, empty, re-edit/reload, invalid years/days, leap centuries, no invented day: listening
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: collection False
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: collection True
+PASS release precision, empty, re-edit/reload, invalid years/days, leap centuries, no invented day: collection
+PASS Search Lab branding; unchanged search.js and no storage access (source review)
+
+python -u tests/collection_score_brand.py
+PASS brand before/after, 320/375/390/430, no clipping/overlap/overflow, unchanged family/weight/color/spacing/logo/h2, desktop unchanged: [{'width': 320, 'before': 16, 'after': 20, 'text_width': 217.421875, 'available': 238}, {'width': 375, 'before': 16, 'after': 25.5, 'text_width': 277.21875, 'available': 293}, {'width': 390, 'before': 16, 'after': 27, 'text_width': 293.515625, 'available': 308}, {'width': 430, 'before': 16.34, 'after': 30, 'text_width': 326.140625, 'available': 348}, {'width': 768, 'before': 26, 'after': 26, 'text_width': 282.65625, 'available': 668}]
+PASS Collection all labels/a11y/validation, stars/colors, touch/drag/clear/keyboard/create/save/reload, original values unchanged, all-tab language switching: ja
+PASS Collection all labels/a11y/validation, stars/colors, touch/drag/clear/keyboard/create/save/reload, original values unchanged, all-tab language switching: en
