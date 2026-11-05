@@ -67,3 +67,11 @@ IME composition中は候補を再描画せず、確定後に更新する。入�
 実装保留の要件はない。Safari/iPhone実機、実際の日本語キーボード変換候補の操作、実容量不足は未検証。自動検証はモバイル幅のChromium、compositionイベント、書き込み例外注入による。ユーザーの実DBは取得・変更せず、合成データとリポジトリ内の旧形式fixtureで検証した。
 
 Insights、自動判定/APIジャンル取得、自動移行・一括変換・固定マスタ、保存保護や保存失敗UIの再設計は対象外。①のレビュー承認を待つ。
+
+## ①レビューBへの対応（PR #18追加コミット）
+
+対象はLiveでのジャンルフィルター表示制御のみ。既存の `.hidden` 切り替えをHTMLの `hidden` プロパティ指定に置き換えた。既存の `[hidden]{display:none!important}` を使用し、Liveでは `hidden=true`、Listening/Collectionでは `hidden=false` とする。既存のdisabled制御とタブ別の選択保持処理は維持。元のコードにもクラスによる非表示制御はあり、今回の確認では表示不具合は再現しなかったが、非表示の状態をHTML属性で明示した。
+
+追加した `tests/genre_filter_tabs.py` で日英の実ブラウザー検証が成功。Liveでフィルターパネルを開いても非表示かつdisabled。リスト/グリッド再描画、言語切り替え、並べ替え後も非表示。Listening/Collectionでは表示かつ操作可能。両アーカイブの実ジャンル選択・未設定選択を入れ替えてLive経由で往復し、選択値と絞り込み結果を保持。操作前後の保存済みDB raw文字列と全レコードが完全一致。
+
+単体126件と既存の `tests/genres_tags.py` も再実行して成功。追加ログ: [タブ切り替え](genres-tags-evidence/review-tabs.log)、[単体](genres-tags-evidence/review-unit.log)、[ジャンル/タグ回帰](genres-tags-evidence/review-genres-tags.log)。保存値・JSON形式・保存保護処理は変更していない。今回の指摘以外の機能追加はない。

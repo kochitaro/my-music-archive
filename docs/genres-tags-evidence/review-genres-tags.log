@@ -1,0 +1,6 @@
+PASS ja listening independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS ja collection independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS ja JSON export/restore exact equality, v3 historic backup, legacy-array backup; Live unchanged
+PASS en listening independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS en collection independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS en JSON export/restore exact equality, v3 historic backup, legacy-array backup; Live unchanged
