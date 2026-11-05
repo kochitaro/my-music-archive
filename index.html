@@ -123,7 +123,7 @@ body { overflow-x: hidden !important; overscroll-behavior-x: none; }
 html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide [lang="en"]{display:none}
 </style></head><body><main class="shell"><div class="brand"><div class="brandmark"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="レコード収納箱"><path d="M7 37 14 27v10H7Zm58 0-7-10v10h7Z" fill="#60788a"/><circle cx="36" cy="32" r="29" fill="#17232d"/><path d="M11 26A26 26 0 0 1 27 7M15 29A22 22 0 0 1 29 11M19 31A18 18 0 0 1 31 15" fill="none" stroke="#e8eef0" stroke-linecap="round" stroke-width="1.6"/><circle cx="36" cy="32" r="10.5" fill="#b45d4e" stroke="#e8eef0" stroke-width="1.8"/><circle cx="36" cy="32" r="1.8" fill="#f6f4ee"/><rect x="6" y="35" width="60" height="35" fill="#62798a"/><path d="M6 35h60" stroke="#f0f2f2" stroke-width="1.6"/><rect x="26" y="44" width="20" height="6" rx="2" fill="#f0f2f2"/></svg></div><h1>My Listening Archive</h1></div>
 <div class="langbar"><label for="ui-language">Language / 言語</label><select aria-label="Language" class="lang-select" id="ui-language"><option value="en">English</option><option value="ja">日本語</option></select></div>
-<p id="tab-change" role="alert" hidden></p><button class="btn ghost" id="draft-open" type="button">未保存入力の回収 / Recover unsaved input</button><section id="unsaved-recovery" class="panel" hidden role="region" aria-label="Unsaved input recovery">
+<p id="tab-change" role="alert" hidden></p><button class="btn ghost" id="draft-open" type="button" hidden>未保存入力の回収 / Recover unsaved input</button><section id="unsaved-recovery" class="panel" hidden role="region" aria-label="Unsaved input recovery">
 <details class="storage-guide" id="recovery-guide">
 <summary>
 <span lang="ja">「保存できませんでした」と表示されたら</span>
@@ -443,8 +443,8 @@ function beginForm(kind){
  formSession++;formOwner={session:formSession,area:section,id:pendingRecord?.entryId||editing,kind};formBaseline=formState();
 }
 function showDraft(){
- const panel=$('unsaved-recovery');panel.hidden=!draft;if(!draft)return;
- const dialog=document.querySelector('#modal.open .dialog,#live-create-modal.open .dialog');if(dialog)dialog.append(panel);else $('storage-state').before(panel);
+ const button=$('draft-open'),panel=$('unsaved-recovery');button.hidden=!pendingDraft();panel.hidden=!draft;if(!draft)return;
+ const dialog=document.querySelector('#modal.open .dialog,#live-create-modal.open .dialog');if(dialog)dialog.append(button,panel);else $('storage-state').before(button,panel);
  $('draft-reason').textContent=draft.reason;
  $('draft-info').textContent=(isJapanese()?'未保存入力専用です。通常のDBバックアップや自動再実行用ではありません。保存先でファイルを確認するか、下のテキストをコピーしてから再読み込みしてください。':'Unsaved input only; not a DB backup or an executable operation. Verify the downloaded file or copy the text below before reloading.')+' '+draft.limitations;
  $('draft-text').value=JSON.stringify(draft,null,2);
@@ -854,7 +854,7 @@ for(const event of ['click','keydown','pointerdown','pointermove'])document.addE
 },true);
 $('draft-export').onclick=()=>{try{download('mla-unsaved-input-'+Date.now()+'.json',$('draft-text').value,'application/json')}catch(e){$('draft-info').textContent=isJapanese()?'ファイル出力に失敗しました。下の全文を選択してコピーしてください。入力は保持しています。':'File export failed. Select and copy all text below. Your input is retained.'}};
 $('draft-confirm').textContent=isJapanese()?'回収内容を確認済み・閉じる操作を許可':'Recovery verified: allow closing';
-$('draft-confirm').onclick=()=>{draftRecovered=true;$('unsaved-recovery').hidden=true};
+$('draft-confirm').onclick=()=>{draftRecovered=true;$('draft-open').hidden=!pendingDraft();$('unsaved-recovery').hidden=true};
 $('draft-hide').onclick=()=>$('unsaved-recovery').hidden=true;
 $('draft-open').onclick=()=>{if(!draft&&($('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')))captureDraft({area:section,id:editing,kind:$('live-create-modal').classList.contains('open')?'create-live':pendingRecord?'create':'edit'},isJapanese()?'未保存入力の手動回収':'Manual unsaved input recovery');else showDraft()};
 $('ui-language').addEventListener('change',()=>{if(draft)showDraft()});
