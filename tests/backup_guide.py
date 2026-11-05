@@ -8,8 +8,8 @@ from data_preservation import seed_data
 
 def main():
     source=(ROOT/'index.html').read_text()
-    baseline=subprocess.check_output(['git','show','82f3f11:index.html'],text=True)
-    assert re.findall(r'<script[^>]*>.*?</script>',source,re.S)==re.findall(r'<script[^>]*>.*?</script>',baseline,re.S),'application JavaScript changed'
+    # Recovery visibility now changes JavaScript; draft_visibility.py checks the exact permitted diff.
+    assert re.findall(r'<details.*?</details>',source,re.S)==re.findall(r'<details.*?</details>',subprocess.check_output(['git','show','c7bffd4:index.html'],text=True),re.S),'guidance changed'
     copy=json.loads((ROOT/'tests/fixtures/backup-guide-copy.json').read_text())
     evidence=ROOT/'docs/backup-guide-evidence';evidence.mkdir(exist_ok=True)
     seam='window.guideTest={openEdit,setSection};'

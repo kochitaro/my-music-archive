@@ -1,0 +1,2 @@
+PASS exact Japanese/English full copy; initial/repeated/keyboard toggle; language/open state; 24 mobile area/language/width layouts; zero DB writes
+PASS 3 areas failed-save recovery: direct guide, JA/EN, unchanged form/text/download bytes/DB, close blocked before confirmation and allowed after; no page errors
