@@ -587,13 +587,15 @@ function countedArchiveFilter(filter){
   if(!names.size)unsetCount++;
   for(const [key,name] of names){if(!counts.has(key))counts.set(key,{name,count:0});counts.get(key).count++}
  }
+ // Live's all-artists label counts saved distinct names, excluding retained zero-match selections.
+ const allCount=section==='live'&&filter.id==='artist'?counts.size:db[section].length;
  if(previous&&previous!==UNSET_FILTER&&!counts.has(previous.toLocaleLowerCase()))counts.set(previous.toLocaleLowerCase(),{name:previous,count:0});
  const entries=[...counts.values()].sort(filter.year?(a,b)=>Number(b.name)-Number(a.name):(a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));
  let unsetValue='__mma_unset__';while(counts.has(unsetValue.toLocaleLowerCase()))unsetValue+='_';
  const ja=isJapanese(),name=ja?filter.ja:filter.en;
  const unset=new Option((ja?name+'未設定':name+' not set')+' ('+unsetCount+')',unsetValue);unset.dataset.unset='true';
  $(id).setAttribute('aria-label',name);
- $(id).replaceChildren(new Option((ja?'すべての'+name:'All '+name)+' ('+db[section].length+')',''),...entries.map(e=>new Option(e.name+' ('+e.count+')',e.name)),unset);
+ $(id).replaceChildren(new Option((ja?'すべての'+name:'All '+name)+' ('+allCount+')',''),...entries.map(e=>new Option(e.name+' ('+e.count+')',e.name)),unset);
  const canonical=previous&&previous!==UNSET_FILTER?counts.get(previous.toLocaleLowerCase()).name:previous;
  restoreArchiveFilter(id,canonical);
 }

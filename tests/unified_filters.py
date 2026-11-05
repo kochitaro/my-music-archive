@@ -40,7 +40,7 @@ def main():
                     assert control.is_enabled()==(field in active)
                     if field not in active:assert control.is_hidden()
                 for field in active:
-                    opts=options(page,field);assert opts[''].endswith(' (5)'),(area,field,opts)
+                    opts=options(page,field);assert opts[''].endswith(' (2)' if area=='live' and field=='artist' else ' (5)'),(area,field,opts)
                     assert all(v.endswith(')') for v in opts.values())
                     expected_unset={'artist':3 if area=='live' else 1,'year':2,'venue':2,'genre':3,'label':3,'tag':3,'store':3,'release-year':2}[field]
                     assert opts[unset_value(page,field)].endswith(f' ({expected_unset})')
