@@ -114,13 +114,172 @@ body { overflow-x: hidden !important; overscroll-behavior-x: none; }
 .manual-add-link:focus-visible{outline:2px solid #c6e7ef;outline-offset:3px}
 @media(max-width:380px){#search-panel .panel-heading{gap:8px}#search-title{font-size:16px}.manual-add-link{font-size:12px;padding-left:4px}}
 .live-artists{margin:12px 0}.live-artist-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}.live-artist-row input{flex:1;min-width:0;font-size:16px}.live-artist-row button{flex:none;min-height:44px}.live-artist-list{margin:0;padding-left:20px;white-space:pre-wrap}
+/* Read-only backup guidance; language follows the existing document language. */
+.storage-guide{margin-top:16px;font-size:16px;line-height:1.75;overflow-wrap:anywhere;min-width:0;max-width:100%}
+.storage-guide summary{cursor:pointer;padding:10px 0;font-weight:600;line-height:1.6}
+.storage-guide summary:focus-visible{outline:2px solid #b9e7f1;outline-offset:3px}
+.storage-guide h3{font-size:17px;line-height:1.6;margin:24px 0 12px}
+.storage-guide p{margin:12px 0}.storage-guide ol{padding-inline-start:1.6em}.storage-guide li{margin:8px 0}
+html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide [lang="en"]{display:none}
 </style></head><body><main class="shell"><div class="brand"><div class="brandmark"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="レコード収納箱"><path d="M7 37 14 27v10H7Zm58 0-7-10v10h7Z" fill="#60788a"/><circle cx="36" cy="32" r="29" fill="#17232d"/><path d="M11 26A26 26 0 0 1 27 7M15 29A22 22 0 0 1 29 11M19 31A18 18 0 0 1 31 15" fill="none" stroke="#e8eef0" stroke-linecap="round" stroke-width="1.6"/><circle cx="36" cy="32" r="10.5" fill="#b45d4e" stroke="#e8eef0" stroke-width="1.8"/><circle cx="36" cy="32" r="1.8" fill="#f6f4ee"/><rect x="6" y="35" width="60" height="35" fill="#62798a"/><path d="M6 35h60" stroke="#f0f2f2" stroke-width="1.6"/><rect x="26" y="44" width="20" height="6" rx="2" fill="#f0f2f2"/></svg></div><h1>My Listening Archive</h1></div>
 <div class="langbar"><label for="ui-language">Language / 言語</label><select aria-label="Language" class="lang-select" id="ui-language"><option value="en">English</option><option value="ja">日本語</option></select></div>
-<p id="tab-change" role="alert" hidden></p><button class="btn ghost" id="draft-open" type="button">未保存入力の回収 / Recover unsaved input</button><section id="unsaved-recovery" class="panel" hidden role="region" aria-label="Unsaved input recovery"><p id="draft-reason"></p><p id="draft-info"></p><textarea id="draft-text" class="field" readonly rows="12" aria-label="Unsaved input JSON"></textarea><button class="btn" id="draft-export" type="button"></button> <button class="btn alt" id="draft-hide" type="button"></button> <button class="btn ghost" id="draft-confirm" type="button"></button></section><section class="panel" id="storage-state" role="alert" hidden><p id="storage-reason"></p><p id="recovery-info"></p><button class="btn" id="recover-source" type="button"></button></section>
+<p id="tab-change" role="alert" hidden></p><button class="btn ghost" id="draft-open" type="button">未保存入力の回収 / Recover unsaved input</button><section id="unsaved-recovery" class="panel" hidden role="region" aria-label="Unsaved input recovery">
+<details class="storage-guide" id="recovery-guide">
+<summary>
+<span lang="ja">「保存できませんでした」と表示されたら</span>
+<span lang="en">If You See a Save Failure</span>
+</summary>
+<div lang="ja">
+<section>
+<h3>「保存できませんでした」と表示されたら</h3>
+<p>入力内容を回収するまで、ページを閉じたり再読み込みしたりしないでください。</p>
+<p>保存失敗と表示された場合、その入力内容が保存済みとは考えず、画面の回収案内に従って保管してください。</p>
+<p>保存失敗時に未保存入力の回収案内が表示された場合は、次の手順で入力内容を保管してください。</p>
+<ol>
+<li>回収用JSONをダウンロードして保存します。</li>
+<li>保存先にファイルが存在することを確認し、開いて入力内容が含まれているか確認します。</li>
+<li>ダウンロードできない場合は、画面に表示された回収用テキストをコピーし、メモやファイルへ保存します。</li>
+<li>入力内容を回収できたことを確認してから、アプリの回収確認操作を行います。</li>
+</ol>
+<p>回収用JSONは、保存できなかった入力を取り出すためのファイルです。通常のJSONバックアップとは形式が異なり、バックアップ復元には使用できません。</p>
+<p>写真の元ファイルは回収用JSONに含まれません。処理済みの写真データも回収できない場合があるため、元の写真は別途保管してください。</p>
+<p>別タブでの更新が原因の場合は、入力を回収した後にページを再読み込みし、最新の記録を確認してください。</p>
+<p>容量不足などが原因の場合は、保存済み記録のJSONバックアップも確保したうえで対処してください。</p>
+<p>回収前にSafariが終了したり、ページが失われたりすると、未保存入力を取り戻せない場合があります。</p>
+</section>
+</div>
+<div lang="en">
+<section>
+<h3>If You See a Save Failure</h3>
+<p>Do not close or reload the page until you have recovered your input.</p>
+<p>If a save failure is displayed, do not assume that your input has been saved. Follow the on-screen recovery guidance to keep a copy.</p>
+<p>If guidance for recovering unsaved input appears after a save failure, follow these steps to keep a copy of your input.</p>
+<ol>
+<li>Download and save the recovery JSON file.</li>
+<li>Check that the file exists at the save destination, then open it and check that it contains your input.</li>
+<li>If you cannot download it, copy the recovery text displayed on screen and save it in a note or file.</li>
+<li>Once you have checked that you have recovered your input, use the app&#x27;s recovery confirmation control.</li>
+</ol>
+<p>The recovery JSON file is for retrieving input that could not be saved. Its format differs from a regular JSON backup, and it cannot be used to restore a backup.</p>
+<p>Original photo files are not included in the recovery JSON. Processed photo data may also be unavailable for recovery, so keep the original photos separately.</p>
+<p>If an update in another tab caused the failure, reload the page after recovering your input and check the latest records.</p>
+<p>If insufficient storage or a similar issue caused the failure, also secure a JSON backup of your saved records before addressing the issue.</p>
+<p>If Safari closes or the page is lost before recovery, you may be unable to retrieve your unsaved input.</p>
+</section>
+</div>
+</details>
+<p id="draft-reason"></p><p id="draft-info"></p><textarea id="draft-text" class="field" readonly rows="12" aria-label="Unsaved input JSON"></textarea><button class="btn" id="draft-export" type="button"></button> <button class="btn alt" id="draft-hide" type="button"></button> <button class="btn ghost" id="draft-confirm" type="button"></button></section><section class="panel" id="storage-state" role="alert" hidden><p id="storage-reason"></p><p id="recovery-info"></p><button class="btn" id="recover-source" type="button"></button></section>
 <nav aria-label="Archives" class="tabbar" id="sections"><button class="tab active" data-section="listening">Listening</button><button class="tab" data-section="collection">Collection</button><button class="tab" data-section="live">Live</button></nav>
 <section class="panel" id="search-panel"><div class="panel-heading"><h2 id="search-title">Search Albums</h2><button class="manual-add-link" id="manual-add-trigger" type="button">＋ Add Manually</button></div><div class="view-segments search-modes" id="search-modes" role="group" aria-label="Search mode"><button class="tab active" type="button" data-search-mode="artist" aria-pressed="true">Artist</button><button class="tab" type="button" data-search-mode="title" aria-pressed="false">Album Title</button></div><form class="row" id="search-form"><input autocomplete="off" class="field grow" id="query" minlength="2" aria-label="Artist name" required=""/><button class="btn" id="search-btn">Search</button></form><div class="status" id="status" role="status"></div><div class="row between"><span class="small muted" id="result-count"></span><button class="btn ghost hidden" id="clear-search" type="button">Clear Results ×</button></div><div class="search-candidates hidden" id="artist-candidates"></div><div class="results" id="results"></div><div style="margin:10px 0;text-align:center"><button class="btn ghost hidden" id="more-results" type="button">Load 30 more</button></div></section>
 <section class="panel"><div class="panel-heading"><h2><span id="library-title">Listening Archive</span> <span class="muted small" id="count">0</span></h2><button class="manual-add-link hidden" id="add-live-trigger" type="button">＋ Add Live</button></div><div aria-labelledby="library-title" class="view-segments" role="group"><button class="tab active" id="grid-tab" type="button">▦ Grid</button><button class="tab" id="list-tab" type="button">☷ List</button></div><div class="filter-control"><button aria-controls="sort-wrap" aria-expanded="false" class="btn ghost" id="filters-toggle" type="button">⚙ Sort &amp; Filter <span id="filters-icon">＋</span></button></div><div class="filter-fields hidden" id="filters-wrap"><select class="field w200" id="sort"><option value="release-desc">Release: Newest</option><option value="release-asc">Release: Oldest</option><option value="date-desc">Listened: Newest</option><option value="date-asc">Listened: Oldest</option><option value="rating-desc">Score: High to Low</option><option value="rating-asc">Score: Low to High</option><option value="label-asc">Label: A–Z</option><option value="artist-asc">Artist: A–Z</option><option value="artist-desc">Artist: Z–A</option></select><select class="field w200" id="group"><option value="year">Group: Release Year</option><option value="week">Group: Release Week</option><option value="month">Group: Release Month</option><option value="day">Group: Release Day</option><option value="none">No Grouping</option></select><select class="field w200" id="artist-filter"><option value="">All Artists</option></select><select class="field hidden" id="genre-filter" aria-hidden="true"><option value="">All Genres</option></select><select class="field w200" id="label-filter"><option value="">All Labels</option></select><select class="field w200 hidden" id="store-filter"><option value="">All Stores</option></select><select class="field w200" id="tag-filter"><option value="">All Tags</option></select><input class="field w200" id="year-filter" inputmode="numeric" maxlength="4" placeholder="Filter listened year"/><input class="field w200" id="release-year-filter" inputmode="numeric" maxlength="4" placeholder="Filter release year"/></div><div id="library"></div></section>
-<section class="panel"><div class="row between wrap"><div><h2>Backup &amp; Restore</h2><div class="muted small">This pilot saves data in this browser only. Export backups before updating or clearing Safari data.</div></div><div class="row wrap" style="margin-top:10px"><button class="btn alt" id="export-json">Export JSON</button><button class="btn alt" id="export-csv">Export CSV</button><label class="btn ghost" style="cursor:pointer">Import JSON<input accept=".json,application/json" hidden="" id="import-json" type="file"/></label></div></div></section>
+<section class="panel"><div class="row between wrap"><div><h2>Backup &amp; Restore</h2><div class="muted small">This pilot saves data in this browser only. Export backups before updating or clearing Safari data.</div></div><div class="row wrap" style="margin-top:10px"><button class="btn alt" id="export-json">Export JSON</button><button class="btn alt" id="export-csv">Export CSV</button><label class="btn ghost" style="cursor:pointer">Import JSON<input accept=".json,application/json" hidden="" id="import-json" type="file"/></label></div></div>
+<details class="storage-guide" id="backup-guide">
+<summary>
+<span lang="ja">バックアップ・復元・保存について</span>
+<span lang="en">About Backup, Restore &amp; Data Storage</span>
+</summary>
+<div lang="ja">
+<section>
+<h3>大切な記録をバックアップする</h3>
+<p>MLAの記録は、利用しているブラウザ内に保存されます。定期的にJSONバックアップを書き出し、iPhoneの「ファイル」アプリなどへ保存してください。</p>
+<p>大切な記録を追加した後や、端末・ブラウザを変更する前にも、バックアップを取ることをおすすめします。</p>
+<p>バックアップには、Listening・Collection・Liveの記録と、アプリ内に保存された写真データが含まれます。ただし、写真の元ファイルそのものが保存されるわけではありません。また、外部から表示しているアルバムジャケット画像の本体は含まれません。</p>
+<p>書き出した後は、保存先にファイルが存在することを確認してください。端末の故障などに備える場合は、別の端末やクラウドストレージにも保管することをおすすめします。</p>
+</section>
+<section>
+<h3>バックアップから復元する</h3>
+<p>復元には、MLAから書き出した通常のJSONバックアップを使用してください。</p>
+<p>JSON復元は、現在のListening・Collection・Liveの記録すべてを、ファイル内の記録に置き換えます。現在の記録への追加・結合ではありません。</p>
+<ol>
+<li>復元する前に、現在の記録をJSONバックアップとして保存します。</li>
+<li>復元したいJSONバックアップファイルを選びます。</li>
+<li>記録の置き換えに関する確認内容を読み、復元を実行します。</li>
+<li>復元後、Listening・Collection・Liveの記録と、保存済みの写真を確認します。</li>
+</ol>
+<p>復元に失敗した場合は、元のバックアップファイルを削除せず、表示された案内を確認してください。</p>
+<p>なお、CSVは記録の閲覧・集計用です。完全なバックアップと復元にはJSONを使用してください。</p>
+</section>
+<section>
+<h3>「保存できませんでした」と表示されたら</h3>
+<p>入力内容を回収するまで、ページを閉じたり再読み込みしたりしないでください。</p>
+<p>保存失敗と表示された場合、その入力内容が保存済みとは考えず、画面の回収案内に従って保管してください。</p>
+<p>保存失敗時に未保存入力の回収案内が表示された場合は、次の手順で入力内容を保管してください。</p>
+<ol>
+<li>回収用JSONをダウンロードして保存します。</li>
+<li>保存先にファイルが存在することを確認し、開いて入力内容が含まれているか確認します。</li>
+<li>ダウンロードできない場合は、画面に表示された回収用テキストをコピーし、メモやファイルへ保存します。</li>
+<li>入力内容を回収できたことを確認してから、アプリの回収確認操作を行います。</li>
+</ol>
+<p>回収用JSONは、保存できなかった入力を取り出すためのファイルです。通常のJSONバックアップとは形式が異なり、バックアップ復元には使用できません。</p>
+<p>写真の元ファイルは回収用JSONに含まれません。処理済みの写真データも回収できない場合があるため、元の写真は別途保管してください。</p>
+<p>別タブでの更新が原因の場合は、入力を回収した後にページを再読み込みし、最新の記録を確認してください。</p>
+<p>容量不足などが原因の場合は、保存済み記録のJSONバックアップも確保したうえで対処してください。</p>
+<p>回収前にSafariが終了したり、ページが失われたりすると、未保存入力を取り戻せない場合があります。</p>
+</section>
+<section>
+<h3>記録の保存について</h3>
+<p>MLAはアカウント不要で、記録を利用中のブラウザ内に保存します。MLAによるクラウド同期や、運営者による記録のバックアップはありません。</p>
+<p>端末やブラウザが違うと、同じ記録は自動的には表示されません。アプリ内ブラウザやホーム画面からの利用でも、保存領域が分かれる場合があります。</p>
+<p>継続して使用するブラウザを決め、記録を移すときはJSONバックアップを使用してください。</p>
+<p>ブラウザのサイトデータ消去や端末の故障などによって、記録を失う可能性があります。プライベートブラウズでの継続利用は避け、定期的にバックアップしてください。</p>
+<p>保存容量には限りがあります。写真などのデータが蓄積すると、新しい記録や変更を保存できなくなる場合があります。</p>
+<p>保存完了前の入力は、Safariの終了やOSによるページ破棄の後まで保持されることを保証していません。保存失敗時には、画面を閉じる前に未保存入力を回収してください。</p>
+<p>小規模β版では、Safariで実際に保存容量が不足した場合や、OSによるページ破棄・強制終了など、一部の条件について検証が完了していません。</p>
+<p>大切な音楽の記録を長く残すため、定期的なJSONバックアップをおすすめします。</p>
+</section>
+</div>
+<div lang="en">
+<section>
+<h3>Back Up Your Important Records</h3>
+<p>MLA records are stored in the browser you are using. Export JSON backups regularly and save them somewhere such as the Files app on your iPhone.</p>
+<p>We also recommend making a backup after adding important records and before changing devices or browsers.</p>
+<p>Backups include your Listening, Collection, and Live records, along with photo data stored within the app. However, they do not contain the original photo files themselves. They also do not contain the actual album artwork images displayed from external sources.</p>
+<p>After exporting, check that the file exists at the save destination. To prepare for problems such as device failure, we also recommend keeping a copy on another device or in cloud storage.</p>
+</section>
+<section>
+<h3>Restore from a Backup</h3>
+<p>To restore your records, use a regular JSON backup exported from MLA.</p>
+<p>Restoring from JSON replaces all current Listening, Collection, and Live records with the records in the file. It does not add to or merge with your current records.</p>
+<ol>
+<li>Before restoring, save your current records as a JSON backup.</li>
+<li>Select the JSON backup file you want to restore.</li>
+<li>Read the confirmation about replacing your records, then proceed with the restore.</li>
+<li>After restoring, check your Listening, Collection, and Live records and saved photos.</li>
+</ol>
+<p>If restoring fails, keep the original backup file and check the guidance displayed on screen.</p>
+<p>CSV is for viewing and analyzing records. Use JSON for a complete backup and restore.</p>
+</section>
+<section>
+<h3>If You See a Save Failure</h3>
+<p>Do not close or reload the page until you have recovered your input.</p>
+<p>If a save failure is displayed, do not assume that your input has been saved. Follow the on-screen recovery guidance to keep a copy.</p>
+<p>If guidance for recovering unsaved input appears after a save failure, follow these steps to keep a copy of your input.</p>
+<ol>
+<li>Download and save the recovery JSON file.</li>
+<li>Check that the file exists at the save destination, then open it and check that it contains your input.</li>
+<li>If you cannot download it, copy the recovery text displayed on screen and save it in a note or file.</li>
+<li>Once you have checked that you have recovered your input, use the app&#x27;s recovery confirmation control.</li>
+</ol>
+<p>The recovery JSON file is for retrieving input that could not be saved. Its format differs from a regular JSON backup, and it cannot be used to restore a backup.</p>
+<p>Original photo files are not included in the recovery JSON. Processed photo data may also be unavailable for recovery, so keep the original photos separately.</p>
+<p>If an update in another tab caused the failure, reload the page after recovering your input and check the latest records.</p>
+<p>If insufficient storage or a similar issue caused the failure, also secure a JSON backup of your saved records before addressing the issue.</p>
+<p>If Safari closes or the page is lost before recovery, you may be unable to retrieve your unsaved input.</p>
+</section>
+<section>
+<h3>About Data Storage</h3>
+<p>MLA does not require an account and stores records in the browser you are using. MLA does not provide cloud synchronization, and the operator does not back up your records.</p>
+<p>The same records do not automatically appear on a different device or in a different browser. Storage may also be separate when using an in-app browser or opening the app from the Home Screen.</p>
+<p>Choose a browser for ongoing use, and use JSON backups when moving your records.</p>
+<p>You may lose records if browser site data is cleared, your device fails, or similar problems occur. Avoid ongoing use in private browsing mode, and back up regularly.</p>
+<p>Storage capacity is limited. As data such as photos accumulates, you may become unable to save new records or changes.</p>
+<p>Input whose save has not completed is not guaranteed to be retained after Safari closes or the OS discards the page. If saving fails, recover your unsaved input before closing the screen.</p>
+<p>In this small-scale beta, testing has not been completed for some conditions, including actual storage exhaustion in Safari and page discarding or forced termination by the OS.</p>
+<p>We recommend regular JSON backups to preserve your important music records over time.</p>
+</section>
+</div>
+</details>
+</section>
 <footer class="foot">Non-commercial pilot. Album search by <a href="https://musicbrainz.org">MusicBrainz</a>; available artwork from Cover Art Archive. Metadata can be missing or inaccurate. Keep backups; this version does not provide accounts or cloud sync. Search requests are throttled.</footer></main>
 <div aria-label="Edit record" aria-modal="true" class="modal" id="modal" role="dialog"><div class="dialog"><div class="row between"><strong id="edit-title">Edit Record</strong><button class="btn alt" id="close">Close</button></div><div id="modal-header" style="margin:12px 0"></div><div id="album-fields"><div class="gridfields"><div class="group" id="artist-row"><label for="manual-artist">Artist</label><input class="field" id="manual-artist"/></div><div class="group"><label for="manual-title">Album Title</label><input autocomplete="off" class="field" id="manual-title"/></div><div class="group"><label for="date" id="date-label">Date Listened (optional)</label><input class="field hidden" id="date" type="date"/></div><div class="group"><label for="release-edit-year">Release Date (optional)</label><input id="release-edit" type="hidden"/></div><div class="group collection-only"><label for="store">Store (optional)</label><input class="field" id="store"/></div><div class="group collection-only"><label for="format">Format (optional)</label><select class="field" id="format"><option value="">Not Set</option><option>LP</option><option>7-inch</option><option>12-inch</option><option>CD</option><option>Cassette</option><option>Digital</option><option>Other</option></select></div><div class="group collection-only"><label for="price">Price (optional)</label><input class="field" id="price" min="0" placeholder="Amount, no currency conversion" step="0.01" type="number"/></div><div class="group collection-only" id="condition-row"><label for="condition">Condition (optional)</label><select class="field" id="condition"><option value="">Not Set</option><option value="New">New</option><option value="Used">Used</option></select></div><div class="group"><label for="label">Label (optional)</label><input class="field" id="label"/></div></div><div class="group" style="margin-top:12px"><label for="tags">Tags (optional · comma-separated)</label><input class="field" id="tags" placeholder="genre, country, mood, etc."/></div><div class="group" style="margin-top:12px"><label for="rating">Score 0.0–5.0 (optional)</label><input class="field" id="rating" max="10" min="0" placeholder="—" step="0.1" type="hidden"/><div class="rating-widget" data-target="rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div><div class="group" style="margin:12px 0"><label for="memo">Notes (optional)</label><textarea class="field" id="memo"></textarea></div><div class="group" id="artwork-row" style="margin-top:12px"><button class="btn ghost artwork-reveal hidden" id="artwork-reveal" type="button">Change artwork</button><div id="artwork-controls"><label for="album-photo">Artwork (optional · one image)</label><input accept="image/*" class="field" id="album-photo" type="file"/><img alt="Album artwork" class="photo hidden" id="existing-album-photo"/><button class="btn ghost hidden" id="remove-album-photo" type="button">Remove Artwork</button><span class="muted small">Photos are resized for device storage. Export JSON backups regularly.</span></div></div></div><div class="hidden" id="live-edit-fields"><div class="gridfields"><div class="group"><label for="e-live-date">Date</label><input class="field hidden" id="e-live-date" type="date"/></div><div class="group"><label for="e-live-title">Artist / Event Title</label><input class="field" id="e-live-title"/></div><div class="group"><label for="e-live-venue">Venue</label><input class="field" id="e-live-venue"/></div><div class="group"><label for="e-live-rating">Score 0.0–5.0</label><input class="field" id="e-live-rating" max="10" min="0" step="0.1" type="hidden"/><div class="rating-widget" data-target="e-live-rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div></div><div class="group" style="margin-top:12px"><label for="e-live-photo">Replace Photo</label><input accept="image/*" class="field" id="e-live-photo" type="file"/><img alt="Live photo" class="photo hidden" id="existing-photo"/><button class="btn ghost hidden" id="remove-photo" type="button">Remove Photo</button></div></div><div class="row between" id="edit-actions"><button class="btn ghost" id="delete">Delete</button><button class="btn" id="save">Save Changes</button></div></div></div>
 <div aria-modal="true" class="modal" id="live-create-modal" role="dialog"><div class="dialog"><div class="row between"><strong id="live-create-title">Add Live Show</strong><button class="btn alt" id="close-live-create" type="button">Close</button></div><section class="" id="live-form-panel"><h2>Add Live Show</h2><form id="live-form"><div class="gridfields"><div class="group"><label for="live-date">Date (optional)</label><input class="field hidden" id="live-date" type="date"/></div><div class="group"><label for="live-title">Artist / Event Title</label><input class="field" id="live-title" placeholder="Artist or event" required=""/></div><div class="group"><label for="live-venue">Venue (optional)</label><input class="field" id="live-venue" placeholder="Venue"/></div><div class="group"><label for="live-rating">Score · 0.0–5.0 (optional)</label><input class="field" id="live-rating" max="10" min="0" step="0.1" type="hidden"/><div class="rating-widget" data-target="live-rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div></div><div class="group" style="margin:12px 0"><label for="live-notes">Notes (optional)</label><textarea class="field" id="live-notes"></textarea></div><div class="group" style="margin:12px 0"><label for="live-photo">Photo (optional · one image)</label><input accept="image/*" class="field" id="live-photo" type="file"/><span class="muted small">Photos are resized for device storage. Export JSON backups regularly.</span></div><button class="btn">Add Live Show</button></form></section></div></div><div aria-modal="true" class="modal" id="view-modal" role="dialog"><div class="dialog"><div class="row between"><strong id="view-heading">Details</strong><button class="btn alt" id="view-close" type="button">Close</button></div><div id="view-content"></div><div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn" id="view-edit" type="button">Edit</button></div></div></div>
