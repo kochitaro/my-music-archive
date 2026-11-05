@@ -1,0 +1,287 @@
+All browser data are synthetic. Chromium mobile emulation; real iPhone Safari untested.
+
+## Node tests: 126 passed
+✔ reject null (2.315212ms)
+✔ reject {} (1.793997ms)
+✔ reject {"version":2,"listening":[]} (0.570108ms)
+✔ reject {"version":3,"listening":[]} (0.626391ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":null} (0.518351ms)
+✔ reject {"version":3,"listening":[null],"collection":[],"live":[]} (0.691829ms)
+✔ reject {"version":3,"listening":[{"title":"Title","artist":"Artist","entryId":"a","date":123}],"collection":[],"live":[]} (0.710577ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","artists":"A"}]} (0.52443ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":"NaN"}]} (1.005205ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":11}]} (0.76023ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title"}]} (1.23768ms)
+✔ reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a"},{"title":"Title","entryId":"a"}]} (0.743986ms)
+✔ legacy invalid row refuses whole array (0.53781ms)
+✔ v3 preserves unknown root and special keys (0.550558ms)
+✔ legacy manual entry, order, optional values retained (3.943953ms)
+✔ overflowing JSON number refuses unknown property conversion to null (0.575165ms)
+✔ nonempty legacy ID is preserved verbatim, including whitespace (0.636466ms)
+✔ v3 optional and score variants remain exact without mutating frozen source (0.815802ms)
+✔ properties only known in another area remain arbitrary JSON (0.572281ms)
+✔ listening.title: missing (3.428136ms)
+✔ listening.title: null (0.691728ms)
+✔ listening.title: empty (1.642391ms)
+✔ listening.title: whitespace (0.65965ms)
+✔ listening.title: number (0.643106ms)
+✔ listening.title: boolean (0.633432ms)
+✔ listening.title: array (0.590487ms)
+✔ listening.title: object (0.474826ms)
+✔ listening.artist: missing (0.65265ms)
+✔ listening.artist: null (0.807972ms)
+✔ listening.artist: empty (0.887719ms)
+✔ listening.artist: whitespace (0.457881ms)
+✔ listening.artist: number (0.547294ms)
+✔ listening.artist: boolean (0.462478ms)
+✔ listening.artist: array (0.562816ms)
+✔ listening.artist: object (0.633742ms)
+✔ collection.title: missing (0.443179ms)
+✔ collection.title: null (0.784927ms)
+✔ collection.title: empty (0.532552ms)
+✔ collection.title: whitespace (0.579061ms)
+✔ collection.title: number (0.510178ms)
+✔ collection.title: boolean (0.460965ms)
+✔ collection.title: array (0.905976ms)
+✔ collection.title: object (0.550509ms)
+✔ collection.artist: missing (0.510159ms)
+✔ collection.artist: null (0.552381ms)
+✔ collection.artist: empty (0.556838ms)
+✔ collection.artist: whitespace (0.558961ms)
+✔ collection.artist: number (0.554164ms)
+✔ collection.artist: boolean (0.47139ms)
+✔ collection.artist: array (0.54458ms)
+✔ collection.artist: object (0.517279ms)
+✔ live.title: missing (0.517629ms)
+✔ live.title: null (0.434887ms)
+✔ live.title: empty (0.50504ms)
+✔ live.title: whitespace (0.463039ms)
+✔ live.title: number (1.299552ms)
+✔ live.title: boolean (0.456099ms)
+✔ live.title: array (0.513564ms)
+✔ live.title: object (0.526392ms)
+✔ live.artist: missing (0.525111ms)
+✔ live.artist: null (0.586882ms)
+✔ live.artist: empty (0.64566ms)
+✔ live.artist: whitespace (0.601804ms)
+✔ live.artist: number (0.496448ms)
+✔ live.artist: boolean (0.486724ms)
+✔ live.artist: array (0.451601ms)
+✔ live.artist: object (0.478391ms)
+✔ legacy.title: missing (0.568515ms)
+✔ legacy.title: null (0.606332ms)
+✔ legacy.title: empty (0.642976ms)
+✔ legacy.title: whitespace (0.525872ms)
+✔ legacy.title: number (0.462628ms)
+✔ legacy.title: boolean (0.436589ms)
+✔ legacy.title: array (0.502037ms)
+✔ legacy.title: object (0.412293ms)
+✔ legacy.artist: missing (0.45112ms)
+✔ legacy.artist: null (0.503599ms)
+✔ legacy.artist: empty (0.678169ms)
+✔ legacy.artist: whitespace (0.467996ms)
+✔ legacy.artist: number (0.462397ms)
+✔ legacy.artist: boolean (0.435338ms)
+✔ legacy.artist: array (1.293564ms)
+✔ legacy.artist: object (0.630417ms)
+✔ historical v3 direct album producer preserves empty title and whitespace credits (6.307568ms)
+✔ official legacy import saved empty artist and whitespace title (3.978936ms)
+✔ same file name cannot substitute for actual selected File identity (1.99117ms)
+✔ unrelated operation preserves draft bytes without a write (0.772509ms)
+✔ only the current operation token can run during an asynchronous save (1.336547ms)
+✔ exact whole-form retry settles only after actual persistence (0.747581ms)
+✔ late input after save started remains recoverable despite a successful write (0.730106ms)
+✔ same failed restore can settle its own recovery (0.820129ms)
+✔ different restore cannot replace unacknowledged failed restore (0.615325ms)
+✔ 429: max four attempts, notices, spacing, then queue recovers (12.184465ms)
+✔ 502: max four attempts, notices, spacing, then queue recovers (5.64302ms)
+✔ 503: max four attempts, notices, spacing, then queue recovers (5.819302ms)
+✔ 504: max four attempts, notices, spacing, then queue recovers (5.865139ms)
+✔ network: max four attempts, notices, spacing, then queue recovers (5.8788ms)
+✔ Retry-After is honoured above 15 seconds, malformed values use backoff (8.05171ms)
+✔ non-retryable HTTP errors and failed body reads (1.699747ms)
+✔ serialized requests, in-flight deduplication, five-minute cache expiry (6.274889ms)
+✔ stale requests skip queued calls; deduplicated current caller receives retry notice (2.562349ms)
+✔ actual API artist fixture: Number Girl (1.749901ms)
+✔ actual API artist fixture: ナンバーガール (0.828461ms)
+✔ actual API artist fixture: 細野晴臣 (0.764357ms)
+✔ actual API artist fixture: Haruomi Hosono (0.866969ms)
+✔ kana normalization, alias sort names, and name agreement outrank server score (1.626778ms)
+✔ missing aliases are enriched; high-score unrelated artists fall back to title search (7.149399ms)
+✔ browse consumes more than 600 raw records, sorts entire catalog, deduplicates by MBID (21.303392ms)
+✔ title pagination uses raw offsets and count, not displayed/deduplicated length (3.25567ms)
+✔ actual Unknown Artist reproduction and credit repair preserve credited name and joinphrases (1.047618ms)
+✔ a timed-out fetch aborts, retries, and recovers (2.282924ms)
+✔ v0.3.21 live artist response: 細野晴臣 (1.78254ms)
+✔ v0.3.21 live artist response: Haruomi Hosono (1.720638ms)
+✔ v0.3.21 live artist response: Number Girl (2.496682ms)
+✔ v0.3.21 live artist response: ナンバーガール (4.088789ms)
+✔ v0.3.21 live artist response: 大比良瑞希 (2.179661ms)
+✔ v0.3.21 live artist response: 大比良 (3.260047ms)
+✔ album mode directly searches actual title response: Punisher (2.199831ms)
+✔ album mode directly searches actual title response: Hard Life (1.683624ms)
+✔ nonexistent album response is empty; explicit artist mode does not return album results (2.107213ms)
+✔ multiple short prefix matches require selection; exact names take precedence over scores (3.274549ms)
+✔ duplicate exact names require selection, and prefix retrieval uses registered aliases/sort names (3.00019ms)
+✔ album title exact match ranks above a higher-scoring partial title and preserves duplicate-name works (1.500441ms)
+✔ full and partial Ohira names reach the same actual ten-work catalog (5.661026ms)
+✔ title ordering: normalized exact, partial, other; date descending with unknown last in each group (1.028519ms)
+✔ title pages merge and re-sort all loaded works without extra requests; artist priority is unchanged (2.967732ms)
+ℹ tests 126
+ℹ suites 0
+ℹ pass 126
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 441.66702
+
+## New counted filters: JA/EN
+PASS ja all counted selects; deduplication; year precision/order/unset; archive-wide AND; legacy Live; tab isolation; widths; unchanged DB; restore; Live CRUD
+PASS en all counted selects; deduplication; year precision/order/unset; archive-wide AND; legacy Live; tab isolation; widths; unchanged DB; restore; Live CRUD
+
+## Existing UI: primary six PASS groups
+PASS 30 heading layouts (2 languages × 5 widths × 3 tabs), 44px targets, search separation, all creation dialogs; no archive writes
+PASS full-archive counts, legacy genres/string tags, duplicate tags, blanks/null/missing fields, collisions, compound filters, tab/view/language preservation
+PASS gold at 0/4.2, exact rose at 4.3/4.5/5, fractional masks, both archives/views/details/editing and clearing
+PASS manual save/edit/delete in both archives; counts update and zero-match selections survive redraw/tab changes
+PASS Live create/edit/delete, Live gold at 5.0, list/grid, sorting and existing record intact
+PASS exact JSON backup/restore, cancelled import, CSV, reload persistence, unrelated fields/records intact; no JS errors
+
+## Followup UI + independent classifications (exclude obsolete Live test)
+PASS Japanese/English manual action on both tabs, repeated language changes, persisted language/reload, unchanged modal route/data
+PASS Collection-only counts, blanks/null/missing stores, raw values/collisions, compound filters, stable counts and tab/view/language selection
+PASS store counts refresh on registration/edit/delete, unset updates, zero-count selection/tab preservation and dynamic identifier collisions
+PASS Live 0/4.2/4.3/4.5/5 in grid/list/detail/edit, unchanged fractional masks/unrated, 0.1 edit/save Live coral/gold hearts and creation UI
+PASS exact original records/storage and JSON backup/restore/reload, refreshed counts; no external requests or JavaScript errors
+PASS ja listening independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS ja collection independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS ja JSON export/restore exact equality, v3 historic backup, legacy-array backup; Live unchanged
+PASS en listening independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS en collection independent inputs, raw preservation, suggestions, case deduplication, IME events, filters, detail, widths
+PASS en JSON export/restore exact equality, v3 historic backup, legacy-array backup; Live unchanged
+
+## Genre tab isolation
+PASS ja Live hidden/disabled including filter panel, redraw and language switch; Listening/Collection visible/enabled; real/unset selections and results retained; saved DB raw unchanged
+PASS en Live hidden/disabled including filter panel, redraw and language switch; Listening/Collection visible/enabled; real/unset selections and results retained; saved DB raw unchanged
+
+## Save failure + original data preservation
+PASS ja listening photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS ja collection photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS ja live photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS ja failed restore keeps original-file guidance; saved archive backup intact; same valid backup retry settles draft
+PASS ja unreadable/unsupported saved DB blocks writes, exact original recovery, no unconditional restoration claim
+PASS en listening photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS en collection photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS en live photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS en failed restore keeps original-file guidance; saved archive backup intact; same valid backup retry settles draft
+PASS en unreadable/unsupported saved DB blocks writes, exact original recovery, no unconditional restoration claim
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: listening
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: collection
+PASS A delete failure, exact data/order, details, backup, later other archive save/reload: live
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= False
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: listening missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: collection missing= True
+PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence: live missing= True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{broken\r\n 日本語' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{ "unrecognized": tr' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '' False
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' True
+PASS C/D read failure, common/entry guards, no fallback/overwrite, exact recovery or unavailable, reload: '{"version": 3, "list' all
+PASS all group 1 injected-exception tests; real device quota and iPhone Safari NOT tested
+
+## Draft baseline + compact failure + validation/IDs + Web Locks + draft review
+PASS listening edit no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS listening create no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS collection edit no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS collection create no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS live edit no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS live create no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS ja listening edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja listening create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja collection edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja collection create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja live edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja live create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en listening edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en listening create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en collection edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en collection create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en live edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en live create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS required-field matrix: import/save/startup + exact recovery: 144
+PASS invalid import + startup exact raw recovery: 32
+PASS compatibility exact import/save/reload/export; cross-area IDs
+PASS legacy import/startup count/order/IDs/scores and whole rejection
+PASS cancel/read/write/render boundaries + subsequent save/reload
+PASS ID guards/deletion recheck/generation; total scenarios: 57
+PASS sequential same/different-area operation matrix: 45
+PASS lock/absent/insecure/exceptions/release/raw guards; cumulative: 57
+PASS all areas create/edit internal draft + photos/text copy/no JSON UI/restore rejection; cumulative: 63
+PASS slow photo
+PASS delete
+PASS retry
+PASS asynchronous operations/retry/migration races; total scenarios: 70
+PASS listening A repeated failure / exact retry
+PASS listening B photo success without previous draft
+PASS listening B pending processed photo
+PASS listening C hide/edit/reopen/navigation
+PASS listening C new file invalidates processed photo
+PASS listening D unavailable download / text copy / unrelated refusal
+PASS listening D deletion cannot discard draft
+PASS listening boundary discard cancelled then edited
+PASS listening boundary conversion failed early
+PASS listening boundary delayed completion / double click
+PASS listening boundary deletion confirmation / second failure
+PASS listening boundary input changed during photo conversion
+PASS collection A repeated failure / exact retry
+PASS collection B photo success without previous draft
+PASS collection B pending processed photo
+PASS collection C hide/edit/reopen/navigation
+PASS collection C new file invalidates processed photo
+PASS collection D unavailable download / text copy / unrelated refusal
+PASS collection D deletion cannot discard draft
+PASS collection boundary discard cancelled then edited
+PASS collection boundary conversion failed early
+PASS collection boundary delayed completion / double click
+PASS collection boundary deletion confirmation / second failure
+PASS collection boundary input changed during photo conversion
+PASS live A repeated failure / exact retry
+PASS live B photo success without previous draft
+PASS live B pending processed photo
+PASS live C hide/edit/reopen/navigation
+PASS live C new file invalidates processed photo
+PASS live D unavailable download / text copy / unrelated refusal
+PASS live D deletion cannot discard draft
+PASS live boundary discard cancelled then edited
+PASS live boundary conversion failed early
+PASS live boundary delayed completion / double click
+PASS live boundary deletion confirmation / second failure
+PASS live boundary input changed during photo conversion
+TOTAL success=36 failure=0 unexecuted=0
+
+## Web Locks standalone: 70 scenarios
+PASS sequential same/different-area operation matrix: 45
+PASS lock/absent/insecure/exceptions/release/raw guards; cumulative: 57
+PASS all areas create/edit internal draft + photos/text copy/no JSON UI/restore rejection; cumulative: 63
+PASS slow photo
+PASS delete
+PASS retry
+PASS asynchronous operations/retry/migration races; total scenarios: 70
+
+## Search + Live UI
+PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes
+PASS 2: two raw pages, four display batches, global re-sort, exact/partial dates/unknown, all types/unclassified, add album metadata and unchanged saved schema
+PASS 3: artist mode retains Album/EP/Single priority and displays type beside release date
+PASS 4: exact JSON export/restore/reload and all original Live rating values; no JS errors
+
+## Obsolete Live test on unchanged main 0b3505a (NOT a passing test)
+Traceback (most recent call last):
+  File "/tmp/mla-main-baseline/tests/live_artists_colors.py", line 159, in <module>
+    main()
+  File "/tmp/mla-main-baseline/tests/live_artists_colors.py", line 54, in main
+    assert stored(page)['live'][0]['artists'] == ['Artist A']
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'artists'

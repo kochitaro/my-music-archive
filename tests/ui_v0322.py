@@ -74,8 +74,8 @@ def choose(page, field, value):
 def clear_filters(page):
     for field in ['artist', 'label', 'tag']:
         choose(page, field, '')
-    page.locator('#year-filter').fill('')
-    page.locator('#release-year-filter').fill('')
+    page.locator('#year-filter').select_option('')
+    page.locator('#release-year-filter').select_option('')
 
 
 def titles(page):
@@ -186,9 +186,9 @@ def main():
             assert labels[value] == expected
         for value, expected in [('Electronic', 'Electronic (2)'), ('AOTY2026', 'AOTY2026 (3)'), ('Electronic (5)', 'Electronic (5) (1)')]:
             assert tags[value] == expected
-        assert labels[''] == 'すべてのレーベル' and tags[''] == 'すべてのタグ'
-        assert labels[unset_value(page, 'label')] == '未設定 (4)'
-        assert tags[unset_value(page, 'tag')] == '未設定 (4)'
+        assert labels[''] == 'すべてのレーベル (12)' and tags[''] == 'すべてのタグ (12)'
+        assert labels[unset_value(page, 'label')] == 'レーベル未設定 (4)'
+        assert tags[unset_value(page, 'tag')] == 'タグ未設定 (4)'
         assert 'Ambient' not in tags and 'Legacy' not in tags
         for field in ['label', 'tag']:
             for literal in ['__mma_unset__', '__mma_unset___', '__unset__', '未設定']:
@@ -205,8 +205,8 @@ def main():
         choose(page, 'tag', 'Electronic')
         choose(page, 'label', 'Merge')
         choose(page, 'artist', 'Artist A')
-        page.locator('#year-filter').fill('2026')
-        page.locator('#release-year-filter').fill('2025')
+        page.locator('#year-filter').select_option('2026')
+        page.locator('#release-year-filter').select_option('2025')
         assert set(titles(page)) == {'Score 4.2', 'Score 4.3'}
         assert options(page, 'tag') == tags and options(page, 'label') == labels
         page.locator('#list-tab').click()
@@ -215,8 +215,8 @@ def main():
         page.locator('[data-section=collection]').click()
         assert options(page, 'tag')['Electronic'] == 'Electronic (1)'
         assert options(page, 'label')['Merge'] == 'Merge (2)'
-        assert options(page, 'label')[unset_value(page, 'label')] == '未設定 (1)'
-        assert options(page, 'tag')[unset_value(page, 'tag')] == '未設定 (3)'
+        assert options(page, 'label')[unset_value(page, 'label')] == 'レーベル未設定 (1)'
+        assert options(page, 'tag')[unset_value(page, 'tag')] == 'タグ未設定 (3)'
         choose(page, 'label', unset_value(page, 'label'))
         choose(page, 'tag', unset_value(page, 'tag'))
         assert titles(page) == ['C 4.5']
@@ -227,7 +227,7 @@ def main():
         assert titles(page) == ['C 4.5']
         expect(page.locator('#tag-filter option:checked')).to_have_attribute('data-unset', 'true')
         page.locator('#ui-language').select_option('en')
-        assert options(page, 'label')[unset_value(page, 'label')] == 'Not set (1)'
+        assert options(page, 'label')[unset_value(page, 'label')] == 'Labels not set (1)'
         assert titles(page) == ['C 4.5']
         assert stored(page) == SEED
         print('PASS full-archive counts, legacy genres/string tags, duplicate tags, blanks/null/missing fields, collisions, compound filters, tab/view/language preservation')
@@ -300,8 +300,8 @@ def main():
             save(page)
             assert options(page, 'tag')['Changed Tag'] == 'Changed Tag (0)'
             label_unset, tag_unset = unset_value(page, 'label'), unset_value(page, 'tag')
-            assert options(page, 'label')[label_unset] == f'Not set ({5 if section == "listening" else 2})'
-            assert options(page, 'tag')[tag_unset] == f'Not set ({5 if section == "listening" else 4})'
+            assert options(page, 'label')[label_unset] == f'Labels not set ({5 if section == "listening" else 2})'
+            assert options(page, 'tag')[tag_unset] == f'Tags not set ({5 if section == "listening" else 4})'
             choose(page, 'tag', tag_unset)
             choose(page, 'label', label_unset)
             assert 'New Entry' in titles(page)

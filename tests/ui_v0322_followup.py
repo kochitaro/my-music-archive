@@ -64,26 +64,26 @@ def main():
 
         page.locator('[data-section=collection]').click()
         stores = options(page, 'store')
-        assert stores[''] == 'すべての購入店舗'
+        assert stores[''] == 'すべての購入店舗 (12)'
         for name, count in [('ディスクユニオン', 3), ('タワーレコード', 2), ('HMV', 1), ('__unset__', 1), ('店舗未設定', 1)]:
             assert stores[name] == f'{name} ({count})'
         unset = unset_value(page, 'store')
         assert unset != '__unset__'
-        assert stores[unset] == '店舗未設定 (4)'
+        assert stores[unset] == '購入店舗未設定 (4)'
         assert 'Listening only store' not in stores
         choose(page, 'store', 'ディスクユニオン')
         assert set(titles(page)) == {'DU 1', 'DU 2', 'DU 3'}
         choose(page, 'label', 'Merge')
         choose(page, 'tag', 'Electronic')
         choose(page, 'artist', 'Artist A')
-        page.locator('#year-filter').fill('2026')
-        page.locator('#release-year-filter').fill('2025')
+        page.locator('#year-filter').select_option('2026')
+        page.locator('#release-year-filter').select_option('2025')
         assert titles(page) == ['DU 1']
         assert options(page, 'store') == stores
         for field in ['artist', 'label', 'tag']:
             choose(page, field, '')
-        page.locator('#year-filter').fill('')
-        page.locator('#release-year-filter').fill('')
+        page.locator('#year-filter').select_option('')
+        page.locator('#release-year-filter').select_option('')
         choose(page, 'store', unset)
         assert set(titles(page)) == {'Blank store', 'Whitespace store', 'Null store', 'Missing store'}
         choose(page, 'label', unset_value(page, 'label'))
@@ -95,7 +95,7 @@ def main():
         expect(page.locator('#store-filter option:checked')).to_have_attribute('data-unset', 'true')
         assert len(titles(page)) == 4
         page.locator('#ui-language').select_option('en')
-        assert options(page, 'store')[unset_value(page, 'store')] == 'Store not set (4)'
+        assert options(page, 'store')[unset_value(page, 'store')] == 'Stores not set (4)'
         assert len(titles(page)) == 4
         for field in ['label', 'tag']:
             choose(page, field, '')
@@ -130,7 +130,7 @@ def main():
         page.locator('[data-section=collection]').click()
         expect(page.locator('#store-filter')).to_have_value('New store')
         choose(page, 'store', unset_value(page, 'store'))
-        assert options(page, 'store')[unset_value(page, 'store')] == 'Store not set (5)'
+        assert options(page, 'store')[unset_value(page, 'store')] == 'Stores not set (5)'
         assert len(titles(page)) == 5
         # Renaming into the current unset identifier cannot change the selected condition.
         old_unset = unset_value(page, 'store')
@@ -139,7 +139,7 @@ def main():
         save(page)
         assert unset_value(page, 'store') != old_unset
         expect(page.locator('#store-filter option:checked')).to_have_attribute('data-unset', 'true')
-        assert options(page, 'store')[unset_value(page, 'store')] == 'Store not set (4)'
+        assert options(page, 'store')[unset_value(page, 'store')] == 'Stores not set (4)'
         assert len(titles(page)) == 4
         choose(page, 'store', old_unset)
         assert titles(page) == ['Store update']
