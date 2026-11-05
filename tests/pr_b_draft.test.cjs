@@ -13,7 +13,7 @@ function setup(){
   currentForm:form,formBaseline:form,draft:{area:'listening',recordId:'row',operation:'edit',input:form.input,proposedRecord:{photo:'actual converted bytes'}},
   draftContext:{session:1,input:form.input,fileRefs:form.fileRefs},draftPhotoFiles:form.fileRefs,draftRecovered:false,
   operationBusy:true,saving:false,db:{version:3,listening:[],collection:[],live:[]},commits:0,alerts:[],captures:[],
-  canSave:()=>true,isJapanese:()=>false,showDraft:()=>{},ArchiveValidationError:class extends Error{},SaveStopped:class extends Error{},validationMessage:e=>e.message};
+  $:()=>({focus:()=>{}}),canSave:()=>true,isJapanese:()=>false,showDraft:()=>{},ArchiveValidationError:class extends Error{},SaveStopped:class extends Error{},validationMessage:e=>e.message};
  ctx.alert=x=>ctx.alerts.push(x);
  ctx.captureDraft=(op,reason,files)=>ctx.captures.push({op,reason,files,input:ctx.currentForm.input});
  ctx.commitDB=async v=>{ctx.commits++;ctx.db=JSON.parse(JSON.stringify(v))};

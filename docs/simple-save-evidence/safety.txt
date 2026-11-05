@@ -1,0 +1,10 @@
+PASS ja listening photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS ja collection photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS ja live photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS ja failed restore keeps original-file guidance; saved archive backup intact; same valid backup retry settles draft
+PASS ja unreadable/unsupported saved DB blocks writes, exact original recovery, no unconditional restoration claim
+PASS en listening photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS en collection photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS en live photo failure retains File/draft; unknown reason hidden; async start/confirm discard refused; explicit discard only; DB unchanged
+PASS en failed restore keeps original-file guidance; saved archive backup intact; same valid backup retry settles draft
+PASS en unreadable/unsupported saved DB blocks writes, exact original recovery, no unconditional restoration claim

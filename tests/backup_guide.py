@@ -8,10 +8,16 @@ from data_preservation import seed_data
 
 def main():
     source=(ROOT/'index.html').read_text()
-    # PR #14 guidance remains byte-identical; new JSON details is separate.
-    assert re.findall(r'<details class="storage-guide".*?</details>',source,re.S)==re.findall(r'<details class="storage-guide".*?</details>',subprocess.check_output(['git','show','c7bffd4:index.html'],text=True),re.S),'guidance changed'
+    # The archive backup/restore sections from PR #14 remain byte-identical.
+    previous=subprocess.check_output(['git','show','f4d41ef:index.html'],text=True)
+    for lang in ['ja','en']:
+        def sections(doc):
+            guide=doc[doc.index('id="backup-guide"'):]
+            body=guide.split('<div lang="'+lang+'">',1)[1].split('</div>',1)[0]
+            return re.findall(r'<section>.*?</section>',body,re.S)
+        assert sections(source)[:2]==sections(previous)[:2]
     copy=json.loads((ROOT/'tests/fixtures/backup-guide-copy.json').read_text())
-    evidence=ROOT/'docs/backup-guide-evidence';evidence.mkdir(exist_ok=True)
+    evidence=ROOT/'docs/simple-save-evidence/guide';evidence.mkdir(parents=True,exist_ok=True)
     seam='window.guideTest={openEdit,setSection};'
     source=source.replace("setSection('listening');showStorageState();",seam+"setSection('listening');showStorageState();")
     server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler)
@@ -32,13 +38,13 @@ def main():
             expect(p.locator('html')).to_have_attribute('lang',lang)
         def exact(guide,lang,sections):
             actual=p.locator(f'{guide} > div[lang={lang}] > section').evaluate_all("els=>els.map(el=>[...el.children].map(n=>n.tagName==='OL'?[...n.children].map((li,i)=>(i+1)+'. '+li.textContent).join('\\n'):n.textContent).join('\\n\\n'))")
-            assert actual==sections,(guide,lang)
+            assert actual==sections,(guide,lang,[(i,a,b) for i,(a,b) in enumerate(zip(actual,sections)) if a!=b])
         def geometry(guide):
             assert p.locator(guide).evaluate("el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&el.scrollWidth<=el.clientWidth}")
             assert p.locator(f'{guide} summary').evaluate('el=>el.getBoundingClientRect().height')>=44
         for lang in ['ja','en']:
             language(lang)
-            exact('#backup-guide',lang,copy[lang]);exact('#recovery-guide',lang,[copy[lang][2]])
+            exact('#backup-guide',lang,copy[lang]);assert p.locator('#recovery-guide').count()==0
             # Native summary supports keyboard and exposes expanded state through details.
             summary=p.locator('#backup-guide summary');summary.focus();p.keyboard.press('Enter')
             assert p.locator('#backup-guide').evaluate('el=>el.open')
@@ -63,31 +69,20 @@ def main():
             p.evaluate('area=>{guideTest.setSection(area);guideTest.openEdit(area)}',area)
             p.locator('#memo').fill('Keep this unsaved input / 未保存を維持')
             p.evaluate('failWrite=true');p.locator('#save').evaluate('el=>el.onclick()')
-            expect(p.locator('#save-notice')).to_be_visible();p.locator('#save-recover').click();expect(p.locator('#unsaved-recovery')).to_be_visible()
-            text=p.locator('#draft-text').input_value()
-            with p.expect_download() as dl:p.locator('#draft-export').click()
-            before=open(dl.value.path()).read()
+            expect(p.locator('#save-notice')).to_be_visible()
+            before=p.locator('#memo').input_value()
             for lang in ['ja','en']:
-                # select outside modal through its actual change handler, without dismissing the modal
                 p.locator('#ui-language').evaluate('(el,lang)=>{el.value=lang;el.dispatchEvent(new Event("change",{bubbles:true}))}',lang)
-                summary=p.locator('#recovery-guide summary');summary.focus();p.keyboard.press('Enter')
-                assert p.locator('#recovery-guide').evaluate('el=>el.open')
-                geometry('#recovery-guide')
-                p.locator('#recovery-guide summary').scroll_into_view_if_needed()
-                p.screenshot(path=str(evidence/f'recovery-{area}-{lang}-390.png'))
-                p.locator(f'#recovery-guide > div[lang={lang}] p').last.scroll_into_view_if_needed()
-                p.screenshot(path=str(evidence/f'recovery-{area}-{lang}-390-end.png'))
-                assert p.locator('#draft-text').input_value()==text
-                assert p.locator('#memo').input_value()=='Keep this unsaved input / 未保存を維持'
-                summary.focus();p.keyboard.press('Enter')
-            with p.expect_download() as dl:p.locator('#draft-export').click()
-            assert open(dl.value.path()).read()==before==text
+                assert p.locator('#draft-text,#draft-export,#draft-confirm').count()==0
+                assert p.locator('#memo').input_value()==before
+            p.locator('#save-return').click();p.locator('#memo').select_text()
             p.locator('#close').click();expect(p.locator('#modal')).to_be_visible()
             assert p.evaluate('(k)=>localStorage.getItem(k)',KEY)==raw
-            p.locator('#save-recover').click();p.locator('#draft-confirm').click();p.locator('#close').click();expect(p.locator('#modal')).to_be_hidden()
-            p.evaluate('failWrite=false')
+            # Complete the same form by retrying, without acknowledging recovery.
+            p.evaluate('failWrite=false');p.locator('#save').click();expect(p.locator('#modal')).to_be_hidden()
+            raw=p.evaluate('(k)=>localStorage.getItem(k)',KEY)
         assert not errors,errors
-        print('PASS 3 areas failed-save recovery: direct guide, JA/EN, unchanged form/text/download bytes/DB, close blocked before confirmation and allowed after; no page errors',flush=True)
+        print('PASS 3 areas failed-save: JA/EN, unchanged form/DB, no JSON UI, close blocked, whole-form retry settles draft; no page errors',flush=True)
         browser.close()
     server.shutdown()
 

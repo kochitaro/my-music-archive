@@ -13,7 +13,7 @@ from ui_v0322 import ROOT, KEY, QuietHandler, stored, edit, record
 
 OLD = 'my-music-archive-pilot-v1'
 PHOTO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII='
-SEAM = "window.testDB=()=>JSON.parse(JSON.stringify(db));window.testSave=saveDB;window.testBusy=()=>operationBusy;"
+SEAM = "window.testSection=()=>section;window.testSetSection=setSection;window.testDB=()=>JSON.parse(JSON.stringify(db));window.testSave=saveDB;window.testBusy=()=>operationBusy;"
 
 
 def seed_data(missing=False):
@@ -40,13 +40,16 @@ def fail_writes(page, fail):
     page.evaluate('(v)=>window.failWrite=v', fail)
 
 
-def recover_before_close(page):
-    # PR-B intentionally preserves failed forms until recovery is acknowledged.
-    if page.locator('#draft-text').input_value():
-        page.locator('#draft-open').evaluate('(e)=>e.onclick()')
-        with page.expect_download() as dl: page.locator('#draft-export').click()
-        assert json.loads(Path(dl.value.path()).read_text())['format']=='mla-unsaved-input'
-        page.locator('#draft-confirm').click()
+def discard_before_close(page):
+    # New UI: closure stays blocked until explicit discard and reload.
+    area=page.evaluate('testSection()')
+    if page.locator('#save-notice').is_visible():
+        page.locator('#save-again').click()
+        page.locator('#discard-cancel').click()
+        page.locator('#save-again').click()
+        with page.expect_navigation():page.locator('#discard-reload').click()
+        page.evaluate('(a)=>testSetSection(a)',area)
+    elif page.locator('#modal').is_visible():page.locator('#close').click()
 
 def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), QuietHandler)
@@ -99,11 +102,11 @@ def main():
             page.locator('#delete').click(); page.locator('#delete-accept').click()
             preserved(seed)
             expect(page.locator('#modal')).to_have_class('modal open')
-            recover_before_close(page); page.locator('#close').click()
+            assert page.locator('#save-notice-title').inner_text()=='保存できませんでした';assert page.locator('#save-notice-reason').is_hidden()
+            discard_before_close(page)
             record(page, section).click()
             expect(page.locator('#view-content')).to_contain_text('Original')
             page.locator('#view-close').click()
-            assert page.locator('#save-notice-title').inner_text()=='保存できませんでした';assert page.locator('#save-notice-reason').is_hidden()
             fail_writes(page, False)
             later_save(seed, section)
             print('PASS A delete failure, exact data/order, details, backup, later other archive save/reload:', section)
@@ -121,14 +124,15 @@ def main():
                 page.locator('#save').click()
                 preserved(seed)
                 expect(page.locator('#memo')).to_have_value('FAILED memo')
-                recover_before_close(page); page.locator('#close').click()
+                discard_before_close(page)
                 edit(page, section)
                 expect(page.locator('#memo')).to_have_value('' if missing else 'Original')
+                fail_writes(page, True)
                 # Photo removal, including absent-property path via direct handler.
                 remove = '#remove-photo' if section == 'live' else '#remove-album-photo'
                 page.locator(remove).evaluate('(e)=>e.onclick()')
                 preserved(seed)
-                recover_before_close(page); page.locator('#close').click()
+                discard_before_close(page)
                 fail_writes(page, False)
                 later_save(seed, section)
                 # Retry the failed edit and real image resize, then successful removal.
@@ -145,7 +149,7 @@ def main():
                 page.locator(f'[data-section={section}]').click(); edit(page, section)
                 page.locator(remove).evaluate('(e)=>e.onclick()')
                 assert stored(page)[section][0]['photo'] == ''
-                recover_before_close(page); page.locator('#close').click()
+                discard_before_close(page)
                 print('PASS B/E edit/photo/remove failure, exact property presence, later save, retry and photo persistence:', section, 'missing=', missing)
 
         for raw, read_error in [('{broken\r\n 日本語', False), ('{ "unrecognized": true }\n', False), ('', False), (json.dumps(seed_data()), True), (json.dumps(seed_data()), 'all')]:
