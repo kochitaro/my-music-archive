@@ -120,7 +120,7 @@ def main():
         reset();before=state();choice[0]=False;imp(json.dumps(variants));choice[0]=True;assert state()==before;assert 'cancelled' in alerts[-1];count+=1
         page.evaluate("async()=>{await document.getElementById('import-json').onchange({target:{files:[{text:async()=>{throw Error('INTERNAL_SECRET')}}],value:'x'}})}")
         assert state()==before;assert 'File could not be read' in alerts[-1];count+=1
-        page.evaluate('failWrite=true');imp(json.dumps(variants));assert raw()==before[0];assert memory(page)==before[1];assert 'Could not save' in alerts[-1];count+=1
+        page.evaluate('failWrite=true');imp(json.dumps(variants));assert raw()==before[0];assert memory(page)==before[1];assert page.locator('#save-notice-title').inner_text()=='Couldn’t Save Changes';assert page.locator('#save-notice-reason').is_hidden();count+=1
         page.evaluate('failWrite=false;a.renderFailure(true)');imp(json.dumps(variants));assert stored(page)==variants, (stored(page),variants);assert memory(page)==variants;assert 'Saving completed' in alerts[-1];assert page.evaluate('writes.length')==2;count+=1
         page.evaluate('a.renderFailure(false)');assert page.evaluate('a.saveDB(a.db())');page.reload();assert backup(page)==variants;count+=1
         print('PASS cancel/read/write/render boundaries + subsequent save/reload')

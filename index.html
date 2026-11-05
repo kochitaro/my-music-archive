@@ -123,7 +123,7 @@ body { overflow-x: hidden !important; overscroll-behavior-x: none; }
 html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide [lang="en"]{display:none}
 </style></head><body><main class="shell"><div class="brand"><div class="brandmark"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="レコード収納箱"><path d="M7 37 14 27v10H7Zm58 0-7-10v10h7Z" fill="#60788a"/><circle cx="36" cy="32" r="29" fill="#17232d"/><path d="M11 26A26 26 0 0 1 27 7M15 29A22 22 0 0 1 29 11M19 31A18 18 0 0 1 31 15" fill="none" stroke="#e8eef0" stroke-linecap="round" stroke-width="1.6"/><circle cx="36" cy="32" r="10.5" fill="#b45d4e" stroke="#e8eef0" stroke-width="1.8"/><circle cx="36" cy="32" r="1.8" fill="#f6f4ee"/><rect x="6" y="35" width="60" height="35" fill="#62798a"/><path d="M6 35h60" stroke="#f0f2f2" stroke-width="1.6"/><rect x="26" y="44" width="20" height="6" rx="2" fill="#f0f2f2"/></svg></div><h1>My Listening Archive</h1></div>
 <div class="langbar"><label for="ui-language">Language / 言語</label><select aria-label="Language" class="lang-select" id="ui-language"><option value="en">English</option><option value="ja">日本語</option></select></div>
-<p id="tab-change" role="alert" hidden></p><button class="btn ghost" id="draft-open" type="button" hidden>未保存入力の回収 / Recover unsaved input</button><section id="unsaved-recovery" class="panel" hidden role="region" aria-label="Unsaved input recovery">
+<p id="tab-change" role="alert" hidden></p><button class="btn ghost" id="draft-open" type="button" hidden>未保存入力の回収 / Recover unsaved input</button><section id="save-notice" class="panel" hidden role="alert" tabindex="-1"><h2 id="save-notice-title"></h2><p id="save-notice-reason"></p><p id="save-notice-info"></p><div class="row wrap"><button class="btn" id="save-return" type="button"></button><button class="btn alt" id="save-recover" type="button"></button></div></section><button class="btn ghost" id="draft-discard" type="button" hidden></button><section id="discard-input" class="panel" hidden role="alertdialog" aria-labelledby="discard-title" aria-describedby="discard-info" tabindex="-1"><h2 id="discard-title"></h2><p id="discard-info"></p><div class="row wrap"><button class="btn alt" id="discard-cancel" type="button"></button><button class="btn" id="discard-reload" type="button"></button></div></section><section id="unsaved-recovery" class="panel" hidden role="region" aria-label="Unsaved input recovery">
 <details class="storage-guide" id="recovery-guide">
 <summary>
 <span lang="ja">「保存できませんでした」と表示されたら</span>
@@ -168,7 +168,7 @@ html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide 
 </section>
 </div>
 </details>
-<p id="draft-reason"></p><p id="draft-info"></p><textarea id="draft-text" class="field" readonly rows="12" aria-label="Unsaved input JSON"></textarea><button class="btn" id="draft-export" type="button"></button> <button class="btn alt" id="draft-hide" type="button"></button> <button class="btn ghost" id="draft-confirm" type="button"></button></section><section class="panel" id="storage-state" role="alert" hidden><p id="storage-reason"></p><p id="recovery-info"></p><button class="btn" id="recover-source" type="button"></button></section>
+<p id="draft-reason"></p><p id="draft-info"></p><details id="draft-json"><summary id="draft-json-label"></summary><textarea id="draft-text" class="field" readonly rows="12" aria-label="Unsaved input JSON"></textarea></details><button class="btn" id="draft-export" type="button"></button> <button class="btn alt" id="draft-hide" type="button"></button> <button class="btn ghost" id="draft-confirm" type="button"></button></section><section class="panel" id="storage-state" role="alert" hidden><p id="storage-reason"></p><p id="recovery-info"></p><button class="btn" id="recover-source" type="button"></button></section>
 <nav aria-label="Archives" class="tabbar" id="sections"><button class="tab active" data-section="listening">Listening</button><button class="tab" data-section="collection">Collection</button><button class="tab" data-section="live">Live</button></nav>
 <section class="panel" id="search-panel"><div class="panel-heading"><h2 id="search-title">Search Albums</h2><button class="manual-add-link" id="manual-add-trigger" type="button">＋ Add Manually</button></div><div class="view-segments search-modes" id="search-modes" role="group" aria-label="Search mode"><button class="tab active" type="button" data-search-mode="artist" aria-pressed="true">Artist</button><button class="tab" type="button" data-search-mode="title" aria-pressed="false">Album Title</button></div><form class="row" id="search-form"><input autocomplete="off" class="field grow" id="query" minlength="2" aria-label="Artist name" required=""/><button class="btn" id="search-btn">Search</button></form><div class="status" id="status" role="status"></div><div class="row between"><span class="small muted" id="result-count"></span><button class="btn ghost hidden" id="clear-search" type="button">Clear Results ×</button></div><div class="search-candidates hidden" id="artist-candidates"></div><div class="results" id="results"></div><div style="margin:10px 0;text-align:center"><button class="btn ghost hidden" id="more-results" type="button">Load 30 more</button></div></section>
 <section class="panel"><div class="panel-heading"><h2><span id="library-title">Listening Archive</span> <span class="muted small" id="count">0</span></h2><button class="manual-add-link hidden" id="add-live-trigger" type="button">＋ Add Live</button></div><div aria-labelledby="library-title" class="view-segments" role="group"><button class="tab active" id="grid-tab" type="button">▦ Grid</button><button class="tab" id="list-tab" type="button">☷ List</button></div><div class="filter-control"><button aria-controls="sort-wrap" aria-expanded="false" class="btn ghost" id="filters-toggle" type="button">⚙ Sort &amp; Filter <span id="filters-icon">＋</span></button></div><div class="filter-fields hidden" id="filters-wrap"><select class="field w200" id="sort"><option value="release-desc">Release: Newest</option><option value="release-asc">Release: Oldest</option><option value="date-desc">Listened: Newest</option><option value="date-asc">Listened: Oldest</option><option value="rating-desc">Score: High to Low</option><option value="rating-asc">Score: Low to High</option><option value="label-asc">Label: A–Z</option><option value="artist-asc">Artist: A–Z</option><option value="artist-desc">Artist: Z–A</option></select><select class="field w200" id="group"><option value="year">Group: Release Year</option><option value="week">Group: Release Week</option><option value="month">Group: Release Month</option><option value="day">Group: Release Day</option><option value="none">No Grouping</option></select><select class="field w200" id="artist-filter"><option value="">All Artists</option></select><select class="field hidden" id="genre-filter" aria-hidden="true"><option value="">All Genres</option></select><select class="field w200" id="label-filter"><option value="">All Labels</option></select><select class="field w200 hidden" id="store-filter"><option value="">All Stores</option></select><select class="field w200" id="tag-filter"><option value="">All Tags</option></select><input class="field w200" id="year-filter" inputmode="numeric" maxlength="4" placeholder="Filter listened year"/><input class="field w200" id="release-year-filter" inputmode="numeric" maxlength="4" placeholder="Filter release year"/></div><div id="library"></div></section>
@@ -335,6 +335,8 @@ try{const preference=localStorage.getItem('mma-ui-language');if(['ja','en'].incl
 // A failed read is never an empty archive. Keep the exact source for recovery.
 let loadFailed=false,rawSource=null,sourceKey=KEY,loadReason='',baseRaw=null,migrationCandidate=null;
 let saving=false,externalChanged=false,operationBusy=false,draft=null,activeOperation=null,draftRecovered=false;
+// Presentation state is separate from draft ownership and recovery authorization.
+let recoveryView=null,noticeReason='',noticeConflict=false,discardReload=false;
 let formSession=0,formOwner=null,formBaseline=null,draftContext=null,draftPhotoFiles=null;
 try{
  rawSource=localStorage.getItem(KEY);baseRaw=rawSource;
@@ -385,7 +387,7 @@ function formState(operation={}){
 function ownsForm(operation){return formOwner&&operation.area===formOwner.area&&(formOwner.kind!=='edit'||operation.id===formOwner.id)}
 function pendingDraft(){return draft&&!draftRecovered}
 function keepDraftMessage(){return isJapanese()?'未回収の入力があります。入力全体を再保存するか、回収内容を確認してから別の操作をしてください。':'Unrecovered input remains. Save the entire form, or verify recovery before another operation.'}
-function preserveDraft(){showDraft();alert(keepDraftMessage());return false}
+function preserveDraft(){recoveryView='notice';showDraft();alert(keepDraftMessage());return false}
 async function saveDB(candidate=db,operation={}){
  if(!canSave())return false;
  const full=['edit','create','create-live'].includes(operation.kind),owned=ownsForm(operation);
@@ -415,8 +417,12 @@ async function saveDB(candidate=db,operation={}){
   }
   showDraft();return true;
  }catch(e){
-  const reason=e instanceof ArchiveValidationError?validationMessage(e):e instanceof SaveStopped?e.message:(isJapanese()?'保存できず、変更は反映されていません。保存領域または排他ロックを利用できません。再試行または入力回収をしてください。':'Could not save. Changes have not been applied. Storage or exclusive locking is unavailable. Retry or recover input.');
-  captureDraft(operation,reason,full&&operation.proposed?attempt?.fileRefs:null);if(operation.kind==='restore')draftContext.restoreRaw=JSON.stringify(candidate);alert(reason);return false;
+  const reason=e instanceof ArchiveValidationError?validationMessage(e):e instanceof SaveStopped?e.message:(isJapanese()?'保存できませんでした':'Couldn’t Save Changes');
+  captureDraft(operation,reason,full&&operation.proposed?attempt?.fileRefs:null);
+  if(operation.kind==='restore')draftContext.restoreRaw=JSON.stringify(candidate);
+  noticeConflict=e instanceof SaveStopped&&e.message===conflictMessage();
+  noticeReason=noticeConflict?(isJapanese()?'別のタブで記録が更新されています。':'The records were updated in another tab.'):e instanceof SaveStopped||e instanceof ArchiveValidationError?reason:'';
+  recoveryView='notice';showDraft();$('save-notice').focus();return false;
  }
 }
 // One recovery owner per form session. No history or archive-wide copies.
@@ -430,6 +436,7 @@ function captureDraft(operation,reason,processedFiles=null){
  // A new File must never inherit converted bytes from an older selection.
  const photoUnavailable=!!draftPhotoFiles?.length&&!sameFiles(draftPhotoFiles,state.fileRefs)||!!state.fileRefs.length&&!sameFiles(draftPhotoFiles,state.fileRefs);
  if(photoUnavailable&&proposed)proposed.photo=null;
+ if(!draft){recoveryView='notice';noticeReason=reason;noticeConflict=false}
  draftRecovered=false;
  draftContext={session:formSession,input:state.input,fileRefs:state.fileRefs};
  draft={format:'mla-unsaved-input',formatVersion:1,createdAt:new Date().toISOString(),area:op.area||null,operation:op.kind||'save',recordId:op.id||null,reason,base:{key:KEY,present:baseRaw!==null},input:state.input,proposedRecord:proposed,files:state.files,
@@ -443,8 +450,20 @@ function beginForm(kind){
  formSession++;formOwner={session:formSession,area:section,id:pendingRecord?.entryId||editing,kind};formBaseline=formState();
 }
 function showDraft(){
- const button=$('draft-open'),panel=$('unsaved-recovery');button.hidden=!pendingDraft();panel.hidden=!draft;if(!draft)return;
- const dialog=document.querySelector('#modal.open .dialog,#live-create-modal.open .dialog');if(dialog)dialog.append(button,panel);else $('storage-state').before(button,panel);
+ const button=$('draft-open'),panel=$('unsaved-recovery'),notice=$('save-notice'),discard=$('draft-discard'),confirmation=$('discard-input');
+ button.hidden=!pendingDraft();discard.hidden=!draft;panel.hidden=!draft||recoveryView!=='recovery';notice.hidden=!draft||recoveryView!=='notice';if(!draft){recoveryView=null;confirmation.hidden=true;return}
+ $('save-notice-title').textContent=isJapanese()?'保存できませんでした':'Couldn’t Save Changes';
+ $('save-notice-reason').textContent=noticeConflict?(isJapanese()?'別のタブで記録が更新されています。':'The records were updated in another tab.'):noticeReason;$('save-notice-reason').hidden=!noticeReason;
+ $('save-notice-info').textContent=isJapanese()?'入力内容はこの画面に残っています。必要な内容をコピーするか、回収用ファイルに保存してください。':'Your input is still on this screen. Copy anything you want to keep, or save it to a recovery file.';
+ $('save-return').textContent=isJapanese()?'入力に戻る':'Return to Editing';
+ $('save-recover').textContent=isJapanese()?'入力内容を回収':'Recover Input';
+ discard.textContent=isJapanese()?'入力を破棄して再入力':'Discard Input and Start Again';
+ $('discard-title').textContent=isJapanese()?'未保存の入力を破棄しますか？':'Discard unsaved input?';
+ $('discard-info').textContent=isJapanese()?'この画面で保存できなかった変更は失われます。必要な文章や写真がある場合は、先にコピーまたは回収してください。':'Changes that could not be saved on this screen will be lost. Copy or recover any text or photos you need first.';
+ $('discard-cancel').textContent=isJapanese()?'キャンセル':'Cancel';
+ $('discard-reload').textContent=isJapanese()?'破棄して再読み込み':'Discard and Reload';
+ $('draft-json-label').textContent=isJapanese()?'回収用テキストを表示・コピー':'Show and Copy Recovery Text';
+ const dialog=document.querySelector('#modal.open .dialog,#live-create-modal.open .dialog');if(dialog)dialog.append(notice,button,panel,discard,confirmation);else $('storage-state').before(notice,button,panel,discard,confirmation);
  $('draft-reason').textContent=draft.reason;
  $('draft-info').textContent=(isJapanese()?'未保存入力専用です。通常のDBバックアップや自動再実行用ではありません。保存先でファイルを確認するか、下のテキストをコピーしてから再読み込みしてください。':'Unsaved input only; not a DB backup or an executable operation. Verify the downloaded file or copy the text below before reloading.')+' '+draft.limitations;
  $('draft-text').value=JSON.stringify(draft,null,2);
@@ -453,7 +472,7 @@ function showDraft(){
  $('draft-confirm').textContent=isJapanese()?'回収内容を確認済み・閉じる操作を許可':'Recovery verified: allow closing';
 }
 window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&(e.key===KEY||e.key===null)&&e.newValue!==baseRaw){externalChanged=true;$('tab-change').hidden=false;$('tab-change').textContent=conflictMessage()}});
-window.addEventListener('beforeunload',e=>{if(operationBusy||draft||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')){e.preventDefault();e.returnValue=''}});
+window.addEventListener('beforeunload',e=>{if(discardReload){discardReload=false;return}if(operationBusy||draft||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')){e.preventDefault();e.returnValue=''}});
 function operationRecord(target,id,expected){
  const rows=db[target];const found=Array.isArray(rows)&&typeof id==='string'&&id.length?rows.filter(r=>r.entryId===id):[];
  if(found.length!==1||(expected&&found[0]!==expected)){alert(isJapanese()?'内部記録IDの重複または操作対象の不一致のため停止しました。画面を開き直し、原本を保管して確認してください。':'Operation stopped: duplicate internal ID or target mismatch. Reopen the record; keep and check the original data.');return null}return found[0];
@@ -850,13 +869,21 @@ for(const [id,event] of [['save','onclick'],['delete','onclick'],['remove-photo'
 for(const event of ['click','keydown','pointerdown','pointermove'])document.addEventListener(event,e=>{
  if(operationBusy&&!e.target.closest('#delete-confirm-modal,#unsaved-recovery')){e.preventDefault();e.stopImmediatePropagation();return}
  // Failed drafts cannot be silently replaced by closing/reopening a form.
- if(draft&&!draftRecovered&&!e.target.closest('#unsaved-recovery')&&(e.target.closest('#close,#close-live-create,#sections,#manual-add-trigger,#add-live-trigger')||e.target===$('modal')||e.target===$('live-create-modal'))){e.preventDefault();e.stopImmediatePropagation();showDraft()}
+ if(draft&&!draftRecovered&&!e.target.closest('#unsaved-recovery')&&(e.target.closest('#close,#close-live-create,#sections,#manual-add-trigger,#add-live-trigger')||e.target===$('modal')||e.target===$('live-create-modal'))){e.preventDefault();e.stopImmediatePropagation();recoveryView='notice';showDraft()}
 },true);
-$('draft-export').onclick=()=>{try{download('mla-unsaved-input-'+Date.now()+'.json',$('draft-text').value,'application/json')}catch(e){$('draft-info').textContent=isJapanese()?'ファイル出力に失敗しました。下の全文を選択してコピーしてください。入力は保持しています。':'File export failed. Select and copy all text below. Your input is retained.'}};
+$('draft-export').onclick=()=>{try{download('mla-unsaved-input-'+Date.now()+'.json',$('draft-text').value,'application/json')}catch(e){$('draft-json').open=true;$('draft-text').focus();$('draft-text').select();$('draft-info').textContent=isJapanese()?'ファイル出力に失敗しました。下の全文を選択してコピーしてください。入力は保持しています。':'File export failed. Select and copy all text below. Your input is retained.'}};
 $('draft-confirm').textContent=isJapanese()?'回収内容を確認済み・閉じる操作を許可':'Recovery verified: allow closing';
-$('draft-confirm').onclick=()=>{draftRecovered=true;$('draft-open').hidden=!pendingDraft();$('unsaved-recovery').hidden=true};
-$('draft-hide').onclick=()=>$('unsaved-recovery').hidden=true;
-$('draft-open').onclick=()=>{if(!draft&&($('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')))captureDraft({area:section,id:editing,kind:$('live-create-modal').classList.contains('open')?'create-live':pendingRecord?'create':'edit'},isJapanese()?'未保存入力の手動回収':'Manual unsaved input recovery');else showDraft()};
+$('draft-confirm').onclick=()=>{recoveryView=null;$('save-notice').hidden=true;draftRecovered=true;$('draft-open').hidden=!pendingDraft();$('unsaved-recovery').hidden=true};
+function returnToEditing(){recoveryView=null;showDraft();const root=document.querySelector('#modal.open,#live-create-modal.open');root?.querySelector('textarea:not([readonly]),input:not([type=file])')?.focus()}
+function openRecovery(){recoveryView='recovery';$('draft-json').open=false;showDraft();$('draft-export').focus()}
+$('draft-hide').onclick=returnToEditing;
+$('save-return').onclick=returnToEditing;
+$('save-recover').onclick=openRecovery;
+$('draft-discard').onclick=()=>{if(operationBusy||!draft)return;$('discard-input').hidden=false;$('discard-cancel').focus()};
+$('discard-cancel').onclick=()=>{$('discard-input').hidden=true;$('draft-discard').focus()};
+// Reload alone drops the in-memory draft. Never write/remove saved storage here.
+$('discard-reload').onclick=()=>{if(operationBusy||!draft||$('discard-input').hidden)return;discardReload=true;try{location.reload()}catch(e){discardReload=false;throw e}};
+$('draft-open').onclick=()=>{if(!draft&&($('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')))captureDraft({area:section,id:editing,kind:$('live-create-modal').classList.contains('open')?'create-live':pendingRecord?'create':'edit'},isJapanese()?'未保存入力の手動回収':'Manual unsaved input recovery');openRecovery()};
 $('ui-language').addEventListener('change',()=>{if(draft)showDraft()});
 for(const event of ['input','change','click'])document.addEventListener(event,e=>{if(draft&&!operationBusy&&e.target.closest('#modal.open,#live-create-modal.open')&&!e.target.closest('#unsaved-recovery')&&!sameForm(draftContext,formState()))captureDraft({area:draft.area,id:draft.recordId,kind:draft.operation,proposed:draft.proposedRecord},draft.reason)});
 setSection('listening');showStorageState();

@@ -39,6 +39,7 @@ def main():
                 p.evaluate('(v)=>window.failWrite=v',fail)
                 p.locator('#save').evaluate('(el)=>el.onclick()')
                 p.wait_for_function('!review.busy()')
+                if fail:p.locator('#save-recover').click()
             def match(value,operation='edit'):
                 d=draft();assert d is not None,'draft disappeared'
                 assert d['operation']==operation,(d['operation'],operation)
