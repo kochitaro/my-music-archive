@@ -184,11 +184,12 @@ def main():
         labels, tags = options(page, 'label'), options(page, 'tag')
         for value, expected in [('Merge', 'Merge (2)'), ('4AD', '4AD (1)'), ('未設定', '未設定 (1)'), ('Merge (2)', 'Merge (2) (1)')]:
             assert labels[value] == expected
-        for value, expected in [('Electronic', 'Electronic (3)'), ('AOTY2026', 'AOTY2026 (3)'), ('Ambient', 'Ambient (1)'), ('Legacy', 'Legacy (1)'), ('Electronic (5)', 'Electronic (5) (1)')]:
+        for value, expected in [('Electronic', 'Electronic (2)'), ('AOTY2026', 'AOTY2026 (3)'), ('Electronic (5)', 'Electronic (5) (1)')]:
             assert tags[value] == expected
         assert labels[''] == 'すべてのレーベル' and tags[''] == 'すべてのタグ'
         assert labels[unset_value(page, 'label')] == '未設定 (4)'
-        assert tags[unset_value(page, 'tag')] == '未設定 (3)'
+        assert tags[unset_value(page, 'tag')] == '未設定 (4)'
+        assert 'Ambient' not in tags and 'Legacy' not in tags
         for field in ['label', 'tag']:
             for literal in ['__mma_unset__', '__mma_unset___', '__unset__', '未設定']:
                 assert unset_value(page, field) != literal
@@ -198,9 +199,9 @@ def main():
         choose(page, 'label', unset_value(page, 'label'))
         assert set(titles(page)) == {'Score 5.0', 'Unrated', 'Score 0.0', 'Legacy genre'}
         choose(page, 'tag', unset_value(page, 'tag'))
-        assert set(titles(page)) == {'Score 5.0', 'Unrated', 'Score 0.0'}
+        assert set(titles(page)) == {'Score 5.0', 'Unrated', 'Score 0.0', 'Legacy genre'}
         choose(page, 'label', '')
-        assert set(titles(page)) == {'Score 5.0', 'Unrated', 'Score 0.0'}
+        assert set(titles(page)) == {'Score 5.0', 'Unrated', 'Score 0.0', 'Legacy genre'}
         choose(page, 'tag', 'Electronic')
         choose(page, 'label', 'Merge')
         choose(page, 'artist', 'Artist A')
@@ -300,7 +301,7 @@ def main():
             assert options(page, 'tag')['Changed Tag'] == 'Changed Tag (0)'
             label_unset, tag_unset = unset_value(page, 'label'), unset_value(page, 'tag')
             assert options(page, 'label')[label_unset] == f'Not set ({5 if section == "listening" else 2})'
-            assert options(page, 'tag')[tag_unset] == 'Not set (4)'
+            assert options(page, 'tag')[tag_unset] == f'Not set ({5 if section == "listening" else 4})'
             choose(page, 'tag', tag_unset)
             choose(page, 'label', label_unset)
             assert 'New Entry' in titles(page)
@@ -387,10 +388,8 @@ def main():
                 if original['title'] in ['Score 4.2', 'C 4.2']:
                     assert actual['rating'] == ''
                     for key, value in original.items():
-                        if key not in ['rating', 'tags', 'genre']:
+                        if key != 'rating':
                             assert actual[key] == value
-                    assert actual['genre'] == ''
-                    assert actual['tags'] == (['Electronic', 'AOTY2026'] if archive == 'listening' else [])
                 else:
                     assert actual == original
         page.screenshot(path='/tmp/mma-v0322-listening.png', full_page=True)
