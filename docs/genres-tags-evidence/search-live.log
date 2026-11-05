@@ -1,0 +1,4 @@
+PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes
+PASS 2: two raw pages, four display batches, global re-sort, exact/partial dates/unknown, all types/unclassified, add album metadata and unchanged saved schema
+PASS 3: artist mode retains Album/EP/Single priority and displays type beside release date
+PASS 4: exact JSON export/restore/reload and all original Live rating values; no JS errors
