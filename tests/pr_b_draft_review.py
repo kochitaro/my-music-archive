@@ -39,14 +39,13 @@ def main():
                 p.evaluate('(v)=>window.failWrite=v',fail)
                 p.locator('#save').evaluate('(el)=>el.onclick()')
                 p.wait_for_function('!review.busy()')
-                if fail:p.locator('#save-recover').click()
             def match(value,operation='edit'):
                 d=draft();assert d is not None,'draft disappeared'
                 assert d['operation']==operation,(d['operation'],operation)
                 assert d['area']==area and d['recordId']==area,(d['area'],d['recordId'])
                 assert d['input']['memo']==p.locator('#memo').input_value()==value
                 assert d['input'][rating[1:]]==p.locator(rating).input_value()
-                assert json.loads(p.locator('#draft-text').input_value())==d
+                assert p.locator('#draft-text,#draft-export,#draft-confirm').count()==0
                 return d
             def attach(name='one.png'):
                 p.locator(photo).set_input_files(dict(name=name,mimeType='image/png',buffer=base64.b64decode(PHOTO.split(',')[1])))
@@ -82,13 +81,13 @@ def main():
             assert p.locator('#'+('e-live-photo' if area=='live' else 'album-photo')).evaluate('(el)=>el.files.length')==1
             blocked()
         def hidden(p,edit,save,match,draft,stored,attach,remove,blocked):
-            edit('C first');attach();save(True);p.locator('#draft-hide').click()
-            edit('C changed');p.locator('#draft-open').evaluate('(el)=>el.onclick()');match('C changed')
+            edit('C first');attach();save(True);p.locator('#save-return').click()
+            edit('C changed');p.locator('#close').click();match('C changed')
             p.locator('[data-section=collection]' if area!='collection' else '[data-section=live]').evaluate('(el)=>el.click()')
             match('C changed');blocked()
         def replaced_file(p,edit,save,match,draft,stored,attach,remove,blocked):
-            edit('C photo');attach();save(True);p.locator('#draft-hide').click();attach('two.png')
-            p.locator('#draft-open').evaluate('(el)=>el.onclick()');d=match('C photo')
+            edit('C photo');attach();save(True);p.locator('#save-return').click();attach('two.png')
+            p.locator('#close').click();d=match('C photo')
             assert d['files'][0]['name']=='two.png'
             assert not d['proposedRecord'] or not d['proposedRecord'].get('photo'),'old processed photo falsely assigned to new file'
             assert d['limitations'];p.locator('#'+('e-live-photo' if area=='live' else 'album-photo')).set_input_files([])
@@ -96,7 +95,7 @@ def main():
         def unrelated(p,edit,save,match,draft,stored,attach,remove,blocked):
             edit('D retained');save(True)
             p.evaluate("()=>{URL.createObjectURL=()=>{throw Error('output failed')}}")
-            p.locator('#draft-export').click();before=match('D retained');raw=stored()
+            p.locator('#save-return').click();p.locator('#memo').select_text();before=match('D retained');raw=stored()
             p.evaluate('failWrite=false')
             other='live' if area!='live' else 'collection'
             result=p.evaluate('(other)=>{const v=structuredClone(review.db());v[other][0].memo="unrelated";return review.saveDB(v,{area:other,id:other,kind:"edit",proposed:v[other][0]})}',other)
@@ -113,7 +112,7 @@ def main():
             assert len(stored()[area])==2,'delete destroyed unrecovered edits'
             match('D deletion');blocked()
         def confirmed_edit(p,edit,save,match,draft,stored,attach,remove,blocked):
-            edit('confirmed');save(True);p.locator('#draft-confirm').click();assert p.evaluate('review.recovered()')
+            edit('confirmed');save(True);p.locator('#save-again').click();p.locator('#discard-cancel').click();assert not p.evaluate('review.recovered()')
             edit('edited again');match('edited again');blocked()
         def conversion_failure(p,edit,save,match,draft,stored,attach,remove,blocked):
             edit('early photo failure');attach();p.evaluate('review.pause()')
@@ -150,7 +149,7 @@ def main():
             assert draft() is None,'another operation replaced recovery during deletion confirmation'
             p.locator('#delete-cancel').click();p.wait_for_function('!review.busy()')
         for area in ['listening','collection','live']:
-            for name,case in [('A repeated failure / exact retry',retry),('B photo success without previous draft',photo_no_draft),('B pending processed photo',photo_pending),('C hide/edit/reopen/navigation',hidden),('C new file invalidates processed photo',replaced_file),('D failed download / unrelated success',unrelated),('D deletion cannot discard draft',delete_guard),('boundary confirmed then edited',confirmed_edit),('boundary conversion failed early',conversion_failure),('boundary delayed completion / double click',delayed_lock),('boundary deletion confirmation / second failure',delete_wait),('boundary input changed during photo conversion',photo_completion)]:
+            for name,case in [('A repeated failure / exact retry',retry),('B photo success without previous draft',photo_no_draft),('B pending processed photo',photo_pending),('C hide/edit/reopen/navigation',hidden),('C new file invalidates processed photo',replaced_file),('D unavailable download / text copy / unrelated refusal',unrelated),('D deletion cannot discard draft',delete_guard),('boundary discard cancelled then edited',confirmed_edit),('boundary conversion failed early',conversion_failure),('boundary delayed completion / double click',delayed_lock),('boundary deletion confirmation / second failure',delete_wait),('boundary input changed during photo conversion',photo_completion)]:
                 run(area,name,case)
         browser.close()
     server.shutdown()

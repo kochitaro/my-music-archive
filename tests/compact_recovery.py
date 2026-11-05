@@ -1,4 +1,4 @@
-"""Compact recovery, explicit discard, bilingual mobile evidence. Synthetic Chromium."""
+"""Simple save failure, explicit discard, bilingual mobile evidence. Synthetic Chromium."""
 import json, os, threading
 from pathlib import Path
 from http.server import ThreadingHTTPServer
@@ -14,7 +14,7 @@ def main():
     source=(ROOT/'index.html').read_text()
     seam="window.v={setSection,openEdit,draft:()=>draft,recovered:()=>draftRecovered,busy:()=>operationBusy,db:()=>db};"
     source=source.replace("setSection('listening');showStorageState();",seam+"setSection('listening');showStorageState();")
-    evidence=ROOT/'docs/compact-recovery-evidence';evidence.mkdir(exist_ok=True)
+    evidence=ROOT/'docs/simple-save-evidence';evidence.mkdir(exist_ok=True)
     with sync_playwright() as pw:
         browser=pw.chromium.launch(executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox'])
         for lang in ['ja','en']:
@@ -45,9 +45,13 @@ def main():
                 else:p.locator('#save').evaluate('el=>el.onclick()')
                 p.wait_for_function('!v.busy()')
               save()
-              expect(p.locator('#save-notice')).to_be_visible();expect(p.locator('#unsaved-recovery')).to_be_hidden();expect(p.locator('#draft-text')).to_be_hidden()
+              expect(p.locator('#save-notice')).to_be_visible();assert p.locator('#unsaved-recovery,#draft-open,#draft-export,#draft-text,#draft-confirm,#save-recover,#draft-discard').count()==0
               assert p.locator('#save-notice-title').inner_text()==('保存できませんでした' if lang=='ja' else 'Couldn’t Save Changes')
               assert p.locator('#save-notice-reason').inner_text()==('別のタブで記録が更新されています。' if lang=='ja' else 'The records were updated in another tab.')
+              assert p.locator('#save-notice-info').inner_text()==('入力内容はこの画面に残っています。必要な文章はコピーしてから、再読み込みして入力し直してください。' if lang=='ja' else 'Your input is still on this screen. Copy any text you want to keep, then reload the page and enter your changes again.')
+              assert p.locator('#save-return').inner_text()==('入力に戻る' if lang=='ja' else 'Return to Editing')
+              assert p.locator('#save-again').inner_text()==('やり直す' if lang=='ja' else 'Start Again')
+              expect(p.locator('#tab-change')).to_be_hidden();expect(p.locator('#discard-input')).to_be_hidden()
               before=p.evaluate('JSON.stringify(v.draft())')
               if kind=='edit':
                 for width in [320,375,390,430]:
@@ -60,35 +64,27 @@ def main():
               assert p.evaluate('JSON.stringify(v.draft())')==before
               p.locator(close).click();expect(p.locator(modal)).to_be_visible();expect(p.locator('#save-notice')).to_be_visible()
               save();assert p.evaluate('(k)=>localStorage.getItem(k)',KEY)==raw
-              p.locator('#save-recover').click();expect(p.locator('#unsaved-recovery')).to_be_visible();expect(p.locator('#draft-text')).to_be_hidden()
-              if kind=='edit':p.locator('#unsaved-recovery').screenshot(path=str(evidence/f'recovery-{area}-{lang}-390.png'))
-              text=p.locator('#draft-text').input_value();assert json.loads(text)==p.evaluate('v.draft()')
-              with p.expect_download() as dl:p.locator('#draft-export').click()
-              assert Path(dl.value.path()).read_text()==text
-              p.locator('#draft-json summary').click();expect(p.locator('#draft-text')).to_be_visible()
-              p.locator('#draft-text').select_text();assert p.locator('#draft-text').evaluate('e=>e.selectionEnd-e.selectionStart')==len(text)
-              # Failed download expands/selects the complete fallback text automatically.
-              p.evaluate("()=>{window.savedCreateURL=URL.createObjectURL;URL.createObjectURL=()=>{throw Error('download unavailable')}}")
-              p.locator('#draft-json summary').click();p.locator('#draft-export').click();expect(p.locator('#draft-text')).to_be_visible()
-              assert p.locator('#draft-text').evaluate('e=>e.selectionEnd-e.selectionStart')==len(text)
-              p.evaluate('()=>{URL.createObjectURL=savedCreateURL}')
-              p.locator('#draft-hide').click();expect(p.locator('#unsaved-recovery')).to_be_hidden()
+              p.locator('#save-return').click()
+              p.locator(memo).select_text()
+              assert p.locator(memo).evaluate('e=>e.selectionEnd-e.selectionStart')==len('Keep this input / 未保存')
               assert not p.evaluate('v.recovered()')
               # beforeunload is still prevented after both dismiss operations.
               assert p.evaluate("()=>{const e=new Event('beforeunload',{cancelable:true});window.dispatchEvent(e);return e.defaultPrevented}")
-              p.locator('#draft-discard').click();expect(p.locator('#discard-input')).to_be_visible()
+              p.locator(close).click();p.locator('#save-again').click();expect(p.locator('#discard-input')).to_be_visible();expect(p.locator('#save-notice')).to_be_hidden()
+              assert p.locator('#discard-title').inner_text()==('未保存の入力を破棄しますか？' if lang=='ja' else 'Discard unsaved changes?')
+              assert p.locator('#discard-info').inner_text()==('保存できなかった変更は失われます。必要な文章は、先にコピーしてください。' if lang=='ja' else 'Your unsaved changes will be lost. Copy any text you want to keep before continuing.')
               if kind=='edit':p.locator('#discard-input').screenshot(path=str(evidence/f'discard-{area}-{lang}-390.png'))
               latest=p.evaluate('JSON.stringify(v.draft())')
               p.locator('#discard-cancel').click();assert p.evaluate('JSON.stringify(v.draft())')==latest
               assert p.locator(memo).input_value()=='Keep this input / 未保存'
-              p.locator('#draft-discard').click()
+              p.locator(close).click();p.locator('#save-again').click()
               with p.expect_navigation():p.locator('#discard-reload').click()
               assert p.evaluate('(k)=>localStorage.getItem(k)',KEY)==raw
               assert p.evaluate('v.draft()') is None
               expect(p.locator(modal)).to_be_hidden()
               assert not dialogs,dialogs
               assert not errors,errors
-              print('PASS',lang,area,kind,'compact notice, retained form/draft, real conflict retry refusal, JSON download/copy/fallback, close/unload guard, cancel/discard, unchanged saved DB',flush=True)
+              print('PASS',lang,area,kind,'compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB',flush=True)
               ctx.close()
         browser.close()
     server.shutdown()

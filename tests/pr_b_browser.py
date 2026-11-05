@@ -101,7 +101,7 @@ def main():
                 assert a.evaluate('(v)=>b.saveDB(v)',change('listening','winner'))
                 if area=='live' and kind=='create':b.locator('#live-form button').last.click()
                 else:b.locator('#save').click()
-                expect(b.locator('#save-notice')).to_be_visible();b.locator('#save-recover').click();expect(b.locator('#unsaved-recovery')).to_be_visible()
+                expect(b.locator('#save-notice')).to_be_visible();assert b.locator('#unsaved-recovery,#draft-export,#draft-text,#draft-confirm').count()==0
                 draft=b.evaluate('b.draft()');assert draft['area']==area
                 assert '未保存メモ' in json.dumps(draft,ensure_ascii=False)
                 assert draft['proposedRecord']['photo'].startswith('data:image/jpeg;')
@@ -115,17 +115,13 @@ def main():
                 b.locator(rating_root+' .rating-clear').click()
                 draft=b.evaluate('b.draft()')
                 assert draft['input']['live-rating' if area=='live' and kind=='create' else 'e-live-rating' if area=='live' else 'rating']==''
-                with b.expect_download() as dl:b.locator('#draft-export').click()
-                recovered=json.loads(Path(dl.value.path()).read_text());assert recovered==draft
-                # Normal restore must reject the draft, with archive unchanged.
+                # The same internal data/photos remain protected without JSON UI.
                 before=raw();b.evaluate("async v=>{await document.getElementById('import-json').onchange({target:{files:[{text:async()=>v}],value:'x'}})}",json.dumps(draft));assert raw()==before
-                # Reopen recovery after the refused restore, then exercise file fallback.
-                b.locator('#draft-open').click()
-                # Failing file output leaves copyable text and form intact.
                 b.evaluate("()=>{URL.createObjectURL=()=>{throw Error('download failed')}}")
-                b.locator('#draft-export').click();assert b.locator('#draft-text').input_value()==json.dumps(draft,ensure_ascii=False,indent=2)
-                assert b.locator(memo).input_value()=='未保存メモ / unsaved';count+=1
-        print('PASS all areas create/edit recovery + photos/download/fallback/restore rejection; cumulative:',count)
+                b.locator('#save-return').click();b.locator(memo).select_text()
+                assert b.locator(memo).evaluate('e=>e.selectionEnd-e.selectionStart')==len('未保存メモ / unsaved')
+                assert b.locator(memo).input_value()=='未保存メモ / unsaved';assert b.evaluate('b.draft()')==draft;count+=1
+        print('PASS all areas create/edit internal draft + photos/text copy/no JSON UI/restore rejection; cumulative:',count)
         # Slow photo: duplicate submits and attempted navigation cannot mix targets.
         reset();b.evaluate("b.openEdit('listening');b.pause()")
         b.locator('#album-photo').set_input_files(dict(name='photo.png',mimeType='image/png',buffer=b'x'))

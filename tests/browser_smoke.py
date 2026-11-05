@@ -98,7 +98,7 @@ with sync_playwright() as p:
  print('PASS Listening/Collection saves, metadata/date inheritance, Japanese/English, existing data intact')
  page.locator('[data-search-mode=title]').click();search(page,'missing',1);page.locator('#results button').click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-artist').input_value()==''
  dialogs=[];page.on('dialog',lambda d:(dialogs.append(d.message),d.accept()))
- page.locator('#save').click();assert dialogs;assert len(stored(page)['collection'])==1
+ page.locator('#save').click();expect(page.locator('#save-notice')).to_be_visible();expect(page.locator('#save-notice-reason')).to_contain_text('album title and artist');assert len(stored(page)['collection'])==1
  page.locator('#manual-artist').fill('Manual Artist');page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open');assert stored(page)['collection'][0]['artist']=='Manual Artist'
  search(page,'repair',1);page.locator('#results button').click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-artist').input_value()=='Recovered Artist';page.locator('#close').click()
  search(page,'title fallback');

@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import ROOT, KEY, QuietHandler
 from data_preservation import seed_data
 
-BASE='c7bffd4843658855f680ab6bd0c23dff3a9892fe'
+BASE='f4d41ef1ad3493060dc6e9a76bd6e872592721d6'
 
 def main():
     baseline=subprocess.check_output(['git','show',BASE+':index.html'],text=True)
@@ -24,28 +24,28 @@ def main():
             ctx.add_init_script("const orig=Storage.prototype.setItem;window.fail=false;Storage.prototype.setItem=function(k,v){if(window.fail&&k==='my-music-archive-pilot-v03')throw Error('synthetic quota');return orig.call(this,k,v)};Date.prototype.toISOString=function(){return '2026-11-05T00:00:00.000Z'}")
             p=ctx.new_page();errors=[];p.on('pageerror',lambda e:errors.append(str(e)));p.on('dialog',lambda d:d.accept());p.goto(base)
             button=p.locator('#draft-open')
-            if check:expect(button).to_be_hidden()
+            if check:assert button.count()==0
             p.evaluate('([k,v])=>localStorage.setItem(k,v)',[KEY,json.dumps(seed_data())]);p.reload()
             p.evaluate('(a)=>v.setSection(a)',area)
             if check:
-                expect(button).to_be_hidden()
-                p.locator('#sort-toggle').click();p.locator('#sort').select_option('rating-desc');expect(button).to_be_hidden()
-                p.locator('#filters-toggle').click();expect(button).to_be_hidden()
+                assert button.count()==0
+                p.locator('#sort-toggle').click();p.locator('#sort').select_option('rating-desc');assert button.count()==0
+                p.locator('#filters-toggle').click();assert button.count()==0
                 options=p.locator('#artist-filter option').evaluate_all('els=>els.map(e=>e.value)')
                 if area!='live' and len(options)>1:
-                    p.locator('#artist-filter').select_option(options[1]);expect(button).to_be_hidden()
+                    p.locator('#artist-filter').select_option(options[1]);assert button.count()==0
                     p.locator('#artist-filter').select_option('')
                 if area!='live':
-                    p.locator('#year-filter').fill('2026');expect(button).to_be_hidden()
+                    p.locator('#year-filter').fill('2026');assert button.count()==0
                     p.locator('#year-filter').fill('')
-                    p.locator('#query').fill('Example');p.locator('#search-form').evaluate('el=>el.requestSubmit()');expect(button).to_be_hidden()
+                    p.locator('#query').fill('Example');p.locator('#search-form').evaluate('el=>el.requestSubmit()');assert button.count()==0
             if kind=='edit':p.evaluate('(a)=>v.openEdit(a)',area)
             elif area=='live':p.locator('#add-live-trigger').click();p.locator('#live-title').fill('Unsaved Live')
             else:
                 p.locator('#manual-add-trigger').click();p.locator('#manual-title').fill('Unsaved Album');p.locator('#manual-artist').fill('Unsaved Artist')
             memo='#live-notes' if kind=='create' and area=='live' else '#memo'
             p.locator(memo).fill('Keep / 未保存')
-            if check:expect(button).to_be_hidden()
+            if check:assert button.count()==0
             # Fixed IDs make new-entry recovery JSON comparable across profiles.
             p.evaluate("v.fix()")
             def save(fail):
@@ -54,26 +54,22 @@ def main():
                 else:p.locator('#save').evaluate('el=>el.onclick()')
                 p.wait_for_function('!v.busy()')
             save(True)
-            if check:
-                expect(p.locator('#save-notice')).to_be_visible();expect(p.locator('#save-notice-reason')).to_be_hidden();expect(p.locator('#unsaved-recovery')).to_be_hidden();p.locator('#save-recover').click()
-            expect(p.locator('#unsaved-recovery')).to_be_visible()
-            text=p.locator('#draft-text').input_value()
-            with p.expect_download() as dl:p.locator('#draft-export').click()
-            assert Path(dl.value.path()).read_text()==text
-            if check:
-                expect(button).to_be_visible();before=p.evaluate('JSON.stringify(v.draft())')
-                p.locator('#draft-hide').click();expect(p.locator('#unsaved-recovery')).to_be_hidden()
-                assert p.evaluate('JSON.stringify(v.draft())')==before
-                button.click();expect(p.locator('#unsaved-recovery')).to_be_visible()
-                assert p.locator('#draft-text').input_value()==text
+            if not check:
+                p.locator('#save-recover').click()
+                text=p.locator('#draft-text').input_value()
+                with p.expect_download() as dl:p.locator('#draft-export').click()
+                assert Path(dl.value.path()).read_text()==text
+            else:
+                expect(p.locator('#save-notice')).to_be_visible();expect(p.locator('#save-notice-reason')).to_be_hidden()
+                assert p.locator('#draft-open,#draft-text,#draft-export,#draft-confirm').count()==0
+                text=p.evaluate('JSON.stringify(v.draft())');before=p.evaluate('JSON.stringify(v.draft())')
+                p.locator('#save-return').click();assert p.evaluate('JSON.stringify(v.draft())')==before
                 close='#close-live-create' if kind=='create' and area=='live' else '#close'
-                p.locator(close).click();expect(p.locator('#save-notice')).to_be_visible();p.locator('#save-recover').click();expect(p.locator('#unsaved-recovery')).to_be_visible()
-                assert not p.evaluate('v.recovered()')
-                p.locator('#draft-confirm').click();expect(button).to_be_hidden()
-                assert p.evaluate('JSON.stringify(v.draft())')==before,'confirmation must retain draft'
-                # New edits recapture the retained draft; successful retry settles it.
-                p.locator(memo).fill('Retry current input');expect(button).to_be_visible()
-                save(False);expect(button).to_be_hidden();assert p.evaluate('v.draft()') is None
+                p.locator(close).click();expect(p.locator('#save-notice')).to_be_visible();assert not p.evaluate('v.recovered()')
+                p.locator('#save-again').click();expect(p.locator('#save-notice')).to_be_hidden();p.locator('#discard-cancel').click()
+                assert p.evaluate('JSON.stringify(v.draft())')==before
+                p.locator(memo).fill('Retry current input')
+                save(False);assert p.evaluate('v.draft()') is None
             assert not errors,errors
             ctx.close()
             # New IDs for operation bookkeeping are intentionally nondeterministic.
@@ -83,7 +79,7 @@ def main():
                 old=run(baseline,area,kind,False);new=run(current,area,kind,True)
                 # Unknown failure copy intentionally avoids claiming that no write occurred.
                 old.pop('reason');new.pop('reason');assert old==new,(area,kind,old,new)
-                print('PASS',area,kind,'visibility, real reopen, close protection, confirm, retry, baseline JSON/text/download equality',flush=True)
+                print('PASS',area,kind,'no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality',flush=True)
         browser.close()
     server.shutdown()
 

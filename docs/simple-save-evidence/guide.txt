@@ -1,0 +1,2 @@
+PASS exact Japanese/English full copy; initial/repeated/keyboard toggle; language/open state; 24 mobile area/language/width layouts; zero DB writes
+PASS 3 areas failed-save: JA/EN, unchanged form/DB, no JSON UI, close blocked, whole-form retry settles draft; no page errors
