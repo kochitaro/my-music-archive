@@ -1,0 +1,6 @@
+PASS listening edit visibility, real reopen, close protection, confirm, retry, baseline JSON/text/download equality
+PASS listening create visibility, real reopen, close protection, confirm, retry, baseline JSON/text/download equality
+PASS collection edit visibility, real reopen, close protection, confirm, retry, baseline JSON/text/download equality
+PASS collection create visibility, real reopen, close protection, confirm, retry, baseline JSON/text/download equality
+PASS live edit visibility, real reopen, close protection, confirm, retry, baseline JSON/text/download equality
+PASS live create visibility, real reopen, close protection, confirm, retry, baseline JSON/text/download equality

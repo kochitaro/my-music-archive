@@ -103,7 +103,7 @@ def main():
             record(page, section).click()
             expect(page.locator('#view-content')).to_contain_text('Original')
             page.locator('#view-close').click()
-            assert '変更は反映されていません' in alerts[-1]
+            assert page.locator('#save-notice-title').inner_text()=='保存できませんでした';assert page.locator('#save-notice-reason').is_hidden()
             fail_writes(page, False)
             later_save(seed, section)
             print('PASS A delete failure, exact data/order, details, backup, later other archive save/reload:', section)

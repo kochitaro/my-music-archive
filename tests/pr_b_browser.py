@@ -101,7 +101,7 @@ def main():
                 assert a.evaluate('(v)=>b.saveDB(v)',change('listening','winner'))
                 if area=='live' and kind=='create':b.locator('#live-form button').last.click()
                 else:b.locator('#save').click()
-                expect(b.locator('#unsaved-recovery')).to_be_visible()
+                expect(b.locator('#save-notice')).to_be_visible();b.locator('#save-recover').click();expect(b.locator('#unsaved-recovery')).to_be_visible()
                 draft=b.evaluate('b.draft()');assert draft['area']==area
                 assert '未保存メモ' in json.dumps(draft,ensure_ascii=False)
                 assert draft['proposedRecord']['photo'].startswith('data:image/jpeg;')
@@ -119,6 +119,8 @@ def main():
                 recovered=json.loads(Path(dl.value.path()).read_text());assert recovered==draft
                 # Normal restore must reject the draft, with archive unchanged.
                 before=raw();b.evaluate("async v=>{await document.getElementById('import-json').onchange({target:{files:[{text:async()=>v}],value:'x'}})}",json.dumps(draft));assert raw()==before
+                # Reopen recovery after the refused restore, then exercise file fallback.
+                b.locator('#draft-open').click()
                 # Failing file output leaves copyable text and form intact.
                 b.evaluate("()=>{URL.createObjectURL=()=>{throw Error('download failed')}}")
                 b.locator('#draft-export').click();assert b.locator('#draft-text').input_value()==json.dumps(draft,ensure_ascii=False,indent=2)

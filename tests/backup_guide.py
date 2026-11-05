@@ -8,8 +8,8 @@ from data_preservation import seed_data
 
 def main():
     source=(ROOT/'index.html').read_text()
-    # Recovery visibility now changes JavaScript; draft_visibility.py checks the exact permitted diff.
-    assert re.findall(r'<details.*?</details>',source,re.S)==re.findall(r'<details.*?</details>',subprocess.check_output(['git','show','c7bffd4:index.html'],text=True),re.S),'guidance changed'
+    # PR #14 guidance remains byte-identical; new JSON details is separate.
+    assert re.findall(r'<details class="storage-guide".*?</details>',source,re.S)==re.findall(r'<details class="storage-guide".*?</details>',subprocess.check_output(['git','show','c7bffd4:index.html'],text=True),re.S),'guidance changed'
     copy=json.loads((ROOT/'tests/fixtures/backup-guide-copy.json').read_text())
     evidence=ROOT/'docs/backup-guide-evidence';evidence.mkdir(exist_ok=True)
     seam='window.guideTest={openEdit,setSection};'
@@ -63,7 +63,7 @@ def main():
             p.evaluate('area=>{guideTest.setSection(area);guideTest.openEdit(area)}',area)
             p.locator('#memo').fill('Keep this unsaved input / 未保存を維持')
             p.evaluate('failWrite=true');p.locator('#save').evaluate('el=>el.onclick()')
-            expect(p.locator('#unsaved-recovery')).to_be_visible()
+            expect(p.locator('#save-notice')).to_be_visible();p.locator('#save-recover').click();expect(p.locator('#unsaved-recovery')).to_be_visible()
             text=p.locator('#draft-text').input_value()
             with p.expect_download() as dl:p.locator('#draft-export').click()
             before=open(dl.value.path()).read()
@@ -84,7 +84,7 @@ def main():
             assert open(dl.value.path()).read()==before==text
             p.locator('#close').click();expect(p.locator('#modal')).to_be_visible()
             assert p.evaluate('(k)=>localStorage.getItem(k)',KEY)==raw
-            p.locator('#draft-confirm').click();p.locator('#close').click();expect(p.locator('#modal')).to_be_hidden()
+            p.locator('#save-recover').click();p.locator('#draft-confirm').click();p.locator('#close').click();expect(p.locator('#modal')).to_be_hidden()
             p.evaluate('failWrite=false')
         assert not errors,errors
         print('PASS 3 areas failed-save recovery: direct guide, JA/EN, unchanged form/text/download bytes/DB, close blocked before confirmation and allowed after; no page errors',flush=True)
