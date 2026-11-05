@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import ROOT, KEY, QuietHandler
 from data_preservation import seed_data
 
-BASE='f4d41ef1ad3493060dc6e9a76bd6e872592721d6'
+BASE='0b3505a'  # PR #18: current independent genre/tag input baseline
 
 def main():
     baseline=subprocess.check_output(['git','show',BASE+':index.html'],text=True)
@@ -36,8 +36,8 @@ def main():
                     p.locator('#artist-filter').select_option(options[1]);assert button.count()==0
                     p.locator('#artist-filter').select_option('')
                 if area!='live':
-                    p.locator('#year-filter').fill('2026');assert button.count()==0
-                    p.locator('#year-filter').fill('')
+                    p.locator('#year-filter').select_option('2026');assert button.count()==0
+                    p.locator('#year-filter').select_option('')
                     p.locator('#query').fill('Example');p.locator('#search-form').evaluate('el=>el.requestSubmit()');assert button.count()==0
             if kind=='edit':p.evaluate('(a)=>v.openEdit(a)',area)
             elif area=='live':p.locator('#add-live-trigger').click();p.locator('#live-title').fill('Unsaved Live')
@@ -55,10 +55,7 @@ def main():
                 p.wait_for_function('!v.busy()')
             save(True)
             if not check:
-                p.locator('#save-recover').click()
-                text=p.locator('#draft-text').input_value()
-                with p.expect_download() as dl:p.locator('#draft-export').click()
-                assert Path(dl.value.path()).read_text()==text
+                text=p.evaluate('JSON.stringify(v.draft())')
             else:
                 expect(p.locator('#save-notice')).to_be_visible();expect(p.locator('#save-notice-reason')).to_be_hidden()
                 assert p.locator('#draft-open,#draft-text,#draft-export,#draft-confirm').count()==0

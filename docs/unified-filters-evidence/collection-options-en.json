@@ -1,0 +1,42 @@
+{
+  "artist": {
+    "": "All Artists (5)",
+    "__mma_unset__": "__mma_unset__ (1)",
+    "Artist A": "Artist A (3)",
+    "__mma_unset___": "Artists not set (1)"
+  },
+  "genre": {
+    "": "All Genres (5)",
+    "Ambient": "Ambient (2)",
+    "Drone": "Drone (1)",
+    "__mma_unset__": "Genres not set (3)"
+  },
+  "label": {
+    "": "All Labels (5)",
+    "Label": "Label (2)",
+    "__mma_unset__": "Labels not set (3)"
+  },
+  "tag": {
+    "": "All Tags (5)",
+    "Night": "Night (2)",
+    "__mma_unset__": "Tags not set (3)"
+  },
+  "year": {
+    "2025": "2025 (1)",
+    "2026": "2026 (2)",
+    "": "All Purchase Year (5)",
+    "__mma_unset__": "Purchase Year not set (2)"
+  },
+  "release-year": {
+    "2024": "2024 (1)",
+    "2025": "2025 (1)",
+    "2026": "2026 (1)",
+    "": "All Release Year (5)",
+    "__mma_unset__": "Release Year not set (2)"
+  },
+  "store": {
+    "": "All Stores (5)",
+    "Shop": "Shop (2)",
+    "__mma_unset__": "Stores not set (3)"
+  }
+}
