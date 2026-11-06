@@ -65,27 +65,28 @@ function render(container,records,area,ja,now=new Date()){
  const paging=(node,s,total,step,more=s.limit<total)=>{const controls=el('div','insight-actions');if(more)controls.append(button(t('さらに表示','Show more'),()=>{s.limit+=step;redraw()}));if(s.limit>step)controls.append(button(t('折りたたむ','Collapse'),()=>{s.limit=step;redraw()}));node.append(controls)};
  container.replaceChildren();container.append(el('h2','',({listening:t('リスニング','Listening'),collection:t('コレクション','Collection'),live:t('ライブ','Live')})[area]+t('の統計',' Insights')));
  const metrics=el('div','insight-metrics');for(const [name,value] of [[area==='live'?t('ライブ公演数','Live shows'):area==='collection'?t('所有作品数','Owned records'):t('鑑賞作品数','Listening records'),stats.total],[area==='live'?t('観たアーティスト数','Artists seen'):t('アーティスト数','Artists'),stats.artists.length]]){const metric=el('div','');metric.append(el('strong','',String(value)),el('span','',name));metrics.append(metric)}container.append(metrics);
- container.append(el('p','insight-note',t('このアーカイブの全登録記録から集計します。再生回数ではありません。','Based on all saved records in this archive. These are not play counts.')));
- const artists=block('artists',t('アーティスト 上位30組','Top 30 artists'));artists.append(el('p','insight-note',t('件数順。同件数は名称順、順位は表示順の連番です。','By count, then name for ties. Ranks are sequential.')));artists.append(el('p','insight-note',area==='live'?t('出演公演数','Number of shows'):t('登録作品数','Number of records')));bars(artists,stats.artists.slice(0,30),true);
+ const artists=block('artists',t('アーティスト','Artists')),as=state('artists','ranking',15);
+ bars(artists,stats.artists.slice(0,as.limit),true);paging(artists,as,stats.artists.length,15);
  const names={genre:t('ジャンル','Genres'),tags:t('タグ','Tags'),label:t('レーベル','Labels'),store:t('購入店舗','Stores'),format:t('フォーマット','Formats'),venue:t('会場','Venues')};
  for(const [field,entries] of Object.entries(stats.categories)){
   const node=block(field,names[field]),s=state(field,'pie',15);switches(node,s,[['pie',t('円グラフ','Pie Chart')],['ranking',t('ランキング','Ranking')]],15);
-  if(field==='genre'||field==='tags')node.append(el('p','insight-note',t('割合は延べ分類件数に対する構成比です。1作品を複数分類に計上します。','Percentages use total category assignments. A record can count in multiple categories.')));
   if(!entries.length){empty(node);continue}
   if(s.mode==='ranking'){bars(node,entries.slice(0,s.limit));paging(node,s,entries.length,15);continue}
-  const slices=pie(entries),total=entries.reduce((sum,x)=>sum+x.count,0);let offset=0;
-  const donut=el('div','insight-donut');donut.setAttribute('aria-hidden','true');donut.style.background='conic-gradient('+slices.map((x,i)=>{const start=offset;offset+=x.count/total*100;return colors[i]+' '+start+'% '+offset+'%'}).join(',')+')';node.append(donut);
-  const legend=el('ul','insight-legend');for(const [i,row] of slices.entries()){const li=el('li',''),swatch=el('span','insight-swatch');swatch.style.background=colors[i];li.append(swatch,el('span','insight-name',row.other?t('その他','Other'):row.name),el('span','',row.count+' · '+(row.count/total*100).toFixed(1)+'%'));legend.append(li)}node.append(legend);
+  const slices=pie(entries),total=entries.reduce((sum,x)=>sum+x.count,0),assignments=field==='genre'||field==='tags';
+  const unit=count=>field==='venue'?t('公演',count===1?'show':'shows'):t('作品',count===1?'record':'records');
+  const centerUnit=assignments?t('延べ件数','assignments'):unit(total);let offset=0;
+  const donut=el('div','insight-donut');donut.setAttribute('aria-hidden','true');donut.style.background='conic-gradient('+slices.map((x,i)=>{const start=offset;offset+=x.count/total*100;return colors[i]+' '+start+'% '+offset+'%'}).join(',')+')';
+  const center=el('div','insight-center');center.append(el('strong','',String(total)),el('span','',centerUnit));donut.append(center);node.append(donut);
+  const legend=el('ul','insight-legend');for(const [i,row] of slices.entries()){const li=el('li',''),swatch=el('span','insight-swatch');swatch.style.background=colors[i];li.append(swatch,el('span','insight-name',(row.other?t('その他','Other'):row.name)+'：'),el('span','insight-value',row.count+(ja?'':' ')+unit(row.count)+(ja?'（':' (')+(row.count/total*100).toFixed(1)+'%'+(ja?'）':')')));legend.append(li)}node.append(legend);
  }
  const time=block('time',area==='live'?t('公演時期','Show dates'):area==='collection'?t('購入時期','Purchase dates'):t('鑑賞時期','Listening dates')),ts=state('time','monthly',12);
  switches(time,ts,[['monthly',t('月別','Monthly')],['yearly',t('年別','Yearly')]],value=>value==='monthly'?12:5);
  const period=timeline(stats,ts.mode,ts.limit,now);bars(time,period.rows);paging(time,ts,0,ts.mode==='monthly'?12:5,period.more);
- time.append(el('p','insight-note',t('未設定・不正な日付は除外。年のみの記録は年別に集計。現在より先の期間は表示しません。','Missing or invalid dates are excluded. Year-only dates count yearly. Future periods are not displayed.')));
  if(area!=='live'){
   const rel=block('release',t('リリース年','Release years')),rs=state('release','yearly',10);switches(rel,rs,[['yearly',t('年別','Yearly')],['decade',t('年代別','By Decade')]],10);
   const rows=releaseRows(stats,rs.mode==='decade');if(rs.mode==='yearly'){bars(rel,rows.slice(0,rs.limit));paging(rel,rs,rows.length,10)}else if(!rows.length)empty(rel);else{const chart=el('div','insight-decades');const max=Math.max(...rows.map(x=>x.count));for(const row of rows){const col=el('div','insight-decade');col.append(el('span','',String(row.count)));const track=el('div','insight-column'),fill=el('div','');fill.style.height=row.count/max*140+'px';track.append(fill);col.append(track,el('span','',row.name+t('年代','s')));chart.append(col)}rel.append(chart)}
-  rel.append(el('p','insight-note',t('作品がリリースされた時代を表示します。鑑賞・購入時期とは異なります。発売年不明は除外。','The era of release, separate from listening or purchase dates. Unknown release years are excluded.')));
  }
 }
 const api={counts,dateParts,aggregate,pie,timeline,releaseRows,render};if(typeof module==='object'&&module.exports)module.exports=api;else root.MLAInsights=api;
 })(globalThis);
+
