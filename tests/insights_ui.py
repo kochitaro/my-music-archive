@@ -5,6 +5,25 @@ from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import ROOT, KEY, QuietHandler, album
 
+def assert_legend_layout(category):
+    rows=category.locator('.insight-legend li').evaluate_all('''elements=>elements.map(row=>{
+        const marker=row.querySelector('.insight-swatch'),name=row.querySelector('.insight-name'),value=row.querySelector('.insight-value');
+        const r=row.getBoundingClientRect(),m=marker.getBoundingClientRect(),n=name.getBoundingClientRect(),v=value.getBoundingClientRect();
+        return {name:name.textContent,markerLeft:m.left-row.getBoundingClientRect().left,
+            markerGap:n.left-m.right,gap:v.left-n.right,right:r.right-v.right,top:Math.abs(n.top-v.top),
+            nameOverflow:name.scrollWidth>name.clientWidth+1,valueOverflow:value.scrollWidth>value.clientWidth+1,
+            wrap:getComputedStyle(value).whiteSpace,nameAlign:getComputedStyle(name).textAlign,valueAlign:getComputedStyle(value).textAlign,
+            narrow:innerWidth<600,nameHeight:n.height,lineHeight:parseFloat(getComputedStyle(name).lineHeight)};
+    })''')
+    assert rows
+    for row in rows:
+        assert abs(row['markerLeft'])<1.5,row
+        assert row['markerGap']>=11 and row['gap']>=11,row
+        assert abs(row['right'])<1.5 and row['top']<1.5,row
+        assert row['valueAlign']=='right' and row['nameAlign'] in ['start','left'],row
+        assert not row['nameOverflow'] and not row['valueOverflow'] and row['wrap']=='nowrap',row
+        if row['narrow'] and len(row['name'])>70:assert row['nameHeight']>row['lineHeight']*1.5,row
+
 def main():
     server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler)
     threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -16,7 +35,7 @@ def main():
     phase='before' if before else 'after'
     with sync_playwright() as pw:
         browser=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
-        for width,lang in [(390,'ja'),(390,'en'),(320,'ja'),(430,'ja'),(1280,'ja')]:
+        for width,lang in [(width,lang) for width in [320,375,390,430,1280] for lang in ['ja','en']]:
             ctx=browser.new_context(viewport=dict(width=width,height=844),is_mobile=width<600,has_touch=width<600)
             ctx.route('https://**/*',lambda r:r.abort())
             if before:
@@ -44,6 +63,7 @@ def main():
                             expect(cat.locator('.insight-legend .insight-name').nth(i)).to_have_text(row['name'])
                             swatch=cat.locator('.insight-swatch').nth(i).evaluate('(e)=>e.style.backgroundColor')
                             assert swatch in cat.locator('.insight-donut').evaluate('(e)=>e.style.background')
+                        assert_legend_layout(cat)
                     assert root.locator('.insight-note').count()==0
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                     # All block content, including long names and center text, fits its box.
@@ -80,6 +100,7 @@ def main():
             expect(cat.locator('.insight-center strong')).to_have_text('50')
             assert cat.locator('.insight-legend li').count()==11
             expect(cat.locator('.insight-value').last).to_have_text('16（32.0%）')
+            assert_legend_layout(cat)
             print('PASS empty/single/15 artists; compact legends; many categories/Other/assignment totals',flush=True)
         browser.close()
     server.shutdown()
