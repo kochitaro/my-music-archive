@@ -1,5 +1,6 @@
 """UI-only screen switching, bilingual mobile evidence and Live form contract."""
-import json, threading
+import json, threading, os
+from pathlib import Path
 from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import ROOT, KEY, QuietHandler, album, stored, open_filters
@@ -8,7 +9,7 @@ from ui_v0322 import ROOT, KEY, QuietHandler, album, stored, open_filters
 def main():
     server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler)
     threading.Thread(target=server.serve_forever,daemon=True).start()
-    evidence=ROOT/'docs/archive-insights-evidence';evidence.mkdir(exist_ok=True)
+    evidence=Path(os.environ.get('MLA_EVIDENCE',str(ROOT/'docs/archive-insights-evidence')));evidence.mkdir(exist_ok=True)
     seed=dict(version=3,listening=[album('Listening sample')],collection=[album('Collection sample')],live=[dict(entryId='live',title='Live sample',artists=['A','B','A'],venue='Tokyo',date='2026-11-06',rating='8.4')])
     with sync_playwright() as pw:
         browser=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
@@ -43,14 +44,14 @@ def main():
                     expect(page.locator('#archive-content')).to_be_hidden()
                     assert page.locator('#archive-content').evaluate('(e)=>e.inert')
                     expect(page.locator(f'#{area}-insights')).to_be_visible()
-                    expect(page.locator(f'#{area}-insights')).to_have_text('統計機能は準備中です。' if lang=='ja' else 'Insights are coming soon.')
-                    assert page.locator('#insights-content section:visible').count()==1
+                    expect(page.locator(f'#{area}-insights h2')).to_contain_text('統計' if lang=='ja' else 'Insights')
+                    assert page.locator('#insights-content > section:visible').count()==1
                     for selector in ['#search-panel','#library','#grid-tab','#sort-toggle','#filters-toggle','#add-live-trigger']:
                         expect(page.locator(selector)).to_be_hidden()
                     expect(page.locator('#export-json')).to_be_visible()
                     other='en' if lang=='ja' else 'ja'
                     page.locator('#ui-language').select_option(other)
-                    expect(page.locator(f'#{area}-insights')).to_have_text('統計機能は準備中です。' if other=='ja' else 'Insights are coming soon.')
+                    expect(page.locator(f'#{area}-insights h2')).to_contain_text('統計' if other=='ja' else 'Insights')
                     page.locator('#ui-language').select_option(lang)
                     if width==390:page.screenshot(path=str(evidence/f'insights-{area}-{lang}-{width}.png'),full_page=True)
                     page.locator('#archive-screen').click()
