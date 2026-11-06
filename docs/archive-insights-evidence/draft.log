@@ -1,0 +1,6 @@
+PASS listening edit no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS listening create no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS collection edit no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS collection create no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS live edit no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality
+PASS live create no JSON UI, dismiss/cancel keeps protection, retry, baseline internal draft equality

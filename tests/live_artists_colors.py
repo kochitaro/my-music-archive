@@ -45,8 +45,8 @@ def main():
             # One artist, then multiple artists, editing/removal, all using the same public UI.
             page.locator('#add-live-trigger').click()
             expect(page.locator('#live-artists input')).to_have_count(1)
-            expect(page.locator('#live-artists > button')).to_have_text('＋ 出演者を追加' if lang == 'ja' else '＋ Add Artist')
-            expect(page.locator('#live-artists label').first).to_have_text('出演アーティスト（任意）' if lang == 'ja' else 'Performing Artists (optional)')
+            expect(page.locator('#live-artists > button')).to_have_text('＋ アーティストを追加' if lang == 'ja' else '＋ Add Artist')
+            expect(page.locator('#live-artists label').first).to_have_text('アーティスト（任意・複数）' if lang == 'ja' else 'Artists (Optional, Multiple)')
             page.locator('#live-title').fill('Festival Title')
             page.locator('#live-artists input').fill('  Artist A  ')
             page.locator('[data-target=live-rating] .star-rating').press('End')
@@ -82,7 +82,10 @@ def main():
             expect(page.locator('#e-live-artists input')).to_have_value('')
             fail_writes(page, True); page.locator('#save').click()
             assert expected == stored(page) == page.evaluate('testDB()') == backup(page)
-            page.locator('#close').click(); fail_writes(page, False)
+            page.locator('#close').click(); expect(page.locator('#modal')).to_be_visible()
+            page.locator('#save-again').click()
+            with page.expect_navigation(): page.locator('#discard-reload').click()
+            assert stored(page) == expected
             # A later successful save in another archive must not commit failed artist removals.
             page.locator('[data-section=collection]').click()
             edit(page, 'C 4.3'); page.locator('#memo').fill('Later independent save'); save(page)
@@ -95,7 +98,11 @@ def main():
             page.locator('#live-artists input').fill('Uncommitted')
             fail_writes(page, True); page.locator('#live-form > button').click()
             assert expected == stored(page) == page.evaluate('testDB()') == backup(page)
-            page.locator('#close-live-create').click(); fail_writes(page, False)
+            page.locator('#close-live-create').click(); expect(page.locator('#live-create-modal')).to_be_visible()
+            page.locator('#save-again').click()
+            with page.expect_navigation(): page.locator('#discard-reload').click()
+            page.locator('[data-section=live]').click()
+            assert stored(page) == expected
             # Successful deletion of all names explicitly stores [] and keeps the title.
             edit(page, 'Festival Title')
             for _ in range(2):
@@ -122,6 +129,7 @@ def main():
                     assert row.evaluate('(e)=>e.scrollWidth<=e.clientWidth+1')
             page.set_viewport_size(dict(width=390, height=844))
             page.locator('#live-form > button').click()
+            expect(page.locator('#live-create-modal')).not_to_have_class('modal open')
             assert stored(page)['live'][0]['artists'] == ['One', 'Two']
             print('PASS artists: legacy/no conversion, one/multiple, add/edit/remove/empty, failure/retry/cancel, detail, reload, JSON:', lang)
             # Boundary values and unrated across all Live displays, save and reload.

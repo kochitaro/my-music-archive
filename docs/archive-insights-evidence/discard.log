@@ -1,0 +1,12 @@
+PASS ja listening edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja listening create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja collection edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja collection create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja live edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS ja live create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en listening edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en listening create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en collection edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en collection create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en live edit compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB
+PASS en live create compact notice, retained form/draft, real conflict retry refusal, text selection/copy and no recovery UI, close/unload guard, cancel/discard, unchanged saved DB

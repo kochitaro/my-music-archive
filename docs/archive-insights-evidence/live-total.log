@@ -1,0 +1,2 @@
+PASS ja 8 distinct / 3 shows; case+space+duplicate handling; per-show counts; unset/all inclusion; other archive totals; language switch; unchanged DB; CRUD; retained zero-count option; JSON restore; zero artists
+PASS en 8 distinct / 3 shows; case+space+duplicate handling; per-show counts; unset/all inclusion; other archive totals; language switch; unchanged DB; CRUD; retained zero-count option; JSON restore; zero artists
