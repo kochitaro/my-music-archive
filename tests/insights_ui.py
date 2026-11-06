@@ -33,7 +33,7 @@ def main():
                     expected=page.evaluate('([d,a])=>MLAInsights.aggregate(d,a)',[seed[area],area])
                     for field,entries in expected['categories'].items():
                         cat=root.locator(f'[data-insight={field}]');total=sum(e['count'] for e in entries)
-                        expect(cat.locator('.insight-center strong')).to_have_text(str(total))
+                        expect(cat.locator('.insight-center')).to_have_text(str(total))
                         assert total==(31 if area=='live' else (69 if field=='genre' else 92 if field=='tags' else 46))
                         expect(cat.locator('.insight-donut')).to_have_attribute('aria-hidden','true')
                         slices=entries[:10]

@@ -1,0 +1,19 @@
+✔ listening independent totals and no mutation (17.670328ms)
+✔ collection independent totals and no mutation (0.674204ms)
+✔ live independent totals and no mutation (0.746055ms)
+✔ classifications trim, fold case and deduplicate each record (2.358501ms)
+✔ live artists count shows, never infer from title (0.867245ms)
+✔ stable top 30, short and empty rankings (1.795073ms)
+✔ pie keeps ten and merges remainder; rankings keep everything (0.483751ms)
+✔ strict date precision and leap boundaries (0.53138ms)
+✔ time includes year-only yearly, no invented January; periods and boundaries (1.664837ms)
+✔ future and empty dates never become current; year pagination (0.58955ms)
+✔ release year and decade boundaries; unknown excluded (3.791213ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 97.295935
