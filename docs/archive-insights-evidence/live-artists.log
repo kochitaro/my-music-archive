@@ -1,0 +1,4 @@
+PASS artists: legacy/no conversion, one/multiple, add/edit/remove/empty, failure/retry/cancel, detail, reload, JSON: ja
+PASS colors: 0/4.4/4.5/5/unrated, edit/save/reload/grid/list/detail: ja
+PASS artists: legacy/no conversion, one/multiple, add/edit/remove/empty, failure/retry/cancel, detail, reload, JSON: en
+PASS colors: 0/4.4/4.5/5/unrated, edit/save/reload/grid/list/detail: en

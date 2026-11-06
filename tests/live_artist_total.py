@@ -28,7 +28,7 @@ def main():
                     assert control.locator('option[value=""]').inner_text().endswith(' (2)')
                 assert options(page,'artist')['Artist A']=='Artist A (2)'
             page.locator('[data-section=live]').click();open_filters(page)
-            prefix='すべての出演アーティスト' if lang=='ja' else 'All Performing Artists'
+            prefix='すべてのアーティスト' if lang=='ja' else 'All Artists'
             def total(n):assert options(page,'artist')['']==f'{prefix} ({n})'
             total(8);assert options(page,'artist')['Artist A']=='Artist A (2)'
             assert page.locator('#count').inner_text()=='(3)'
@@ -41,7 +41,7 @@ def main():
             choose(page,'artist',unset_value(page,'artist'));total(8);assert titles(page)==['Old title is not a performer']
             choose(page,'artist','');assert len(titles(page))==3
             page.locator('#ui-language').select_option('en' if lang=='ja' else 'ja')
-            assert options(page,'artist')['']==('All Performing Artists (8)' if lang=='ja' else 'すべての出演アーティスト (8)')
+            assert options(page,'artist')['']==('All Artists (8)' if lang=='ja' else 'すべてのアーティスト (8)')
             page.locator('#ui-language').select_option(lang)
             assert stored(page)==seed and page.evaluate('(k)=>localStorage.getItem(k)',KEY)==raw
             # Real registration, edit and deletion. A retained (0) selection must not count as a saved artist.

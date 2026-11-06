@@ -1,0 +1,14 @@
+Loading MMA
+Loaded MMA
+PASS modes, short prefix, candidate choice, input preservation, actual album fixtures and nonexistent title
+Searching Number Girl
+Searching ナンバーガール
+Searching 細野晴臣
+Searching Haruomi Hosono
+PASS actual artist fixtures, same artist IDs, whole-catalog sorting, 390px width
+PASS Listening/Collection saves, metadata/date inheritance, Japanese/English, existing data intact
+PASS missing-credit guard/manual correction, extra metadata lookup, title mode and 30-item pagination
+PASS failed next page preserves offset/results and can retry without duplicates
+PASS final API failure/re-search, stale-result race, tab reset, manual entry, no page errors
+PASS Punisher/Hard Life from API fixtures save correct artists and release dates in Listening/Collection
+PASS Search Lab shared core, artist credits, pagination and title-mode switch
