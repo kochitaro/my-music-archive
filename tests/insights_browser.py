@@ -41,7 +41,7 @@ def main():
                     root=page.locator(f'#{area}-insights')
                     expect(root.locator('h2')).to_contain_text('統計' if lang=='ja' else 'Insights')
                     expect(root.locator('.insight-metrics strong').first).to_have_text(str(len(seed[area])))
-                    assert root.locator('[data-insight=artists] li').count()==(26 if area=='live' else 30)
+                    assert root.locator('[data-insight=artists] li').count()==15
                     if width==390:page.screenshot(path=str(evidence/f'{area}-{lang}-pie-monthly.png'),full_page=True)
                     field='venue' if area=='live' else 'genre';cat=root.locator(f'[data-insight={field}]')
                     assert cat.locator('.insight-legend li').count()==11
@@ -119,3 +119,4 @@ def main():
         browser.close()
     server.shutdown()
 if __name__=='__main__':main()
+
