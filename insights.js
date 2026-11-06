@@ -73,11 +73,10 @@ function render(container,records,area,ja,now=new Date()){
   if(!entries.length){empty(node);continue}
   if(s.mode==='ranking'){bars(node,entries.slice(0,s.limit));paging(node,s,entries.length,15);continue}
   const slices=pie(entries),total=entries.reduce((sum,x)=>sum+x.count,0);
-  const unit=count=>field==='venue'?t('公演',count===1?'show':'shows'):t('作品',count===1?'record':'records');
   let offset=0;
   const donut=el('div','insight-donut');donut.setAttribute('aria-hidden','true');donut.style.background='conic-gradient('+slices.map((x,i)=>{const start=offset;offset+=x.count/total*100;return colors[i]+' '+start+'% '+offset+'%'}).join(',')+')';
   const center=el('div','insight-center');center.append(el('strong','',String(total)));donut.append(center);node.append(donut);
-  const legend=el('ul','insight-legend');for(const [i,row] of slices.entries()){const li=el('li',''),swatch=el('span','insight-swatch');swatch.style.background=colors[i];li.append(swatch,el('span','insight-name',(row.other?t('その他','Other'):row.name)+'：'),el('span','insight-value',row.count+(ja?'':' ')+unit(row.count)+(ja?'（':' (')+(row.count/total*100).toFixed(1)+'%'+(ja?'）':')')));legend.append(li)}node.append(legend);
+  const legend=el('ul','insight-legend');for(const [i,row] of slices.entries()){const li=el('li',''),swatch=el('span','insight-swatch');swatch.style.background=colors[i];li.append(swatch,el('span','insight-name',row.other?t('その他','Other'):row.name),el('span','insight-value',row.count+(ja?'（':' (')+(row.count/total*100).toFixed(1)+'%'+(ja?'）':')')));legend.append(li)}node.append(legend);
  }
  const time=block('time',area==='live'?t('公演時期','Show dates'):area==='collection'?t('購入時期','Purchase dates'):t('鑑賞時期','Listening dates')),ts=state('time','monthly',12);
  switches(time,ts,[['monthly',t('月別','Monthly')],['yearly',t('年別','Yearly')]],value=>value==='monthly'?12:5);
