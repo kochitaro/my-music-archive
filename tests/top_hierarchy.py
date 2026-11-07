@@ -32,9 +32,9 @@ def main():
                             assert p.locator('#search-title').count()==0 and p.locator('#search-panel h2').count()==0
                             for name in ['archive','insights']:
                                 tab=p.locator('#'+name+'-screen');b=tab.bounding_box();assert b['width']>=44 and b['height']>=44
-                                css=tab.evaluate('(e)=>{const s=getComputedStyle(e);return {bg:s.backgroundColor,font:parseFloat(s.fontSize),border:s.borderBottomColor}}')
+                                css=tab.evaluate('(e)=>{const s=getComputedStyle(e);return {bg:s.backgroundColor,font:parseFloat(s.fontSize),border:s.borderBottomColor,line:s.textDecorationLine,thickness:s.textDecorationThickness}}')
                                 assert css['bg']=='rgba(0, 0, 0, 0)' and css['font']<p.locator('#sections .tab').first.evaluate('(e)=>parseFloat(getComputedStyle(e).fontSize)')
-                                if name=='archive':assert css['border']=='rgb(159, 207, 220)'
+                                if name=='archive':assert css['border']=='rgba(0, 0, 0, 0)' and css['line']=='underline' and css['thickness']=='2px'
                                 else:assert css['border']=='rgba(0, 0, 0, 0)'
                             if area!='live':
                                 for mode in ['artist','title']:
