@@ -112,7 +112,7 @@ body { overflow-x: hidden !important; overscroll-behavior-x: none; }
 .panel-heading>button{flex:none;min-height:44px;min-width:44px;white-space:nowrap}
 .manual-add-link{text-decoration:none;border:0;background:transparent;color:#c6e7ef;padding:10px 0 10px 10px;font-size:13px;border-radius:6px}
 .manual-add-link:focus-visible{outline:2px solid #c6e7ef;outline-offset:3px}
-@media(max-width:380px){#search-panel .panel-heading{gap:8px}#search-title{font-size:16px}.manual-add-link{font-size:12px;padding-left:4px}}
+@media(max-width:380px){.manual-add-link{font-size:12px;padding-left:4px}}
 .live-artists{margin:12px 0}.live-artist-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}.live-artist-row input{flex:1;min-width:0;font-size:16px}.live-artist-row button{flex:none;min-height:44px}.live-artist-list{margin:0;padding-left:20px;white-space:pre-wrap}
 /* Read-only backup guidance; language follows the existing document language. */
 .storage-guide{margin-top:16px;font-size:16px;line-height:1.75;overflow-wrap:anywhere;min-width:0;max-width:100%}
@@ -134,7 +134,7 @@ html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide 
 .archive-actions{display:flex;justify-content:flex-end;margin-top:4px}
 #archive-panel .filter-control{margin:8px 0}
 #search-panel,#archive-panel{margin:12px 0;padding:16px}
-#search-panel .panel-heading{margin-bottom:8px}
+
 #search-modes{margin:0 0 8px}
 #search-modes .tab{min-height:44px}
 #search-panel .status:empty{min-height:0;margin:0}
@@ -153,7 +153,7 @@ html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide 
 #search-form #query{font-size:16px}
 #search-modes{margin:0;padding:9px 8px;height:44px}
 #search-panel,#archive-panel{padding:12px 14px}
-#search-panel .panel-heading{margin-bottom:4px}
+
 #search-panel>div:last-child:has(#more-results.hidden){display:none}
 .live-artist-row{align-items:flex-end}
 .live-artist-row input{height:44px}
@@ -162,6 +162,23 @@ html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide 
 .live-photo-actions .btn,#add-live-trigger{min-height:44px}
 #live-form-panel{margin-top:14px}
 @media(max-width:380px){#search-form{grid-template-columns:minmax(0,1fr) auto}#search-modes{grid-column:1 / -1;width:132px}}
+/* Secondary navigation and album search are supporting controls. */
+#search-form #query::placeholder{color:#8d9bad;opacity:1}
+.screen-segments{background:transparent;border:0;border-radius:0;padding:0;gap:12px;margin:4px auto}
+.screen-segments .tab{min-width:44px;min-height:44px;padding:9px 12px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:#a1adbc;font-size:14px}
+.screen-segments .tab.active{background:transparent;color:#c6e7ef;border-bottom-color:#9fcfdc}
+.screen-segments .tab:focus-visible{outline:2px solid #9fcfdc;outline-offset:2px}
+#search-panel{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;margin:8px 0;padding:8px 10px;background:#151a21;border:0;border-radius:8px}
+#search-panel>*{grid-column:1 / -1}
+#search-panel #search-form{grid-column:1}
+#search-panel .search-actions{grid-column:2;grid-row:1;display:flex;justify-content:flex-end;align-items:center}
+.search-actions .manual-add-link{min-width:44px;min-height:44px;font-size:12px;padding:10px 0}
+@media(max-width:540px){
+ #search-panel{display:block}
+ #search-panel #search-form{grid-template-columns:minmax(0,1fr) auto}
+ #search-panel #search-modes{grid-column:1 / -1;width:132px}
+ #search-panel .search-actions{position:absolute;top:8px;right:10px}
+}
 </style><link rel="stylesheet" href="insights.css?v=20261106-legend-layout-4"></head><body><main class="shell"><div class="brand"><div class="brandmark"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="レコード収納箱"><path d="M7 37 14 27v10H7Zm58 0-7-10v10h7Z" fill="#60788a"/><circle cx="36" cy="32" r="29" fill="#17232d"/><path d="M11 26A26 26 0 0 1 27 7M15 29A22 22 0 0 1 29 11M19 31A18 18 0 0 1 31 15" fill="none" stroke="#e8eef0" stroke-linecap="round" stroke-width="1.6"/><circle cx="36" cy="32" r="10.5" fill="#b45d4e" stroke="#e8eef0" stroke-width="1.8"/><circle cx="36" cy="32" r="1.8" fill="#f6f4ee"/><rect x="6" y="35" width="60" height="35" fill="#62798a"/><path d="M6 35h60" stroke="#f0f2f2" stroke-width="1.6"/><rect x="26" y="44" width="20" height="6" rx="2" fill="#f0f2f2"/></svg></div><h1>My Listening Archive</h1></div>
 <div class="langbar"><label for="ui-language">Language / 言語</label><select aria-label="Language" class="lang-select" id="ui-language"><option value="en">English</option><option value="ja">日本語</option></select></div>
 <p id="tab-change" role="alert" hidden></p><section id="save-notice" class="panel" hidden role="alert" tabindex="-1">
@@ -174,7 +191,7 @@ html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide 
 <nav aria-label="Archives" class="tabbar" id="sections"><button class="tab active" data-section="listening">Listening</button><button class="tab" data-section="collection">Collection</button><button class="tab" data-section="live">Live</button></nav>
 <div id="screen-switch" class="screen-segments" role="group" aria-label="Screen"><button id="archive-screen" class="tab active" type="button" aria-pressed="true" aria-controls="archive-content">Archive</button><button id="insights-screen" class="tab" type="button" aria-pressed="false" aria-controls="insights-content">Insights</button></div>
 <div id="archive-content">
-<section class="panel" id="search-panel"><div class="panel-heading"><h2 id="search-title">Search Albums</h2><button class="manual-add-link" id="manual-add-trigger" type="button">＋ Add Manually</button></div><form class="row" id="search-form"><select class="field" id="search-modes" aria-label="Search mode"><option value="artist">Artist</option><option value="title">Album Title</option></select><input autocomplete="off" class="field grow" id="query" minlength="2" aria-label="Artist name" required=""/><button class="btn" id="search-btn">Search</button></form><div class="status" id="status" role="status"></div><div class="row between"><span class="small muted" id="result-count"></span><button class="btn ghost hidden" id="clear-search" type="button">Clear Results ×</button></div><div class="search-candidates hidden" id="artist-candidates"></div><div class="results" id="results"></div><div style="margin:10px 0;text-align:center"><button class="btn ghost hidden" id="more-results" type="button">Load 30 more</button></div></section>
+<section class="panel" id="search-panel" aria-label="Album search"><form class="row" id="search-form"><select class="field" id="search-modes" aria-label="Search mode"><option value="artist">Artist</option><option value="title">Album Title</option></select><input autocomplete="off" class="field grow" id="query" minlength="2" aria-label="Artist name" required=""/><button class="btn" id="search-btn">Search</button></form><div class="search-actions"><button class="manual-add-link" id="manual-add-trigger" type="button">＋ Add Manually</button></div><div class="status" id="status" role="status"></div><div class="row between"><span class="small muted" id="result-count"></span><button class="btn ghost hidden" id="clear-search" type="button">Clear Results ×</button></div><div class="search-candidates hidden" id="artist-candidates"></div><div class="results" id="results"></div><div style="margin:10px 0;text-align:center"><button class="btn ghost hidden" id="more-results" type="button">Load 30 more</button></div></section>
 <section class="panel" id="archive-panel"><div class="archive-heading"><h2><span id="library-title">Listening Archive</span> <span class="muted small" id="count">0</span></h2><div aria-labelledby="library-title" class="view-segments" role="group"><button class="tab active" id="grid-tab" type="button" aria-label="Grid" title="Grid" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg></button><button class="tab" id="list-tab" type="button" aria-label="List" title="List" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18M3 12h18M3 19h18"/></svg></button></div></div><div class="archive-actions"><button class="manual-add-link hidden" id="add-live-trigger" type="button">＋ Add Live</button></div><div class="filter-control"><button aria-controls="sort-wrap" aria-expanded="false" class="btn ghost" id="filters-toggle" type="button">⚙ Sort &amp; Filter <span id="filters-icon">＋</span></button></div><div class="filter-fields hidden" id="filters-wrap"><select class="field w200" id="sort"><option value="release-desc">Release: Newest</option><option value="release-asc">Release: Oldest</option><option value="date-desc">Listened: Newest</option><option value="date-asc">Listened: Oldest</option><option value="rating-desc">Score: High to Low</option><option value="rating-asc">Score: Low to High</option><option value="label-asc">Label: A–Z</option><option value="artist-asc">Artist: A–Z</option><option value="artist-desc">Artist: Z–A</option></select><select class="field w200" id="group"><option value="year">Group: Release Year</option><option value="week">Group: Release Week</option><option value="month">Group: Release Month</option><option value="day">Group: Release Day</option><option value="none">No Grouping</option></select><select class="field w200" id="artist-filter"><option value="">All Artists</option></select><select class="field w200" id="genre-filter"><option value="">All Genres</option></select><select class="field w200" id="label-filter"><option value="">All Labels</option></select><select class="field w200" id="tag-filter"><option value="">All Tags</option></select><select class="field w200" id="year-filter"></select><select class="field w200" id="release-year-filter"></select><select class="field w200 hidden" id="store-filter"><option value="">All Stores</option></select><select class="field w200 hidden" id="venue-filter"></select></div><div id="library"></div></section>
 </div>
 <section id="insights-content" class="panel insights-panel" aria-label="Insights" hidden>
@@ -499,6 +516,7 @@ $('clear-search').onclick=()=>clearSearch();
 function updateSearchMode(){
  $('search-modes').value=searchMode;
  $('search-modes').setAttribute('aria-label',isJapanese()?'検索方式':'Search mode');
+ $('query').placeholder=searchMode==='artist'?(isJapanese()?'アーティストを検索':'Search artists'):(isJapanese()?'アルバムを検索':'Search albums');
  $('query').setAttribute('aria-label',searchMode==='artist'?(isJapanese()?'アーティスト名':'Artist name'):(isJapanese()?'アルバム名':'Album title'));
 }
 $('search-modes').onchange=()=>{if(searchMode===$('search-modes').value)return;searchMode=$('search-modes').value;clearSearch(true);updateSearchMode()};
@@ -590,7 +608,7 @@ function setScreen(next){
 }
 $('archive-screen').onclick=()=>setScreen('archive');
 $('insights-screen').onclick=()=>setScreen('insights');
-function setSection(next){if(sectionFiltersReady)rememberTabFilters();section=next;setScreen('archive');document.querySelectorAll('#sections button').forEach(b=>b.classList.toggle('active',b.dataset.section===next));$('search-panel').hidden=next==='live';$('manual-add-trigger').classList.toggle('hidden',next!=='listening'&&next!=='collection');$('add-live-trigger').classList.toggle('hidden',next!=='live');$('library-title').textContent={listening:'Listening',collection:'Collection',live:'Live'}[next];$('search-title').textContent=next==='collection'?'Search to Add a Purchase':'Search Albums';$('sort').querySelector('[value="date-desc"]').textContent=next==='collection'?'Purchased: Newest':next==='live'?'Show Date: Newest':'Listened: Newest';$('sort').querySelector('[value="date-asc"]').textContent=next==='collection'?'Purchased: Oldest':next==='live'?'Show Date: Oldest':'Listened: Oldest';for(const id of archiveFilterIds)$(id+'-filter').value='';filters();restoreTabFilters();sectionFiltersReady=true;$('filters-wrap').classList.add('hidden');$('sort-wrap').classList.add('hidden');$('filters-icon').textContent='＋';$('filters-toggle').setAttribute('aria-expanded','false');$('sort-toggle').setAttribute('aria-expanded','false');clearSearch();render();showStorageState()};document.querySelectorAll('#sections button').forEach(b=>b.onclick=()=>setSection(b.dataset.section));
+function setSection(next){if(sectionFiltersReady)rememberTabFilters();section=next;setScreen('archive');document.querySelectorAll('#sections button').forEach(b=>b.classList.toggle('active',b.dataset.section===next));$('search-panel').hidden=next==='live';$('manual-add-trigger').classList.toggle('hidden',next!=='listening'&&next!=='collection');$('add-live-trigger').classList.toggle('hidden',next!=='live');$('library-title').textContent={listening:'Listening',collection:'Collection',live:'Live'}[next];$('sort').querySelector('[value="date-desc"]').textContent=next==='collection'?'Purchased: Newest':next==='live'?'Show Date: Newest':'Listened: Newest';$('sort').querySelector('[value="date-asc"]').textContent=next==='collection'?'Purchased: Oldest':next==='live'?'Show Date: Oldest':'Listened: Oldest';for(const id of archiveFilterIds)$(id+'-filter').value='';filters();restoreTabFilters();sectionFiltersReady=true;$('filters-wrap').classList.add('hidden');$('sort-wrap').classList.add('hidden');$('filters-icon').textContent='＋';$('filters-toggle').setAttribute('aria-expanded','false');$('sort-toggle').setAttribute('aria-expanded','false');clearSearch();render();showStorageState()};document.querySelectorAll('#sections button').forEach(b=>b.onclick=()=>setSection(b.dataset.section));
 function rate(r){if(r.rating===''||r.rating===undefined||r.rating===null)return null;const n=Number(r.rating);return Number.isFinite(n)?n:null}
 function fiveScore(raw){return Math.round((Number(raw)/2)*10)/10}
 const STAR_PATH='M12 2.5 14.94 8.47 21.53 9.43 16.77 14.07 17.89 20.63 12 17.53 6.11 20.63 7.23 14.07 2.47 9.43 9.06 8.47Z';
@@ -976,7 +994,7 @@ dictionary['Score 0.0–5.0 (optional)']='スコア 0.0〜5.0（任意）';
 const prefixes=[['Release: ','発売：'],['Listened: ','鑑賞：'],['Purchased: ','購入：'],['Score: ','スコア：'],['Label: ','レーベル：'],['Format: ','形式：'],['Date: ','日付：'],['Week of ','週の開始：'],['Added to Listening Archive.','鑑賞記録に追加しました。'],['Added to Collection.','購入記録に追加しました。'],['Search failed: ','検索失敗：']];
 const reverse=Object.fromEntries(Object.entries(dictionary).map(([a,b])=>[b,a]));
 const revPrefixes=prefixes.map(([a,b])=>[b,a]);
-const selector='h2,.tab,.btn,.group label,option,.filter-control button,.details,.empty,.section,.status,#result-count,#library-title,#search-title,#edit-title,#live-create-title,#date-label,.foot,.small.muted:not(.result .small):not(.record .small),#modal-header strong,#search-order-label,#more-results,#artwork-reveal,#manual-add-trigger,#add-live-trigger';
+const selector='h2,.tab,.btn,.group label,option,.filter-control button,.details,.empty,.section,.status,#result-count,#library-title,#edit-title,#live-create-title,#date-label,.foot,.small.muted:not(.result .small):not(.record .small),#modal-header strong,#search-order-label,#more-results,#artwork-reveal,#manual-add-trigger,#add-live-trigger';
 function swap(t,lang){const map=lang==='ja'?dictionary:reverse;const pref=lang==='ja'?prefixes:revPrefixes;if(map[t]!==undefined)return map[t];for(const [a,b] of pref){if(t.startsWith(a))return b+t.slice(a.length)}if(lang==='ja'&&/^\d+ results$/.test(t))return t.replace(' results',' 件');if(lang==='en'&&/^\d+ 件$/.test(t))return t.replace(' 件',' results');return t}
 let lang=(navigator.language||'en').toLowerCase().startsWith('ja')?'ja':'en';try{lang=localStorage.getItem('mma-ui-language')||lang}catch(e){}if(!['ja','en'].includes(lang))lang='en';
 const select=document.getElementById('ui-language');select.value=lang;
@@ -999,7 +1017,8 @@ function refreshCustomControls(){
  const searchModes=document.getElementById('search-modes');searchModes.setAttribute('aria-label',ja?'検索方式':'Search mode');
  for(const id of ['live-photo-preview','existing-photo'])document.getElementById(id).alt=ja?'ライブ写真':'Live photo';
  document.querySelectorAll('.artist-remove').forEach(b=>b.setAttribute('aria-label',ja?'アーティストを削除':'Remove Artist'));
- const byArtist=searchModes.value==='artist';document.getElementById('query').setAttribute('aria-label',byArtist?(ja?'アーティスト名':'Artist name'):(ja?'アルバム名':'Album title'));
+ document.getElementById('search-panel').setAttribute('aria-label',ja?'アルバム検索':'Album search');
+ const byArtist=searchModes.value==='artist';document.getElementById('query').placeholder=byArtist?(ja?'アーティストを検索':'Search artists'):(ja?'アルバムを検索':'Search albums');document.getElementById('query').setAttribute('aria-label',byArtist?(ja?'アーティスト名':'Artist name'):(ja?'アルバム名':'Album title'));
  for(const control of document.querySelectorAll('.rating-widget')){
   const slider=control.querySelector('.star-rating');if(slider){const live=control.dataset.target!=='rating';slider.setAttribute('aria-label',live?(ja?'ハートをなぞってスコアを設定（5点満点）':'Slide across hearts to set score out of 5'):(ja?'星をなぞってスコアを設定（5点満点）':'Slide across stars to set score out of 5'));const input=document.getElementById(control.dataset.target);slider.setAttribute('aria-valuetext',input.value!==''?(Math.round(Number(input.value)/2*10)/10).toFixed(1)+' / 5':(ja?'未評価':'Unrated'));}
  }

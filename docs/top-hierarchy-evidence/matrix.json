@@ -1,0 +1,112 @@
+[
+  {
+    "width": 320,
+    "lang": "ja",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "archives": 3,
+    "touchTargets": ">=44px",
+    "queryFont": 16,
+    "overlap": false,
+    "overflow": false,
+    "dbWrites": 0,
+    "apiCalls": 0
+  }
+]

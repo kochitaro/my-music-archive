@@ -62,7 +62,7 @@ with sync_playwright() as p:
  print('Loading MMA',flush=True);page.goto(BASE);print('Loaded MMA',flush=True);page.evaluate('([key,seed])=>localStorage.setItem(key,JSON.stringify(seed))',[KEY,SEED]);page.reload()
  assert stored(page)==SEED
  expect(page.locator('#search-modes')).to_have_value('artist')
- assert page.locator('#query').get_attribute('placeholder') is None
+ assert page.locator('#query').get_attribute('placeholder')==('アーティストを検索' if page.locator('#search-modes').input_value()=='artist' else 'アルバムを検索')
  assert page.locator('#search-modes').evaluate('(el)=>el.parentElement.id==="search-form"&&el.nextElementSibling.id==="query"')
  for name in ['大比良瑞希','大比良']:search(page,name)
  page.locator('#query').fill('ambiguous');page.locator('#search-btn').click();expect(page.locator('#artist-candidates button')).to_have_count(2)
@@ -71,7 +71,7 @@ with sync_playwright() as p:
  expect(page.locator('#query')).to_have_value('keep this input');expect(page.locator('#results .result')).to_have_count(0);expect(page.locator('#artist-candidates')).to_have_class('search-candidates hidden');page.wait_for_timeout(50);assert len(calls)==before
  for title,name in [('Punisher','Phoebe Bridgers'),('Hard Life','The Tubs')]:
   before=len(calls);search(page,title);assert name in page.locator('#results').inner_text();assert all('/artist/' not in call for call in calls[before:])
-  assert page.locator('#query').get_attribute('placeholder') is None
+  assert page.locator('#query').get_attribute('placeholder')==('アーティストを検索' if page.locator('#search-modes').input_value()=='artist' else 'アルバムを検索')
  page.locator('#query').fill('MMA nonexistent qzxvkwp 0321');page.locator('#search-btn').click();expect(page.locator('#status')).to_contain_text('作品が見つかりませんでした');expect(page.locator('#results .result')).to_have_count(0)
  page.screenshot(path='/tmp/mma-v0321-ja.png',full_page=True)
  page.locator('#search-modes').select_option('artist')
