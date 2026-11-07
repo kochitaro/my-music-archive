@@ -1,0 +1,18 @@
+[
+  {
+    "width": 390,
+    "lang": "ja",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  }
+]

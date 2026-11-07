@@ -101,7 +101,7 @@ def main():
         print('PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes')
 
         page.locator('[data-section=listening]').click()
-        page.locator('[data-search-mode=title]').click()
+        page.locator('#search-modes').select_option('title')
         page.locator('#query').fill('Title')
         page.locator('#search-btn').click()
         expect(page.locator('#results .result')).to_have_count(30)
@@ -128,7 +128,7 @@ def main():
         assert 'primary-type' not in added  # UI-only metadata does not enter the backup format.
         print('PASS 2: two raw pages, four display batches, global re-sort, exact/partial dates/unknown, all types/unclassified, add album metadata and unchanged saved schema')
 
-        page.locator('[data-search-mode=artist]').click()
+        page.locator('#search-modes').select_option('artist')
         page.locator('#query').fill('Synthetic Artist')
         page.locator('#search-btn').click()
         expect(page.locator('#results .result')).to_have_count(3)
