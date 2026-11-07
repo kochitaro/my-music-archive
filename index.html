@@ -166,7 +166,9 @@ html:not([lang="ja"]) .storage-guide [lang="ja"],html[lang="ja"] .storage-guide 
 #search-form #query::placeholder{color:#8d9bad;opacity:1}
 .screen-segments{background:transparent;border:0;border-radius:0;padding:0;gap:12px;margin:4px auto}
 .screen-segments .tab{min-width:44px;min-height:44px;padding:9px 12px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:#a1adbc;font-size:14px}
-.screen-segments .tab.active{background:transparent;color:#c6e7ef;border-bottom-color:#9fcfdc}
+.screen-segments .tab.active{background:transparent;color:#c6e7ef;border-bottom-color:transparent;text-decoration-line:underline;text-decoration-color:#9fcfdc;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-skip-ink:none}
+html:lang(ja) .screen-segments .tab.active{text-underline-offset:5px}
+html:lang(en) #insights-screen.active{text-underline-offset:6px}
 .screen-segments .tab:focus-visible{outline:2px solid #9fcfdc;outline-offset:2px}
 #search-panel{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;margin:8px 0;padding:8px 10px;background:#151a21;border:0;border-radius:8px}
 #search-panel>*{grid-column:1 / -1}

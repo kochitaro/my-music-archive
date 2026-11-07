@@ -1,0 +1,5 @@
+PASS all script elements unchanged from main 5ff94eb
+PASS full document after </style> unchanged
+PASS search.js / insights.js / insights.css unchanged
+PASS PR #32 search-mode CSS block unchanged
+Production difference: secondary tab active-underline CSS and glyph-specific offsets only.
