@@ -1,0 +1,50 @@
+{
+  "initial_suite": "results-initial.json",
+  "final_results": [
+    {
+      "test": "node",
+      "exit_code": 0,
+      "run": "initial suite"
+    },
+    {
+      "test": "direct_search_modes",
+      "exit_code": 0,
+      "run": "rerun after DOM-range measurement and flex correction"
+    },
+    {
+      "test": "browser_smoke",
+      "exit_code": 0,
+      "run": "initial suite"
+    },
+    {
+      "test": "search_live_ui",
+      "exit_code": 0,
+      "run": "initial suite"
+    },
+    {
+      "test": "top_hierarchy",
+      "exit_code": 0,
+      "run": "initial suite"
+    },
+    {
+      "test": "ui_v0322",
+      "exit_code": 0,
+      "run": "initial suite"
+    },
+    {
+      "test": "insights_browser",
+      "exit_code": 0,
+      "run": "initial suite"
+    },
+    {
+      "test": "save_failure_safety",
+      "exit_code": 0,
+      "run": "initial suite"
+    },
+    {
+      "test": "compact_live_ui",
+      "exit_code": 0,
+      "run": "initial suite"
+    }
+  ]
+}

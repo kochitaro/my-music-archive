@@ -1,0 +1,5 @@
+PASS unchanged: search.js
+PASS unchanged: insights.js
+PASS unchanged: insights.css
+PASS unchanged main-script prefix: DB/save protection, search state, searchContext/resetSearchView/clearSearch
+PASS unchanged main-script remainder: candidate selection, search fetch/results/paging, archive/Insights, all create/edit/photo/backup controls

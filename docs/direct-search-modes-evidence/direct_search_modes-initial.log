@@ -1,0 +1,18 @@
+PASS before ja 320
+PASS before en 320
+PASS before ja 375
+PASS before en 375
+PASS before ja 390
+PASS before en 390
+PASS before ja 430
+PASS before en 430
+PASS before ja 1280
+PASS before en 1280
+Traceback (most recent call last):
+  File "/workspace/my-music-archive/tests/direct_search_modes.py", line 70, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/my-music-archive/tests/direct_search_modes.py", line 40, in main
+    assert css['bg']=='rgba(0, 0, 0, 0)' and css['font']==13 and css['bottom']=='rgb(159, 207, 220)' and css['text']<=css['available']+.5,css
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'bg': 'rgba(0, 0, 0, 0)', 'font': 13, 'bottom': 'rgb(159, 207, 220)', 'weight': '400', 'text': 77.2200927734375, 'available': 76}
