@@ -1,0 +1,82 @@
+[
+  {
+    "width": 320,
+    "lang": "ja",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "overflow": false,
+    "touchTargets": ">=44px",
+    "uiDBWrites": 0,
+    "photoLifecycle": "pass"
+  }
+]

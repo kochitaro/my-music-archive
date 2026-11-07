@@ -151,8 +151,11 @@ def main():
                     heading = page.locator('#library-title' if section == 'live' else '#search-title')
                     t, h = trigger.bounding_box(), heading.bounding_box()
                     assert t['height'] >= 44 and t['width'] >= 44
-                    assert h['x'] + h['width'] <= t['x'] - 3, (language, width, section, h, t)
-                    assert max(t['y'], h['y']) < min(t['y']+t['height'], h['y']+h['height'])
+                    if section != 'live':
+                        assert h['x'] + h['width'] <= t['x'] - 3, (language, width, section, h, t)
+                        assert max(t['y'], h['y']) < min(t['y']+t['height'], h['y']+h['height'])
+                    else:
+                        assert t['y'] >= h['y']+h['height']  # Archive actions live below the heading.
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                     style = trigger.evaluate('(el)=>({bg:getComputedStyle(el).backgroundColor,border:getComputedStyle(el).borderWidth,color:getComputedStyle(el).color,underline:getComputedStyle(el).textDecorationLine})')
                     assert style == dict(bg='rgba(0, 0, 0, 0)', border='0px', color='rgb(198, 231, 239)', underline='none')
