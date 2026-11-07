@@ -161,9 +161,9 @@ def main():
                         style = trigger.evaluate('(el)=>({bg:getComputedStyle(el).backgroundColor,border:getComputedStyle(el).borderWidth,color:getComputedStyle(el).color})')
                         assert style == dict(bg='rgba(0, 0, 0, 0)', border='0px', color='rgb(198, 231, 239)')
                         search = page.locator('#search-btn').bounding_box()
-                        assert t['y']+t['height']+10 < search['y']
+                        assert t['y']+t['height'] <= search['y']
                         assert trigger.evaluate('(el)=>!el.closest("form")')
-                        assert page.locator('#search-modes').evaluate('(el)=>el.previousElementSibling.contains(document.getElementById("search-title"))&&el.nextElementSibling.id==="search-form"')
+                        assert page.locator('#search-modes').evaluate('(el)=>el.parentElement.id==="search-form"&&el.nextElementSibling.id==="query"')
                         page.locator('#query').fill('preserve input')
                         trigger.click()
                         expect(page.locator('#modal')).to_have_class('modal open')

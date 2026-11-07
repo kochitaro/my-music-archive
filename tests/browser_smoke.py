@@ -61,20 +61,20 @@ with sync_playwright() as p:
  page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
  print('Loading MMA',flush=True);page.goto(BASE);print('Loaded MMA',flush=True);page.evaluate('([key,seed])=>localStorage.setItem(key,JSON.stringify(seed))',[KEY,SEED]);page.reload()
  assert stored(page)==SEED
- expect(page.locator('[data-search-mode=artist]')).to_have_attribute('aria-pressed','true')
+ expect(page.locator('#search-modes')).to_have_value('artist')
  assert page.locator('#query').get_attribute('placeholder') is None
- assert page.locator('#search-modes').evaluate('(el)=>el.previousElementSibling.contains(document.getElementById("search-title"))&&el.nextElementSibling.id==="search-form"')
+ assert page.locator('#search-modes').evaluate('(el)=>el.parentElement.id==="search-form"&&el.nextElementSibling.id==="query"')
  for name in ['大比良瑞希','大比良']:search(page,name)
  page.locator('#query').fill('ambiguous');page.locator('#search-btn').click();expect(page.locator('#artist-candidates button')).to_have_count(2)
  expect(page.locator('#results .result')).to_have_count(0);page.locator('#artist-candidates button').first.click();expect(page.locator('#results .result')).to_have_count(30)
- page.locator('#query').fill('keep this input');before=len(calls);page.locator('[data-search-mode=title]').click()
+ page.locator('#query').fill('keep this input');before=len(calls);page.locator('#search-modes').select_option('title')
  expect(page.locator('#query')).to_have_value('keep this input');expect(page.locator('#results .result')).to_have_count(0);expect(page.locator('#artist-candidates')).to_have_class('search-candidates hidden');page.wait_for_timeout(50);assert len(calls)==before
  for title,name in [('Punisher','Phoebe Bridgers'),('Hard Life','The Tubs')]:
   before=len(calls);search(page,title);assert name in page.locator('#results').inner_text();assert all('/artist/' not in call for call in calls[before:])
   assert page.locator('#query').get_attribute('placeholder') is None
  page.locator('#query').fill('MMA nonexistent qzxvkwp 0321');page.locator('#search-btn').click();expect(page.locator('#status')).to_contain_text('作品が見つかりませんでした');expect(page.locator('#results .result')).to_have_count(0)
  page.screenshot(path='/tmp/mma-v0321-ja.png',full_page=True)
- page.locator('[data-search-mode=artist]').click()
+ page.locator('#search-modes').select_option('artist')
  print('PASS modes, short prefix, candidate choice, input preservation, actual album fixtures and nonexistent title')
  for name in ARTISTS:
   print('Searching',name,flush=True)
@@ -96,7 +96,7 @@ with sync_playwright() as p:
  page.locator('#results .result button').first.click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-title').input_value()=='Work 143'
  page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open');assert stored(page)['collection'][0]['release']=='2043-01-02'
  print('PASS Listening/Collection saves, metadata/date inheritance, Japanese/English, existing data intact')
- page.locator('[data-search-mode=title]').click();search(page,'missing',1);page.locator('#results button').click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-artist').input_value()==''
+ page.locator('#search-modes').select_option('title');search(page,'missing',1);page.locator('#results button').click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-artist').input_value()==''
  dialogs=[];page.on('dialog',lambda d:(dialogs.append(d.message),d.accept()))
  page.locator('#save').click();expect(page.locator('#save-notice')).to_be_visible();expect(page.locator('#save-notice-reason')).to_contain_text('album title and artist');assert len(stored(page)['collection'])==1
  page.locator('#manual-artist').fill('Manual Artist');page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open');assert stored(page)['collection'][0]['artist']=='Manual Artist'
@@ -112,14 +112,14 @@ with sync_playwright() as p:
  assert len(set(page.locator('#results .title').all_text_contents()))==120
  print('PASS failed next page preserves offset/results and can retry without duplicates')
  page.locator('#query').fill('failure');page.locator('#search-btn').click();expect(page.locator('#status')).to_contain_text('Search failed',timeout=15000)
- assert page.locator('#search-btn').is_enabled();page.locator('[data-search-mode=artist]').click();search(page,'Number Girl')
+ assert page.locator('#search-btn').is_enabled();page.locator('#search-modes').select_option('artist');search(page,'Number Girl')
  # Hold one artist request in the browser before submitting a newer query.
  page.evaluate('''()=>{const fetch=window.fetch;window.fetch=async(...args)=>{if(String(args[0]).includes('artist/')&&String(args[0]).includes('old'))await new Promise(r=>{window.releaseOld=r});return fetch(...args)}}''')
  page.locator('#query').fill('old-query');page.locator('#search-btn').click();page.wait_for_function('window.releaseOld!==undefined')
- page.locator('[data-search-mode=title]').click();expect(page.locator('#query')).to_have_value('old-query');page.locator('#query').fill('new-title');page.locator('#search-btn').click();page.evaluate('window.releaseOld()')
+ page.locator('#search-modes').select_option('title');expect(page.locator('#query')).to_have_value('old-query');page.locator('#query').fill('new-title');page.locator('#search-btn').click();page.evaluate('window.releaseOld()')
  expect(page.locator('#results .title').first).to_have_text('Title 000',timeout=10000)
  # Tab changes and clearing invalidate queued and in-flight results.
- page.locator('[data-search-mode=artist]').click();page.locator('#query').fill('細野晴臣');page.locator('#search-btn').click();page.locator('[data-section="live"]').click();page.wait_for_timeout(150);expect(page.locator('#results .result')).to_have_count(0)
+ page.locator('#search-modes').select_option('artist');page.locator('#query').fill('細野晴臣');page.locator('#search-btn').click();page.locator('[data-section="live"]').click();page.wait_for_timeout(150);expect(page.locator('#results .result')).to_have_count(0)
  assert stored(page)['live']==SEED['live']
  page.locator('[data-section="listening"]').click();page.locator('#manual-add-trigger').click();expect(page.locator('#manual-artist')).to_have_value('');page.locator('#close').click()
  page.screenshot(path='/tmp/mma-v0321-en.png',full_page=True)
@@ -127,7 +127,7 @@ with sync_playwright() as p:
  print('PASS final API failure/re-search, stale-result race, tab reset, manual entry, no page errors')
  # Save actual response titles in both archives and check the exact artist credits.
  for archive,title,artist in [('listening','Punisher','Phoebe Bridgers'),('collection','Hard Life','The Tubs')]:
-  page.locator(f'[data-section="{archive}"]').click();page.locator('[data-search-mode=title]').click();search(page,title)
+  page.locator(f'[data-section="{archive}"]').click();page.locator('#search-modes').select_option('title');search(page,title)
   page.locator('#results .result').filter(has_text=artist).first.locator('button').click();expect(page.locator('#modal')).to_have_class('modal open')
   expect(page.locator('#manual-artist')).to_have_value(artist);expect(page.locator('#manual-title')).to_have_value(title)
   release=page.locator('#release-edit').input_value();page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open')
