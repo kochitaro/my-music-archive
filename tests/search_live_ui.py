@@ -109,6 +109,13 @@ def main():
         for count in [60, 90, 105]:
             page.locator('#more-results').click()
             expect(page.locator('#results .result')).to_have_count(count)
+        # Switching secondary screens retains the loaded search pages without another request.
+        before_switch_calls = len(calls)
+        page.locator('#insights-screen').click()
+        expect(page.locator('#results')).to_be_hidden()
+        page.locator('#archive-screen').click()
+        expect(page.locator('#results .result')).to_have_count(105)
+        assert len(calls) == before_switch_calls
         names = page.locator('#results .title').all_text_contents()
         assert names[:2] == ['ＴＩＴＬＥ', 'Title']
         dates = page.locator('#results .result .grow').evaluate_all('(els)=>els.map(e=>e.lastElementChild.textContent)')

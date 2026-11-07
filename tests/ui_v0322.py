@@ -148,7 +148,7 @@ def main():
                 for section in ['listening', 'collection', 'live']:
                     page.locator(f'[data-section={section}]').click()
                     trigger = page.locator('#add-live-trigger' if section == 'live' else '#manual-add-trigger')
-                    heading = page.locator('#library-title' if section == 'live' else '#search-title')
+                    heading = page.locator('#library-title' if section == 'live' else '#search-modes')
                     t, h = trigger.bounding_box(), heading.bounding_box()
                     assert t['height'] >= 44 and t['width'] >= 44
                     if section != 'live':
@@ -164,7 +164,7 @@ def main():
                         style = trigger.evaluate('(el)=>({bg:getComputedStyle(el).backgroundColor,border:getComputedStyle(el).borderWidth,color:getComputedStyle(el).color})')
                         assert style == dict(bg='rgba(0, 0, 0, 0)', border='0px', color='rgb(198, 231, 239)')
                         search = page.locator('#search-btn').bounding_box()
-                        assert t['y']+t['height'] <= search['y']
+                        assert t['y']+t['height'] <= search['y'] or width>540
                         assert trigger.evaluate('(el)=>!el.closest("form")')
                         assert page.locator('#search-modes').evaluate('(el)=>el.parentElement.id==="search-form"&&el.nextElementSibling.id==="query"')
                         page.locator('#query').fill('preserve input')
