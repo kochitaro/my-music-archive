@@ -1,0 +1,3 @@
+PASS: all script elements byte-identical to main 78dd28a
+PASS: entire document after first </style> byte-identical to main 78dd28a
+Production change: 7 added CSS lines in index.html only.
