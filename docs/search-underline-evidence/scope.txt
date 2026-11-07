@@ -1,0 +1,4 @@
+PASS: all script elements unchanged from main 313c48a
+PASS: full document after </style> unchanged from main 313c48a
+PASS: search.js / insights.js / insights.css unchanged
+Production changes: active underline CSS plus Japanese font-metric offset only.

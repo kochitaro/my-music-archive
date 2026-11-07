@@ -1,0 +1,1402 @@
+[
+  {
+    "width": 320,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 253,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 265,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 253,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 265,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 253,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 265,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 253,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 265,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 232,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 244,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 232,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 244,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 232,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 244,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 232,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 244,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 232,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 244,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 232,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 244,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 232,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 244,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 232,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 244,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 232,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 244,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 232,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 244,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 232,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 26,
+        "y": 244,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 108.453125,
+        "y": 232,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 112.453125,
+        "y": 244,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 22,
+        "y": 225,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 29.1875,
+        "y": 239,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 68,
+        "y": 225,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 72,
+        "y": 239,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 26,
+        "y": 245,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 30,
+        "y": 257,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 112.453125,
+        "y": 245,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 116.453125,
+        "y": 257,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 14,
+      "lineWidth": 84,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 76,
+      "inkWidth": 74,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 26,
+        "y": 245,
+        "width": 84.453125,
+        "height": 44
+      },
+      "text": {
+        "x": 30,
+        "y": 257,
+        "width": 76.453125,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 14,
+      "lineWidth": 73,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 3,
+      "lineWidth": 64,
+      "inkWidth": 62,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 112.453125,
+        "y": 245,
+        "width": 72.875,
+        "height": 44
+      },
+      "text": {
+        "x": 116.453125,
+        "y": 257,
+        "width": 64.875,
+        "height": 19
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "area": "listening",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 26,
+        "y": 238,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 33.1875,
+        "y": 252,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "area": "listening",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 72,
+        "y": 238,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 76,
+        "y": 252,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "area": "collection",
+    "mode": "artist",
+    "before": {
+      "gap": 17,
+      "lineWidth": 44,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 28,
+      "inkWidth": 30,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 26,
+        "y": 238,
+        "width": 44,
+        "height": 44
+      },
+      "text": {
+        "x": 33.1875,
+        "y": 252,
+        "width": 29.625,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "area": "collection",
+    "mode": "title",
+    "before": {
+      "gap": 17,
+      "lineWidth": 72,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "after": {
+      "gap": 4,
+      "lineWidth": 64,
+      "inkWidth": 64,
+      "lineThickness": 1
+    },
+    "geometry": {
+      "button": {
+        "x": 72,
+        "y": 238,
+        "width": 72.3125,
+        "height": 44
+      },
+      "text": {
+        "x": 76,
+        "y": 252,
+        "width": 64.3125,
+        "height": 15
+      }
+    },
+    "layoutShift": 0,
+    "dbWrites": 0,
+    "apiCalls": 0
+  }
+]
