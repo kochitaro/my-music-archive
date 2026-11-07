@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import ROOT, KEY, QuietHandler, album, stored
 from data_preservation import PHOTO
 
-OUT=ROOT/'docs/compact-live-evidence'
+OUT=Path(os.environ.get('MLA_COMPACT_EVIDENCE',str(ROOT/'docs/compact-live-evidence')))
 FILE=dict(name='photo.png',mimeType='image/png',buffer=__import__('base64').b64decode(PHOTO.split(',')[1]))
 OTHER=dict(name='replacement.svg',mimeType='image/svg+xml',buffer=b'<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="blue"/></svg>')
 SEED=dict(version=3,listening=[album('Listening sample')],collection=[album('Collection sample')],live=[dict(entryId='live',title='Live sample',artists=['A','B'],venue='Tokyo',date='2026-11-06',rating='8.4',photo=PHOTO,memo='Saved note')])

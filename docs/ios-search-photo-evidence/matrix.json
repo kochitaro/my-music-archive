@@ -1,0 +1,82 @@
+[
+  {
+    "width": 320,
+    "lang": "ja",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "searchFont": 16,
+    "preSaveReselection": true,
+    "cancelKeepsSelection": true,
+    "preSaveDBWrites": 0
+  }
+]
