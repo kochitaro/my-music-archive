@@ -1,0 +1,422 @@
+[
+  {
+    "width": 320,
+    "lang": "ja",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 320,
+    "lang": "ja",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 320,
+    "lang": "en",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 375,
+    "lang": "ja",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 375,
+    "lang": "en",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 390,
+    "lang": "ja",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 430,
+    "lang": "ja",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 1280,
+    "lang": "ja",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 84.453125,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.875,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "area": "listening",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  },
+  {
+    "width": 1280,
+    "lang": "en",
+    "area": "collection",
+    "buttons": [
+      {
+        "mode": "artist",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "mode": "title",
+        "width": 72.3125,
+        "height": 44
+      }
+    ],
+    "rapidClicks": 200,
+    "dbWrites": 0,
+    "apiCalls": 0,
+    "overlap": false
+  }
+]

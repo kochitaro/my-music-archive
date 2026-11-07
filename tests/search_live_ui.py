@@ -101,7 +101,7 @@ def main():
         print('PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes')
 
         page.locator('[data-section=listening]').click()
-        page.locator('#search-modes').select_option('title')
+        page.locator('[data-search-mode=title]').click()
         page.locator('#query').fill('Title')
         page.locator('#search-btn').click()
         expect(page.locator('#results .result')).to_have_count(30)
@@ -109,6 +109,13 @@ def main():
         for count in [60, 90, 105]:
             page.locator('#more-results').click()
             expect(page.locator('#results .result')).to_have_count(count)
+        # Re-pressing the selected mode leaves the loaded result pages intact.
+        before_repeat_calls = len(calls)
+        before_repeat_query = page.locator('#query').input_value()
+        for _ in range(3):page.locator('[data-search-mode=title]').click()
+        expect(page.locator('#results .result')).to_have_count(105)
+        expect(page.locator('#query')).to_have_value(before_repeat_query)
+        assert len(calls) == before_repeat_calls
         # Switching secondary screens retains the loaded search pages without another request.
         before_switch_calls = len(calls)
         page.locator('#insights-screen').click()
@@ -135,7 +142,7 @@ def main():
         assert 'primary-type' not in added  # UI-only metadata does not enter the backup format.
         print('PASS 2: two raw pages, four display batches, global re-sort, exact/partial dates/unknown, all types/unclassified, add album metadata and unchanged saved schema')
 
-        page.locator('#search-modes').select_option('artist')
+        page.locator('[data-search-mode=artist]').click()
         page.locator('#query').fill('Synthetic Artist')
         page.locator('#search-btn').click()
         expect(page.locator('#results .result')).to_have_count(3)

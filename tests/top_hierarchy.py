@@ -38,12 +38,12 @@ def main():
                                 else:assert css['border']=='rgba(0, 0, 0, 0)'
                             if area!='live':
                                 for mode in ['artist','title']:
-                                    p.locator('#search-modes').select_option(mode)
+                                    p.locator(f'[data-search-mode={mode}]').click()
                                     placeholder=('アーティストを検索' if mode=='artist' else 'アルバムを検索') if lang=='ja' else ('Search artists' if mode=='artist' else 'Search albums')
                                     expect(p.locator('#query')).to_have_attribute('placeholder',placeholder)
                                     if width==390:p.screenshot(path=str(OUT/f'placeholder-{area}-{mode}-{lang}.png'),full_page=True)
                                     assert p.locator('#query').get_attribute('aria-label') and p.locator('#query').evaluate('(e)=>parseFloat(getComputedStyle(e).fontSize)')>=16
-                                p.locator('#search-modes').select_option('artist')
+                                p.locator('[data-search-mode=artist]').click()
                                 for target in ['query','search-modes','search-btn','manual-add-trigger']:
                                     b=p.locator('#'+target).bounding_box();assert b['width']>=44 and b['height']>=44 and b['x']>=0 and b['x']+b['width']<=width+.1
                                 boxes=[p.locator('#'+x).bounding_box() for x in ['search-modes','query','search-btn','manual-add-trigger']]

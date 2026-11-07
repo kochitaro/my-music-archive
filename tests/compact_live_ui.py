@@ -38,7 +38,7 @@ def main():
                             p.locator('#list-tab').click();p.locator('#insights-screen').click();p.locator('#archive-screen').click()
                             expect(p.locator('#list-tab')).to_have_attribute('aria-pressed','true');p.locator('#grid-tab').click()
                             if area!='live':
-                                p.locator('#search-modes').select_option('title');expect(p.locator('#query')).to_have_attribute('aria-label','アルバム名' if lang=='ja' else 'Album title');p.locator('#search-modes').select_option('artist')
+                                p.locator('[data-search-mode=title]').click();expect(p.locator('#query')).to_have_attribute('aria-label','アルバム名' if lang=='ja' else 'Album title');p.locator('[data-search-mode=artist]').click()
                     assert p.evaluate('writes')==0 and stored(p)==SEED
                     p.locator('#add-live-trigger').click();p.locator('#live-title').fill('Draft show');p.locator('#live-venue').fill('Draft venue');p.locator('#live-notes').fill('Keep these notes')
                     if width==390:p.screenshot(path=str(OUT/f'{phase}-create-{lang}.png'),full_page=True)
