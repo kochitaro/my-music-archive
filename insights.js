@@ -27,7 +27,7 @@ function aggregate(records,area){
  const scalar=field=>r=>[r[field]];
  const artists=counts(records,area==='live'?r=>Array.isArray(r.artists)?r.artists:[]:scalar('artist'));
  const fields=area==='live'?['venue']:['genre','tags','label',...(area==='collection'?['store','format']:[])];
- const categories=Object.fromEntries(fields.map(field=>[field,counts(records,field==='genre'?r=>genres(r.genre):field==='tags'?r=>tags(r.tags):scalar(field))]));
+ const categories=Object.fromEntries(fields.map(field=>[field,counts(records,(field==='genre'||field==='label')?r=>genres(r[field]):field==='tags'?r=>tags(r.tags):scalar(field))]));
  const months=new Map(),years=new Map(),release=new Map();
  const add=(map,k)=>map.set(k,(map.get(k)||0)+1);
  for(const record of records){const date=dateParts(record.date),rel=dateParts(record.release);
