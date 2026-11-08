@@ -1,0 +1,850 @@
+TAP version 13
+# Subtest: listening independent totals and no mutation
+ok 1 - listening independent totals and no mutation
+  ---
+  duration_ms: 10.205941
+  type: 'test'
+  ...
+# Subtest: collection independent totals and no mutation
+ok 2 - collection independent totals and no mutation
+  ---
+  duration_ms: 1.116655
+  type: 'test'
+  ...
+# Subtest: live independent totals and no mutation
+ok 3 - live independent totals and no mutation
+  ---
+  duration_ms: 0.170267
+  type: 'test'
+  ...
+# Subtest: classifications trim, fold case and deduplicate each record
+ok 4 - classifications trim, fold case and deduplicate each record
+  ---
+  duration_ms: 1.073921
+  type: 'test'
+  ...
+# Subtest: live artists count shows, never infer from title
+ok 5 - live artists count shows, never infer from title
+  ---
+  duration_ms: 0.299321
+  type: 'test'
+  ...
+# Subtest: stable top 30, short and empty rankings
+ok 6 - stable top 30, short and empty rankings
+  ---
+  duration_ms: 0.516449
+  type: 'test'
+  ...
+# Subtest: pie keeps ten and merges remainder; rankings keep everything
+ok 7 - pie keeps ten and merges remainder; rankings keep everything
+  ---
+  duration_ms: 0.343058
+  type: 'test'
+  ...
+# Subtest: strict date precision and leap boundaries
+ok 8 - strict date precision and leap boundaries
+  ---
+  duration_ms: 0.210908
+  type: 'test'
+  ...
+# Subtest: time includes year-only yearly, no invented January; periods and boundaries
+ok 9 - time includes year-only yearly, no invented January; periods and boundaries
+  ---
+  duration_ms: 0.582649
+  type: 'test'
+  ...
+# Subtest: future and empty dates never become current; year pagination
+ok 10 - future and empty dates never become current; year pagination
+  ---
+  duration_ms: 0.371872
+  type: 'test'
+  ...
+# Subtest: release year and decade boundaries; unknown excluded
+ok 11 - release year and decade boundaries; unknown excluded
+  ---
+  duration_ms: 1.477831
+  type: 'test'
+  ...
+# Subtest: listening labels count per record and retain display order/spelling
+ok 12 - listening labels count per record and retain display order/spelling
+  ---
+  duration_ms: 2.416186
+  type: 'test'
+  ...
+# Subtest: collection labels count per record and retain display order/spelling
+ok 13 - collection labels count per record and retain display order/spelling
+  ---
+  duration_ms: 0.247504
+  type: 'test'
+  ...
+# Subtest: label pie top ten/other and ranking retain all memberships
+ok 14 - label pie top ten/other and ranking retain all memberships
+  ---
+  duration_ms: 8.344843
+  type: 'test'
+  ...
+# Subtest: reject null
+ok 15 - reject null
+  ---
+  duration_ms: 2.915961
+  type: 'test'
+  ...
+# Subtest: reject {}
+ok 16 - reject {}
+  ---
+  duration_ms: 0.710041
+  type: 'test'
+  ...
+# Subtest: reject {"version":2,"listening":[]}
+ok 17 - reject {"version":2,"listening":[]}
+  ---
+  duration_ms: 0.63636
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[]}
+ok 18 - reject {"version":3,"listening":[]}
+  ---
+  duration_ms: 0.539244
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[],"collection":[],"live":null}
+ok 19 - reject {"version":3,"listening":[],"collection":[],"live":null}
+  ---
+  duration_ms: 0.738084
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[null],"collection":[],"live":[]}
+ok 20 - reject {"version":3,"listening":[null],"collection":[],"live":[]}
+  ---
+  duration_ms: 0.762851
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[{"title":"Title","artist":"Artist","entryId":"a","date":123}],"collection":[],"live":[]}
+ok 21 - reject {"version":3,"listening":[{"title":"Title","artist":"Artist","entryId":"a","date":123}],"collection":[],"live":[]}
+  ---
+  duration_ms: 0.630301
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","artists":"A"}]}
+ok 22 - reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","artists":"A"}]}
+  ---
+  duration_ms: 0.507596
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":"NaN"}]}
+ok 23 - reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":"NaN"}]}
+  ---
+  duration_ms: 0.793437
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":11}]}
+ok 24 - reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a","rating":11}]}
+  ---
+  duration_ms: 0.797143
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title"}]}
+ok 25 - reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title"}]}
+  ---
+  duration_ms: 0.58312
+  type: 'test'
+  ...
+# Subtest: reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a"},{"title":"Title","entryId":"a"}]}
+ok 26 - reject {"version":3,"listening":[],"collection":[],"live":[{"title":"Title","entryId":"a"},{"title":"Title","entryId":"a"}]}
+  ---
+  duration_ms: 0.778996
+  type: 'test'
+  ...
+# Subtest: legacy invalid row refuses whole array
+ok 27 - legacy invalid row refuses whole array
+  ---
+  duration_ms: 0.719656
+  type: 'test'
+  ...
+# Subtest: v3 preserves unknown root and special keys
+ok 28 - v3 preserves unknown root and special keys
+  ---
+  duration_ms: 0.632855
+  type: 'test'
+  ...
+# Subtest: legacy manual entry, order, optional values retained
+ok 29 - legacy manual entry, order, optional values retained
+  ---
+  duration_ms: 1.094602
+  type: 'test'
+  ...
+# Subtest: overflowing JSON number refuses unknown property conversion to null
+ok 30 - overflowing JSON number refuses unknown property conversion to null
+  ---
+  duration_ms: 0.900819
+  type: 'test'
+  ...
+# Subtest: nonempty legacy ID is preserved verbatim, including whitespace
+ok 31 - nonempty legacy ID is preserved verbatim, including whitespace
+  ---
+  duration_ms: 1.051076
+  type: 'test'
+  ...
+# Subtest: v3 optional and score variants remain exact without mutating frozen source
+ok 32 - v3 optional and score variants remain exact without mutating frozen source
+  ---
+  duration_ms: 1.170577
+  type: 'test'
+  ...
+# Subtest: properties only known in another area remain arbitrary JSON
+ok 33 - properties only known in another area remain arbitrary JSON
+  ---
+  duration_ms: 0.723252
+  type: 'test'
+  ...
+# Subtest: listening.title: missing
+ok 34 - listening.title: missing
+  ---
+  duration_ms: 3.367912
+  type: 'test'
+  ...
+# Subtest: listening.title: null
+ok 35 - listening.title: null
+  ---
+  duration_ms: 1.248615
+  type: 'test'
+  ...
+# Subtest: listening.title: empty
+ok 36 - listening.title: empty
+  ---
+  duration_ms: 0.779366
+  type: 'test'
+  ...
+# Subtest: listening.title: whitespace
+ok 37 - listening.title: whitespace
+  ---
+  duration_ms: 0.715039
+  type: 'test'
+  ...
+# Subtest: listening.title: number
+ok 38 - listening.title: number
+  ---
+  duration_ms: 0.58277
+  type: 'test'
+  ...
+# Subtest: listening.title: boolean
+ok 39 - listening.title: boolean
+  ---
+  duration_ms: 0.470299
+  type: 'test'
+  ...
+# Subtest: listening.title: array
+ok 40 - listening.title: array
+  ---
+  duration_ms: 0.673066
+  type: 'test'
+  ...
+# Subtest: listening.title: object
+ok 41 - listening.title: object
+  ---
+  duration_ms: 0.573455
+  type: 'test'
+  ...
+# Subtest: listening.artist: missing
+ok 42 - listening.artist: missing
+  ---
+  duration_ms: 0.583029
+  type: 'test'
+  ...
+# Subtest: listening.artist: null
+ok 43 - listening.artist: null
+  ---
+  duration_ms: 0.788089
+  type: 'test'
+  ...
+# Subtest: listening.artist: empty
+ok 44 - listening.artist: empty
+  ---
+  duration_ms: 0.524391
+  type: 'test'
+  ...
+# Subtest: listening.artist: whitespace
+ok 45 - listening.artist: whitespace
+  ---
+  duration_ms: 0.687248
+  type: 'test'
+  ...
+# Subtest: listening.artist: number
+ok 46 - listening.artist: number
+  ---
+  duration_ms: 0.613496
+  type: 'test'
+  ...
+# Subtest: listening.artist: boolean
+ok 47 - listening.artist: boolean
+  ---
+  duration_ms: 0.482999
+  type: 'test'
+  ...
+# Subtest: listening.artist: array
+ok 48 - listening.artist: array
+  ---
+  duration_ms: 1.134402
+  type: 'test'
+  ...
+# Subtest: listening.artist: object
+ok 49 - listening.artist: object
+  ---
+  duration_ms: 0.498342
+  type: 'test'
+  ...
+# Subtest: collection.title: missing
+ok 50 - collection.title: missing
+  ---
+  duration_ms: 0.717343
+  type: 'test'
+  ...
+# Subtest: collection.title: null
+ok 51 - collection.title: null
+  ---
+  duration_ms: 0.559794
+  type: 'test'
+  ...
+# Subtest: collection.title: empty
+ok 52 - collection.title: empty
+  ---
+  duration_ms: 0.432422
+  type: 'test'
+  ...
+# Subtest: collection.title: whitespace
+ok 53 - collection.title: whitespace
+  ---
+  duration_ms: 0.616039
+  type: 'test'
+  ...
+# Subtest: collection.title: number
+ok 54 - collection.title: number
+  ---
+  duration_ms: 0.524882
+  type: 'test'
+  ...
+# Subtest: collection.title: boolean
+ok 55 - collection.title: boolean
+  ---
+  duration_ms: 0.475037
+  type: 'test'
+  ...
+# Subtest: collection.title: array
+ok 56 - collection.title: array
+  ---
+  duration_ms: 0.565003
+  type: 'test'
+  ...
+# Subtest: collection.title: object
+ok 57 - collection.title: object
+  ---
+  duration_ms: 0.558893
+  type: 'test'
+  ...
+# Subtest: collection.artist: missing
+ok 58 - collection.artist: missing
+  ---
+  duration_ms: 0.673827
+  type: 'test'
+  ...
+# Subtest: collection.artist: null
+ok 59 - collection.artist: null
+  ---
+  duration_ms: 0.776361
+  type: 'test'
+  ...
+# Subtest: collection.artist: empty
+ok 60 - collection.artist: empty
+  ---
+  duration_ms: 0.485423
+  type: 'test'
+  ...
+# Subtest: collection.artist: whitespace
+ok 61 - collection.artist: whitespace
+  ---
+  duration_ms: 0.812826
+  type: 'test'
+  ...
+# Subtest: collection.artist: number
+ok 62 - collection.artist: number
+  ---
+  duration_ms: 0.479784
+  type: 'test'
+  ...
+# Subtest: collection.artist: boolean
+ok 63 - collection.artist: boolean
+  ---
+  duration_ms: 0.554327
+  type: 'test'
+  ...
+# Subtest: collection.artist: array
+ok 64 - collection.artist: array
+  ---
+  duration_ms: 0.642539
+  type: 'test'
+  ...
+# Subtest: collection.artist: object
+ok 65 - collection.artist: object
+  ---
+  duration_ms: 0.551432
+  type: 'test'
+  ...
+# Subtest: live.title: missing
+ok 66 - live.title: missing
+  ---
+  duration_ms: 0.663011
+  type: 'test'
+  ...
+# Subtest: live.title: null
+ok 67 - live.title: null
+  ---
+  duration_ms: 1.365631
+  type: 'test'
+  ...
+# Subtest: live.title: empty
+ok 68 - live.title: empty
+  ---
+  duration_ms: 0.475938
+  type: 'test'
+  ...
+# Subtest: live.title: whitespace
+ok 69 - live.title: whitespace
+  ---
+  duration_ms: 0.453204
+  type: 'test'
+  ...
+# Subtest: live.title: number
+ok 70 - live.title: number
+  ---
+  duration_ms: 0.541738
+  type: 'test'
+  ...
+# Subtest: live.title: boolean
+ok 71 - live.title: boolean
+  ---
+  duration_ms: 0.474776
+  type: 'test'
+  ...
+# Subtest: live.title: array
+ok 72 - live.title: array
+  ---
+  duration_ms: 0.739916
+  type: 'test'
+  ...
+# Subtest: live.title: object
+ok 73 - live.title: object
+  ---
+  duration_ms: 0.601799
+  type: 'test'
+  ...
+# Subtest: live.artist: missing
+ok 74 - live.artist: missing
+  ---
+  duration_ms: 0.518833
+  type: 'test'
+  ...
+# Subtest: live.artist: null
+ok 75 - live.artist: null
+  ---
+  duration_ms: 0.633556
+  type: 'test'
+  ...
+# Subtest: live.artist: empty
+ok 76 - live.artist: empty
+  ---
+  duration_ms: 0.491391
+  type: 'test'
+  ...
+# Subtest: live.artist: whitespace
+ok 77 - live.artist: whitespace
+  ---
+  duration_ms: 0.652174
+  type: 'test'
+  ...
+# Subtest: live.artist: number
+ok 78 - live.artist: number
+  ---
+  duration_ms: 0.50407
+  type: 'test'
+  ...
+# Subtest: live.artist: boolean
+ok 79 - live.artist: boolean
+  ---
+  duration_ms: 0.452893
+  type: 'test'
+  ...
+# Subtest: live.artist: array
+ok 80 - live.artist: array
+  ---
+  duration_ms: 0.451762
+  type: 'test'
+  ...
+# Subtest: live.artist: object
+ok 81 - live.artist: object
+  ---
+  duration_ms: 0.478342
+  type: 'test'
+  ...
+# Subtest: legacy.title: missing
+ok 82 - legacy.title: missing
+  ---
+  duration_ms: 0.601428
+  type: 'test'
+  ...
+# Subtest: legacy.title: null
+ok 83 - legacy.title: null
+  ---
+  duration_ms: 0.404521
+  type: 'test'
+  ...
+# Subtest: legacy.title: empty
+ok 84 - legacy.title: empty
+  ---
+  duration_ms: 0.741399
+  type: 'test'
+  ...
+# Subtest: legacy.title: whitespace
+ok 85 - legacy.title: whitespace
+  ---
+  duration_ms: 0.475237
+  type: 'test'
+  ...
+# Subtest: legacy.title: number
+ok 86 - legacy.title: number
+  ---
+  duration_ms: 0.446614
+  type: 'test'
+  ...
+# Subtest: legacy.title: boolean
+ok 87 - legacy.title: boolean
+  ---
+  duration_ms: 0.4371
+  type: 'test'
+  ...
+# Subtest: legacy.title: array
+ok 88 - legacy.title: array
+  ---
+  duration_ms: 0.481687
+  type: 'test'
+  ...
+# Subtest: legacy.title: object
+ok 89 - legacy.title: object
+  ---
+  duration_ms: 0.646786
+  type: 'test'
+  ...
+# Subtest: legacy.artist: missing
+ok 90 - legacy.artist: missing
+  ---
+  duration_ms: 0.448717
+  type: 'test'
+  ...
+# Subtest: legacy.artist: null
+ok 91 - legacy.artist: null
+  ---
+  duration_ms: 1.741618
+  type: 'test'
+  ...
+# Subtest: legacy.artist: empty
+ok 92 - legacy.artist: empty
+  ---
+  duration_ms: 0.539945
+  type: 'test'
+  ...
+# Subtest: legacy.artist: whitespace
+ok 93 - legacy.artist: whitespace
+  ---
+  duration_ms: 0.548668
+  type: 'test'
+  ...
+# Subtest: legacy.artist: number
+ok 94 - legacy.artist: number
+  ---
+  duration_ms: 0.436739
+  type: 'test'
+  ...
+# Subtest: legacy.artist: boolean
+ok 95 - legacy.artist: boolean
+  ---
+  duration_ms: 0.464781
+  type: 'test'
+  ...
+# Subtest: legacy.artist: array
+ok 96 - legacy.artist: array
+  ---
+  duration_ms: 0.442237
+  type: 'test'
+  ...
+# Subtest: legacy.artist: object
+ok 97 - legacy.artist: object
+  ---
+  duration_ms: 0.501487
+  type: 'test'
+  ...
+# Subtest: historical v3 direct album producer preserves empty title and whitespace credits
+ok 98 - historical v3 direct album producer preserves empty title and whitespace credits
+  ---
+  duration_ms: 6.71939
+  type: 'test'
+  ...
+# Subtest: official legacy import saved empty artist and whitespace title
+ok 99 - official legacy import saved empty artist and whitespace title
+  ---
+  duration_ms: 4.010642
+  type: 'test'
+  ...
+# Subtest: same file name cannot substitute for actual selected File identity
+ok 100 - same file name cannot substitute for actual selected File identity
+  ---
+  duration_ms: 1.917153
+  type: 'test'
+  ...
+# Subtest: unrelated operation preserves draft bytes without a write
+ok 101 - unrelated operation preserves draft bytes without a write
+  ---
+  duration_ms: 0.816282
+  type: 'test'
+  ...
+# Subtest: only the current operation token can run during an asynchronous save
+ok 102 - only the current operation token can run during an asynchronous save
+  ---
+  duration_ms: 1.387404
+  type: 'test'
+  ...
+# Subtest: exact whole-form retry settles only after actual persistence
+ok 103 - exact whole-form retry settles only after actual persistence
+  ---
+  duration_ms: 0.650371
+  type: 'test'
+  ...
+# Subtest: late input after save started remains recoverable despite a successful write
+ok 104 - late input after save started remains recoverable despite a successful write
+  ---
+  duration_ms: 0.834649
+  type: 'test'
+  ...
+# Subtest: same failed restore can settle its own recovery
+ok 105 - same failed restore can settle its own recovery
+  ---
+  duration_ms: 0.623201
+  type: 'test'
+  ...
+# Subtest: different restore cannot replace unacknowledged failed restore
+ok 106 - different restore cannot replace unacknowledged failed restore
+  ---
+  duration_ms: 0.636601
+  type: 'test'
+  ...
+# Subtest: 429: max four attempts, notices, spacing, then queue recovers
+ok 107 - 429: max four attempts, notices, spacing, then queue recovers
+  ---
+  duration_ms: 12.672363
+  type: 'test'
+  ...
+# Subtest: 502: max four attempts, notices, spacing, then queue recovers
+ok 108 - 502: max four attempts, notices, spacing, then queue recovers
+  ---
+  duration_ms: 4.930981
+  type: 'test'
+  ...
+# Subtest: 503: max four attempts, notices, spacing, then queue recovers
+ok 109 - 503: max four attempts, notices, spacing, then queue recovers
+  ---
+  duration_ms: 6.080306
+  type: 'test'
+  ...
+# Subtest: 504: max four attempts, notices, spacing, then queue recovers
+ok 110 - 504: max four attempts, notices, spacing, then queue recovers
+  ---
+  duration_ms: 5.274058
+  type: 'test'
+  ...
+# Subtest: network: max four attempts, notices, spacing, then queue recovers
+ok 111 - network: max four attempts, notices, spacing, then queue recovers
+  ---
+  duration_ms: 7.551877
+  type: 'test'
+  ...
+# Subtest: Retry-After is honoured above 15 seconds, malformed values use backoff
+ok 112 - Retry-After is honoured above 15 seconds, malformed values use backoff
+  ---
+  duration_ms: 8.368603
+  type: 'test'
+  ...
+# Subtest: non-retryable HTTP errors and failed body reads
+ok 113 - non-retryable HTTP errors and failed body reads
+  ---
+  duration_ms: 3.379866
+  type: 'test'
+  ...
+# Subtest: serialized requests, in-flight deduplication, five-minute cache expiry
+ok 114 - serialized requests, in-flight deduplication, five-minute cache expiry
+  ---
+  duration_ms: 5.917219
+  type: 'test'
+  ...
+# Subtest: stale requests skip queued calls; deduplicated current caller receives retry notice
+ok 115 - stale requests skip queued calls; deduplicated current caller receives retry notice
+  ---
+  duration_ms: 1.254784
+  type: 'test'
+  ...
+# Subtest: actual API artist fixture: Number Girl
+ok 116 - actual API artist fixture: Number Girl
+  ---
+  duration_ms: 1.892646
+  type: 'test'
+  ...
+# Subtest: actual API artist fixture: ナンバーガール
+ok 117 - actual API artist fixture: ナンバーガール
+  ---
+  duration_ms: 0.763873
+  type: 'test'
+  ...
+# Subtest: actual API artist fixture: 細野晴臣
+ok 118 - actual API artist fixture: 細野晴臣
+  ---
+  duration_ms: 0.802952
+  type: 'test'
+  ...
+# Subtest: actual API artist fixture: Haruomi Hosono
+ok 119 - actual API artist fixture: Haruomi Hosono
+  ---
+  duration_ms: 0.798164
+  type: 'test'
+  ...
+# Subtest: kana normalization, alias sort names, and name agreement outrank server score
+ok 120 - kana normalization, alias sort names, and name agreement outrank server score
+  ---
+  duration_ms: 1.849731
+  type: 'test'
+  ...
+# Subtest: missing aliases are enriched; high-score unrelated artists fall back to title search
+ok 121 - missing aliases are enriched; high-score unrelated artists fall back to title search
+  ---
+  duration_ms: 6.848589
+  type: 'test'
+  ...
+# Subtest: browse consumes more than 600 raw records, sorts entire catalog, deduplicates by MBID
+ok 122 - browse consumes more than 600 raw records, sorts entire catalog, deduplicates by MBID
+  ---
+  duration_ms: 17.651737
+  type: 'test'
+  ...
+# Subtest: title pagination uses raw offsets and count, not displayed/deduplicated length
+ok 123 - title pagination uses raw offsets and count, not displayed/deduplicated length
+  ---
+  duration_ms: 3.728377
+  type: 'test'
+  ...
+# Subtest: actual Unknown Artist reproduction and credit repair preserve credited name and joinphrases
+ok 124 - actual Unknown Artist reproduction and credit repair preserve credited name and joinphrases
+  ---
+  duration_ms: 0.984606
+  type: 'test'
+  ...
+# Subtest: a timed-out fetch aborts, retries, and recovers
+ok 125 - a timed-out fetch aborts, retries, and recovers
+  ---
+  duration_ms: 2.458701
+  type: 'test'
+  ...
+# Subtest: v0.3.21 live artist response: 細野晴臣
+ok 126 - v0.3.21 live artist response: 細野晴臣
+  ---
+  duration_ms: 1.817683
+  type: 'test'
+  ...
+# Subtest: v0.3.21 live artist response: Haruomi Hosono
+ok 127 - v0.3.21 live artist response: Haruomi Hosono
+  ---
+  duration_ms: 2.512251
+  type: 'test'
+  ...
+# Subtest: v0.3.21 live artist response: Number Girl
+ok 128 - v0.3.21 live artist response: Number Girl
+  ---
+  duration_ms: 2.408835
+  type: 'test'
+  ...
+# Subtest: v0.3.21 live artist response: ナンバーガール
+ok 129 - v0.3.21 live artist response: ナンバーガール
+  ---
+  duration_ms: 3.822028
+  type: 'test'
+  ...
+# Subtest: v0.3.21 live artist response: 大比良瑞希
+ok 130 - v0.3.21 live artist response: 大比良瑞希
+  ---
+  duration_ms: 2.162894
+  type: 'test'
+  ...
+# Subtest: v0.3.21 live artist response: 大比良
+ok 131 - v0.3.21 live artist response: 大比良
+  ---
+  duration_ms: 3.473571
+  type: 'test'
+  ...
+# Subtest: album mode directly searches actual title response: Punisher
+ok 132 - album mode directly searches actual title response: Punisher
+  ---
+  duration_ms: 1.55676
+  type: 'test'
+  ...
+# Subtest: album mode directly searches actual title response: Hard Life
+ok 133 - album mode directly searches actual title response: Hard Life
+  ---
+  duration_ms: 1.029864
+  type: 'test'
+  ...
+# Subtest: nonexistent album response is empty; explicit artist mode does not return album results
+ok 134 - nonexistent album response is empty; explicit artist mode does not return album results
+  ---
+  duration_ms: 2.881529
+  type: 'test'
+  ...
+# Subtest: multiple short prefix matches require selection; exact names take precedence over scores
+ok 135 - multiple short prefix matches require selection; exact names take precedence over scores
+  ---
+  duration_ms: 2.985386
+  type: 'test'
+  ...
+# Subtest: duplicate exact names require selection, and prefix retrieval uses registered aliases/sort names
+ok 136 - duplicate exact names require selection, and prefix retrieval uses registered aliases/sort names
+  ---
+  duration_ms: 2.545702
+  type: 'test'
+  ...
+# Subtest: album title exact match ranks above a higher-scoring partial title and preserves duplicate-name works
+ok 137 - album title exact match ranks above a higher-scoring partial title and preserves duplicate-name works
+  ---
+  duration_ms: 1.793967
+  type: 'test'
+  ...
+# Subtest: full and partial Ohira names reach the same actual ten-work catalog
+ok 138 - full and partial Ohira names reach the same actual ten-work catalog
+  ---
+  duration_ms: 8.082658
+  type: 'test'
+  ...
+# Subtest: title ordering: normalized exact, partial, other; date descending with unknown last in each group
+ok 139 - title ordering: normalized exact, partial, other; date descending with unknown last in each group
+  ---
+  duration_ms: 1.381154
+  type: 'test'
+  ...
+# Subtest: title pages merge and re-sort all loaded works without extra requests; artist priority is unchanged
+ok 140 - title pages merge and re-sort all loaded works without extra requests; artist priority is unchanged
+  ---
+  duration_ms: 4.410165
+  type: 'test'
+  ...
+1..140
+# tests 140
+# suites 0
+# pass 140
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 602.439181

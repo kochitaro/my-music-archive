@@ -38,7 +38,7 @@ def main():
         page.goto(base+'/')
         assert page.evaluate('typeof MLAInsights.render')=='function'
         assert page.evaluate('typeof staleInsightsAsset')=='undefined'
-        assert '/insights.js?v=20261106-legend-layout-4' in requests
+        assert '/insights.js?v=20261109-multi-label' in requests
         assert '/insights.css?v=20261106-legend-layout-4' in requests
         page.locator('#insights-screen').click()
         root=page.locator('#listening-insights [data-insight=genre]')
