@@ -1,11 +1,12 @@
 """Synthetic Chromium evidence; baseline mode must run before changing index.html."""
 import json, os, sys, threading, subprocess
+from pathlib import Path
 from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import ROOT, KEY, QuietHandler, album
 PREF='mma-ui-grid-display-v1'
-EVIDENCE=ROOT/'docs/display-options-evidence'
-EVIDENCE.mkdir(exist_ok=True)
+EVIDENCE=Path(os.environ.get('MLA_DISPLAY_EVIDENCE',str(ROOT/'docs/display-options-evidence')))
+EVIDENCE.mkdir(parents=True,exist_ok=True)
 seed=dict(version=3,listening=[],collection=[],live=[])
 for area in ['listening','collection']:
     seed[area]=[{**album(t,label='Very long label records international, 別のレーベル',genre='Ambient, Electronic, ジャズ',tags=['夜','Long tag'],store='Very long record shop 東京',format='LP'), 'release':['2025','2025-02','2025-02-03'][i%3], 'rating':['8.6','','8.4','10','0','9'][i], 'artist':'長いアーティスト名 Artist with a very long name'} for i,t in enumerate(['短い','A very long album title 日本語とEnglish 混在するタイトル','Missing label','Four','Five','Six'])]
@@ -59,7 +60,7 @@ def main():
                 assert page.locator('[data-display-field=tags]').is_disabled()
                 page.locator('[data-move=up][data-field=rating]').click()
                 page.locator('[data-move=up][data-field=rating]').click()
-                assert page.locator('#display-selected [data-order-field]').evaluate_all('(ns)=>ns.map(n=>n.dataset.orderField)')==['rating','genre','label']
+                assert page.locator('#display-choices [data-order-field]').evaluate_all('(ns)=>ns.map(n=>n.dataset.orderField)')==['rating','genre','label']
                 page.locator('#display-close').click()
                 for width in [320,375,390,430,1280]:
                     page.set_viewport_size(dict(width=width,height=844))

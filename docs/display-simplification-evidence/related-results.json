@@ -1,0 +1,30 @@
+[
+  {
+    "name": "display_options",
+    "exit": 0
+  },
+  {
+    "name": "display_defaults",
+    "exit": 0
+  },
+  {
+    "name": "archive_insights",
+    "exit": 0
+  },
+  {
+    "name": "data_preservation",
+    "exit": 0
+  },
+  {
+    "name": "save_failure_safety",
+    "exit": 0
+  },
+  {
+    "name": "ui_v0322",
+    "exit": 0
+  },
+  {
+    "name": "unified_filters",
+    "exit": 0
+  }
+]
