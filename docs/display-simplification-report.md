@@ -1,8 +1,10 @@
 # PR #35 追加修正：ヘッダー・設定画面の簡素化
 
+最新の表示設定ボタンの配置・外観修正は末尾に追記。以下の前回修正から、配置を左側、外観を枠なしへ更新した。
+
 2026-11-10。変更前は同PRの `4adf87c9fca848fcb1bd7a09edff22c62890bfd5`。新規PRを作成せず、`feat/archive-display-options` を更新する。
 
-## 最終デザイン
+## 前回修正のデザイン
 
 アーカイブの見出し・件数・グリッド／リスト・表示設定を1行へ戻した。380px以下の2段化を削除し、グリッド／リストの既存グループ、各44×44px、18pxアイコン、独立した設定ボタンまでの12px間隔を維持。320px付近（340px以下）だけ見出しを18→16px、件数を12→11px、見出しと操作群の最小間隔を8→4pxに調整した。375px以上の文字サイズは変えない。Liveにはこの文字サイズ変更を適用しない。カードの列幅やパネル余白を変更して収める方法は採用していない。
 
@@ -83,3 +85,71 @@ PR #35上で①開発・検証ルーム #3の再レビューを依頼する。�
 |unified_filters|成功|[ログ](display-simplification-evidence/unified_filters.log)|
 
 全7本成功。[機械可読結果](display-simplification-evidence/related-results.json)。初期カードはmainとの日英×5幅×2アーカイブ×3並べ替え比較で一致（[結果](display-simplification-evidence/grid-default-comparison.json)）。グリッド／リスト、Insights切替、複合フィルター、登録・編集・削除、JSONバックアップ／復元、CSV、保存失敗と別タブ競合の既存保護を確認した。
+
+## 表示設定ボタンの配置・外観（最新修正）
+
+2026-11-10。変更前: `3895564419d4137758bc9f850bf3ac4ee49ba945`。PR #35の同じブランチを更新。
+
+### 変更内容と見た目
+
+ヘッダーの順序を「タイトル・件数 → 表示設定 → グリッド／リスト」にした。切り替え群を右端に置き、設定ボタンとの独立間隔は12px。設定ボタンは44×44pxの操作領域を保ち、透明背景、枠なし、角丸なし、既存のmuted色 `#a1adbc` と16pxのスライダーアイコンに変更した。グリッド／リストは従来の一体グループと18pxアイコンを維持する。フォーカス時のアウトラインとアクセシブル名は維持した。
+
+見出しの文字サイズ、件数、狭幅の調整値、パネル余白、ジャケット・列幅は今回変更していない。設定ボタンの見える四角形を取り除き、切り替え群の左側に控えめな補助アイコンを置くことで、タイトルと主要操作の強弱を保つ。枠のために使っていた領域を詰めず、タップしやすさを維持している。
+
+### 再検証
+
+Chromium、隔離した合成データ（両アーカイブ各60件）、外部通信遮断で検証。日英×320/375/390/430px×Listening/Collectionの全16条件で次を確認した。
+
+- タイトル・件数・全操作が1行、設定が左、グリッド／リストが右端。重複・横はみ出し・横スクロールなし。
+- 3ボタンすべて44×44px以上。設定アイコン16px、切り替えアイコン18px。独立間隔12px。4桁件数のDOMストレス条件でも収まる。
+- 設定モーダルの開閉（閉じる／Escape）、設定ボタンへのフォーカス復帰、グリッド／リスト切り替えが正常。
+- 変更前後で単一一覧モーダルのHTML、一覧のHTML、カードの寸法・情報位置・表示内容が一致。設定保存文字列を維持。
+- Liveは日英×4幅の8条件で、変更前後のヘッダー画像がピクセル単位で一致し、表示ボタンの矩形も一致。
+- 操作後にレコードDB保存文字列が完全一致し、DB書き込み0回。設定の保存キー・形式は不変。
+- アプリケーションJavaScript全体とモーダルのHTMLは前回コミットと完全一致。レコード保存・保護、Insights、検索の処理差分なし。
+
+[ヘッダー試験ログ](display-header-controls-evidence/browser.log) / [寸法・外観の実測値](display-header-controls-evidence/measurements.json) / [ソース不変の照合](display-header-controls-evidence/source-invariance.log)
+
+### 重点比較
+
+320px・日本語・Listening（60件）:
+
+![変更前](display-header-controls-evidence/before-listening-ja-320.png)
+
+![変更後](display-header-controls-evidence/after-listening-ja-320.png)
+
+390px・日本語・Listening（60件）:
+
+![変更前](display-header-controls-evidence/before-listening-ja-390.png)
+
+![変更後](display-header-controls-evidence/after-listening-ja-390.png)
+
+390px・英語・Collection（60件）:
+
+![変更前](display-header-controls-evidence/before-collection-en-390.png)
+
+![変更後](display-header-controls-evidence/after-collection-en-390.png)
+
+上記の3組を目視確認。変更後は設定ボタンを囲む四角形がなくなり、右端の切り替え群が主要操作として読み取れる。文字・アイコンの縦方向の中心も整っている。
+
+全幅・言語の画像は下表。Listening/Collection計32画像と、Live比較16画像を保存した。
+
+|幅|言語|Listening|Collection|Live（画像一致）|
+|---|---|---|---|---|
+|320|ja|[前](display-header-controls-evidence/before-listening-ja-320.png) / [後](display-header-controls-evidence/after-listening-ja-320.png)|[前](display-header-controls-evidence/before-collection-ja-320.png) / [後](display-header-controls-evidence/after-collection-ja-320.png)|[前](display-header-controls-evidence/before-live-ja-320.png) / [後](display-header-controls-evidence/after-live-ja-320.png)|
+|320|en|[前](display-header-controls-evidence/before-listening-en-320.png) / [後](display-header-controls-evidence/after-listening-en-320.png)|[前](display-header-controls-evidence/before-collection-en-320.png) / [後](display-header-controls-evidence/after-collection-en-320.png)|[前](display-header-controls-evidence/before-live-en-320.png) / [後](display-header-controls-evidence/after-live-en-320.png)|
+|375|ja|[前](display-header-controls-evidence/before-listening-ja-375.png) / [後](display-header-controls-evidence/after-listening-ja-375.png)|[前](display-header-controls-evidence/before-collection-ja-375.png) / [後](display-header-controls-evidence/after-collection-ja-375.png)|[前](display-header-controls-evidence/before-live-ja-375.png) / [後](display-header-controls-evidence/after-live-ja-375.png)|
+|375|en|[前](display-header-controls-evidence/before-listening-en-375.png) / [後](display-header-controls-evidence/after-listening-en-375.png)|[前](display-header-controls-evidence/before-collection-en-375.png) / [後](display-header-controls-evidence/after-collection-en-375.png)|[前](display-header-controls-evidence/before-live-en-375.png) / [後](display-header-controls-evidence/after-live-en-375.png)|
+|390|ja|[前](display-header-controls-evidence/before-listening-ja-390.png) / [後](display-header-controls-evidence/after-listening-ja-390.png)|[前](display-header-controls-evidence/before-collection-ja-390.png) / [後](display-header-controls-evidence/after-collection-ja-390.png)|[前](display-header-controls-evidence/before-live-ja-390.png) / [後](display-header-controls-evidence/after-live-ja-390.png)|
+|390|en|[前](display-header-controls-evidence/before-listening-en-390.png) / [後](display-header-controls-evidence/after-listening-en-390.png)|[前](display-header-controls-evidence/before-collection-en-390.png) / [後](display-header-controls-evidence/after-collection-en-390.png)|[前](display-header-controls-evidence/before-live-en-390.png) / [後](display-header-controls-evidence/after-live-en-390.png)|
+|430|ja|[前](display-header-controls-evidence/before-listening-ja-430.png) / [後](display-header-controls-evidence/after-listening-ja-430.png)|[前](display-header-controls-evidence/before-collection-ja-430.png) / [後](display-header-controls-evidence/after-collection-ja-430.png)|[前](display-header-controls-evidence/before-live-ja-430.png) / [後](display-header-controls-evidence/after-live-ja-430.png)|
+|430|en|[前](display-header-controls-evidence/before-listening-en-430.png) / [後](display-header-controls-evidence/after-listening-en-430.png)|[前](display-header-controls-evidence/before-collection-en-430.png) / [後](display-header-controls-evidence/after-collection-en-430.png)|[前](display-header-controls-evidence/before-live-en-430.png) / [後](display-header-controls-evidence/after-live-en-430.png)|
+
+### 自動試験・未検証事項
+
+- [Node全151件成功](display-header-controls-evidence/node-tests.log)。
+- 関連ブラウザ `display_simplification`（選択・解除・並べ替え・最大3件・保存失敗・キーボード）、`display_defaults`（初期カードとmain比較）、`archive_insights`（アーカイブ／Insights、一覧切り替え、Live）を再実行。最終結果は以下のログを参照。
+- 今回もChromium試験。iPhone Safari実機、VoiceOver、実タッチの最終評価は未実施。画面外を隠すことで収めたものではなく、文字と操作の矩形の非重複を検証している。
+- 前回記載の既存試験4本の失敗は今回のヘッダー修正対象外。新規PR・マージ・手動デプロイは行わず、PR #35で再レビューを依頼する。
+
+関連ブラウザ3本はいずれも成功：[設定操作・キーボード](display-header-controls-evidence/display_simplification.log) / [初期カード比較](display-header-controls-evidence/display_defaults.log) / [アーカイブ・Live・Insights](display-header-controls-evidence/archive_insights.log)。[初期カードの一致結果](display-header-controls-evidence/default-comparison.json)。

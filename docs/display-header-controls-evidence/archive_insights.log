@@ -1,0 +1,8 @@
+PASS ja 320: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score
+PASS en 320: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score
+PASS ja 390: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score
+PASS en 390: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score
+PASS ja 430: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score
+PASS en 430: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score
+PASS ja 1280: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score
+PASS en 1280: screen isolation, DOM state, no DB writes, icon names/tap sizes, overflow, Live labels/order/score

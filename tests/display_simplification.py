@@ -15,8 +15,8 @@ def assert_header(p,m):
  assert abs(m['heading']['y']+m['heading']['h']/2-m['buttons'][0]['y']-22)<1,m
  assert m['text']['h']<=m['heading']['h']+1,m
  assert all(b['w']>=44 and b['h']>=44 for b in m['buttons']),m
- assert abs(m['buttons'][2]['x']-m['segments']['right']-12)<.1,m
- assert all(i['w']==18 and i['h']==18 for i in m['icons']),m
+ assert abs(m['segments']['x']-m['buttons'][0]['right']-12)<.1,m
+ assert [(i['w'],i['h']) for i in m['icons']]==[(16,16),(18,18),(18,18)],m
  assert m['controls']['right']<=m['container']['right']+.1,m
  assert p.evaluate('document.documentElement.scrollWidth<=innerWidth')
 

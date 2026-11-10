@@ -1,0 +1,8 @@
+PASS 320 ja both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
+PASS 320 en both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
+PASS 375 ja both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
+PASS 375 en both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
+PASS 390 ja both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
+PASS 390 en both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
+PASS 430 ja both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
+PASS 430 en both archives: settings left, grid/list right, 44px, muted; Live pixel-identical; modal/list/cards unchanged; DB writes 0
