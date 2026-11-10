@@ -134,6 +134,7 @@ def main():
             print('PASS artists: legacy/no conversion, one/multiple, add/edit/remove/empty, failure/retry/cancel, detail, reload, JSON:', lang)
             # Boundary values and unrated across all Live displays, save and reload.
             page.locator('[data-section=live]').click()
+            page.locator('#display-options').click();page.locator('[data-display-field=rating]').check();page.locator('#display-close').click()
             for score, color in [(4.4, LIVE_CORAL), (4.5, LIVE_GOLD), (5.0, LIVE_GOLD), (0.0, LIVE_CORAL), (None, LIVE_CORAL)]:
                 edit(page, 'Festival Title')
                 slider = page.locator('[data-target=e-live-rating] .star-rating')
