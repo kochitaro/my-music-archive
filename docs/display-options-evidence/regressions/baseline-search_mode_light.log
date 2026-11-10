@@ -36,4 +36,3 @@ Call log:
     - locator resolved to <div role="group" id="search-modes" aria-label="検索方式">…</div>
   - attempting select option action
     - waiting for element to be visible and enabled
-
