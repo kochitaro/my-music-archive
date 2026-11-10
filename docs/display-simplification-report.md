@@ -153,3 +153,11 @@ Chromium、隔離した合成データ（両アーカイブ各60件）、外部�
 - 前回記載の既存試験4本の失敗は今回のヘッダー修正対象外。新規PR・マージ・手動デプロイは行わず、PR #35で再レビューを依頼する。
 
 関連ブラウザ3本はいずれも成功：[設定操作・キーボード](display-header-controls-evidence/display_simplification.log) / [初期カード比較](display-header-controls-evidence/display_defaults.log) / [アーカイブ・Live・Insights](display-header-controls-evidence/archive_insights.log)。[初期カードの一致結果](display-header-controls-evidence/default-comparison.json)。
+
+## ヘッダー左右配置・背景の再調査（最新）
+
+実際のMLAのDOM・CSS・Chromium描画を調査した結果、左右端は既に整列し、ヘッダー専用の背景・枠・影・疑似要素は存在しなかった。パネルの背景色がヘッダーの空き領域まで連続することを画素で確認した。指示に従い、アプリのHTML/CSS/JavaScriptは変更していない。
+
+前回の44px高のヘッダー切り抜きだけでは全体の外観を判断しにくいため、全16条件のパネル全体の前後画像、Live比較、重点3条件のページ全体を追加した。GitHubビューア自体の表示は直接確認していないため、その影響を原因と断定しない。
+
+[最新の調査報告・DOM寸法・CSS・比較画像・試験結果](archive-header-audit-report.md)を参照。iPhone Safari実機は未検証。PR #35の同一ブランチを更新し、マージ・手動デプロイは行わない。

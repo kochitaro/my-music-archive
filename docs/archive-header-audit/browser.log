@@ -1,0 +1,9 @@
+PASS 320 ja left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS 320 en left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS 375 ja left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS 375 en left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS 390 ja left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS 390 en left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS 430 ja left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS 430 en left/right aligned; transparent header; continuous panel pixels; before/after identical; Live unchanged; DB writes 0
+PASS app HTML/CSS/JavaScript unchanged from 1356248c92678f5ddc82f4c54d69c4b513986326
