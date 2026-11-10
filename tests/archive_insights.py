@@ -33,7 +33,10 @@ def main():
                         assert button.inner_text()==''
                         box=button.bounding_box();assert box['width']>=44 and box['height']>=44
                         heading=page.locator('.archive-heading h2').bounding_box()
-                        assert box['x']>=heading['x']+heading['width'] and box['y']<heading['y']+heading['height']+44
+                        if width<=380 and area!='live':
+                            assert box['y']>=heading['y']+heading['height']
+                        else:
+                            assert box['x']>=heading['x']+heading['width'] and box['y']<heading['y']+heading['height']+44
                     page.screenshot(path=str(evidence/f'archive-{area}-{lang}-{width}.png'),full_page=True)
                     page.locator('#list-tab').click();open_filters(page)
                     page.locator('#sort-toggle').click();page.locator('#sort').select_option('rating-desc');open_filters(page)

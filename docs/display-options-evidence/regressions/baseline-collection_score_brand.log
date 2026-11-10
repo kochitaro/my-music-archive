@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/tmp/mla-main/tests/collection_score_brand.py", line 152, in <module>
+    main()
+  File "/tmp/mla-main/tests/collection_score_brand.py", line 58, in main
+    assert pair['before'][key] == pair['after'][key], (width, key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (320, 'h2')

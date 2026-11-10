@@ -1,0 +1,6 @@
+PASS required-field matrix: import/save/startup + exact recovery: 144
+PASS invalid import + startup exact raw recovery: 32
+PASS compatibility exact import/save/reload/export; cross-area IDs
+PASS legacy import/startup count/order/IDs/scores and whole rejection
+PASS cancel/read/write/render boundaries + subsequent save/reload
+PASS ID guards/deletion recheck/generation; total scenarios: 57

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/tmp/mla-main/tests/integration_pr6_pr7.py", line 161, in <module>
+    main()
+  File "/tmp/mla-main/tests/integration_pr6_pr7.py", line 63, in main
+    assert ('変更は反映されていません' if ja else 'Changes have not been applied') in alerts[-1]
+                                                                                      ~~~~~~^^^^
+IndexError: list index out of range

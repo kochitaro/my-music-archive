@@ -1,0 +1,9 @@
+PASS branding, widths, legacy key, bilingual labels/a11y, Collection, star boundaries: ja
+PASS branding, widths, legacy key, bilingual labels/a11y, Collection, star boundaries: en
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: listening False
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: listening True
+PASS release precision, empty, re-edit/reload, invalid years/days, leap centuries, no invented day: listening
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: collection False
+PASS title edit, failure/retry, all other fields/IDs, reload, old MMA JSON, blank validation: collection True
+PASS release precision, empty, re-edit/reload, invalid years/days, leap centuries, no invented day: collection
+PASS Search Lab branding; unchanged search.js and no storage access (source review)
