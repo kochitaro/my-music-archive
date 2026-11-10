@@ -1,0 +1,52 @@
+[
+  {
+    "lang": "ja",
+    "width": 320,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "defaultCardGeometryAndContentUnchanged": true
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "defaultCardGeometryAndContentUnchanged": true
+  }
+]

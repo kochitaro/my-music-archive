@@ -1,0 +1,5 @@
+PASS Japanese/English manual action on both tabs, repeated language changes, persisted language/reload, unchanged modal route/data
+PASS Collection-only counts, blanks/null/missing stores, raw values/collisions, compound filters, stable counts and tab/view/language selection
+PASS store counts refresh on registration/edit/delete, unset updates, zero-count selection/tab preservation and dynamic identifier collisions
+PASS Live 0/4.2/4.3/4.5/5 in grid/list/detail/edit, unchanged fractional masks/unrated, 0.1 edit/save Live coral/gold hearts and creation UI
+PASS exact original records/storage and JSON backup/restore/reload, refreshed counts; no external requests or JavaScript errors

@@ -1,0 +1,3 @@
+PASS all application JavaScript unchanged from 3895564
+PASS settings modal markup unchanged from 3895564
+Changes limited to header button order and settings-button CSS

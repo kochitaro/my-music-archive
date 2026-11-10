@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/my-music-archive/tests/archive_insights.py", line 86, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/my-music-archive/tests/archive_insights.py", line 36, in main
+    assert box['x']>=heading['x']+heading['width'] and box['y']<heading['y']+heading['height']+44
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
