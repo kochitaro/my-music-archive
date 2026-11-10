@@ -99,7 +99,8 @@ def main():
                 assert page.evaluate('(k)=>localStorage.getItem(k)',KEY)==raw and page.evaluate('dbWrites')==0
                 page.evaluate('failPreference=false');page.evaluate('(k)=>localStorage.setItem(k,JSON.stringify({listening:["rating","rating","bogus","genre","label","date"],collection:["store"]}))',PREF);page.reload()
                 assert page.locator('.tile-slot').count()==0 # invalid listening falls back to default
-                page.locator('[data-section=live]').click();assert page.locator('#display-options').is_hidden()
+                page.locator('[data-section=live]').click();assert page.locator('#display-options').is_visible()
+                assert page.locator('.archive-heading #display-options').count()==0
             assert not errors,errors
             ctx.close()
         browser.close()

@@ -1,0 +1,32 @@
+PASS placement ja listening 320
+PASS placement ja listening 375
+PASS placement ja listening 390
+PASS placement ja listening 430
+PASS placement ja listening 1280
+PASS placement ja collection 320
+PASS placement ja collection 375
+PASS placement ja collection 390
+PASS placement ja collection 430
+PASS placement ja collection 1280
+PASS placement ja live 320
+PASS placement ja live 375
+PASS placement ja live 390
+PASS placement ja live 430
+PASS placement ja live 1280
+PASS ja 3 archives × 5 widths × groups/empty/list; Live 0-3 fields; save/read/DB safety
+PASS placement en listening 320
+PASS placement en listening 375
+PASS placement en listening 390
+PASS placement en listening 430
+PASS placement en listening 1280
+PASS placement en collection 320
+PASS placement en collection 375
+PASS placement en collection 390
+PASS placement en collection 430
+PASS placement en collection 1280
+PASS placement en live 320
+PASS placement en live 375
+PASS placement en live 390
+PASS placement en live 430
+PASS placement en live 1280
+PASS en 3 archives × 5 widths × groups/empty/list; Live 0-3 fields; save/read/DB safety

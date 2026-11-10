@@ -1,0 +1,10 @@
+PASS Live edges ja 320 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges ja 375 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges ja 390 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges ja 430 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges ja 1280 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges en 320 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges en 375 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges en 390 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges en 430 memo/date/heart, keyboard, invalid/read failure, DB unchanged
+PASS Live edges en 1280 memo/date/heart, keyboard, invalid/read failure, DB unchanged

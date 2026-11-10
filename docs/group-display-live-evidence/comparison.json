@@ -1,0 +1,662 @@
+[
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 266,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 246,
+      "width": 266,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 321,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 191,
+      "width": 321,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 336,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 176,
+      "width": 336,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 376,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 168,
+      "width": 376,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 31,
+      "y": 168,
+      "width": 1218,
+      "height": 48
+    },
+    "headingAfter": {
+      "x": 31,
+      "y": 168,
+      "width": 1218,
+      "height": 48
+    },
+    "cardStartDelta": 0
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 266,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 266,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 260,
+      "width": 266,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 321,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 321,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 205,
+      "width": 321,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 336,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 336,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 190,
+      "width": 336,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 120,
+      "width": 376,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 27,
+      "y": 168,
+      "width": 376,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 27,
+      "y": 168,
+      "width": 376,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "listening",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "collection",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": true,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 31,
+      "y": 120,
+      "width": 1218,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "live",
+    "photosUnchanged": true,
+    "albumCardsUnchanged": false,
+    "listUnchanged": true,
+    "insightsUnchanged": true,
+    "headingBefore": {
+      "x": 31,
+      "y": 168,
+      "width": 1218,
+      "height": 43
+    },
+    "headingAfter": {
+      "x": 31,
+      "y": 168,
+      "width": 1218,
+      "height": 44
+    },
+    "cardStartDelta": 1
+  }
+]

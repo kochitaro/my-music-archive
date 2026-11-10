@@ -334,6 +334,8 @@ def main():
         # Live uses Live coral/gold hearts, with its existing creation/edit/delete/sort/view controls.
         page.locator('[data-section=live]').click()
         page.locator('#grid-tab').click()
+        # Live defaults to title only; opt into score for the existing color regression.
+        page.locator('#display-options').click();page.locator('[data-display-field=rating]').check();page.locator('#display-close').click()
         assert_hearts(record(page, 'Existing Live'), LIVE_GOLD, 100)
         page.locator('#add-live-trigger').click()
         page.locator('#live-title').fill('New Live')

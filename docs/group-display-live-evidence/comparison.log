@@ -1,0 +1,10 @@
+PASS compare ja 320 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare ja 375 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare ja 390 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare ja 430 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare ja 1280 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare en 320 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare en 375 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare en 390 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare en 430 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained
+PASS compare en 1280 album cards/list/Insights/photos unchanged; grouped card start delta <=1px; JSON exact; Live language retained

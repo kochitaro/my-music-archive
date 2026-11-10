@@ -1,0 +1,7 @@
+{
+  "record validation, writes, guards and storage conflict handling": true,
+  "photos and search setup": true,
+  "insights.js unchanged": true,
+  "search.js unchanged": true,
+  "JSON/CSV export and restore code unchanged": true
+}
