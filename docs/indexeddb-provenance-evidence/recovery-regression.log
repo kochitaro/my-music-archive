@@ -1,0 +1,11 @@
+PASS cleanup gates, journal-write failure, interruption after deletion + reload/photos
+USAGE {"case": "6 records / one generated 128px PNG repeated", "before": {"entries": [{"key": "my-music-archive-photos-v1", "characters": 2673}, {"key": "my-music-archive-pilot-v03", "characters": 455623}], "utf16Bytes": 916592}, "after": {"entries": [{"key": "my-music-archive-photos-v1", "characters": 2673}], "utf16Bytes": 5346}, "releasedUTF16Bytes": 911246}
+PASS actual old main saves after cleanup; dual backups; failed recovery retains both; recovery/save/JSON roundtrip
+PASS only matching v03 removed; distinct v1 retained and independently exportable/readback verified
+PASS v1 missing-ID migration: stable export/readback, cleanup and reload
+PASS partial two-key deletion interrupted; durable stop/recovery/retry cleanup
+PASS actual old main write before cleanup; both backups and explicit new-branch recovery
+PASS legacy race before cleanup; durable stop on reload; choose new branch recovery/save
+PASS source race during recovery stops publication; fresh dual backups allow retry
+PASS aggregate localStorage quota blocks coexistence; old retained; export/readback + restore to isolated context
+PASS all next-stage synthetic recovery checks

@@ -1,0 +1,4 @@
+PASS UI listening create with photo, edit, replace/remove/add photo, delete; original records exact
+PASS UI collection create with photo, edit, replace/remove/add photo, delete; original records exact
+PASS UI live create with photo, edit, replace/remove/add photo, delete; original records exact
+PASS actual downloaded photo JSON import/reload exact; page errors 0

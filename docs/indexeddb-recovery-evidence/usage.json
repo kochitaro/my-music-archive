@@ -1,0 +1,28 @@
+[
+  {
+    "case": "6 records / one generated 128px PNG repeated",
+    "before": {
+      "entries": [
+        {
+          "key": "my-music-archive-photos-v1",
+          "characters": 2510
+        },
+        {
+          "key": "my-music-archive-pilot-v03",
+          "characters": 455623
+        }
+      ],
+      "utf16Bytes": 916266
+    },
+    "after": {
+      "entries": [
+        {
+          "key": "my-music-archive-photos-v1",
+          "characters": 2510
+        }
+      ],
+      "utf16Bytes": 5020
+    },
+    "releasedUTF16Bytes": 911246
+  }
+]

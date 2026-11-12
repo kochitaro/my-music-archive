@@ -1,0 +1,8 @@
+PASS new-only add/edit/photo changes: provenance carried; latest JSON/reload gates; imported key deleted, unrelated key retained
+PASS actual old-main save after new edits: cleanup/save stopped across reload; both complete photo JSON branches exported
+PASS explicit recovery resets provenance; rejected old branch stays retained
+PASS pre-provenance compatibility: equivalence verified before first edit; cleanup allowed
+PASS pre-provenance compatibility: already edited history not invented; old retained
+PASS per-key content digest rejects changed legacy even when combined stamp agrees
+PASS malformed provenance stops cleanup without deleting old data
+PASS all migration-provenance checks
