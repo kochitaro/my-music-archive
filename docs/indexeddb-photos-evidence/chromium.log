@@ -1,0 +1,11 @@
+PASS migration: all fields/photos equal, original retained, three areas display
+PASS old JSON import and new portable JSON round trip
+PASS readback mismatch rejects publication without changing original
+PASS injected quota on restore preserves archive/photos; retry succeeds
+PASS reference write failure + reload retry; replace/remove/delete in all areas
+PASS tab race after copy, legacy divergence detected across reloads
+PASS new photo quota UI: cancel retains input/file; chosen no-photo save
+PASS migration interruption by page close and failed publication + retry
+PASS rollback: actual baseline main restores new photo-inclusive JSON
+PASS missing photo export notification and fail-closed startup
+PASS all synthetic IndexedDB prototype checks
