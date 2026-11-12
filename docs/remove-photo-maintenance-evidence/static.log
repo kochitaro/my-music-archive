@@ -1,0 +1,5 @@
+PASS all inline JavaScript and photo/recovery modules: node --check
+PASS git diff --check
+PASS photo-store.js and photo-lifecycle.js byte-identical to 6bbe6e43ae9886674e2a51d0cc0b8b43ca330164
+PASS 120 full-page PNGs; 60 layout comparisons; 30 prior display comparison cases
+PASS origin/main unchanged at final fetch

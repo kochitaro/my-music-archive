@@ -1,0 +1,542 @@
+[
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 375,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 430,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "ja",
+    "width": 1280,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 375,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 430,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "listening",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "listening",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "collection",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "collection",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "live",
+    "screen": "archive",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "area": "live",
+    "screen": "insights",
+    "appDOMAndGeometryEqual": true,
+    "footerUnchanged": true,
+    "legacyRetained": true
+  }
+]
