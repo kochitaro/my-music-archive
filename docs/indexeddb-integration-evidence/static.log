@@ -1,0 +1,5 @@
+PASS all inline scripts and photo modules: node --check
+PASS git diff --check
+PASS app files identical to cbce1e1
+PASS latest origin/main c2c719dd1bd25583402e0a2db948e168018ce34e
+PASS 30 main comparison results; 10 language/width combinations
