@@ -1,0 +1,64 @@
+{
+  "allMatch": true,
+  "results": [
+    {
+      "file": "1-migration-final.json",
+      "match": true,
+      "differences": [],
+      "photos": [
+        {
+          "area": "listening",
+          "entryId": "safari-cbce1e1-listening",
+          "sha256": "946e3ffbfc04eb24acf4650adb8a387a14ffb03d9ee392e1013a45f19d85e559"
+        },
+        {
+          "area": "collection",
+          "entryId": "safari-cbce1e1-collection",
+          "sha256": "71766b34a63c4442970372278ca5755cd826675220f71ce92decbcbfbb8f5834"
+        },
+        {
+          "area": "live",
+          "entryId": "safari-cbce1e1-live",
+          "sha256": "f75c656013fe70817edfef56e3d08ae1ec98e5f349ff421d69d4861192ad687c"
+        }
+      ],
+      "fileSHA256": "8504be49541d50201574df3ca98ad185089c5218f2cf36d9fa829c841f829a7f",
+      "counts": {
+        "listening": 1,
+        "collection": 1,
+        "live": 1
+      },
+      "listeningMemo": "Safari編集1・再読み込み後保存"
+    },
+    {
+      "file": "2-restore-final.json",
+      "match": true,
+      "differences": [],
+      "photos": [
+        {
+          "area": "listening",
+          "entryId": "safari-cbce1e1-listening",
+          "sha256": "946e3ffbfc04eb24acf4650adb8a387a14ffb03d9ee392e1013a45f19d85e559"
+        },
+        {
+          "area": "collection",
+          "entryId": "safari-cbce1e1-collection",
+          "sha256": "71766b34a63c4442970372278ca5755cd826675220f71ce92decbcbfbb8f5834"
+        },
+        {
+          "area": "live",
+          "entryId": "safari-cbce1e1-live",
+          "sha256": "f75c656013fe70817edfef56e3d08ae1ec98e5f349ff421d69d4861192ad687c"
+        }
+      ],
+      "fileSHA256": "8504be49541d50201574df3ca98ad185089c5218f2cf36d9fa829c841f829a7f",
+      "counts": {
+        "listening": 1,
+        "collection": 1,
+        "live": 1
+      },
+      "listeningMemo": "Safari編集1・再読み込み後保存"
+    }
+  ],
+  "scope": "Submitted JSON records, fields and photo bytes only; device/iOS and visual cleanup confirmation not yet reported."
+}
