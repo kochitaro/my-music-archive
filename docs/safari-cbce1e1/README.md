@@ -51,3 +51,9 @@ python tools/compare_safari_json.py /path/to/migration-final.json /path/to/resto
 比較器の一致・写真欠落・写真取り違え・再読み込み後保存漏れ・記録欠落・追加フィールドの10ケースを自動検証した。[結果](comparator-tests.log)。旧形式JSONが旧版・試作版の両方の`migrate`検証に通り、内容が変わらないこともNodeで確認した。[自己照合結果](comparator-self-check.json)は合成の期待値を使った比較器の動作確認であり、iPhoneの検証結果ではない。
 
 準備は配信まで完了。実機JSONが提出されるまでiPhone Safariの成否は未判定。
+
+## 追記：Safari共有メニューに保存がない場合
+
+[直接ダウンロードページ](https://mla-safari-cbce1e1.wigglyfrost4096.chatgpt.site/download.html)を追加した。「旧JSONをダウンロード」を押すと、元のUTF-8バイト列をそのままBlobから`mla-safari-legacy.json`としてダウンロードする。共有メニューの「ファイルに保存」は使用しない。ファイル名・MIME・元JSONとのバイト一致をNodeで検証した（SHA-256 `bd8781a6110ebec61e59de3e16d39a651afb5f70ab1df3acdd97fe70ccdaefa8`）。
+
+移行ホストだけを再配信。配信用コミット `374eb67579b5227bf33ea83bad642fb1f0856024`、保存済みバージョンID `appgprj_6af51f10b7908191a2da601a4eae21e1~appgver_11a989e350d48191a786e375eb857012`、配信成功。旧版・試作版のアプリ本体、合成JSONの内容、ブラウザ保存領域、復元先ホストは変更していない。

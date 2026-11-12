@@ -44,6 +44,7 @@ def main():
   for p in (DOC/'fixtures').iterdir():
    t=dist/'fixtures'/p.name;t.parent.mkdir(exist_ok=True);t.write_bytes(p.read_bytes())
   (dist/'index.html').write_text((DOC/'index.html').read_text())
+  if (DOC/'download.html').exists():(dist/'download.html').write_bytes((DOC/'download.html').read_bytes())
   manifest=dict(legacyCommit=OLD if has_old else None,prototypeCommit=NEW,siteOrigin=MIGRATION if has_old else RESTORE,migrationOrigin=MIGRATION,restoreOrigin=RESTORE,assetsSHA256=hashes)
   dump(dist/'build.json',manifest);checks[name]=manifest
  dump(DOC/'source-manifest.json',checks)
