@@ -1,0 +1,36 @@
+{
+  "mla-safari-cbce1e1": {
+    "legacyCommit": "c2c719dd1bd25583402e0a2db948e168018ce34e",
+    "prototypeCommit": "cbce1e1fefd5017e8c9efa84e43a08c4c1c5041f",
+    "siteOrigin": "https://mla-safari-cbce1e1.wigglyfrost4096.chatgpt.site",
+    "migrationOrigin": "https://mla-safari-cbce1e1.wigglyfrost4096.chatgpt.site",
+    "restoreOrigin": "https://mla-safari-restore-cbce1e1.wigglyfrost4096.chatgpt.site",
+    "assetsSHA256": {
+      "old/index.html": "ce715a3445c093b4bacc5f6c9f1c066e298ab8014a34ffa3c524256c7efb78ec",
+      "old/insights.js": "01c833b30126b5bbad9ba9448809963eb5204c53ba1e907f09187c1938855b08",
+      "old/insights.css": "b8b70a02874fed91a203a0d552775367db3caf1604d8656b0504b2f4b213128a",
+      "old/search.js": "10cf241f183167ab4d07b1f05a280c61c862011991b09e6c3d46f3499dc4965d",
+      "new/index.html": "609219c5f5eb400bd551c6194f798822b23d673a9707608da2afc9dc52220757",
+      "new/insights.js": "01c833b30126b5bbad9ba9448809963eb5204c53ba1e907f09187c1938855b08",
+      "new/insights.css": "b8b70a02874fed91a203a0d552775367db3caf1604d8656b0504b2f4b213128a",
+      "new/search.js": "10cf241f183167ab4d07b1f05a280c61c862011991b09e6c3d46f3499dc4965d",
+      "new/photo-store.js": "5acd0e0c118dd83328e7aecb543a3e93ce4a544c4374f40d09eef06448deb1b8",
+      "new/photo-lifecycle.js": "2295794535de6bd335a6c1abf76c8de13277ee8c66ae81a7f794b590dbe8e1ef"
+    }
+  },
+  "mla-safari-restore-cbce1e1": {
+    "legacyCommit": null,
+    "prototypeCommit": "cbce1e1fefd5017e8c9efa84e43a08c4c1c5041f",
+    "siteOrigin": "https://mla-safari-restore-cbce1e1.wigglyfrost4096.chatgpt.site",
+    "migrationOrigin": "https://mla-safari-cbce1e1.wigglyfrost4096.chatgpt.site",
+    "restoreOrigin": "https://mla-safari-restore-cbce1e1.wigglyfrost4096.chatgpt.site",
+    "assetsSHA256": {
+      "new/index.html": "609219c5f5eb400bd551c6194f798822b23d673a9707608da2afc9dc52220757",
+      "new/insights.js": "01c833b30126b5bbad9ba9448809963eb5204c53ba1e907f09187c1938855b08",
+      "new/insights.css": "b8b70a02874fed91a203a0d552775367db3caf1604d8656b0504b2f4b213128a",
+      "new/search.js": "10cf241f183167ab4d07b1f05a280c61c862011991b09e6c3d46f3499dc4965d",
+      "new/photo-store.js": "5acd0e0c118dd83328e7aecb543a3e93ce4a544c4374f40d09eef06448deb1b8",
+      "new/photo-lifecycle.js": "2295794535de6bd335a6c1abf76c8de13277ee8c66ae81a7f794b590dbe8e1ef"
+    }
+  }
+}

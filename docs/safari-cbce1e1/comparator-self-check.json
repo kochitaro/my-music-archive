@@ -1,0 +1,49 @@
+{
+  "allMatch": true,
+  "results": [
+    {
+      "file": "expected-final.json",
+      "match": true,
+      "differences": [],
+      "photos": [
+        {
+          "area": "listening",
+          "entryId": "safari-cbce1e1-listening",
+          "sha256": "946e3ffbfc04eb24acf4650adb8a387a14ffb03d9ee392e1013a45f19d85e559"
+        },
+        {
+          "area": "collection",
+          "entryId": "safari-cbce1e1-collection",
+          "sha256": "71766b34a63c4442970372278ca5755cd826675220f71ce92decbcbfbb8f5834"
+        },
+        {
+          "area": "live",
+          "entryId": "safari-cbce1e1-live",
+          "sha256": "f75c656013fe70817edfef56e3d08ae1ec98e5f349ff421d69d4861192ad687c"
+        }
+      ]
+    },
+    {
+      "file": "expected-final.json",
+      "match": true,
+      "differences": [],
+      "photos": [
+        {
+          "area": "listening",
+          "entryId": "safari-cbce1e1-listening",
+          "sha256": "946e3ffbfc04eb24acf4650adb8a387a14ffb03d9ee392e1013a45f19d85e559"
+        },
+        {
+          "area": "collection",
+          "entryId": "safari-cbce1e1-collection",
+          "sha256": "71766b34a63c4442970372278ca5755cd826675220f71ce92decbcbfbb8f5834"
+        },
+        {
+          "area": "live",
+          "entryId": "safari-cbce1e1-live",
+          "sha256": "f75c656013fe70817edfef56e3d08ae1ec98e5f349ff421d69d4861192ad687c"
+        }
+      ]
+    }
+  ]
+}

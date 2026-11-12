@@ -1,0 +1,56 @@
+{
+  "version": 3,
+  "listening": [
+    {
+      "entryId": "safari-cbce1e1-listening",
+      "title": "Safari Listening 1",
+      "date": "2026-11-12",
+      "added": "2026-11-12T00:00:00.000Z",
+      "rating": "",
+      "memo": "合成データ Listening",
+      "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAIAAAAErfB6AAAEN0lEQVR4nO3dP2tUQRSG8XuXYOEipgkpIsFGUZCUFoqVrWghoq0fwWCbSqwEeysrQVSwEywstdJGEEQsBCMqREUESSJGi8HLhWXj7s75N++8v06wuHOenNl1MWy7vfm9IVwD7wcgXQwMjoHBMTA4BgbHwOAYGBwDg2NgcAwMjoHBMTA4BgbHwOAYGBwDg2NgcAwMjoHBzXk/gKKV1TeT/+WXNw/rPYmjFuY/3U2VcxIYycsOLB51nHJjFxnYrOuo4koXFtgxbV9BmcsIHKTrqPilowcOm7Yvcua4gYtI2xczc9APOoqr20R95nAbHHNMUwm1yrE2GKBuE+wUUTY41FCkRFjlEBsMWbeJcS7/wBGmoMf9dJ5XtPvhLXld124bXFXdxu+8PoFrq5u4nNohcJ11E/uzWweuuW5iPAHTwKybWM7BLjDr9plNwygw646ymYn/Bx2kyiIw13ccg8moB2bd3WnPRzcw605CdUp8DQanGJjrOzm9WWkFZt1pKU2MVzQ4lcBc39lozE0+MOvmEJ8er2hwwoG5vvlkZ8gNBicZmOsrRXCS3GBwDAxOLDDvZ1lS8+QGg5MJzPXVIDJVbjA4BgYnEJj3s5782XKDwTEwOAYGlxuYL8DaMifMDQbHwOAYGBwDg2NgcFmB+RbaRs6cucHgGBgc8vcmjXPkwN7LpxePH9q3OL+nbZu1O+8ePNvwfigtdQWeH86tnls6f2Jh0Ho/ipVaAg/a5sLJhStnl/YPazlyUsVpVw4O1y4uH1sepj/+3vlz/+nGpVMLvk9lo4rAd68ebf/dyc/f/rh+7/3rDz8ZGEeq++nb9o2H649efPV+HFNVBN76tXP7yedbjz9ubu94P4u1KgKfufZq/cuW91P4qOKDjmrrNpUErhkDg2NgcFmBI3zxUw1y5swNBsfA4BgYHAODY2BwuYH5Rlpb5oS5weAYGBwDgxMIzJdhPfmz5QaDY2BwYl/xzt9TEify2scNBicWmG+1ZEnNkxsMjoHBSQbmLS1FcJLcYHDCgbnE+WRnyA0GJx+YS5xDfHoqG8zGs9GYG69ocFqBucTTUpqY4gaz8eT0ZsUrGpxuYC7xJFSnpL7BbLw77flYXNFsPI7BZPgaDM4oMJd4lM1M7DaYjfvMpmF6RbNxYjkH69dgNjaegMObrJob25/d5110nY1dTu32z6TaGnudV+w3G2YG/ysRvj/K/h90YK+y++n8AzcBpqAkwrn8r+g+mOs6QtokxAZ34swlR6hTxNrgTqGrHCptEmuDOwEn9V8xnznoBneKWOWYaZPogZOwmSOnTcoI3AlSOn7XTmGBE8fMBaVNigzcMStdXNdO2YH7xGOXG7UPJ/CoqZJj5ByFHJiasB90kBQGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBvcXlXtLz5PUkogAAAAASUVORK5CYII=",
+      "id": "",
+      "artist": "Synthetic Artist",
+      "release": "2026",
+      "genre": "Jazz",
+      "label": "Synthetic",
+      "tags": []
+    }
+  ],
+  "collection": [
+    {
+      "entryId": "safari-cbce1e1-collection",
+      "title": "Safari Collection 2",
+      "date": "2026-11-12",
+      "added": "2026-11-12T00:00:00.000Z",
+      "rating": "",
+      "memo": "合成データ Collection",
+      "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAIAAAAErfB6AAAEkUlEQVR4nO3dXWhbZRzH8f9J07z0bWuTjqFW7TqcL2hF63zBFZ31xsnWTRBFFEXwYlPBgRd648Q7HShOdOpAQW+mglYdyiZzboIwJsU5UenedGyruKzN2iZNeprjxZEgajcvcnLke36fq6fhyeEPX542aULilKfzJlyxsAeQYCkwnALDKTCcAsMpMJwCwykwnALDKTCcAsMpMJwCwykwnALDKTCcAsMpMJwCwykwnALDKTCcAsMpMFy8htca3dRXw6tF3MLH9tXkOjrBcAoMp8BwCgynwHAKDKfAcAoMp8BwCgynwHAKDKfAcAoMp8BwCgynwHAKDKfAcAoMp8BwCgynwHAKDKfAcAoMp8BwCgynwHAKDKfAcAoMp8BwCgynwHAKDKfAcAoMp8BwCgynwHAKDKfAcAoMp8BwCgynwHAKDKfAcLX8xPf/v3jb+YnzehuaFzjxVKU04Y4dLZ0Y9mYKYc8VoKgETvfc1nbj2sTCK/92u+eWpg58kN/zYqV0JpTBghaBwE6sfWBDS+891Rs8t2TmOfGUmTnxZMvV96W6+39/7wE3fzy8KYPCDzy//0m/rldxJ/a+MfX9+37I+Lyu1msfbLnmfn+dHdw8+s6gVWZDHrfW4A+yEgsub+17yMzMvNzQuvzXL1WPqZs/NrbzufHdL/g/NnYuab5iTUhjBggeuPW6h82JmdnUgQ+Lh77854aJvVvc00f8ddNld9Z1uLogB3Zi8XTPcn89uX/rHLu8wsEd/irReWld5qorcuB4xyIn0WxmnjtdPvndXNtmz5z0F06ytU6T1RH5QVZDU2bm1IiZueO/mFeZc1tz1l9UpvN1mqyOyIGnf/1m9O0V59xWfXI889sPAU8UAvKv6P+iMbM41b3MXxd+2hbuMEGIdmAn1j7wjJljZu7Y0cKPn4Q9UO1FOvC8ZeuTXdebmXmzpz9/yqu4YU9Ue9EN3HzV3W1LH/HX4189Xzr+bbjzBCSigZuW3NFx+7P+enL/1ol9b4U7T3CiGDi9eKBjxUZzGsysOLJ9bMeGsCcKUOQCp3uWZ1a+7MTiZlY8vCv36RPm0V5g+KtoBU4vuiWzcpNfd/rI7tzQo97sTNhDBStCgVPd/ZlVrzgNjWZWPLzr1Edrvdly2EMFLiqBUxffnB181WlImFnx0M7c0Loo1DX2vyqrUhfdlB187c+6B7/Iffw48invv+Kf4NSFN2RXb3biSTMrjmyPVF3Dn+Bk19Ls6tf9t18Vfv4st2097005Z0cOnLygr3PNm05j2swqxbHyieGW3nvPfpfJ4XfrMlr9kAN33rXFr2tmsXT7/FufPuddeIHJf4OdxqawRwgf+QQf23hJ2COEj3yCxRQYT4HhFBhOgeEUGE6B4RQYToHhFBhOgeEUGE6B4RQYToHhFBhOgeEUGE6B4RQYToHhFBhOgeEUGE6B4RQYToHhFBhOgeEUGE6B4RQYToHhFBjOKRO/iUKqdILhFBhOgeEUGE6B4RQYToHhFBhOgeEUGE6B4RQYToHhFBhOgeEUGE6B4RQYToHhFBhOgeEUGE6B4f4AKZDud8xthv4AAAAASUVORK5CYII=",
+      "id": "",
+      "artist": "Synthetic Artist",
+      "release": "2026",
+      "genre": "Jazz",
+      "label": "Synthetic",
+      "tags": [],
+      "store": "Synthetic Store",
+      "format": "CD",
+      "price": "0",
+      "condition": "New"
+    }
+  ],
+  "live": [
+    {
+      "entryId": "safari-cbce1e1-live",
+      "title": "Safari Live 3",
+      "date": "2026-11-12",
+      "added": "2026-11-12T00:00:00.000Z",
+      "rating": "",
+      "memo": "合成データ Live",
+      "photo": "data:image/png;base64,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",
+      "artists": [
+        "Synthetic Trio"
+      ],
+      "venue": "合成ホール"
+    }
+  ]
+}

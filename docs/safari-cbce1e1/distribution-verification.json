@@ -1,0 +1,40 @@
+{
+  "mla-safari-cbce1e1": {
+    "sourceCommit": "bddfa60b489f0e1b2c85f5b66938ac21634f2eee",
+    "applicationCommits": {
+      "old": "c2c719dd1bd25583402e0a2db948e168018ce34e",
+      "new": "cbce1e1fefd5017e8c9efa84e43a08c4c1c5041f"
+    },
+    "appAssetsVerified": [
+      "old/index.html",
+      "old/insights.js",
+      "old/insights.css",
+      "old/search.js",
+      "new/index.html",
+      "new/insights.js",
+      "new/insights.css",
+      "new/search.js",
+      "new/photo-store.js",
+      "new/photo-lifecycle.js"
+    ],
+    "archiveSHA256": "20c36c2535158a73c51ddb3afc40fb343dc94e66d7be6d28327fdd38b51ad100",
+    "guideAndFixtureVerified": true
+  },
+  "mla-safari-restore-cbce1e1": {
+    "sourceCommit": "b84f1eb7876c8152515947a5a7c8eba2b8f3d342",
+    "applicationCommits": {
+      "old": null,
+      "new": "cbce1e1fefd5017e8c9efa84e43a08c4c1c5041f"
+    },
+    "appAssetsVerified": [
+      "new/index.html",
+      "new/insights.js",
+      "new/insights.css",
+      "new/search.js",
+      "new/photo-store.js",
+      "new/photo-lifecycle.js"
+    ],
+    "archiveSHA256": "e8327cd72aaa7599a4bc6a84134f9a42d3f14f5596ea09dec8e653ec95eb77fe",
+    "guideAndFixtureVerified": true
+  }
+}

@@ -1,0 +1,11 @@
+PASS exact final records and distinct synthetic photos
+PASS listening missing photo rejected
+PASS listening swapped photo rejected
+PASS collection missing photo rejected
+PASS collection swapped photo rejected
+PASS live missing photo rejected
+PASS live swapped photo rejected
+PASS missing post-reload save rejected
+PASS missing record rejected
+PASS extra fields rejected
+PASS 10 comparison cases; all three image byte hashes are distinct
