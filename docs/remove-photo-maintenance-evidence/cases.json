@@ -1,0 +1,27 @@
+[
+  {
+    "case": "new-only add/edit/photos all three areas",
+    "sourceProof": {
+      "version": 1,
+      "sources": [
+        {
+          "key": "my-music-archive-pilot-v03",
+          "sha256": "sha256-9b69630435ea9c29a5ca088994d5b15cce9248fd0a9c0c7baf1f03eb208ff7a1"
+        }
+      ]
+    },
+    "legacyDeleted": true,
+    "unimportedLegacyRetained": true,
+    "currentCounts": {
+      "listening": 3,
+      "collection": 3,
+      "live": 3
+    }
+  },
+  {
+    "case": "old-main save too",
+    "cleanupStopped": true,
+    "bothPhotoBackupsMatch": true,
+    "afterRecoverySources": []
+  }
+]

@@ -1,0 +1,6 @@
+PASS production controls: branch export exact, save stop, missing backup/cancel/failed recovery preserve both, retry/reload success; legacy retained
+PASS raw recovery envelope includes exact readable photo bytes and all sources
+PASS read startup stops, raw new/old retained, unavailable photos explicit, old portable JSON restores into isolated context
+PASS mismatch startup stops, raw new/old retained, unavailable photos explicit, old portable JSON restores into isolated context
+PASS localStorage failure preserves draft input/source, retry succeeds
+PASS production stopped-state recovery without maintenance UI

@@ -1,10 +1,11 @@
 """Compare latest main to IndexedDB integration using synthetic data, no external requests."""
-import json, subprocess, threading
+import json, os, subprocess, threading
 from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
 from ui_v0322 import ROOT, KEY, QuietHandler
+from pathlib import Path
 from group_display_live import seed, PREF
-OUT=ROOT/"docs/indexeddb-integration-evidence"
+OUT=Path(os.environ.get("MLA_DISPLAY_EVIDENCE",ROOT/"docs/indexeddb-integration-evidence"))
 OUT.mkdir(exist_ok=True)
 BASE="c2c719dd1bd25583402e0a2db948e168018ce34e"
 
@@ -19,7 +20,7 @@ def main():
      c=browser.new_context(viewport=dict(width=width,height=844),has_touch=True,accept_downloads=True);c.route('https://**/*',lambda r:r.abort())
      if phase=='before':c.route(url,lambda r:r.fulfill(body=old,content_type='text/html'))
      p=c.new_page();p.goto(url);prefs=dict(listening=['genre','rating'],collection=['label'])
-     p.evaluate('([k,s,l,pk,v])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem("mma-ui-language",l);localStorage.setItem(pk,JSON.stringify(v))}',[KEY,seed,lang,PREF,prefs]);p.reload();p.wait_for_function("document.querySelector('#display-options') && (!window.MLAReady || document.querySelector('#photo-maintenance'))");phases[phase]={}
+     p.evaluate('([k,s,l,pk,v])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem("mma-ui-language",l);localStorage.setItem(pk,JSON.stringify(v))}',[KEY,seed,lang,PREF,prefs]);p.reload();p.wait_for_function("document.querySelector('#display-options') && (!window.MLAReady || localStorage.getItem('my-music-archive-photos-v1'))");phases[phase]={}
      for area in ['listening','collection','live']:
       p.locator(f'[data-section={area}]').click();p.locator('#sort-toggle').click();p.locator('#sort').select_option('date-desc' if area=='live' else 'release-desc');p.locator('#group').select_option('year');p.locator('#sort-toggle').click()
       # DOM/geometry equality provides compact repeatable evidence.

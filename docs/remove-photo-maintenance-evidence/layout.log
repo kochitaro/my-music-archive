@@ -1,0 +1,11 @@
+PASS layout ja 320 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout ja 375 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout ja 390 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout ja 430 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout ja 1280 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout en 320 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout en 375 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout en 390 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout en 430 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS layout en 1280 all 3 archives / Insights / list exact; removed panel; footer adjacent; no overflow; records unchanged
+PASS 60 comparisons; 120 full-page PNGs; page errors 0

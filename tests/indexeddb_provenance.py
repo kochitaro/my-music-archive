@@ -4,6 +4,7 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from ui_v0322 import ROOT, QuietHandler
+from lifecycle_harness import controls
 from data_preservation import seed_data, PHOTO
 from indexeddb_recovery import KEY, LEGACY, OLD, SEAM, INJECT
 
@@ -11,7 +12,7 @@ from indexeddb_recovery import KEY, LEGACY, OLD, SEAM, INJECT
 def main():
  server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler);threading.Thread(target=server.serve_forever,daemon=True).start()
  url=f'http://127.0.0.1:{server.server_port}'
- source=(ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();",SEAM+"setSection('listening');showStorageState();")
+ source=(ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();",SEAM+controls()+"setSection('listening');showStorageState();")
  legacy_source=subprocess.check_output(['git','show','c2c719d:index.html'],cwd=ROOT).decode()
  evidence=Path(os.environ.get('MLA_PROVENANCE_EVIDENCE',ROOT/'docs/indexeddb-provenance-evidence'));evidence.mkdir(exist_ok=True)
  errors=[];cases=[]

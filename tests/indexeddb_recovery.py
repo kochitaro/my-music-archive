@@ -6,6 +6,7 @@ from pathlib import Path
 from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
 from ui_v0322 import ROOT, QuietHandler
+from lifecycle_harness import controls
 from data_preservation import seed_data
 KEY='my-music-archive-photos-v1'
 LEGACY='my-music-archive-pilot-v03'
@@ -23,7 +24,7 @@ IDBObjectStore.prototype.put=function(...a){if(window.failJournal&&this.transact
 def main():
  server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler);threading.Thread(target=server.serve_forever,daemon=True).start()
  url=f'http://127.0.0.1:{server.server_port}'
- source=(ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();",SEAM+"setSection('listening');showStorageState();")
+ source=(ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();",SEAM+controls()+"setSection('listening');showStorageState();")
  engine=(ROOT/'photo-lifecycle.js').read_text().replace("    if(stable(candidate)!==stable(verified))", "    if(window.pauseRecovery)await new Promise(r=>window.resumeRecovery=r);\n    if(stable(candidate)!==stable(verified))").replace('   check(snapshot); // Journal write awaited:', '   if(window.pauseCleanup)await new Promise(r=>window.resumeCleanup=r);\n   check(snapshot); // Journal write awaited:')
  old_source=subprocess.check_output(['git','show','c2c719d:index.html'],cwd=ROOT).decode()
  evidence=Path(os.environ.get('MLA_RECOVERY_EVIDENCE',ROOT/'docs/indexeddb-recovery-evidence'));evidence.mkdir(exist_ok=True)
