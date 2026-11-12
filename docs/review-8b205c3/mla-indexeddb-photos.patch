@@ -1,0 +1,491 @@
+From 8b205c305aac1a09d88ebdb1fe8bdeb4502f7504 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E5=BA=83=E5=A4=A7=20=E5=8A=A0=E8=97=A4?=
+ <2x9jnf4zvp@privaterelay.appleid.com>
+Date: Thu, 12 Nov 2026 01:22:40 +0000
+Subject: [PATCH] Prototype verified IndexedDB photo copies with portable JSON
+ backups
+
+---
+ docs/indexeddb-photos-evidence/chromium.log |  11 ++
+ docs/indexeddb-photos-evidence/node.log     |  11 ++
+ docs/indexeddb-photos-report.md             |  76 +++++++++
+ index.html                                  |  50 ++++--
+ photo-store.js                              |  46 ++++++
+ tests/indexeddb_photos.py                   | 162 ++++++++++++++++++++
+ 6 files changed, 342 insertions(+), 14 deletions(-)
+ create mode 100644 docs/indexeddb-photos-evidence/chromium.log
+ create mode 100644 docs/indexeddb-photos-evidence/node.log
+ create mode 100644 docs/indexeddb-photos-report.md
+ create mode 100644 photo-store.js
+ create mode 100644 tests/indexeddb_photos.py
+
+diff --git a/docs/indexeddb-photos-evidence/chromium.log b/docs/indexeddb-photos-evidence/chromium.log
+new file mode 100644
+index 0000000..d6dbddd
+--- /dev/null
++++ b/docs/indexeddb-photos-evidence/chromium.log
+@@ -0,0 +1,11 @@
++PASS migration: all fields/photos equal, original retained, three areas display
++PASS old JSON import and new portable JSON round trip
++PASS readback mismatch rejects publication without changing original
++PASS injected quota on restore preserves archive/photos; retry succeeds
++PASS reference write failure + reload retry; replace/remove/delete in all areas
++PASS tab race after copy, legacy divergence detected across reloads
++PASS new photo quota UI: cancel retains input/file; chosen no-photo save
++PASS migration interruption by page close and failed publication + retry
++PASS rollback: actual baseline main restores new photo-inclusive JSON
++PASS missing photo export notification and fail-closed startup
++PASS all synthetic IndexedDB prototype checks
+diff --git a/docs/indexeddb-photos-evidence/node.log b/docs/indexeddb-photos-evidence/node.log
+new file mode 100644
+index 0000000..a76ac42
+--- /dev/null
++++ b/docs/indexeddb-photos-evidence/node.log
+@@ -0,0 +1,11 @@
++✔ tests/display_preferences.test.cjs (113.197674ms)
++✔ tests/insights.test.cjs (74.950182ms)
++✔ tests/search.test.cjs (211.041782ms)
++ℹ tests 3
++ℹ suites 0
++ℹ pass 3
++ℹ fail 0
++ℹ cancelled 0
++ℹ skipped 0
++ℹ todo 0
++ℹ duration_ms 409.871743
+diff --git a/docs/indexeddb-photos-report.md b/docs/indexeddb-photos-report.md
+new file mode 100644
+index 0000000..9e22669
+--- /dev/null
++++ b/docs/indexeddb-photos-report.md
+@@ -0,0 +1,76 @@
++# 添付写真のIndexedDB移行試作：①・③レビュー用
++
++2026-11-12 UTC。対象 `kochitaro/my-music-archive`、取得時main `c2c719dd1bd25583402e0a2db948e168018ce34e`。作業ブランチ `prototype/indexeddb-photos`。隔離Linux環境・新規Chromiumプロファイル・合成画像/記録のみ使用。本番、main、実利用者データへの反映なし。
++
++## ①向け：結果と判断材料
++
++Listening / Collection / Liveの端末添付画像をIndexedDBへコピーし、保存される記録は`photoId`で参照する試作。画面内では読み出した写真を展開し、既存の一覧・詳細・編集表示を利用する。Cover Art ArchiveのURL生成・外部画像取得の経路は変更していない。JSONは従来と同じversion 3、各記録の`photo`に写真本体を埋め込む持ち運び形式を維持。旧JSONの復元、新方式での写真付きJSON出力/復元、取得時mainアプリへの復元まで自動確認する。
++
++新規写真をIndexedDBへ保存できなければ入力と選択ファイルを保持する。利用者が確認ダイアログで選んだ場合のみ、今回選んだ写真を付けずに記録を保存する。既存記録の差し替え時は元の写真を維持する。キャンセルで入力へ戻れる。復元にはこの部分保存を適用しない。
++
++試作レビューには提出可能。本番採用の判断材料として、Safari実機確認、データ分岐時の運用、旧データを廃棄する時期、容量回収を残す。旧領域を維持するため、この試作を入れただけでは旧写真分のlocalStorage使用量は解放されない。
++
++## ③向け：保存境界と復旧
++
++現行mainの調査対象は`index.html`の`migrate`、`commitDB`、`saveDB`、`resizePhoto`、`art`、`openView`、`openEdit`、写真削除、JSON入出力。現行は縮小JPEGのdata URLを記録の`photo`に格納し、アーカイブ全体をlocalStorageへ書く。Web Locksと保存前文字列の比較、保存失敗時の入力保持が既にある。
++
++試作の保存領域：
++
++| 領域 | 用途 |
++| --- | --- |
++| localStorage `my-music-archive-pilot-v03` / `my-music-archive-pilot-v1` | 旧原本。試作から変更・削除しない |
++| localStorage `my-music-archive-photos-v1` | 新しい記録スナップショット、写真ID、旧領域の指紋 |
++| IndexedDB `mla-photos-v1` / store `photos` | SHA-256 ID → 写真data URL本体。追記のみ |
++
++保存順序は次のとおり。
++
++1. 旧版mainと同じWeb Lock名を取得し、記録と移行元が読み込み時点から変わっていないことを確認。
++2. 画像文字列から決定的IDを作成。未保存なら追記し、書き込みトランザクションの完了を待つ。
++3. 別の読み出しトランザクションで文字列を完全一致照合。全記録を写真付きに再展開して、全フィールドを照合。
++4. 非同期処理中の新旧領域変更を再確認してから、参照スナップショットをlocalStorageへ一回で確定。成功後のみ画面側の保存済み状態を更新。
++
++中断・容量エラー・参照確定失敗時には旧参照と写真を残す。再試行は同じIDを使い、既存画像は照合して再利用する。写真差し替え、削除、記録削除、復元でも古い写真本体は自動削除しない。確定前にコピーした未参照画像も残る。これは復旧を優先した試作の制約で、GCは別途設計する。
++
++復元は構造検証後に写真をステージングし、全照合成功後に参照を確定する。失敗した復元は既存スナップショットと写真を保持する。写真IDだけの内部形式を持ち運びJSONとして読み込むことは拒否する。書き出しは画面キャッシュではなく、保存済み参照から写真を読み戻してハッシュを確認する。欠落・破損・読み出し失敗時は利用者に通知し、欠けたJSONを出力しない。起動時に写真が読めない場合も空アーカイブとして上書きしない。
++
++### 旧版タブが残っている場合
++
++取得時mainは同じロックを使うため同時保存は排他される。ただし旧タブは新領域を認識しないので、新方式の更新後にも旧領域へ保存できる。試作は旧領域の更新を検出して保存停止し、新旧双方を保持する。旧領域指紋を新スナップショットに残すため、再読み込みで分岐を見逃さない。
++
++分岐を自動統合するUIは未実装。旧タブを閉じる前にその側のJSON、新版からも写真付きJSONを別々に回収し、差分を合成データ環境で確認する。新版の一般的な「再読み込み」案内だけでは旧領域分岐を解消できない。これは本番前のUX課題。旧タブは新領域の内容を見ることができず、旧版に戻しただけでは試作中の更新は現れない。
++
++### 旧版に戻す手順
++
++1. 試作で写真付きJSONを書き出し、ファイルを別の場所に保管する。旧版タブに独立した更新があれば、旧版側でも別名でJSONを保存する。欠落通知が出る場合は切り戻しを進めず、ブラウザ保存領域を残す。
++2. 新旧すべての編集タブを閉じる。隔離環境で取得時mainを起動し、試作のJSONをImport JSONで復元する。3種類の件数・主な入力・添付写真を確認し、再出力したJSONとも照合する。自動検証はこの旧mainへの復元を含む。
++3. 旧版への復元は旧領域を書き換えるので、再び試作へ戻す場合は保存停止となる。新旧JSONを保管して統合内容を決めた後、隔離環境で新領域を退避・削除して旧領域から移行し直す。本番での手動キー削除はこの試作の運用対象外。
++4. JSON、旧領域、新領域、IndexedDBの退避はレビューと確認が終わるまで削除しない。ブラウザの「サイトデータを消去」は切り戻し操作に使用しない。
++
++写真を含む旧形式JSONはlocalStorageの容量制限を再び受ける。旧版への復元が容量不足になった場合も、ファイルと元の保存領域を維持し、十分な容量のある隔離環境で確認する。
++
++## 自動検証と証跡
++
++`python -u tests/indexeddb_photos.py`。実ブラウザのIndexedDBとlocalStorageを使用し、外部HTTPSは遮断。テスト用のクロージャアクセスとエラー注入はインターセプトしたテストHTMLだけに追加しており、アプリにテスト操作APIは設けていない。
++
++- 移行前後の全記録・未知フィールド・写真文字列の一致、旧原本保持、3種類の一覧画像表示。
++- 読み戻し不一致時の確定拒否、QuotaExceededError注入による復元失敗と再試行。
++- 写真コピー後の参照書き込み失敗と再読み込み、3種類の差し替え・写真削除・記録削除。
++- コピー後に別タブが更新する競合、旧領域の更新と再読み込みをまたぐ分岐検出。
++- 新規写真保存失敗時の入力/ファイル保持と、利用者選択による写真なし保存。
++- 移行のコピー後にページを閉じる中断、移行参照の確定失敗と再試行。
++- 旧写真付きJSON復元、新方式JSON往復、取得時mainでの新JSON復元。
++- 写真欠落時の書き出し通知と停止、起動失敗時の保存領域保持。
++
++結果ログ：[chromium.log](indexeddb-photos-evidence/chromium.log)。既存の検索・統計・表示設定のNodeテスト3ファイルも成功。
++
++## 未確認事項・Safari実機の引き継ぎ
++
++Safari実機は未実施。Linux Chromiumでの成功をSafari実機の結果とみなさない。実容量を埋める試験は行わず、容量不足は書き込みエラー注入で確認した。OSによる強制終了、ストレージの自動退避/消去、数千件規模の性能・メモリ、アクセシビリティの包括検証、既存テスト全件の新保存キーへの追従も未実施。写真は起動時に全件読み出し、保存時に再照合するため大規模データでの最適化が必要。
++
++Safari実機は合成データで次の代表ケースに限定する。
++
++1. 本番と異なるHTTPS originの隔離環境で、旧版にListening / Collection / Live各1件と異なる合成写真を用意して旧JSONを書き出す。iOS/Safariバージョン、件数、JSONサイズを記録する。
++2. 試作を同originで開き、移行後の3種類の一覧・詳細・編集写真を確認する。タブを閉じて開き直して再確認する。
++3. 写真付きJSONをFilesへ書き出し、別の隔離originへ読み込んで3種類の写真を確認する。再出力JSONの各記録と写真文字列を元ファイルと比較する。
++
++①・③のレビュー後に、本番への反映と残課題の扱いを判断する。この試作はマージ・デプロイしていない。
+diff --git a/index.html b/index.html
+index 0450bca..ee6093c 100644
+--- a/index.html
++++ b/index.html
+@@ -328,9 +328,9 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
+ <footer class="foot">Non-commercial pilot. Album search by <a href="https://musicbrainz.org">MusicBrainz</a>; available artwork from Cover Art Archive. Metadata can be missing or inaccurate. Keep backups; this version does not provide accounts or cloud sync. Search requests are throttled.</footer></main>
+ <div aria-label="Edit record" aria-modal="true" class="modal" id="modal" role="dialog"><div class="dialog"><div class="row between"><strong id="edit-title">Edit Record</strong><button class="btn alt" id="close">Close</button></div><div id="modal-header" style="margin:12px 0"></div><div id="album-fields"><div class="gridfields"><div class="group" id="artist-row"><label for="manual-artist">Artist</label><input class="field" id="manual-artist"/></div><div class="group"><label for="manual-title">Album Title</label><input autocomplete="off" class="field" id="manual-title"/></div><div class="group"><label for="date" id="date-label">Date Listened (optional)</label><input class="field hidden" id="date" type="date"/></div><div class="group"><label for="release-edit-year">Release Date (optional)</label><input id="release-edit" type="hidden"/></div><div class="group collection-only"><label for="store">Store (optional)</label><input class="field" id="store"/></div><div class="group collection-only"><label for="format">Format (optional)</label><select class="field" id="format"><option value="">Not Set</option><option>LP</option><option>7-inch</option><option>12-inch</option><option>CD</option><option>Cassette</option><option>Digital</option><option>Other</option></select></div><div class="group collection-only"><label for="price">Price (optional)</label><input class="field" id="price" min="0" placeholder="Amount, no currency conversion" step="0.01" type="number"/></div><div class="group collection-only" id="condition-row"><label for="condition">Condition (optional)</label><select class="field" id="condition"><option value="">Not Set</option><option value="New">New</option><option value="Used">Used</option></select></div><div class="group"><label for="label">Labels (optional · comma-separated)</label><input class="field" id="label"/></div></div><div class="group" style="margin-top:12px"><label for="genre">Genres (optional · comma-separated)</label><input autocomplete="off" class="field" id="genre"/></div><div class="group" style="margin-top:12px"><label for="tags">Tags (optional · comma-separated)</label><input class="field" id="tags" placeholder="Country, mood, occasion, etc."/></div><div class="group" style="margin-top:12px"><label for="rating">Score 0.0–5.0 (optional)</label><input class="field" id="rating" max="10" min="0" placeholder="—" step="0.1" type="hidden"/><div class="rating-widget" data-target="rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div><div class="group" style="margin:12px 0"><label for="memo">Notes (optional)</label><textarea class="field" id="memo"></textarea></div><div class="group" id="artwork-row" style="margin-top:12px"><button class="btn ghost artwork-reveal hidden" id="artwork-reveal" type="button">Change artwork</button><div id="artwork-controls"><label for="album-photo">Artwork (optional · one image)</label><input accept="image/*" class="field" id="album-photo" type="file"/><img alt="Album artwork" class="photo hidden" id="existing-album-photo"/><button class="btn ghost hidden" id="remove-album-photo" type="button">Remove Artwork</button><span class="muted small">Photos are resized for device storage. Export JSON backups regularly.</span></div></div></div><div class="hidden" id="live-edit-fields"><div class="gridfields"><div class="group"><label for="e-live-date">Date</label><input class="field hidden" id="e-live-date" type="date"/></div><div class="group"><label for="e-live-title">Show Name</label><input class="field" id="e-live-title"/></div><div class="group"><label for="e-live-venue">Venue</label><input class="field" id="e-live-venue"/></div><div class="group"><label for="e-live-rating">Score</label><input class="field" id="e-live-rating" max="10" min="0" step="0.1" type="hidden"/><div class="rating-widget" data-target="e-live-rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div></div><div class="group" style="margin-top:12px"><label for="e-live-photo">Photo (optional · one image)</label><input accept="image/*" class="field" id="e-live-photo" type="file"/><img alt="Live photo" class="photo hidden" id="existing-photo"/><button class="btn ghost hidden" id="remove-photo" type="button">Remove Photo</button></div></div><div class="row between" id="edit-actions"><button class="btn ghost" id="delete">Delete</button><button class="btn" id="save">Save Changes</button></div></div></div>
+ <div aria-modal="true" class="modal" id="live-create-modal" role="dialog" aria-labelledby="live-create-title"><div class="dialog"><div class="row between"><strong id="live-create-title">Add Live Show</strong><button class="btn alt" id="close-live-create" type="button">Close</button></div><section class="" id="live-form-panel"><form id="live-form"><div class="gridfields"><div class="group"><label for="live-date">Date</label><input class="field hidden" id="live-date" type="date"/></div><div class="group"><label for="live-title">Show Name</label><input class="field" id="live-title" placeholder="Show Name" required=""/></div><div class="group"><label for="live-venue">Venue</label><input class="field" id="live-venue" placeholder="Venue"/></div><div class="group"><label for="live-rating">Score</label><input class="field" id="live-rating" max="10" min="0" step="0.1" type="hidden"/><div class="rating-widget" data-target="live-rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div></div><div class="group" style="margin:12px 0"><label for="live-notes">Notes (optional)</label><textarea class="field" id="live-notes"></textarea></div><div class="group" style="margin:12px 0"><label for="live-photo">Photo (optional · one image)</label><input accept="image/*" class="field" id="live-photo" type="file"/><span class="muted small">Photos are resized for device storage. Export JSON backups regularly.</span></div><button class="btn">Add Live Show</button></form></section></div></div><div aria-modal="true" class="modal" id="view-modal" role="dialog"><div class="dialog"><div class="row between"><strong id="view-heading">Details</strong><button class="btn alt" id="view-close" type="button">Close</button></div><div id="view-content"></div><div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn" id="view-edit" type="button">Edit</button></div></div></div>
+-<div aria-labelledby="delete-prompt" aria-modal="true" class="modal" id="delete-confirm-modal" role="dialog"><div class="dialog" style="max-width:360px"><p id="delete-prompt" style="margin:2px 0 22px"></p><div class="row" style="justify-content:flex-end"><button class="btn alt" id="delete-cancel" type="button"></button><button class="btn" id="delete-accept" type="button"></button></div></div></div><div class="modal" id="display-modal" role="dialog" aria-modal="true" aria-labelledby="display-title"><div class="dialog"><div class="row between"><strong id="display-title"></strong><button class="btn alt" id="display-close" type="button"></button></div><p class="muted small" id="display-fixed"></p><p id="display-count" role="status"></p><ul id="display-choices"></ul><button class="btn ghost" id="display-reset" type="button"></button><p id="display-save-status" role="status"></p></div></div><script src="insights.js?v=20261109-multi-label"></script><script src="search.js"></script><script>
+-(()=>{'use strict';
+-const OLD='my-music-archive-pilot-v1',KEY='my-music-archive-pilot-v03';const $=id=>document.getElementById(id);let db={version:3,listening:[],collection:[],live:[]},section='listening',mode='grid',editing=null,editingSection=null,pendingRecord=null,lastResults=[];
++<div aria-labelledby="delete-prompt" aria-modal="true" class="modal" id="delete-confirm-modal" role="dialog"><div class="dialog" style="max-width:360px"><p id="delete-prompt" style="margin:2px 0 22px"></p><div class="row" style="justify-content:flex-end"><button class="btn alt" id="delete-cancel" type="button"></button><button class="btn" id="delete-accept" type="button"></button></div></div></div><div class="modal" id="display-modal" role="dialog" aria-modal="true" aria-labelledby="display-title"><div class="dialog"><div class="row between"><strong id="display-title"></strong><button class="btn alt" id="display-close" type="button"></button></div><p class="muted small" id="display-fixed"></p><p id="display-count" role="status"></p><ul id="display-choices"></ul><button class="btn ghost" id="display-reset" type="button"></button><p id="display-save-status" role="status"></p></div></div><script src="insights.js?v=20261109-multi-label"></script><script src="search.js"></script><script src="photo-store.js"></script><script>
++globalThis.MLAReady=(async()=>{'use strict';
++const OLD='my-music-archive-pilot-v1',LEGACY_KEY='my-music-archive-pilot-v03',KEY='my-music-archive-photos-v1';const $=id=>document.getElementById(id);let db={version:3,listening:[],collection:[],live:[]},section='listening',mode='grid',editing=null,editingSection=null,pendingRecord=null,lastResults=[];
+ const text=(tag,cls,t)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(t!==undefined)e.textContent=String(t);return e};function safe(v){return typeof v==='string'?v:''}function newId(){for(let n=0;n<100;n++){const id=globalThis.crypto?.randomUUID?.()||'id-'+Date.now()+'-'+Math.random().toString(36).slice(2);if(!['listening','collection','live'].some(k=>db[k].some(r=>r.entryId===id)))return id}throw new ArchiveValidationError('entryId: could not generate unique ID / 一意なIDを生成できません')}
+ function migrate(value){
+  const areas=['listening','collection','live'];
+@@ -378,37 +378,49 @@ function validationMessage(e){return (isJapanese()?'データが不正なため
+ $('ui-language').value=(navigator.language||'en').toLowerCase().startsWith('ja')?'ja':'en';
+ try{const preference=localStorage.getItem('mma-ui-language');if(['ja','en'].includes(preference))$('ui-language').value=preference}catch(e){}
+ // A failed read is never an empty archive. Keep the exact source for recovery.
++let legacyBase=null,oldBase=null;
+ let loadFailed=false,rawSource=null,sourceKey=KEY,loadReason='',baseRaw=null,migrationCandidate=null;
+ let saving=false,externalChanged=false,operationBusy=false,draft=null,activeOperation=null,draftRecovered=false;
+ // Presentation state is separate from draft ownership and recovery authorization.
+ let recoveryView=null,noticeReason='',noticeConflict=false,discardReload=false;
+ let formSession=0,formOwner=null,formBaseline=null,draftContext=null,draftPhotoFiles=null;
+ try{
++ legacyBase=localStorage.getItem(LEGACY_KEY);oldBase=localStorage.getItem(OLD);
+  rawSource=localStorage.getItem(KEY);baseRaw=rawSource;
+- if(rawSource!==null){db=migrate(JSON.parse(rawSource))}
+- else{sourceKey=OLD;rawSource=localStorage.getItem(OLD);if(rawSource!==null){migrationCandidate=migrate(JSON.parse(rawSource))}}
++ if(rawSource!==null){const stored=JSON.parse(rawSource);externalChanged=stored.legacyStamp!==await MLAPhotos.idFor(JSON.stringify([legacyBase,oldBase]));db=migrate(await MLAPhotos.unpack(stored))}
++ else{sourceKey=legacyBase!==null?LEGACY_KEY:OLD;rawSource=legacyBase??oldBase;if(rawSource!==null){migrationCandidate=migrate(JSON.parse(rawSource));db=migrationCandidate}}
+ }catch(e){loadFailed=true;if(e instanceof ArchiveValidationError)loadReason=e.message}
+ function storageStoppedMessage(){return isJapanese()?'保存データを読み込めなかったため、上書きを防ぐ目的で保存を停止しています。現在の状態で新しい記録を保存できません。':'Saved data could not be read. Saving is stopped to prevent overwriting it. New records cannot be saved in the current state.'}
+ function canSave(){if(!loadFailed)return true;alert(storageStoppedMessage());return false}
+ // All archive writes, including startup migration, use this cooperative lock.
+-const DB_LOCK='mla:'+KEY+':write';
++const DB_LOCK='mla:'+LEGACY_KEY+':write';
+ class SaveStopped extends Error {}
+ function stopped(reason){return new SaveStopped(reason)}
+ function conflictMessage(){return isJapanese()?'別タブまたは外部で保存内容が変更されたため保存を停止しました。必要な文章をコピーしてから再読み込みしてください。':'Saved content changed in another tab or externally. Saving stopped. Copy any text you want to keep before reloading.'}
++function stable(v){return JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x)}
+ async function commitDB(candidate,operation={},migration=false){
+  if(saving)throw stopped('A save is already running / 保存処理中です');
+  // Snapshot before waiting: no caller can change the candidate during lock acquisition.
+  const snapshot=migrate(candidate);saving=true;
+  try{
+   if(!globalThis.isSecureContext||!navigator.locks?.request)throw stopped(isJapanese()?'安全な排他保存を利用できません。この環境では保存できません。必要な文章をコピーしてください。':'Safe exclusive saving is unavailable in this environment. Copy any text you want to keep.');
+-  await navigator.locks.request(DB_LOCK,{mode:'exclusive',ifAvailable:true},lock=>{
++  await navigator.locks.request(DB_LOCK,{mode:'exclusive',ifAvailable:true},async lock=>{
+    if(!lock)throw stopped(isJapanese()?'別タブが保存中です。入力を保持したまま再試行してください。':'Another tab holds the save lock. Retry with your input intact.');
+    if(loadFailed)throw stopped(storageStoppedMessage());
+    const currentRaw=localStorage.getItem(KEY);
+    if(externalChanged||currentRaw!==baseRaw)throw stopped(conflictMessage());
+-   if(migration&&localStorage.getItem(OLD)!==rawSource)throw stopped(isJapanese()?'旧形式の移行元が変更されました。原本を回収し再読み込みしてください。':'Legacy migration source changed. Recover the original and reload.');
++   if(migration&&localStorage.getItem(sourceKey)!==rawSource)throw stopped(isJapanese()?'旧形式の移行元が変更されました。原本を回収し再読み込みしてください。':'Legacy migration source changed. Recover the original and reload.');
+    if(operation.record){const found=db[operation.area]?.filter(r=>r.entryId===operation.id);if(found?.length!==1||found[0]!==operation.record)throw stopped('Operation target mismatch / 操作対象が一致しません')}
+-   const validated=migrate(snapshot),raw=JSON.stringify(validated);
++   const checkSources=()=>{if(localStorage.getItem(KEY)!==baseRaw||localStorage.getItem(LEGACY_KEY)!==legacyBase||localStorage.getItem(OLD)!==oldBase)throw stopped(conflictMessage())};
++   checkSources();
++   const validated=migrate(snapshot),packed=await MLAPhotos.pack(validated);
++   // Awaited copies may be interrupted. Nothing published yet; old data stays intact.
++   const verified=migrate(await MLAPhotos.unpack(packed));
++   if(stable(verified)!==stable(validated))throw new MLAPhotos.PhotoError('Archive readback mismatch');
++   checkSources();
++   packed.legacyStamp=await MLAPhotos.idFor(JSON.stringify([legacyBase,oldBase]));
++   checkSources();
++   const raw=JSON.stringify(packed);
+    localStorage.setItem(KEY,raw);
+    db=validated;baseRaw=raw; // Never roll back storage on failure.
+   });
+@@ -442,7 +454,15 @@ async function saveDB(candidate=db,operation={}){
+  if(pendingDraft()&&!sameRestore&&(!owned||draftContext?.session!==formSession||(!full&&operation.kind!=='photo-remove')||full&&operation.operationToken!==activeOperation||draft.operation==='delete'&&operation.kind!=='delete'))return preserveDraft();
+  const attempt=owned?(activeOperation?.session===formSession?activeOperation.form:formState()):null,session=formSession;
+  try{
+-  await commitDB(candidate,operation);
++  try{await commitDB(candidate,operation)}catch(e){
++   if(!(e instanceof MLAPhotos.PhotoError)||!full||!owned||!attempt?.fileRefs.length)throw e;
++   if(!confirm(isJapanese()?'写真を保存できませんでした。入力は保持されています。今回選んだ写真なしで記録を保存しますか？（キャンセルで入力に戻ります）':'Photo could not be saved. Input is retained. Save this record without the selected photo? Cancel to keep editing.'))throw e;
++   const previous=operation.record;
++   const replacement={...operation.proposed,photo:previous?.photo||''};
++   const fallback={...candidate,[operation.area]:candidate[operation.area].map(r=>r.entryId===operation.id?replacement:r)};
++   await commitDB(fallback,operation);
++   operation={...operation,proposed:replacement};
++  }
+   if(sameRestore){draft=null;draftContext=null;draftPhotoFiles=null;draftRecovered=false;showDraft();return true}
+   if(full&&owned){
+    const persisted=db[operation.area]?.find(r=>r.entryId===operation.id);
+@@ -521,7 +541,7 @@ function showDraft(){
+  const dialog=document.querySelector('#modal.open .dialog,#live-create-modal.open .dialog');
+  if(dialog)dialog.append(notice,confirmation);else $('storage-state').before(notice,confirmation);
+ }
+-window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&(e.key===KEY||e.key===null)&&e.newValue!==baseRaw){externalChanged=true;$('tab-change').hidden=!!draft;$('tab-change').textContent=conflictMessage()}});
++window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&([KEY,LEGACY_KEY,OLD].includes(e.key)||e.key===null)&&e.newValue!==baseRaw){externalChanged=true;$('tab-change').hidden=!!draft;$('tab-change').textContent=conflictMessage()}});
+ window.addEventListener('beforeunload',e=>{if(discardReload){discardReload=false;return}if(operationBusy||draft||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')){e.preventDefault();e.returnValue=''}});
+ function operationRecord(target,id,expected){
+  const rows=db[target];const found=Array.isArray(rows)&&typeof id==='string'&&id.length?rows.filter(r=>r.entryId===id):[];
+@@ -1020,11 +1040,11 @@ $('delete').onclick=async()=>{if(!canSave())return;const target=section,id=editi
+ $('live-form').onsubmit=async e=>{e.preventDefault();if(!canSave())return;try{validateDateSelect('live-date');const title=$('live-title').value.trim();if(!title)return;const photo=await resizePhoto($('live-photo').files[0]);const r={entryId:newId(),title,artists:readLiveArtists('live-artists'),date:$('live-date').value,venue:$('live-venue').value,rating:validateRating($('live-rating').value),memo:$('live-notes').value,photo,added:new Date().toISOString()};if(!await saveDB({...db,live:[r,...db.live]},{operationToken:activeOperation,area:"live",id:r.entryId,kind:"create-live",proposed:r}))return;$('live-form').reset();clearLivePhoto('live-photo');artistEditor('live-artists');refreshDateSelect('live-date');prepareRating('live-rating','');$('live-create-modal').classList.remove('open');render()}catch(err){captureFormFailure(err)}};
+ const actions=text('div','filter-actions');const oldButton=$('filters-toggle');oldButton.parentElement.insertBefore(actions,oldButton);actions.append(oldButton);const sortButton=text('button','btn ghost',isJapanese()?'↕ 並べ替え':'↕ Sort');sortButton.id='sort-toggle';sortButton.type='button';sortButton.setAttribute('aria-expanded','false');sortButton.setAttribute('aria-controls','sort-wrap');actions.insertBefore(sortButton,oldButton);const sortWrap=text('div','hidden');sortWrap.id='sort-wrap';$('filters-wrap').before(sortWrap);sortWrap.append($('sort'),$('group'));oldButton.setAttribute('aria-controls','filters-wrap');oldButton.innerHTML='☷ <span id="filter-label">Filter</span> <span id="filters-icon">＋</span>';function closeSort(){sortWrap.classList.add('hidden');sortButton.setAttribute('aria-expanded','false')}function closeFilter(){$('filters-wrap').classList.add('hidden');oldButton.setAttribute('aria-expanded','false');$('filters-icon').textContent='＋'}sortButton.onclick=()=>{const open=sortWrap.classList.contains('hidden');closeFilter();sortWrap.classList.toggle('hidden',!open);sortButton.setAttribute('aria-expanded',String(open))};oldButton.onclick=()=>{const open=$('filters-wrap').classList.contains('hidden');closeSort();$('filters-wrap').classList.toggle('hidden',!open);oldButton.setAttribute('aria-expanded',String(open));$('filters-icon').textContent=open?'−':'＋'};function refreshFilterButtons(){sortButton.textContent=isJapanese()?'↕ 並べ替え':'↕ Sort';$('filter-label').textContent=isJapanese()?'絞り込み':'Filter'}document.getElementById('ui-language').addEventListener('change',refreshFilterButtons);refreshFilterButtons();
+ for(const k of ['sort','group',...archiveFilterIds.map(id=>id+'-filter')])$(k).onchange=render;function view(v){mode=v;for(const value of ['grid','list'])$(value+'-tab').setAttribute('aria-pressed',String(value===v));$('grid-tab').classList.toggle('active',v==='grid');$('list-tab').classList.toggle('active',v==='list');render()}$('grid-tab').onclick=()=>view('grid');$('list-tab').onclick=()=>view('list');
+-function download(name,data,type){const url=URL.createObjectURL(new Blob([data],{type})),a=text('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000)}$('export-json').onclick=()=>{if(loadFailed){canSave();return}download('my-music-archive-backup-v0310.json',JSON.stringify(db,null,2),'application/json')};$('export-csv').onclick=()=>{if(loadFailed){canSave();return}const columns=['archive','title','artist','release','date','added','genre','label','rating','rating_5','tags','store','format','price','condition','venue','memo','id'];const rows=Object.keys({listening:1,collection:1,live:1}).flatMap(k=>db[k].map(x=>columns.map(c=>c==='archive'?k:c==='rating_5'?(rate(x)===null?'':fiveScore(rate(x)).toFixed(1)):c==='tags'?parseTags(x.tags).join('; '):c==='id'?x.entryId:x[c]??'')));const csv=[columns,...rows].map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');download('my-music-archive.csv','\uFEFF'+csv,'text/csv;charset=utf-8')};$('import-json').onchange=async e=>{
++function download(name,data,type){const url=URL.createObjectURL(new Blob([data],{type})),a=text('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000)}$('export-json').onclick=async()=>{if(loadFailed){canSave();return}try{const raw=localStorage.getItem(KEY);const portable=raw===null?db:migrate(await MLAPhotos.unpack(JSON.parse(raw)));download('my-music-archive-backup-v0310.json',JSON.stringify(portable,null,2),'application/json')}catch(e){alert(isJapanese()?'写真が欠けているか、バックアップを読み出せません。JSON書き出しを停止しました。保存領域を消去せず確認してください。':'A photo is missing or the backup cannot be read. JSON export stopped. Keep browser storage and check the archive.')}};$('export-csv').onclick=()=>{if(loadFailed){canSave();return}const columns=['archive','title','artist','release','date','added','genre','label','rating','rating_5','tags','store','format','price','condition','venue','memo','id'];const rows=Object.keys({listening:1,collection:1,live:1}).flatMap(k=>db[k].map(x=>columns.map(c=>c==='archive'?k:c==='rating_5'?(rate(x)===null?'':fiveScore(rate(x)).toFixed(1)):c==='tags'?parseTags(x.tags).join('; '):c==='id'?x.entryId:x[c]??'')));const csv=[columns,...rows].map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');download('my-music-archive.csv','\uFEFF'+csv,'text/csv;charset=utf-8')};$('import-json').onchange=async e=>{
+  if(!canSave()){e.target.value='';return}const f=e.target.files?.[0];if(!f)return;
+  try{
+   let raw;try{raw=await f.text()}catch(err){alert(isJapanese()?'ファイルを読み込めませんでした。元の記録は変更されていません。ファイルを確認し再試行してください。':'File could not be read. Existing records are unchanged. Check the file and retry.');return}
+-  let incoming;try{let parsed;try{parsed=JSON.parse(raw)}catch(err){throw new ArchiveValidationError('JSON: invalid syntax / JSON構文が不正です')}incoming=migrate(parsed)}catch(err){alert(validationMessage(err));return}
++  let incoming;try{let parsed;try{parsed=JSON.parse(raw)}catch(err){throw new ArchiveValidationError('JSON: invalid syntax / JSON構文が不正です')}incoming=migrate(parsed);if(['listening','collection','live'].some(a=>incoming[a].some(r=>Object.hasOwn(r,'photoId'))))throw new ArchiveValidationError('JSON: photo data required / 写真本体が必要です')}catch(err){alert(validationMessage(err));return}
+   if(!confirm(isJapanese()?'現在の記録をバックアップの内容に置き換えます。事前にバックアップを保存しましたか？':'Import '+(incoming.listening.length+incoming.collection.length+incoming.live.length)+' records? Current archive data will be replaced. Export a backup first.')){alert(isJapanese()?'復元を取り消しました。元の記録は変更されていません。':'Import cancelled. Existing records are unchanged.');return}
+   if(!await saveDB(incoming,{operationToken:activeOperation,kind:"restore"}))return;
+   try{render()}catch(err){alert(isJapanese()?'保存は完了しましたが、画面反映に失敗しました。再読み込みしてください。':'Saving completed, but the display could not be updated. Reload the page.');return}
+@@ -1064,6 +1084,7 @@ $('discard-reload').onclick=()=>{if(operationBusy||saving||!draft||$('discard-in
+ $('ui-language').addEventListener('change',()=>{if(draft)showDraft()});
+ for(const event of ['input','change','click'])document.addEventListener(event,e=>{if(draft&&!operationBusy&&e.target.closest('#modal.open,#live-create-modal.open')&&!sameForm(draftContext,formState()))captureDraft({area:draft.area,id:draft.recordId,kind:draft.operation,proposed:draft.proposedRecord},draft.reason)});
+ setSection('listening');showStorageState();
++if(externalChanged){$('tab-change').hidden=false;$('tab-change').textContent=conflictMessage()}
+ if(migrationCandidate){
+  operationBusy=true;
+  commitDB(migrationCandidate,{},true).then(()=>{render()}).catch(e=>{loadFailed=true;loadReason=(isJapanese()?'旧形式の移行を中断しました。原本を回収し、再読み込みで再試行してください。':'Legacy migration stopped. Recover the original; reload to retry.')+(e instanceof SaveStopped?' '+e.message:'');showStorageState()}).finally(()=>operationBusy=false);
+@@ -1072,7 +1093,8 @@ if(migrationCandidate){
+ })();
+ </script>
+ <script>
+-(()=>{'use strict';
++(async()=>{'use strict';
++await globalThis.MLAReady;
+ const dictionary={
+ 'Archive':'アーカイブ','Insights':'統計','Score':'スコア','Select an artist.':'アーティスト候補を選択してください。','No artists found. Try another spelling.':'アーティストが見つかりませんでした。表記を変えて検索してください。',
+ 'Artists (Optional, Multiple)':'アーティスト（任意・複数）','Artist Name':'アーティスト名','Remove Artist':'アーティストを削除','＋ Add Artist':'＋ アーティストを追加','Listening':'リスニング','Collection':'購入','Live':'ライブ','Search Albums':'アルバムを検索','Search to Add a Purchase':'購入作品を検索','Search':'検索','Artist or album':'アーティスト名・アルバム名','▦ Grid':'▦ グリッド','☷ List':'☷ リスト','⚙ Sort & Filter':'⚙ 並び替え・絞り込み','Sort & Filter':'並び替え・絞り込み','Add Live Show':'ライブを登録','Show Name':'公演名','Show Name':'公演名','Date (optional)':'日付（任意）','Venue (optional)':'会場（任意）','Venue':'会場','Notes (optional)':'メモ（任意）','Photo (optional · one image)':'写真（任意・1枚）','Add Live Show':'ライブを追加','Release Date (optional)':'発売日（任意）','YYYY or YYYY-MM-DD':'年、または年月日','Result order':'検索結果の並び順','Relevance':'関連度順','Load 30 more':'さらに30件','Change artwork':'アートワークを変更','Release: Newest':'発売日：新しい順','Release: Oldest':'発売日：古い順','Added: Newest':'登録日：新しい順','Added: Oldest':'登録日：古い順','Listened: Newest':'鑑賞日：新しい順','Listened: Oldest':'鑑賞日：古い順','Purchased: Newest':'購入日：新しい順','Purchased: Oldest':'購入日：古い順','Show Date: Newest':'公演日：新しい順','Show Date: Oldest':'公演日：古い順','Score: High to Low':'スコア：高い順','Score: Low to High':'スコア：低い順','Genre: A–Z':'ジャンル：A〜Z','Label: A–Z':'レーベル：A〜Z','Artist: A–Z':'アーティスト名：A〜Z','Artist: Z–A':'アーティスト名：Z〜A','All Labels':'すべてのレーベル','All Artists':'すべてのアーティスト','Filter listened year':'鑑賞年で絞り込み','Filter purchase year':'購入年で絞り込み','＋ Add Manually':'＋ 手動で追加','Add Purchase':'購入記録を追加','Title':'タイトル','Album Title':'アルバム名','Artist':'アーティスト','Group: Release Year':'発売年別に表示','Group: Release Week':'発売週別に表示','No Grouping':'グループ分けなし','All Genres':'すべてのジャンル','All Tags':'すべてのタグ','Filter release year':'発売年で絞り込み','Backup & Restore':'バックアップと復元','Export JSON':'JSONを書き出す','Export CSV':'CSVを書き出す','Import JSON':'JSONを読み込む','Edit Record':'記録の編集','Edit Album':'アルバムを編集','Edit Purchase':'購入記録を編集','Edit Live Show':'ライブ記録を編集','Close':'閉じる','Date Listened (optional)':'鑑賞日（任意）','Date Purchased (optional)':'購入日（任意）','Genre (optional)':'ジャンル（任意）','Labels (optional · comma-separated)':'レーベル（任意・複数）','Store (optional)':'購入店舗（任意）','Format (optional)':'フォーマット（任意）','Price (optional)':'価格（任意）','Condition (optional)':'新品・中古（任意）','Not Set':'未設定','Used':'中古','New':'新品','Other':'その他','Country, mood, occasion, etc.':'国、気分、シーンなど','Free text':'自由入力','Amount, no currency conversion':'金額（通貨換算なし）','Genres (optional · comma-separated)':'ジャンル（任意・複数）','Tags (optional · comma-separated)':'タグ（任意・複数）','Add Photo':'写真を追加','You can choose another photo before saving.':'保存前でも、このボタンから別の写真を選び直せます。','Replace Photo':'写真を変更','Remove Photo':'写真を削除','Delete':'削除','Save Changes':'変更を保存','Clear Results ×':'検索結果を消去 ×','Date':'日付','Unknown Artist':'アーティスト不明','Venue not set':'会場未設定','Release date unknown':'発売日不明','No records to display.':'表示する記録がありません。','Release week unknown':'発売週不明','Unknown release year':'発売年不明','Untitled':'タイトル未設定','Already in Listening.':'すでに鑑賞記録に登録されています。','Searching MusicBrainz…':'MusicBrainzで検索中…','Please wait before searching again.':'少し待ってから再検索してください。','No albums found. Try another spelling.':'見つかりませんでした。表記を変えて検索してください。','Select an album to add.':'追加するアルバムを選んでください。','Photos are resized for device storage. Export JSON backups regularly.':'写真は端末保存用に縮小されます。定期的にJSONでバックアップしてください。','This pilot saves data in this browser only. Export backups before updating or clearing Safari data.':'この試作品はブラウザ内にのみ保存します。更新やSafariデータ削除前にはバックアップしてください。','Non-commercial pilot. Album search by':'非商用の試作品。アルバム検索：', 'Album artwork':'ジャケット画像','Live photo':'ライブ写真','Artwork (optional · one image)':'アートワーク画像（任意・1枚）','Remove Artwork':'アートワークを削除','+ Add':'＋ 追加','Added':'追加済み','＋ Add Live':'＋ ライブを追加','Unrated':'未評価','Details':'詳細','Edit':'編集','Not set':'未設定','Unknown date':'日付不明'
+diff --git a/photo-store.js b/photo-store.js
+new file mode 100644
+index 0000000..239a0f6
+--- /dev/null
++++ b/photo-store.js
+@@ -0,0 +1,46 @@
++/* Prototype: immutable photo copies. References are published only after readback.
++ * Deliberately no GC: failed attempts, old snapshots and rollback keep their bytes.
++ */
++(()=>{'use strict';
++ const areas=['listening','collection','live'];
++ class PhotoError extends Error {}
++ function open(){return new Promise((resolve,reject)=>{
++  const request=indexedDB.open('mla-photos-v1',1);
++  request.onupgradeneeded=()=>request.result.createObjectStore('photos');
++  request.onerror=()=>reject(new PhotoError('Photo storage unavailable'));
++  request.onblocked=()=>reject(new PhotoError('Photo storage blocked'));
++  request.onsuccess=()=>{const db=request.result;db.onversionchange=()=>db.close();resolve(db)};
++ })}
++ async function access(mode,action){const db=await open();try{return await new Promise((resolve,reject)=>{
++  const tx=db.transaction('photos',mode);let result;
++  tx.oncomplete=()=>resolve(result);tx.onerror=tx.onabort=()=>reject(new PhotoError('Photo storage failed'));
++  try{action(tx.objectStore('photos'),v=>result=v)}catch(e){tx.abort();reject(new PhotoError('Photo storage failed'))}
++ })}finally{db.close()}}
++ const get=id=>access('readonly',(s,done)=>{const r=s.get(id);r.onsuccess=()=>done(r.result)});
++ async function idFor(value){const bytes=new TextEncoder().encode(value);return 'sha256-'+Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('')}
++ async function copy(value){
++  const id=await idFor(value),existing=await get(id);
++  if(existing===undefined)await access('readwrite',s=>{const r=s.get(id);r.onsuccess=()=>{try{if(r.result===undefined)s.add(value,id)}catch(e){s.transaction.abort()}}});
++  if(await get(id)!==value)throw new PhotoError('Photo readback mismatch');
++  return id;
++ }
++ async function pack(archive){
++  const out=structuredClone(archive);
++  for(const area of areas)for(const r of out[area]){
++   if(r.photoId)throw new PhotoError('Portable JSON must include photo data');
++   if(typeof r.photo==='string'&&r.photo.startsWith('data:image/')){r.photoId=await copy(r.photo);delete r.photo}
++  }
++  out.photoStorage=1;return out;
++ }
++ async function unpack(archive){
++  const out=structuredClone(archive);delete out.photoStorage;delete out.legacyStamp;
++  for(const area of areas)for(const r of out[area])if(Object.hasOwn(r,'photoId')){
++   if(typeof r.photoId!=='string'||r.photo)throw new PhotoError('Invalid photo reference');
++   const value=await get(r.photoId);
++   if(typeof value!=='string'||!value.startsWith('data:image/')||await idFor(value)!==r.photoId)throw new PhotoError('Missing or damaged photo: '+r.entryId);
++   r.photo=value;delete r.photoId;
++  }
++  return out;
++ }
++ globalThis.MLAPhotos=Object.freeze({pack,unpack,PhotoError,idFor});
++})();
+diff --git a/tests/indexeddb_photos.py b/tests/indexeddb_photos.py
+new file mode 100644
+index 0000000..dfe91f0
+--- /dev/null
++++ b/tests/indexeddb_photos.py
+@@ -0,0 +1,162 @@
++"""Isolated Chromium, synthetic data only. python -u tests/indexeddb_photos.py"""
++import base64, copy, json, os, threading, subprocess
++from http.server import ThreadingHTTPServer
++from pathlib import Path
++from playwright.sync_api import sync_playwright, expect
++from ui_v0322 import ROOT, QuietHandler
++from data_preservation import seed_data, PHOTO
++LEGACY='my-music-archive-pilot-v03'
++KEY='my-music-archive-photos-v1'
++SEAM="""window.probe={db:()=>db,save:saveDB,commit:commitDB,edit:openEdit,section:setSection,busy:()=>operationBusy,failed:()=>loadFailed};"""
++INJECT="""
++window.failPhoto=sessionStorage.getItem('failPhoto')==='yes';window.failRef=sessionStorage.getItem('failRef')==='yes';
++const get=IDBObjectStore.prototype.get;
++IDBObjectStore.prototype.get=function(...args){const r=get.apply(this,args);if(window.mismatch&&args[0]===window.mismatchId){window.mismatch=false;r.addEventListener('success',()=>Object.defineProperty(r,'result',{value:'synthetic read mismatch'}))}return r};
++const add=IDBObjectStore.prototype.add;
++IDBObjectStore.prototype.add=function(...args){
++ if(window.failPhoto)throw new DOMException('synthetic quota','QuotaExceededError');
++ return add.apply(this,args);
++};
++const set=Storage.prototype.setItem;
++Storage.prototype.setItem=function(k,v){if(window.failRef&&k==='my-music-archive-photos-v1')throw new DOMException('synthetic quota','QuotaExceededError');return set.call(this,k,v)};
++"""
++
++def main():
++ server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler)
++ threading.Thread(target=server.serve_forever,daemon=True).start()
++ url=f'http://127.0.0.1:{server.server_port}'
++ source=(ROOT/'index.html').read_text().replace('<script>\nglobalThis.MLAReady=', '''<script>
++if(sessionStorage.getItem('pauseCopy')==='yes'){const pack=MLAPhotos.pack;window.MLAPhotos={...MLAPhotos,pack:async d=>{const result=await pack(d);await new Promise(r=>window.resumeCopy=r);return result}}}
++globalThis.MLAReady=''' ).replace("setSection('listening');showStorageState();",SEAM+"setSection('listening');showStorageState();")
++ with sync_playwright() as pw:
++  browser=pw.chromium.launch(executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox'])
++  ctx=browser.new_context(accept_downloads=True)
++  ctx.route(url+'/',lambda r:r.fulfill(body=source,content_type='text/html'))
++  old_source=subprocess.check_output(['git','show','c2c719d:index.html'],cwd=ROOT).decode()
++  ctx.route(url+'/rollback',lambda r:r.fulfill(body=old_source,content_type='text/html'))
++  ctx.route('https://**/*',lambda r:r.abort())
++  ctx.add_init_script(INJECT)
++  accept_dialog=lambda d:d.accept()
++  dismiss_dialog=lambda d:d.dismiss()
++  p=ctx.new_page();errors=[];p.on('pageerror',lambda e:errors.append(str(e)));p.on('dialog',accept_dialog)
++  p.goto(url);p.wait_for_function('window.probe')
++  def raw():return p.evaluate('(k)=>localStorage.getItem(k)',KEY)
++  def ready():p.wait_for_function('window.probe && !probe.busy()')
++  def seed(data):
++   p.evaluate('([k,l,d])=>{localStorage.removeItem(k);localStorage.setItem(l,JSON.stringify(d))}',[KEY,LEGACY,data]);p.reload();ready()
++  original=seed_data();seed(original)
++  assert p.evaluate('probe.db()')==original
++  packed=json.loads(raw());assert all('photoId' in r and 'photo' not in r for a in ['listening','collection','live'] for r in packed[a])
++  assert p.evaluate('(k)=>JSON.parse(localStorage.getItem(k))',LEGACY)==original
++  for area in ['listening','collection','live']:
++   p.evaluate('(a)=>probe.section(a)',area)
++   assert p.locator('#library img').first.evaluate('(e)=>e.complete && e.naturalWidth>0')
++  print('PASS migration: all fields/photos equal, original retained, three areas display')
++  with p.expect_download() as dl:p.locator('#export-json').click()
++  portable=json.loads(Path(dl.value.path()).read_text());assert portable==original
++  changed=copy.deepcopy(original);changed['live'][0]['photo']='';changed['listening'][0]['memo']='changed'
++  assert p.evaluate('(d)=>probe.save(d)',changed)
++  p.locator('#import-json').set_input_files(dict(name='legacy.json',mimeType='application/json',buffer=json.dumps(portable).encode()));ready()
++  assert p.evaluate('probe.db()')==original
++  print('PASS old JSON import and new portable JSON round trip')
++  # New bytes for each test; no image decoding required in storage tests.
++  other='data:image/svg+xml;base64,'+base64.b64encode(b'<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="2" height="2" fill="red"/></svg>').decode()
++  replacement=copy.deepcopy(original);replacement['collection'][0]['photo']=other
++  before=raw();p.evaluate('async v=>{window.mismatchId=await MLAPhotos.idFor(v);window.mismatch=true}',other)
++  assert not p.evaluate('(d)=>probe.save(d,{kind:"restore"})',replacement)
++  assert raw()==before and p.evaluate('probe.db()')==original
++  print('PASS readback mismatch rejects publication without changing original')
++  p.evaluate('failPhoto=true')
++  assert not p.evaluate('(d)=>probe.save(d,{kind:"restore"})',replacement)
++  assert raw()==before and p.evaluate('probe.db()')==original
++  p.evaluate('failPhoto=false')
++  assert p.evaluate('(d)=>probe.save(d,{kind:"restore"})',replacement)
++  assert p.evaluate('probe.db()')==replacement
++  print('PASS injected quota on restore preserves archive/photos; retry succeeds')
++  # Reference publication fails after photo copy: reload/retry reuses immutable copy.
++  p.evaluate('failRef=true');before=raw()
++  assert not p.evaluate('(d)=>probe.save(d)',original);assert raw()==before
++  p.reload();ready();assert p.evaluate('probe.db()')==replacement
++  assert p.evaluate('(d)=>probe.save(d)',original)
++  for area in ['listening','collection','live']:
++   updated=copy.deepcopy(original);updated[area][0]['photo']=other
++   assert p.evaluate('(d)=>probe.save(d)',updated)
++   updated[area][0]['photo']=''
++   assert p.evaluate('(d)=>probe.save(d)',updated)
++   updated[area]=updated[area][1:]
++   assert p.evaluate('(d)=>probe.save(d)',updated)
++  print('PASS reference write failure + reload retry; replace/remove/delete in all areas')
++  assert p.evaluate('(d)=>probe.save(d)',original)
++  # Pause after copies, race an uncooperative tab, and verify final source check.
++  p.evaluate("""()=>{const pack=MLAPhotos.pack;window.MLAPhotos={...MLAPhotos,pack:async d=>{const result=await pack(d);await new Promise(r=>window.resumeCopy=r);return result}};window.pending=probe.save({...probe.db(),live:[]})}""")
++  
++  try:p.wait_for_function('!!window.resumeCopy',timeout=5000)
++  except Exception:
++   print('DEBUG',p.evaluate('async()=>({result:await pending,body:document.body.innerText.slice(-4000)})'));raise
++  q=ctx.new_page();q.goto(url);q.wait_for_function('window.probe')
++  q.evaluate('(k)=>{const d=JSON.parse(localStorage.getItem(k));d.live[0].memo="other tab";localStorage.setItem(k,JSON.stringify(d))}',KEY)
++  current=raw();p.evaluate('resumeCopy()');assert not p.evaluate('pending');assert raw()==current
++  p.reload();ready();assert p.evaluate('probe.db().live[0].memo')=='other tab'
++  # Legacy tab after migration; stamp must detect divergence even after reload.
++  q.evaluate('(k)=>{const d=JSON.parse(localStorage.getItem(k));d.live[0].memo="old tab";localStorage.setItem(k,JSON.stringify(d))}',LEGACY)
++  p.reload();ready();assert not p.evaluate('probe.save(probe.db())');assert raw()==current
++  print('PASS tab race after copy, legacy divergence detected across reloads')
++  q.close();seed(original)
++  # UI photo failure: cancel retains exact input/file; retry with explicit no-photo choice.
++  p.evaluate('probe.section("live")')
++  p.locator('#add-live-trigger').evaluate('e=>e.click()')
++  p.locator('#live-title').fill('Synthetic failed photo')
++  p.locator('#live-notes').fill('keep this input')
++  p.locator('#live-photo').set_input_files(dict(name='synthetic.png',mimeType='image/png',buffer=base64.b64decode(PHOTO.split(',')[1])))
++  p.evaluate('failPhoto=true')
++  p.remove_listener('dialog',accept_dialog);p.on('dialog',dismiss_dialog)
++  p.locator('#live-form').evaluate('e=>e.requestSubmit()');ready()
++  assert p.locator('#live-title').input_value()=='Synthetic failed photo'
++  assert p.locator('#live-photo').evaluate('e=>e.files.length')==1
++  # Original archive and selected file survive the declined fallback.
++  assert len(p.evaluate('probe.db().live'))==2
++  p.remove_listener('dialog',dismiss_dialog);p.on('dialog',accept_dialog)
++  p.locator('#live-form').evaluate('e=>e.requestSubmit()');ready()
++  assert p.evaluate('probe.db().live[0].title')=='Synthetic failed photo'
++  assert p.evaluate('probe.db().live[0].photo')==''
++  assert p.evaluate('probe.db().live[0].memo')=='keep this input'
++  print('PASS new photo quota UI: cancel retains input/file; chosen no-photo save')
++  p.evaluate('failPhoto=false')
++  # Interrupt startup migration after copy, before publishing references.
++  p.evaluate('([k,l,d])=>{localStorage.removeItem(k);localStorage.setItem(l,JSON.stringify(d));sessionStorage.setItem("pauseCopy","yes")}',[KEY,LEGACY,original])
++  p.reload();p.wait_for_function('!!window.resumeCopy')
++  assert raw() is None
++  assert p.evaluate('(k)=>JSON.parse(localStorage.getItem(k))',LEGACY)==original
++  p.close()
++  p=ctx.new_page();p.on('pageerror',lambda e:errors.append(str(e)));p.on('dialog',accept_dialog);p.goto(url);ready()
++  assert p.evaluate('probe.db()')==original
++  # Fail migration reference publication, then reload to retry.
++  p.evaluate('(k)=>{localStorage.removeItem(k);sessionStorage.setItem("failRef","yes")}',KEY)
++  p.reload();ready();assert p.evaluate('probe.failed()');assert raw() is None
++  p.evaluate('sessionStorage.removeItem("failRef")');p.reload();ready()
++  assert p.evaluate('probe.db()')==original and raw() is not None
++  print('PASS migration interruption by page close and failed publication + retry')
++  # Confirm portable export really restores into the baseline main application.
++  newest=copy.deepcopy(original);newest['collection'][0]['photo']=other;newest['live'][0]['memo']='prototype change'
++  assert p.evaluate('(d)=>probe.save(d)',newest)
++  with p.expect_download() as dl:p.locator('#export-json').click()
++  rollback_json=Path(dl.value.path()).read_bytes()
++  old=ctx.new_page();old.on('pageerror',lambda e:errors.append(str(e)));old.on('dialog',accept_dialog);old.goto(url+'/rollback')
++  old.locator('#import-json').set_input_files(dict(name='portable.json',mimeType='application/json',buffer=rollback_json))
++  old.wait_for_function('(k)=>JSON.parse(localStorage.getItem(k)).live[0].memo==="prototype change"',arg=LEGACY)
++  assert old.evaluate('(k)=>JSON.parse(localStorage.getItem(k))',LEGACY)==newest
++  old.close();seed(original)
++  print('PASS rollback: actual baseline main restores new photo-inclusive JSON')
++  # Missing bytes must stop export, and startup must never turn that into an empty DB.
++  p.evaluate("""async()=>{await new Promise((resolve,reject)=>{const r=indexedDB.open('mla-photos-v1',1);r.onsuccess=()=>{const db=r.result,t=db.transaction('photos','readwrite');t.objectStore('photos').clear();t.oncomplete=()=>{db.close();resolve()}}})}""")
++  notices=[]
++  p.on('dialog',lambda d:notices.append(d.message))
++  before=raw();p.locator('#export-json').click();p.wait_for_timeout(150)
++  assert any('missing' in n for n in notices)
++  p.reload();ready();assert p.evaluate('probe.failed()');assert raw()==before
++  print('PASS missing photo export notification and fail-closed startup')
++  assert not errors,errors
++  browser.close()
++ server.shutdown()
++ print('PASS all synthetic IndexedDB prototype checks')
++if __name__=='__main__':main()
+-- 
+2.52.0
+
