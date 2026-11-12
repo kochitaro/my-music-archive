@@ -1,0 +1,463 @@
+From cbce1e1fefd5017e8c9efa84e43a08c4c1c5041f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E5=BA=83=E5=A4=A7=20=E5=8A=A0=E8=97=A4?=
+ <2x9jnf4zvp@privaterelay.appleid.com>
+Date: Thu, 12 Nov 2026 02:02:44 +0000
+Subject: [PATCH] Track imported legacy source hashes across new archive edits
+
+---
+ docs/indexeddb-provenance-evidence/cases.json |  27 ++++
+ .../chromium.log                              |   8 ++
+ docs/indexeddb-provenance-evidence/node.log   |  11 ++
+ .../photo-regression.log                      |  11 ++
+ .../recovery-regression.log                   |  11 ++
+ docs/indexeddb-provenance-report.md           |  86 +++++++++++++
+ index.html                                    |   3 +-
+ photo-lifecycle.js                            |  39 +++++-
+ photo-store.js                                |   2 +-
+ tests/indexeddb_provenance.py                 | 121 ++++++++++++++++++
+ tests/indexeddb_recovery.py                   |   2 +-
+ 11 files changed, 314 insertions(+), 7 deletions(-)
+ create mode 100644 docs/indexeddb-provenance-evidence/cases.json
+ create mode 100644 docs/indexeddb-provenance-evidence/chromium.log
+ create mode 100644 docs/indexeddb-provenance-evidence/node.log
+ create mode 100644 docs/indexeddb-provenance-evidence/photo-regression.log
+ create mode 100644 docs/indexeddb-provenance-evidence/recovery-regression.log
+ create mode 100644 docs/indexeddb-provenance-report.md
+ create mode 100644 tests/indexeddb_provenance.py
+
+diff --git a/docs/indexeddb-provenance-evidence/cases.json b/docs/indexeddb-provenance-evidence/cases.json
+new file mode 100644
+index 0000000..69ead75
+--- /dev/null
++++ b/docs/indexeddb-provenance-evidence/cases.json
+@@ -0,0 +1,27 @@
++[
++  {
++    "case": "new-only add/edit/photos all three areas",
++    "sourceProof": {
++      "version": 1,
++      "sources": [
++        {
++          "key": "my-music-archive-pilot-v03",
++          "sha256": "sha256-9b69630435ea9c29a5ca088994d5b15cce9248fd0a9c0c7baf1f03eb208ff7a1"
++        }
++      ]
++    },
++    "legacyDeleted": true,
++    "unimportedLegacyRetained": true,
++    "currentCounts": {
++      "listening": 3,
++      "collection": 3,
++      "live": 3
++    }
++  },
++  {
++    "case": "old-main save too",
++    "cleanupStopped": true,
++    "bothPhotoBackupsMatch": true,
++    "afterRecoverySources": []
++  }
++]
+diff --git a/docs/indexeddb-provenance-evidence/chromium.log b/docs/indexeddb-provenance-evidence/chromium.log
+new file mode 100644
+index 0000000..79d98d2
+--- /dev/null
++++ b/docs/indexeddb-provenance-evidence/chromium.log
+@@ -0,0 +1,8 @@
++PASS new-only add/edit/photo changes: provenance carried; latest JSON/reload gates; imported key deleted, unrelated key retained
++PASS actual old-main save after new edits: cleanup/save stopped across reload; both complete photo JSON branches exported
++PASS explicit recovery resets provenance; rejected old branch stays retained
++PASS pre-provenance compatibility: equivalence verified before first edit; cleanup allowed
++PASS pre-provenance compatibility: already edited history not invented; old retained
++PASS per-key content digest rejects changed legacy even when combined stamp agrees
++PASS malformed provenance stops cleanup without deleting old data
++PASS all migration-provenance checks
+diff --git a/docs/indexeddb-provenance-evidence/node.log b/docs/indexeddb-provenance-evidence/node.log
+new file mode 100644
+index 0000000..ddf7844
+--- /dev/null
++++ b/docs/indexeddb-provenance-evidence/node.log
+@@ -0,0 +1,11 @@
++✔ tests/display_preferences.test.cjs (467.020445ms)
++✔ tests/insights.test.cjs (297.82509ms)
++✔ tests/search.test.cjs (1187.592728ms)
++ℹ tests 3
++ℹ suites 0
++ℹ pass 3
++ℹ fail 0
++ℹ cancelled 0
++ℹ skipped 0
++ℹ todo 0
++ℹ duration_ms 1981.016089
+diff --git a/docs/indexeddb-provenance-evidence/photo-regression.log b/docs/indexeddb-provenance-evidence/photo-regression.log
+new file mode 100644
+index 0000000..d6dbddd
+--- /dev/null
++++ b/docs/indexeddb-provenance-evidence/photo-regression.log
+@@ -0,0 +1,11 @@
++PASS migration: all fields/photos equal, original retained, three areas display
++PASS old JSON import and new portable JSON round trip
++PASS readback mismatch rejects publication without changing original
++PASS injected quota on restore preserves archive/photos; retry succeeds
++PASS reference write failure + reload retry; replace/remove/delete in all areas
++PASS tab race after copy, legacy divergence detected across reloads
++PASS new photo quota UI: cancel retains input/file; chosen no-photo save
++PASS migration interruption by page close and failed publication + retry
++PASS rollback: actual baseline main restores new photo-inclusive JSON
++PASS missing photo export notification and fail-closed startup
++PASS all synthetic IndexedDB prototype checks
+diff --git a/docs/indexeddb-provenance-evidence/recovery-regression.log b/docs/indexeddb-provenance-evidence/recovery-regression.log
+new file mode 100644
+index 0000000..4e331ca
+--- /dev/null
++++ b/docs/indexeddb-provenance-evidence/recovery-regression.log
+@@ -0,0 +1,11 @@
++PASS cleanup gates, journal-write failure, interruption after deletion + reload/photos
++USAGE {"case": "6 records / one generated 128px PNG repeated", "before": {"entries": [{"key": "my-music-archive-photos-v1", "characters": 2673}, {"key": "my-music-archive-pilot-v03", "characters": 455623}], "utf16Bytes": 916592}, "after": {"entries": [{"key": "my-music-archive-photos-v1", "characters": 2673}], "utf16Bytes": 5346}, "releasedUTF16Bytes": 911246}
++PASS actual old main saves after cleanup; dual backups; failed recovery retains both; recovery/save/JSON roundtrip
++PASS only matching v03 removed; distinct v1 retained and independently exportable/readback verified
++PASS v1 missing-ID migration: stable export/readback, cleanup and reload
++PASS partial two-key deletion interrupted; durable stop/recovery/retry cleanup
++PASS actual old main write before cleanup; both backups and explicit new-branch recovery
++PASS legacy race before cleanup; durable stop on reload; choose new branch recovery/save
++PASS source race during recovery stops publication; fresh dual backups allow retry
++PASS aggregate localStorage quota blocks coexistence; old retained; export/readback + restore to isolated context
++PASS all next-stage synthetic recovery checks
+diff --git a/docs/indexeddb-provenance-report.md b/docs/indexeddb-provenance-report.md
+new file mode 100644
+index 0000000..c57adc2
+--- /dev/null
++++ b/docs/indexeddb-provenance-report.md
+@@ -0,0 +1,86 @@
++# 旧キー整理の見直し：①・③向け報告
++
++2026-11-12 UTC。基準 `92dd60426dfa819d7243b116dbaa23e154e7bd4f`。レビュー用ブランチ `review/indexeddb-import-provenance`。隔離Linux・合成記録／画像・使い捨てChromiumプロファイルのみ使用。mainへの反映・マージ・デプロイなし。
++
++## ①向け：変更と結果
++
++前回は整理時の新版と旧データの全件一致が必要だったため、新版だけで追加・編集した場合にも整理できなかった。今回、移行時に取り込めた旧キーと内容のSHA-256指紋を記録し、通常の追加・編集ではその記録を引き継ぐように変更した。
++
++整理時は、現在の新版全体ではなく、移行時に記録した指紋と現在の旧キーの内容を照合する。旧データが変わっていなければ、新版の追加・編集・写真変更後も整理できる。新版の記録・写真を整理操作で書き換えることはない。
++
++維持した条件：
++
++1. 最新の新版と存在する旧領域について、実際に保存した写真付きJSONファイルを再選択し、読み戻して全フィールド・写真文字列を照合する。
++2. 最新の新版保存後に再読み込みし、記録・写真を読み出せていることを確認する。整理時にはそのスナップショットと現在の保存元が同じことを要求する。
++3. 保存ロック内で旧キーの指紋を確認し、整理ジャーナル保存後にも新旧すべての生文字列を再照合してから削除する。
++
++旧版でも更新された場合は、従来どおり保存・整理を停止する。新版JSONと旧JSONはそれぞれ退避でき、両方を照合したうえで採用内容を確認して復旧する手順も維持した。自動統合は追加していない。
++
++前回報告の「新版編集後は一致せず旧キーを残す」という制約は、今回の移行元記録を持つデータでは解消した。指紋のない過去データについては後述の制約がある。
++
++## ③向け：記録する内容と保存境界
++
++新版の内部スナップショットに次を保存する。写真本体や旧JSON全体の複製はこの項目には持たない。
++
++```json
++{
++  "importedLegacy": {
++    "version": 1,
++    "sources": [
++      {
++        "key": "my-music-archive-pilot-v03",
++        "sha256": "sha256-<旧キーの保存文字列のSHA-256>"
++      }
++    ]
++  }
++}
++```
++
++- 写真コピー・読み戻し・全記録照合が成功した移行／復元候補と、各旧キーを正規化した内容が完全一致する場合だけ移行元として記録する。同じ内容を持つ複数の旧キーはそれぞれ記録できる。無関係な旧キーを、存在していたという理由だけで移行済み扱いにはしない。
++- 旧キーの元の保存文字列をUTF-8化してハッシュ化する。キー名と指紋を対にし、整理時にそのキーの現在の文字列から計算し直した指紋と一致することを確認する。空白や直列化順序だけが変わっても安全側に倒して保持する。
++- 移行元記録は、写真照合後に新版スナップショットと同じlocalStorage書き込みで確定する。コピー途中や参照の書き込み失敗で移行済みの記録だけが残ることはない。
++- 通常の追加・編集・写真差し替え等では、直前の保存済みスナップショットから移行元記録を引き継ぐ。新版の現在の内容で指紋を更新し直さない。
++- JSON読み込みによるアーカイブ全体の置き換え、および分岐復旧では、選択した内容に基づいて移行元記録を作り直す。以前の記録を無条件には引き継がない。変更された旧側を採用しなかった復旧後に、その旧キーを誤って整理することを防ぐ。
++- 内部の移行元記録は画面用データと写真付きJSONから取り除く。持ち運びJSONは従来のversion 3形式のまま。JSONから移行元の履歴を無条件に持ち込むことはしない。
++- 移行元記録の型・バージョン・キー名・重複・指紋形式を検証する。不正なら削除を止める。削除予定キー、ジャーナル、削除直前の再確認、途中中断後の停止／復旧は92dd604の方式を維持した。
++
++### 指紋のない92dd604以前のデータ
++
++指紋がなければ過去に何を取り込んだかは断定しない。
++
++- 現在の保存済み新版と旧データが完全一致している場合は、最初の編集の**前**に写真を読み戻して一致を確認し、その旧キーを移行元として記録できる。その後の新版だけの追加・編集では記録を保持する。
++- すでに新旧の内容が異なっている既存データから、昔の取り込み履歴は推測しない。その旧キーは保持する。新旧を退避し、採用内容を確認して明示的に復旧する既存手順を利用する。
++- 指紋がまだないまま整理する場合の従来の全件一致条件も維持した。空の移行元リストが明示的に保存されている場合は、未取り込みとして扱う。
++
++## 合成データによる自動検証
++
++`tests/indexeddb_provenance.py` を追加。実Chromium／IndexedDB／localStorageを使用し、外部HTTPSは遮断。検証用のクロージャアクセスとエラー注入はインターセプトしたHTMLだけに追加した。
++
++| ケース | 結果 |
++| --- | --- |
++| 移行時の旧キー名・指紋が元文字列のSHA-256と一致 | 成功 |
++| 3種類すべてに記録追加・編集・写真変更し、再編集後も同じ移行元記録を保持 | 成功 |
++| 最新JSONと旧JSONを照合・再読み込みした後に、取り込み済みの旧キーだけを整理 | 成功。新版は各3件・全フィールド・写真を維持 |
++| 取り込んでいない別の旧v1キー | 保持 |
++| 新版だけのJSON照合、保存後の再読み込み不足、古い新版JSONの使用 | 整理拒否・旧キー保持 |
++| 整理ジャーナル書き込み失敗 | 新旧とも保持し、再試行で整理成功 |
++| 新版編集後、実際の旧mainから別の記録・写真を保存 | 保存・整理停止。再読み込み後も検出 |
++| その分岐から新旧それぞれの写真付きJSONを保存・読み戻し | 双方の全フィールド・写真文字列が期待値と一致 |
++| 新版側を採用して分岐復旧 | 古い取り込み履歴をリセットし、採用しなかった旧側は保持 |
++| 組み合わせた旧領域指紋を一致させた合成ケースでも、個別旧キーの内容が移行時と異なる | 整理拒否。個別指紋による防御を確認 |
++| 指紋のない旧試作データで、編集前は一致／すでに編集済み | 前者だけ移行元を確認でき整理成功、後者は履歴を捏造せず保持 |
++| 不正な移行元記録 | 旧キーを削除しない |
++
++実行した回帰：
++
++- `tests/indexeddb_recovery.py`：整理直後・2キー途中の中断、ロック中の更新、旧版分岐、復旧時の失敗と再試行、容量不足、写真付きJSON往復が全成功。
++- `tests/indexeddb_photos.py`：写真コピー・照合失敗、保存失敗、タブ競合、写真削除、JSON互換性、旧mainへの復元が全成功。
++- 検索・統計・表示設定のNodeテスト3ファイル、JavaScript構文検査、`git diff --check` が成功。
++
++証跡：[今回のログ](indexeddb-provenance-evidence/chromium.log)、[ケース詳細](indexeddb-provenance-evidence/cases.json)、[整理・復旧回帰](indexeddb-provenance-evidence/recovery-regression.log)、[写真回帰](indexeddb-provenance-evidence/photo-regression.log)、[Nodeログ](indexeddb-provenance-evidence/node.log)。過去の容量・画面証跡を上書きしないよう、既存回帰テストに証跡出力先の環境変数を追加した。
++
++## 残課題・運用前提
++
++Safari実機、OSによる強制終了／電源断、写真GC、大量記録性能は今回も未確認または対象外。同じWeb Lockを利用する旧main `c2c719d` を競合検証に使った。ロックを無視する任意の旧版との同時編集に対する保証範囲は前回報告と同じで、整理前に旧タブを閉じる必要がある。
++
++すでに編集済みで指紋を持たないデータから、確かな過去の移行履歴を自動復元することはできない。JSONでアーカイブ全体を置き換えた後も、取り込み元と照合できない旧領域は保持する。①・③のレビュー後に本番反映を判断する。
+diff --git a/index.html b/index.html
+index b439dbf..c20af70 100644
+--- a/index.html
++++ b/index.html
+@@ -419,6 +419,7 @@ async function commitDB(candidate,operation={},migration=false){
+    const verified=migrate(await MLAPhotos.unpack(packed));
+    if(stable(verified)!==stable(validated))throw new MLAPhotos.PhotoError('Archive readback mismatch');
+    checkSources();
++   packed.importedLegacy=await lifecycle.importsFor(validated,baseRaw,migration||operation.kind==='restore');
+    packed.legacyStamp=await MLAPhotos.idFor(JSON.stringify([legacyBase,oldBase]));
+    checkSources();
+    packed.generation=crypto.randomUUID();
+@@ -1100,7 +1101,7 @@ function mountPhotoMaintenance(){
+  evidence.onchange=()=>run(async()=>{const matches=new Set();for(const file of evidence.files)for(const i of await lifecycle.verify(await file.text()))matches.add(i);message.textContent='読み戻し一致 / Verified: '+[...matches].map(i=>['新版','旧v03','旧v1'][i]).join(', ')});
+  panel.append(label);
+  const cleanup=text('button','btn ghost','確認済みの旧データを整理 / Clean up verified legacy data');cleanup.id='photo-cleanup';cleanup.type='button';
+- cleanup.onclick=()=>run(async()=>{if(pendingDraft()||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open'))throw Error(keepDraftMessage());if(externalChanged)throw Error('新旧の分岐を復旧してから整理してください / Resolve branch conflict first');if(!confirm('写真付きJSONをファイルから読み戻し、再読み込み後の記録と写真を確認しましたか？一致した旧データだけを削除します。 / Delete only verified matching legacy data?'))return;await lifecycle.cleanup(loadedRaw);[baseRaw,legacyBase,oldBase]=lifecycle.raws();message.textContent='旧データの整理が完了しました。JSON原本を保管してください / Legacy cleanup complete; keep JSON files'});
++ cleanup.onclick=()=>run(async()=>{if(pendingDraft()||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open'))throw Error(keepDraftMessage());if(externalChanged)throw Error('新旧の分岐を復旧してから整理してください / Resolve branch conflict first');if(!confirm('写真付きJSONをファイルから読み戻し、再読み込み後の記録と写真を確認しましたか？移行時の内容と一致する旧データだけを削除します。新版で追加・編集した内容は保持します。 / Delete only unchanged imported legacy data? New edits will be kept.'))return;await lifecycle.cleanup(loadedRaw);[baseRaw,legacyBase,oldBase]=lifecycle.raws();message.textContent='旧データの整理が完了しました。JSON原本を保管してください / Legacy cleanup complete; keep JSON files'});
+  panel.append(cleanup);
+  const choice=text('input','field');choice.type='file';choice.accept='.json,application/json';choice.id='photo-recovery-file';
+  const previewSummary=text('p','small');
+diff --git a/photo-lifecycle.js b/photo-lifecycle.js
+index 5076e97..e290be0 100644
+--- a/photo-lifecycle.js
++++ b/photo-lifecycle.js
+@@ -20,6 +20,29 @@
+    if(['listening','collection','live'].some(a=>result[a].some(r=>Object.hasOwn(r,'photoId'))))fail('写真本体が必要です / Photo data required');
+    return result;
+   }
++  function validateImports(proof){
++   if(!proof||proof.version!==1||!Array.isArray(proof.sources))fail('移行元の記録が不正です。旧データは保持しました / Invalid migration provenance; legacy data retained');
++   const seen=new Set();
++   for(const source of proof.sources){if(!source||!legacyKeys.includes(source.key)||seen.has(source.key)||!/^sha256-[0-9a-f]{64}$/.test(source.sha256))fail('移行元の記録が不正です / Invalid migration provenance');seen.add(source.key)}
++   return structuredClone(proof);
++  }
++  async function recordImports(candidate){
++   const snapshot=raws(),sources=[];
++   for(let i=1;i<snapshot.length;i++)if(snapshot[i]!==null){
++    let equivalent=false;
++    try{equivalent=stable(await portable(snapshot[i],i))===stable(candidate)}catch(e){/* Unreadable unrelated legacy keys are retained. */}
++    if(equivalent)sources.push({key:legacyKeys[i-1],sha256:await photos.idFor(snapshot[i])});
++   }
++   check(snapshot);return {version:1,sources};
++  }
++  async function importsFor(candidate,previousRaw,reset=false){
++   if(reset||previousRaw===null)return recordImports(candidate);
++   const previous=JSON.parse(previousRaw);
++   if(Object.hasOwn(previous,'importedLegacy'))return validateImports(previous.importedLegacy);
++   // Older prototypes have no historical receipt. Establish equivalence BEFORE editing,
++   // never by assuming that their combined legacyStamp proves an import took place.
++   return recordImports(await portable(previousRaw,0));
++  }
+   async function guard(snapshot=raws()){
+    if(snapshot[0]===null)return true;
+    const state=await journal();
+@@ -48,9 +71,16 @@
+    if(!snapshot[0]||loadedRaw!==snapshot[0])fail('移行・保存後に再読み込みし、記録と写真を確認してください / Reload to verify saved records and photos first');
+    if(!await guard(snapshot))fail('新旧の分岐を復旧してから整理してください / Resolve branch conflict before cleanup');
+    needReceipts(snapshot);
+-   const current=await portable(snapshot[0],0),remove=[];
+-   for(let i=1;i<snapshot.length;i++)if(snapshot[i]!==null&&stable(await portable(snapshot[i],i))===stable(current))remove.push(i);
+-   if(!remove.length)fail('移行済み記録と一致する旧キーがありません。旧データは保持しました / No matching legacy key; retained');
++   const current=await portable(snapshot[0],0),stored=JSON.parse(snapshot[0]),remove=[];
++   const proof=Object.hasOwn(stored,'importedLegacy')?validateImports(stored.importedLegacy):null;
++   for(let i=1;i<snapshot.length;i++)if(snapshot[i]!==null){
++    // Current records may have been added, edited or deliberately deleted since import.
++    // Only the imported source's exact contents, and current backup/readback, matter.
++    const source=proof?.sources.find(s=>s.key===legacyKeys[i-1]);
++    const imported=proof?source&&source.sha256===await photos.idFor(snapshot[i]):stable(await portable(snapshot[i],i))===stable(current);
++    if(imported)remove.push(i);
++   }
++   if(!remove.length)fail('移行元の記録と一致する旧キーがありません。旧データは保持しました / No unchanged imported legacy key; retained');
+    const after=snapshot.slice(1);for(const i of remove)after[i-1]=null;
+    check(snapshot);
+    await journal({raw:snapshot[0],after},true);
+@@ -64,12 +94,13 @@
+     const snapshot=raws();needReceipts(snapshot);
+     const packed=await photos.pack(candidate),verified=validate(await photos.unpack(packed));
+     if(stable(candidate)!==stable(verified))fail('復元の読み戻し照合に失敗しました / Restore readback mismatch');
++    packed.importedLegacy=await recordImports(candidate);
+     packed.legacyStamp=await photos.idFor(JSON.stringify(snapshot.slice(1)));
+     packed.generation=crypto.randomUUID();check(snapshot);needReceipts(snapshot);
+     const raw=JSON.stringify(packed);localStorage.setItem(key,raw);receipts.clear();
+     return {raw,data:candidate};
+    });
+   }
+-  return Object.freeze({guard,verify,cleanup,recover,exportBranch,invalidate:()=>receipts.clear(),raws});
++  return Object.freeze({guard,verify,cleanup,recover,exportBranch,importsFor,invalidate:()=>receipts.clear(),raws});
+  };
+ })();
+diff --git a/photo-store.js b/photo-store.js
+index b7042d1..2146f9e 100644
+--- a/photo-store.js
++++ b/photo-store.js
+@@ -33,7 +33,7 @@
+   out.photoStorage=1;return out;
+  }
+  async function unpack(archive){
+-  const out=structuredClone(archive);delete out.photoStorage;delete out.legacyStamp;delete out.generation;
++  const out=structuredClone(archive);delete out.photoStorage;delete out.legacyStamp;delete out.generation;delete out.importedLegacy;
+   for(const area of areas)for(const r of out[area])if(Object.hasOwn(r,'photoId')){
+    if(typeof r.photoId!=='string'||r.photo)throw new PhotoError('Invalid photo reference');
+    const value=await get(r.photoId);
+diff --git a/tests/indexeddb_provenance.py b/tests/indexeddb_provenance.py
+new file mode 100644
+index 0000000..9bed649
+--- /dev/null
++++ b/tests/indexeddb_provenance.py
+@@ -0,0 +1,121 @@
++"""Migration-source provenance across edits; isolated Chromium and synthetic photos only."""
++import copy, hashlib, json, os, subprocess, threading
++from http.server import ThreadingHTTPServer
++from pathlib import Path
++from playwright.sync_api import sync_playwright
++from ui_v0322 import ROOT, QuietHandler
++from data_preservation import seed_data, PHOTO
++from indexeddb_recovery import KEY, LEGACY, OLD, SEAM, INJECT
++
++
++def main():
++ server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler);threading.Thread(target=server.serve_forever,daemon=True).start()
++ url=f'http://127.0.0.1:{server.server_port}'
++ source=(ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();",SEAM+"setSection('listening');showStorageState();")
++ legacy_source=subprocess.check_output(['git','show','c2c719d:index.html'],cwd=ROOT).decode()
++ evidence=ROOT/'docs/indexeddb-provenance-evidence';evidence.mkdir(exist_ok=True)
++ errors=[];cases=[]
++ with sync_playwright() as pw:
++  browser=pw.chromium.launch(executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox'])
++  def fresh():
++   ctx=browser.new_context(accept_downloads=True,locale='ja-JP')
++   ctx.route(url+'/',lambda r:r.fulfill(body=source,content_type='text/html'))
++   ctx.route(url+'/legacy',lambda r:r.fulfill(body=legacy_source,content_type='text/html'))
++   ctx.route('https://**/*',lambda r:r.abort());ctx.add_init_script(INJECT)
++   p=ctx.new_page();p.on('pageerror',lambda e:errors.append(str(e)));p.on('dialog',lambda d:d.accept());p.goto(url);ready(p)
++   return ctx,p
++  def ready(p):p.wait_for_function('window.review && !review.busy()')
++  def raw(p,k=KEY):return p.evaluate('(k)=>localStorage.getItem(k)',k)
++  def seed(p,data,other=None):
++   p.evaluate('([l,o,d,a])=>{localStorage.clear();localStorage.setItem(l,JSON.stringify(d));if(a!==null)localStorage.setItem(o,JSON.stringify(a))}',[LEGACY,OLD,data,other]);p.reload();ready(p)
++  def click(p,selector):p.locator(selector).click();ready(p)
++  def export(p,index):
++   with p.expect_download() as dl:p.locator(f'#photo-export-{index}').click()
++   ready(p);return json.loads(Path(dl.value.path()).read_text())
++  def files(p,*values):
++   p.locator('#photo-verify').set_input_files([dict(name=f'saved-{i}.json',mimeType='application/json',buffer=json.dumps(v,ensure_ascii=False).encode()) for i,v in enumerate(values)]);ready(p)
++   assert 'Verified' in p.locator('#photo-maintenance-status').inner_text()
++  def save(p,data,kind='edit'):assert p.evaluate('([d,k])=>review.save(d,{kind:k})',[data,kind])
++  def proof(p):return json.loads(raw(p))['importedLegacy']
++  def edited(data):
++   result=copy.deepcopy(data)
++   for area in ['listening','collection','live']:
++    result[area][0]['memo']='新版だけで編集 '+area
++    result[area][0]['title']+=' edited'
++    result[area][0]['photo']='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyIiBoZWlnaHQ9IjIiPjwvc3ZnPg=='
++    result[area].append(dict(result[area][0],entryId=area+'-added',title='新版追加 '+area,photo=PHOTO))
++   return result
++  original=seed_data()
++  ctx,p=fresh();unrelated=[dict(id='unrelated',title='Unimported',artist='Synthetic',rating='4',photo=PHOTO)]
++  seed(p,original,unrelated);legacy_raw=raw(p,LEGACY);other_raw=raw(p,OLD)
++  imported=proof(p)
++  assert imported==dict(version=1,sources=[dict(key=LEGACY,sha256='sha256-'+hashlib.sha256(legacy_raw.encode()).hexdigest())])
++  modified=edited(original);save(p,modified,'create');assert proof(p)==imported
++  # Current file alone is insufficient once old and new differ.
++  p.reload();ready(p);new=export(p,0);old=export(p,1);other=export(p,2)
++  assert new==modified and old==original
++  files(p,new);before=raw(p);click(p,'#photo-cleanup');assert raw(p,LEGACY)==legacy_raw and raw(p)==before
++  # Previously exported pre-edit JSON cannot stand in for the latest new snapshot.
++  files(p,new,old,other)
++  again=copy.deepcopy(modified);again['live'][0]['memo']='再編集';save(p,again)
++  click(p,'#photo-cleanup');assert raw(p,LEGACY)==legacy_raw # Reload required after each save.
++  p.reload();ready(p);p.locator('#photo-verify').set_input_files(dict(name='stale-new.json',mimeType='application/json',buffer=json.dumps(new).encode()));ready(p);click(p,'#photo-cleanup');assert raw(p,LEGACY)==legacy_raw # New receipt stale.
++  latest=export(p,0);files(p,latest,old,other)
++  frozen=raw(p);p.evaluate('failJournal=true');click(p,'#photo-cleanup');assert raw(p)==frozen and raw(p,LEGACY)==legacy_raw
++  p.evaluate('failJournal=false');click(p,'#photo-cleanup');assert raw(p,LEGACY) is None and raw(p,OLD)==other_raw
++  assert raw(p)==frozen
++  p.reload();ready(p);assert not p.evaluate('review.conflict()') and p.evaluate('review.db()')==again
++  for area in ['listening','collection','live']:
++   p.evaluate('(a)=>review.section(a)',area);p.wait_for_function("document.querySelector('#library img')?.naturalWidth>0")
++  assert export(p,0)==again
++  cases.append(dict(case='new-only add/edit/photos all three areas',sourceProof=imported,legacyDeleted=True,unimportedLegacyRetained=True,currentCounts={a:len(again[a]) for a in ['listening','collection','live']}))
++  print('PASS new-only add/edit/photo changes: provenance carried; latest JSON/reload gates; imported key deleted, unrelated key retained')
++  ctx.close()
++  # Actual old-main write after new-only edits: both branches must survive and export.
++  ctx,p=fresh();seed(p,original);save(p,modified);p.reload();ready(p)
++  new=export(p,0);old=export(p,1);files(p,new,old)
++  oldtab=ctx.new_page();oldtab.on('pageerror',lambda e:errors.append(str(e)));oldtab.on('dialog',lambda d:d.accept());oldtab.goto(url+'/legacy')
++  branched=copy.deepcopy(original);branched['collection'][0]['memo']='旧版でも保存';branched['live'][0]['photo']=modified['live'][0]['photo']
++  oldtab.locator('#import-json').set_input_files(dict(name='old-save.json',mimeType='application/json',buffer=json.dumps(branched).encode()))
++  p.wait_for_function('(k)=>JSON.parse(localStorage.getItem(k)).collection[0].memo==="旧版でも保存"',arg=LEGACY)
++  p.wait_for_function('review.conflict()');frozen=raw(p);legacy_changed=raw(p,LEGACY)
++  click(p,'#photo-cleanup');assert raw(p)==frozen and raw(p,LEGACY)==legacy_changed
++  assert not p.evaluate('review.save(review.db())')
++  p.reload();ready(p);assert p.evaluate('review.conflict()')
++  assert export(p,0)==modified and export(p,1)==branched
++  files(p,modified,branched);click(p,'#photo-cleanup');assert raw(p)==frozen and raw(p,LEGACY)==legacy_changed
++  print('PASS actual old-main save after new edits: cleanup/save stopped across reload; both complete photo JSON branches exported')
++  # Explicit new-branch adoption must not re-authorize deletion of changed old sources.
++  p.locator('#photo-recovery-file').set_input_files(dict(name='adopt-new.json',mimeType='application/json',buffer=json.dumps(modified).encode()));ready(p);click(p,'#photo-recover')
++  assert proof(p)['sources']==[] and p.evaluate('review.db()')==modified
++  p.reload();ready(p);files(p,modified,branched);click(p,'#photo-cleanup');assert raw(p,LEGACY)==legacy_changed
++  cases.append(dict(case='old-main save too',cleanupStopped=True,bothPhotoBackupsMatch=True,afterRecoverySources=proof(p)['sources']))
++  print('PASS explicit recovery resets provenance; rejected old branch stays retained')
++  ctx.close()
++  # Legacy prototypes: establish only equivalence that can still be proved before editing.
++  for already_edited in [False,True]:
++   ctx,p=fresh();seed(p,original)
++   if already_edited:save(p,modified)
++   p.evaluate('(k)=>{const d=JSON.parse(localStorage.getItem(k));delete d.importedLegacy;localStorage.setItem(k,JSON.stringify(d))}',KEY)
++   p.reload();ready(p);save(p,modified);p.reload();ready(p)
++   files(p,export(p,0),export(p,1));click(p,'#photo-cleanup')
++   assert (raw(p,LEGACY) is None)==(not already_edited)
++   print('PASS pre-provenance compatibility: '+('already edited history not invented; old retained' if already_edited else 'equivalence verified before first edit; cleanup allowed'))
++   ctx.close()
++  # Source digest is checked independently of the combined conflict stamp.
++  ctx,p=fresh();seed(p,original);save(p,modified)
++  p.evaluate('''async ([k,l,d])=>{const old=JSON.stringify(d);localStorage.setItem(l,old);const packed=JSON.parse(localStorage.getItem(k));packed.legacyStamp=await MLAPhotos.idFor(JSON.stringify([old,null]));localStorage.setItem(k,JSON.stringify(packed))}''',[KEY,LEGACY,branched])
++  p.reload();ready(p);assert not p.evaluate('review.conflict()')
++  files(p,export(p,0),export(p,1));before=raw(p,LEGACY);click(p,'#photo-cleanup');assert raw(p,LEGACY)==before
++  print('PASS per-key content digest rejects changed legacy even when combined stamp agrees')
++  ctx.close()
++  # Invalid source evidence never falls back to a weaker content assumption.
++  ctx,p=fresh();seed(p,original)
++  p.evaluate('(k)=>{const d=JSON.parse(localStorage.getItem(k));d.importedLegacy.sources[0].sha256="bad";localStorage.setItem(k,JSON.stringify(d))}',KEY)
++  p.reload();ready(p);files(p,export(p,0),export(p,1));before=raw(p,LEGACY);click(p,'#photo-cleanup');assert raw(p,LEGACY)==before
++  print('PASS malformed provenance stops cleanup without deleting old data')
++  ctx.close();browser.close()
++ assert not errors,errors
++ (evidence/'cases.json').write_text(json.dumps(cases,ensure_ascii=False,indent=2)+'\n')
++ server.shutdown();print('PASS all migration-provenance checks')
++if __name__=='__main__':main()
+diff --git a/tests/indexeddb_recovery.py b/tests/indexeddb_recovery.py
+index e69740f..793e817 100644
+--- a/tests/indexeddb_recovery.py
++++ b/tests/indexeddb_recovery.py
+@@ -26,7 +26,7 @@ def main():
+  source=(ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();",SEAM+"setSection('listening');showStorageState();")
+  engine=(ROOT/'photo-lifecycle.js').read_text().replace("    if(stable(candidate)!==stable(verified))", "    if(window.pauseRecovery)await new Promise(r=>window.resumeRecovery=r);\n    if(stable(candidate)!==stable(verified))").replace('   check(snapshot); // Journal write awaited:', '   if(window.pauseCleanup)await new Promise(r=>window.resumeCleanup=r);\n   check(snapshot); // Journal write awaited:')
+  old_source=subprocess.check_output(['git','show','c2c719d:index.html'],cwd=ROOT).decode()
+- evidence=ROOT/'docs/indexeddb-recovery-evidence';evidence.mkdir(exist_ok=True)
++ evidence=Path(os.environ.get('MLA_RECOVERY_EVIDENCE',ROOT/'docs/indexeddb-recovery-evidence'));evidence.mkdir(exist_ok=True)
+  measurements=[];errors=[]
+  with sync_playwright() as pw:
+   browser=pw.chromium.launch(executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox'])
+-- 
+2.52.0
+
