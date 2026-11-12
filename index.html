@@ -419,6 +419,7 @@ async function commitDB(candidate,operation={},migration=false){
    const verified=migrate(await MLAPhotos.unpack(packed));
    if(stable(verified)!==stable(validated))throw new MLAPhotos.PhotoError('Archive readback mismatch');
    checkSources();
+   packed.importedLegacy=await lifecycle.importsFor(validated,baseRaw,migration||operation.kind==='restore');
    packed.legacyStamp=await MLAPhotos.idFor(JSON.stringify([legacyBase,oldBase]));
    checkSources();
    packed.generation=crypto.randomUUID();
@@ -1100,7 +1101,7 @@ function mountPhotoMaintenance(){
  evidence.onchange=()=>run(async()=>{const matches=new Set();for(const file of evidence.files)for(const i of await lifecycle.verify(await file.text()))matches.add(i);message.textContent='読み戻し一致 / Verified: '+[...matches].map(i=>['新版','旧v03','旧v1'][i]).join(', ')});
  panel.append(label);
  const cleanup=text('button','btn ghost','確認済みの旧データを整理 / Clean up verified legacy data');cleanup.id='photo-cleanup';cleanup.type='button';
- cleanup.onclick=()=>run(async()=>{if(pendingDraft()||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open'))throw Error(keepDraftMessage());if(externalChanged)throw Error('新旧の分岐を復旧してから整理してください / Resolve branch conflict first');if(!confirm('写真付きJSONをファイルから読み戻し、再読み込み後の記録と写真を確認しましたか？一致した旧データだけを削除します。 / Delete only verified matching legacy data?'))return;await lifecycle.cleanup(loadedRaw);[baseRaw,legacyBase,oldBase]=lifecycle.raws();message.textContent='旧データの整理が完了しました。JSON原本を保管してください / Legacy cleanup complete; keep JSON files'});
+ cleanup.onclick=()=>run(async()=>{if(pendingDraft()||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open'))throw Error(keepDraftMessage());if(externalChanged)throw Error('新旧の分岐を復旧してから整理してください / Resolve branch conflict first');if(!confirm('写真付きJSONをファイルから読み戻し、再読み込み後の記録と写真を確認しましたか？移行時の内容と一致する旧データだけを削除します。新版で追加・編集した内容は保持します。 / Delete only unchanged imported legacy data? New edits will be kept.'))return;await lifecycle.cleanup(loadedRaw);[baseRaw,legacyBase,oldBase]=lifecycle.raws();message.textContent='旧データの整理が完了しました。JSON原本を保管してください / Legacy cleanup complete; keep JSON files'});
  panel.append(cleanup);
  const choice=text('input','field');choice.type='file';choice.accept='.json,application/json';choice.id='photo-recovery-file';
  const previewSummary=text('p','small');

@@ -26,7 +26,7 @@ def main():
  source=(ROOT/'index.html').read_text().replace("setSection('listening');showStorageState();",SEAM+"setSection('listening');showStorageState();")
  engine=(ROOT/'photo-lifecycle.js').read_text().replace("    if(stable(candidate)!==stable(verified))", "    if(window.pauseRecovery)await new Promise(r=>window.resumeRecovery=r);\n    if(stable(candidate)!==stable(verified))").replace('   check(snapshot); // Journal write awaited:', '   if(window.pauseCleanup)await new Promise(r=>window.resumeCleanup=r);\n   check(snapshot); // Journal write awaited:')
  old_source=subprocess.check_output(['git','show','c2c719d:index.html'],cwd=ROOT).decode()
- evidence=ROOT/'docs/indexeddb-recovery-evidence';evidence.mkdir(exist_ok=True)
+ evidence=Path(os.environ.get('MLA_RECOVERY_EVIDENCE',ROOT/'docs/indexeddb-recovery-evidence'));evidence.mkdir(exist_ok=True)
  measurements=[];errors=[]
  with sync_playwright() as pw:
   browser=pw.chromium.launch(executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox'])

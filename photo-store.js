@@ -33,7 +33,7 @@
   out.photoStorage=1;return out;
  }
  async function unpack(archive){
-  const out=structuredClone(archive);delete out.photoStorage;delete out.legacyStamp;delete out.generation;
+  const out=structuredClone(archive);delete out.photoStorage;delete out.legacyStamp;delete out.generation;delete out.importedLegacy;
   for(const area of areas)for(const r of out[area])if(Object.hasOwn(r,'photoId')){
    if(typeof r.photoId!=='string'||r.photo)throw new PhotoError('Invalid photo reference');
    const value=await get(r.photoId);

@@ -20,6 +20,29 @@
    if(['listening','collection','live'].some(a=>result[a].some(r=>Object.hasOwn(r,'photoId'))))fail('写真本体が必要です / Photo data required');
    return result;
   }
+  function validateImports(proof){
+   if(!proof||proof.version!==1||!Array.isArray(proof.sources))fail('移行元の記録が不正です。旧データは保持しました / Invalid migration provenance; legacy data retained');
+   const seen=new Set();
+   for(const source of proof.sources){if(!source||!legacyKeys.includes(source.key)||seen.has(source.key)||!/^sha256-[0-9a-f]{64}$/.test(source.sha256))fail('移行元の記録が不正です / Invalid migration provenance');seen.add(source.key)}
+   return structuredClone(proof);
+  }
+  async function recordImports(candidate){
+   const snapshot=raws(),sources=[];
+   for(let i=1;i<snapshot.length;i++)if(snapshot[i]!==null){
+    let equivalent=false;
+    try{equivalent=stable(await portable(snapshot[i],i))===stable(candidate)}catch(e){/* Unreadable unrelated legacy keys are retained. */}
+    if(equivalent)sources.push({key:legacyKeys[i-1],sha256:await photos.idFor(snapshot[i])});
+   }
+   check(snapshot);return {version:1,sources};
+  }
+  async function importsFor(candidate,previousRaw,reset=false){
+   if(reset||previousRaw===null)return recordImports(candidate);
+   const previous=JSON.parse(previousRaw);
+   if(Object.hasOwn(previous,'importedLegacy'))return validateImports(previous.importedLegacy);
+   // Older prototypes have no historical receipt. Establish equivalence BEFORE editing,
+   // never by assuming that their combined legacyStamp proves an import took place.
+   return recordImports(await portable(previousRaw,0));
+  }
   async function guard(snapshot=raws()){
    if(snapshot[0]===null)return true;
    const state=await journal();
@@ -48,9 +71,16 @@
    if(!snapshot[0]||loadedRaw!==snapshot[0])fail('移行・保存後に再読み込みし、記録と写真を確認してください / Reload to verify saved records and photos first');
    if(!await guard(snapshot))fail('新旧の分岐を復旧してから整理してください / Resolve branch conflict before cleanup');
    needReceipts(snapshot);
-   const current=await portable(snapshot[0],0),remove=[];
-   for(let i=1;i<snapshot.length;i++)if(snapshot[i]!==null&&stable(await portable(snapshot[i],i))===stable(current))remove.push(i);
-   if(!remove.length)fail('移行済み記録と一致する旧キーがありません。旧データは保持しました / No matching legacy key; retained');
+   const current=await portable(snapshot[0],0),stored=JSON.parse(snapshot[0]),remove=[];
+   const proof=Object.hasOwn(stored,'importedLegacy')?validateImports(stored.importedLegacy):null;
+   for(let i=1;i<snapshot.length;i++)if(snapshot[i]!==null){
+    // Current records may have been added, edited or deliberately deleted since import.
+    // Only the imported source's exact contents, and current backup/readback, matter.
+    const source=proof?.sources.find(s=>s.key===legacyKeys[i-1]);
+    const imported=proof?source&&source.sha256===await photos.idFor(snapshot[i]):stable(await portable(snapshot[i],i))===stable(current);
+    if(imported)remove.push(i);
+   }
+   if(!remove.length)fail('移行元の記録と一致する旧キーがありません。旧データは保持しました / No unchanged imported legacy key; retained');
    const after=snapshot.slice(1);for(const i of remove)after[i-1]=null;
    check(snapshot);
    await journal({raw:snapshot[0],after},true);
@@ -64,12 +94,13 @@
     const snapshot=raws();needReceipts(snapshot);
     const packed=await photos.pack(candidate),verified=validate(await photos.unpack(packed));
     if(stable(candidate)!==stable(verified))fail('復元の読み戻し照合に失敗しました / Restore readback mismatch');
+    packed.importedLegacy=await recordImports(candidate);
     packed.legacyStamp=await photos.idFor(JSON.stringify(snapshot.slice(1)));
     packed.generation=crypto.randomUUID();check(snapshot);needReceipts(snapshot);
     const raw=JSON.stringify(packed);localStorage.setItem(key,raw);receipts.clear();
     return {raw,data:candidate};
    });
   }
-  return Object.freeze({guard,verify,cleanup,recover,exportBranch,invalidate:()=>receipts.clear(),raws});
+  return Object.freeze({guard,verify,cleanup,recover,exportBranch,importsFor,invalidate:()=>receipts.clear(),raws});
  };
 })();
