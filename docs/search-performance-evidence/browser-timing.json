@@ -1,0 +1,290 @@
+[
+  {
+    "phase": "before",
+    "lang": "ja",
+    "mode": "title",
+    "repeat": false,
+    "elapsedMs": 22,
+    "firstFetchDelayMs": 4.399999999965075,
+    "domMs": 1.7999999999883585,
+    "net": [
+      {
+        "start": 590.2999999999884,
+        "apiMs": 13.400000000023283,
+        "jsonMs": 0.9000000000232831
+      }
+    ],
+    "dedupMs": 0.1000000000349246,
+    "sortMs": 0.3999999999650754
+  },
+  {
+    "phase": "before",
+    "lang": "ja",
+    "mode": "title",
+    "repeat": true,
+    "elapsedMs": 7.900000000023283,
+    "firstFetchDelayMs": null,
+    "domMs": 4.7000000000116415,
+    "net": [],
+    "dedupMs": 0,
+    "sortMs": 0.7999999999883585
+  },
+  {
+    "phase": "before",
+    "lang": "ja",
+    "mode": "artist",
+    "repeat": false,
+    "elapsedMs": 3259.3000000000466,
+    "firstFetchDelayMs": 749.2000000000116,
+    "domMs": 1.2000000000116415,
+    "net": [
+      {
+        "start": 1841,
+        "apiMs": 7.600000000034925,
+        "jsonMs": 0.6999999999534339
+      },
+      {
+        "start": 3091.5,
+        "apiMs": 13.600000000034925,
+        "jsonMs": 0.8000000000465661
+      },
+      {
+        "start": 4342.600000000035,
+        "apiMs": 5.599999999976717,
+        "jsonMs": 0.40000000002328306
+      }
+    ],
+    "dedupMs": 0,
+    "sortMs": 0.30000000004656613,
+    "cachedArtistCandidateMs": 0.19999999995343387
+  },
+  {
+    "phase": "before",
+    "lang": "ja",
+    "mode": "artist",
+    "repeat": true,
+    "elapsedMs": 6.900000000023283,
+    "firstFetchDelayMs": null,
+    "domMs": 3.400000000023283,
+    "net": [],
+    "dedupMs": 0,
+    "sortMs": 1.5,
+    "cachedArtistCandidateMs": 0.1000000000349246
+  },
+  {
+    "phase": "before",
+    "lang": "en",
+    "mode": "title",
+    "repeat": false,
+    "elapsedMs": 34.5,
+    "firstFetchDelayMs": 6.599999999976717,
+    "domMs": 3.5,
+    "net": [
+      {
+        "start": 439.5,
+        "apiMs": 20.600000000034925,
+        "jsonMs": 0.9000000000232831
+      }
+    ],
+    "dedupMs": 0,
+    "sortMs": 1.1000000000349246
+  },
+  {
+    "phase": "before",
+    "lang": "en",
+    "mode": "title",
+    "repeat": true,
+    "elapsedMs": 7.899999999965075,
+    "firstFetchDelayMs": null,
+    "domMs": 4.100000000034925,
+    "net": [],
+    "dedupMs": 0.09999999997671694,
+    "sortMs": 0.7000000000116415
+  },
+  {
+    "phase": "before",
+    "lang": "en",
+    "mode": "artist",
+    "repeat": false,
+    "elapsedMs": 3364.5,
+    "firstFetchDelayMs": 853.5,
+    "domMs": 1,
+    "net": [
+      {
+        "start": 1690,
+        "apiMs": 10.900000000023283,
+        "jsonMs": 0.5999999999767169
+      },
+      {
+        "start": 2940.2000000000116,
+        "apiMs": 8.299999999988358,
+        "jsonMs": 0.6000000000349246
+      },
+      {
+        "start": 4190.700000000012,
+        "apiMs": 6.2000000000116415,
+        "jsonMs": 1.7999999999883585
+      }
+    ],
+    "dedupMs": 0,
+    "sortMs": 0.5,
+    "cachedArtistCandidateMs": 0.30000000004656613
+  },
+  {
+    "phase": "before",
+    "lang": "en",
+    "mode": "artist",
+    "repeat": true,
+    "elapsedMs": 8.599999999976717,
+    "firstFetchDelayMs": null,
+    "domMs": 4.7000000000116415,
+    "net": [],
+    "dedupMs": 0.09999999997671694,
+    "sortMs": 0.7000000000116415,
+    "cachedArtistCandidateMs": 0.29999999998835847
+  },
+  {
+    "phase": "after",
+    "lang": "ja",
+    "mode": "title",
+    "repeat": false,
+    "elapsedMs": 27.5,
+    "firstFetchDelayMs": 6.400000000023283,
+    "domMs": 2.7000000000116415,
+    "net": [
+      {
+        "start": 574.2000000000116,
+        "apiMs": 11,
+        "jsonMs": 1.400000000023283
+      }
+    ],
+    "dedupMs": 0,
+    "sortMs": 0.3999999999650754
+  },
+  {
+    "phase": "after",
+    "lang": "ja",
+    "mode": "title",
+    "repeat": true,
+    "elapsedMs": 7.7000000000116415,
+    "firstFetchDelayMs": null,
+    "domMs": 4.2999999999883585,
+    "net": [],
+    "dedupMs": 0.09999999997671694,
+    "sortMs": 0.7000000000116415
+  },
+  {
+    "phase": "after",
+    "lang": "ja",
+    "mode": "artist",
+    "repeat": false,
+    "elapsedMs": 3279.5,
+    "firstFetchDelayMs": 766.6999999999534,
+    "domMs": 2.6000000000349246,
+    "net": [
+      {
+        "start": 1825.0999999999767,
+        "apiMs": 6.7000000000116415,
+        "jsonMs": 0.9000000000232831
+      },
+      {
+        "start": 3075.0999999999767,
+        "apiMs": 7.2000000000116415,
+        "jsonMs": 1.099999999976717
+      },
+      {
+        "start": 4325.5,
+        "apiMs": 7.7999999999883585,
+        "jsonMs": 1.1000000000349246
+      }
+    ],
+    "dedupMs": 0,
+    "sortMs": 0.8000000000465661,
+    "cachedArtistCandidateMs": 0.3999999999650754
+  },
+  {
+    "phase": "after",
+    "lang": "ja",
+    "mode": "artist",
+    "repeat": true,
+    "elapsedMs": 10.300000000046566,
+    "firstFetchDelayMs": null,
+    "domMs": 6.900000000023283,
+    "net": [],
+    "dedupMs": 0.1000000000349246,
+    "sortMs": 0.29999999998835847,
+    "cachedArtistCandidateMs": 0.09999999997671694
+  },
+  {
+    "phase": "after",
+    "lang": "en",
+    "mode": "title",
+    "repeat": false,
+    "elapsedMs": 29.399999999965075,
+    "firstFetchDelayMs": 7,
+    "domMs": 3,
+    "net": [
+      {
+        "start": 626.7999999999884,
+        "apiMs": 14.200000000011642,
+        "jsonMs": 3.2999999999883585
+      }
+    ],
+    "dedupMs": 0.19999999995343387,
+    "sortMs": 1.2000000000116415
+  },
+  {
+    "phase": "after",
+    "lang": "en",
+    "mode": "title",
+    "repeat": true,
+    "elapsedMs": 10.299999999988358,
+    "firstFetchDelayMs": null,
+    "domMs": 6.7000000000116415,
+    "net": [],
+    "dedupMs": 0,
+    "sortMs": 0.29999999998835847
+  },
+  {
+    "phase": "after",
+    "lang": "en",
+    "mode": "artist",
+    "repeat": false,
+    "elapsedMs": 3304.2999999999884,
+    "firstFetchDelayMs": 786.4000000000233,
+    "domMs": 4,
+    "net": [
+      {
+        "start": 1877,
+        "apiMs": 9.699999999953434,
+        "jsonMs": 1.8000000000465661
+      },
+      {
+        "start": 3127.0999999999767,
+        "apiMs": 10.400000000023283,
+        "jsonMs": 1.1999999999534339
+      },
+      {
+        "start": 4378.399999999965,
+        "apiMs": 10.799999999988358,
+        "jsonMs": 0.7999999999883585
+      }
+    ],
+    "dedupMs": 0.1000000000349246,
+    "sortMs": 1,
+    "cachedArtistCandidateMs": 0.7000000000116415
+  },
+  {
+    "phase": "after",
+    "lang": "en",
+    "mode": "artist",
+    "repeat": true,
+    "elapsedMs": 9.200000000011642,
+    "firstFetchDelayMs": null,
+    "domMs": 6,
+    "net": [],
+    "dedupMs": 0,
+    "sortMs": 0.29999999998835847,
+    "cachedArtistCandidateMs": 0.19999999995343387
+  }
+]

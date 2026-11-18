@@ -1,0 +1,4 @@
+SKIP legacy Live UI checks (search-only run)
+PASS 2: two raw pages, four display batches, global re-sort, exact/partial dates/unknown, all types/unclassified, add album metadata and unchanged saved schema
+PASS 3: artist mode retains Album/EP/Single priority and displays type beside release date
+PASS 4: exact JSON export/restore/reload and all original Live rating values; no JS errors
