@@ -8,8 +8,12 @@ import threading
 from pathlib import Path
 from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright, expect
-from ui_v0322 import KEY, QuietHandler, SEED, stored, record, edit, save, assert_hearts, assert_stars, GOLD
+from ui_v0322 import KEY, QuietHandler, SEED, record, edit, save, assert_hearts, assert_stars, GOLD
 
+
+def stored(page):
+    # Read the current photo-backed archive; the legacy seed remains a rollback copy.
+    return page.evaluate("async()=>MLAPhotos.unpack(JSON.parse(localStorage.getItem('my-music-archive-photos-v1')))")
 
 def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), QuietHandler)
@@ -52,7 +56,7 @@ def main():
         page.goto(base)
         page.evaluate('([key,data])=>localStorage.setItem(key,JSON.stringify(data))', [KEY, seed])
         page.reload()
-        for lang in ['ja', 'en']:
+        for lang in ([] if os.environ.get('MLA_SEARCH_ONLY') else ['ja', 'en']):
             ja = lang == 'ja'
             page.locator('#ui-language').select_option(lang)
             page.locator('[data-section=live]').click()
@@ -98,8 +102,9 @@ def main():
                 assert page.locator('[data-target=rating] .heart-symbol').count() == 0
                 page.locator('#close').click()
         assert stored(page) == seed
-        print('PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes')
+        print('SKIP legacy Live UI checks (search-only run)' if os.environ.get('MLA_SEARCH_ONLY') else 'PASS 1: JA/EN create/edit/detail/list/grid/sort labels, Live coral/gold hearts, keyboard/pointer, unrated/null, legacy precision, album stars; no data writes')
 
+        page.locator('#ui-language').select_option('en')
         page.locator('[data-section=listening]').click()
         page.locator('[data-search-mode=title]').click()
         page.locator('#query').fill('Title')

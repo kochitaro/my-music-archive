@@ -5,11 +5,11 @@ const fs=require('node:fs');
 const source=fs.readFileSync(require.resolve('../search.js'),'utf8');
 const artists=require('./fixtures/artists.json');
 const credits=require('./fixtures/credits.json');
-function harness(handler,timeouts=false){
+function harness(handler,timeouts=false,onSleep=()=>{}){
  let now=1000000,active=0,maxActive=0;
  const calls=[],delays=[];
  const context={window:{},URLSearchParams,AbortController,Date:{now:()=>now},
-  setTimeout:(fn,ms)=>{if(String(fn).includes("controller.abort"))return timeouts?setTimeout(fn,0):null;delays.push(ms);now+=ms;return setTimeout(fn,0)},clearTimeout,
+  setTimeout:(fn,ms)=>{if(String(fn).includes("controller.abort"))return timeouts?setTimeout(fn,0):null;delays.push(ms);now+=ms;onSleep(ms);return setTimeout(fn,0)},clearTimeout,
   fetch:async(address,options)=>{calls.push({url:new URL(address),at:now});active++;maxActive=Math.max(maxActive,active);try{return await handler(new URL(address),calls.length,options)}finally{active--}}
  };
  vm.runInNewContext(source,context);
@@ -146,4 +146,24 @@ test('title pages merge and re-sort all loaded works without extra requests; art
  assert.equal(b.offset,103);assert.equal(b.exhausted,true);assert.equal(h.calls.length,2);
  const artist=[{id:'s',title:'Title','primary-type':'Single','first-release-date':'2026'},{id:'e',title:'Title','primary-type':'EP','first-release-date':'2025'},{id:'a',title:'Title','primary-type':'Album','first-release-date':'2020'}].sort(h.api.sort);
  assert.deepEqual(artist.map(r=>r.id),['a','e','s']);
+});
+
+test('mode switch during interval prevents obsolete fetch and lets the queue recover',async()=>{
+ let live=true;
+ const h=harness(()=>response({ok:true}),false,()=>{live=false});
+ await h.api.request('https://example.test/warm');
+ await assert.rejects(h.api.request('https://example.test/obsolete',{isCurrent:()=>live}),/superseded/);
+ assert.equal(h.calls.length,1);
+ await h.api.request('https://example.test/current');
+ assert.equal(h.calls.length,2);
+ assert.ok(h.calls[1].at-h.calls[0].at>=1250);
+});
+test('interval cancellation preserves a deduplicated current listener',async()=>{
+ let live=true;
+ const h=harness(()=>response({ok:true}),false,()=>{live=false});
+ await h.api.request('https://example.test/warm');
+ const old=h.api.request('https://example.test/shared',{isCurrent:()=>live});
+ const next=h.api.request('https://example.test/shared',{isCurrent:()=>true});
+ const [a,b]=await Promise.all([old,next]);
+ assert.equal(a,b);assert.equal(h.calls.length,2);
 });

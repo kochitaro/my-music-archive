@@ -1,0 +1,135 @@
+{
+  "environment": "Node VM, virtual time; API 250ms + JSON 5ms per success, no real API calls; wall includes timer scheduling",
+  "results": [
+    {
+      "name": "artist cold",
+      "modelElapsedMs": 1505,
+      "intervalMs": 995,
+      "retryMs": 0,
+      "apiMs": 500,
+      "jsonMs": 10,
+      "calls": 2,
+      "items": 100,
+      "mode": "artist",
+      "wallMs": [
+        22.799139999999994
+      ]
+    },
+    {
+      "name": "title cold",
+      "modelElapsedMs": 255,
+      "intervalMs": 0,
+      "retryMs": 0,
+      "apiMs": 250,
+      "jsonMs": 5,
+      "calls": 1,
+      "items": 100,
+      "mode": "title",
+      "wallMs": [
+        1.672939999999997
+      ]
+    },
+    {
+      "name": "artist repeated",
+      "modelElapsedMs": 1505,
+      "intervalMs": 995,
+      "retryMs": 0,
+      "apiMs": 500,
+      "jsonMs": 10,
+      "calls": 2,
+      "repeatMs": 0,
+      "items": 100,
+      "mode": "artist",
+      "wallMs": [
+        2.9161730000000006,
+        0.6710270000000094
+      ]
+    },
+    {
+      "name": "title repeated",
+      "modelElapsedMs": 255,
+      "intervalMs": 0,
+      "retryMs": 0,
+      "apiMs": 250,
+      "jsonMs": 5,
+      "calls": 1,
+      "repeatMs": 0,
+      "items": 100,
+      "mode": "title",
+      "wallMs": [
+        1.968954999999994,
+        3.270543999999987
+      ]
+    },
+    {
+      "name": "artist candidates",
+      "modelElapsedMs": 255,
+      "intervalMs": 0,
+      "retryMs": 0,
+      "apiMs": 250,
+      "jsonMs": 5,
+      "calls": 1,
+      "items": 0,
+      "mode": "candidates",
+      "wallMs": [
+        0.2180189999999982
+      ]
+    },
+    {
+      "name": "selected artist catalog",
+      "modelElapsedMs": 255,
+      "intervalMs": 0,
+      "retryMs": 0,
+      "apiMs": 250,
+      "jsonMs": 5,
+      "calls": 1,
+      "wallMs": [
+        0.30764500000000794
+      ]
+    },
+    {
+      "name": "503 then success",
+      "modelElapsedMs": 2505,
+      "intervalMs": 0,
+      "retryMs": 2000,
+      "apiMs": 500,
+      "jsonMs": 5,
+      "calls": 2,
+      "items": 100,
+      "mode": "title",
+      "wallMs": [
+        2.84093
+      ]
+    },
+    {
+      "name": "Retry-After 5s",
+      "modelElapsedMs": 5505,
+      "intervalMs": 0,
+      "retryMs": 5000,
+      "apiMs": 500,
+      "jsonMs": 5,
+      "calls": 2,
+      "items": 100,
+      "mode": "title",
+      "wallMs": [
+        5.02809400000001
+      ]
+    },
+    {
+      "name": "switch during interval",
+      "modelElapsedMs": 1250,
+      "recoveryMs": 1250,
+      "totalThroughRecoveryMs": 2500,
+      "obsoleteCalls": 1,
+      "intervalMs": 1990,
+      "retryMs": 0,
+      "apiMs": 500,
+      "jsonMs": 10,
+      "calls": 2,
+      "error": "Search superseded",
+      "wallMs": [
+        1.3664079999999927
+      ]
+    }
+  ]
+}

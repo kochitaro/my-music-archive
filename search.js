@@ -37,11 +37,14 @@ function request(address,ctx){
   }
   const entry={listeners:new Set([ctx||{}])};
   const notify=notice=>{for(const listener of entry.listeners)if(!listener.isCurrent||listener.isCurrent())listener.onRetry?.(notice)};
+  const hasCurrent=()=>[...entry.listeners].some(c=>!c.isCurrent||c.isCurrent());
   entry.job=queue.catch(()=>{}).then(async()=>{
     for(let attempt=0;attempt<4;attempt++){
       // Stale queued searches need no new API call. A deduplicated current caller can keep it alive.
-      if(entry.listeners.size&&![...entry.listeners].some(c=>!c.isCurrent||c.isCurrent()))throw new Error('Search superseded');
+      if(!hasCurrent())throw new Error('Search superseded');
       const interval=Math.max(0,1250-(Date.now()-lastCall));if(interval)await sleep(interval);
+      // A mode switch or clear can invalidate every caller during the interval wait.
+      if(!hasCurrent())throw new Error('Search superseded');
       const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
       let response,data,networkError;
       lastCall=Date.now();
