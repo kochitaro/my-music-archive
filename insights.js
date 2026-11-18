@@ -44,7 +44,7 @@ function timeline(stats,mode,limit,now=new Date()){
  const rows=Array.from({length},(_,i)=>{const k=current-i;return {name:monthly?String(Math.floor(k/12)).padStart(4,'0')+'-'+String(k%12+1).padStart(2,'0'):String(k),count:map.get(k)||0}});
  return {rows,more:length<current-earliest+1};
 }
-function releaseRows(stats,decades=false){const map=new Map();for(const [year,count] of stats.release){const k=decades?Math.floor(year/10)*10:year;map.set(k,(map.get(k)||0)+count)}return [...map].sort((a,b)=>decades?a[0]-b[0]:b[0]-a[0]).map(([year,count])=>({name:String(year),count}))}
+function releaseRows(stats,decades=false){const map=new Map();for(const [year,count] of stats.release){const k=decades?Math.floor(year/10)*10:year;map.set(k,(map.get(k)||0)+count)}return [...map].sort((a,b)=>b[0]-a[0]).map(([year,count])=>({name:String(year),count}))}
 const states=new Map();
 // Every accepted save/restore replaces db with validated data (index.html commitDB).
 // Weak keys release old snapshots and prevent stale counts after those replacements.
@@ -83,7 +83,9 @@ function render(container,records,area,ja,now=new Date()){
  const period=timeline(stats,ts.mode,ts.limit,now);bars(time,period.rows);paging(time,ts,0,ts.mode==='monthly'?12:5,period.more);
  if(area!=='live'){
   const rel=block('release',t('リリース年','Release years')),rs=state('release','yearly',10);switches(rel,rs,[['yearly',t('年別','Yearly')],['decade',t('年代別','By Decade')]],10);
-  const rows=releaseRows(stats,rs.mode==='decade');if(rs.mode==='yearly'){bars(rel,rows.slice(0,rs.limit));paging(rel,rs,rows.length,10)}else if(!rows.length)empty(rel);else{const chart=el('div','insight-decades');const max=Math.max(...rows.map(x=>x.count));for(const row of rows){const col=el('div','insight-decade');col.append(el('span','',String(row.count)));const track=el('div','insight-column'),fill=el('div','');fill.style.height=row.count/max*140+'px';track.append(fill);col.append(track,el('span','',row.name+t('年代','s')));chart.append(col)}rel.append(chart)}
+  const rows=releaseRows(stats,rs.mode==='decade');
+  if(rs.mode==='yearly'){bars(rel,rows.slice(0,rs.limit));paging(rel,rs,rows.length,10)}
+  else bars(rel,rows.map(row=>({...row,name:row.name+t('年代','s')})));
  }
 }
 const api={counts,dateParts,aggregate,pie,timeline,releaseRows,render};if(typeof module==='object'&&module.exports)module.exports=api;else root.MLAInsights=api;

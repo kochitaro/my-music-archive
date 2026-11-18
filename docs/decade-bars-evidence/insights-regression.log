@@ -1,0 +1,24 @@
+START 320 ja
+PASS bilingual/touch/layout/state/zero DB writes 320 ja
+START 320 en
+PASS bilingual/touch/layout/state/zero DB writes 320 en
+START 375 ja
+PASS bilingual/touch/layout/state/zero DB writes 375 ja
+START 375 en
+PASS bilingual/touch/layout/state/zero DB writes 375 en
+START 390 ja
+PASS bilingual/touch/layout/state/zero DB writes 390 ja
+START 390 en
+PASS bilingual/touch/layout/state/zero DB writes 390 en
+START 430 ja
+PASS bilingual/touch/layout/state/zero DB writes 430 ja
+START 430 en
+PASS bilingual/touch/layout/state/zero DB writes 430 en
+START 1280 ja
+PASS bilingual/touch/layout/state/zero DB writes 1280 ja
+START 1280 en
+PASS bilingual/touch/layout/state/zero DB writes 1280 en
+PASS empty data, real JSON restore freshness, live language changes
+PASS real create/edit/delete freshness listening
+PASS real create/edit/delete freshness collection
+PASS real create/edit/delete freshness live

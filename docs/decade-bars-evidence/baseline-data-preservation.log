@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/tmp/mla-before/tests/data_preservation.py", line 193, in <module>
+    main()
+  File "/tmp/mla-before/tests/data_preservation.py", line 103, in main
+    preserved(seed)
+  File "/tmp/mla-before/tests/data_preservation.py", line 81, in preserved
+    assert backup(page) == seed
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError
