@@ -10,4 +10,26 @@ test('pie keeps ten and merges remainder; rankings keep everything',()=>{const e
 test('strict date precision and leap boundaries',()=>{for(const d of ['',null,'bad','2026-00','2026-13','2025-02-29','1900-02-29','2026-04-31','0000','2026-01-00'])assert.equal(I.dateParts(d),null,d);for(const d of ['2026','2026-11','2024-02-29','2000-02-29'])assert.ok(I.dateParts(d),d)});
 test('time includes year-only yearly, no invented January; periods and boundaries',()=>{const s=I.aggregate(rows,'listening');assert.equal(s.years.get(2025),1);assert.equal(s.months.get(2025*12),undefined);const now=new Date(2026,10,6);const m=I.timeline(s,'monthly',12,now);assert.equal(m.rows.length,12);assert.equal(m.rows[0].name,'2026-11');assert.equal(m.rows[0].count,1);assert.equal(m.rows[11].name,'2025-12');assert.equal(I.timeline(s,'monthly',24,now).rows.length,24);assert.equal(I.timeline(s,'yearly',5,now).rows.length,5);assert.equal(I.timeline(s,'monthly',12,new Date(2027,0,1)).rows[0].name,'2027-01')});
 test('future and empty dates never become current; year pagination',()=>{const s=I.aggregate([{date:'2010'},{date:'2099-01-01'},{date:'invalid'}],'live');assert.equal(I.timeline(s,'yearly',5,new Date(2026,0,1)).rows[0].count,0);assert.equal(I.timeline(s,'yearly',10,new Date(2026,0,1)).rows.length,10);assert.equal(I.timeline(s,'monthly',12,new Date(2026,0,1)).rows.length,12)});
-test('release year and decade boundaries; unknown excluded',()=>{const s=I.aggregate(rows,'collection');assert.deepEqual(I.releaseRows(s),[{name:'2000',count:1},{name:'1999',count:1}]);assert.deepEqual(I.releaseRows(s,true),[{name:'1990',count:1},{name:'2000',count:1}]);assert.equal(I.releaseRows(I.aggregate(Array.from({length:25},(_,i)=>({release:String(1980+i)})),'listening')).length,25)});
+test('release year and decade boundaries; unknown excluded',()=>{const s=I.aggregate(rows,'collection');assert.deepEqual(I.releaseRows(s),[{name:'2000',count:1},{name:'1999',count:1}]);assert.deepEqual(I.releaseRows(s,true),[{name:'2000',count:1},{name:'1990',count:1}]);assert.equal(I.releaseRows(I.aggregate(Array.from({length:25},(_,i)=>({release:String(1980+i)})),'listening')).length,25)});
+
+for(const area of ['listening','collection'])test(area+' decade cases: numeric descending, unchanged sums and immutable inputs',()=>{
+ const cases=[
+  ['single',['2021']],['multiple',['1999','2000','2020','2029','1980']],
+  ['12 decades',Array.from({length:12},(_,i)=>String(1910+i*10))],
+  ['skewed',[...Array(60).fill('2020'),...Array(3).fill('2010'),...Array(2).fill('2000'),...Array(3).fill('1990'),'1970']],
+  ['equal',['1970','1980','1990']],['unknown',['','unknown',null,'0000','2025-02-29','2000-02-29']],
+  ['empty',[]],['numeric not lexical',['0999','1000','2000']]
+ ];
+ for(const [name,years] of cases){
+  const input=years.map(release=>Object.freeze({release}));Object.freeze(input);
+  const stats=I.aggregate(input,area),expected=new Map();
+  for(const [year,count] of stats.release){const decade=Math.floor(year/10)*10;expected.set(decade,(expected.get(decade)||0)+count)}
+  const actual=I.releaseRows(stats,true);
+  assert.deepEqual(actual,[...expected].sort((a,b)=>b[0]-a[0]).map(([year,count])=>({name:String(year),count})),name);
+  assert.equal(actual.reduce((n,r)=>n+r.count,0),I.releaseRows(stats).reduce((n,r)=>n+r.count,0),name);
+ }
+});
+test('area counts remain independent',()=>{
+ assert.equal(I.releaseRows(I.aggregate([{release:'2020'},{release:'2021'}],'listening'),true)[0].count,2);
+ assert.equal(I.releaseRows(I.aggregate([{release:'2020'}],'collection'),true)[0].count,1);
+});

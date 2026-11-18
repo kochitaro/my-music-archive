@@ -62,7 +62,7 @@ def main():
                     if area!='live':
                         rel=root.locator('[data-insight=release]');assert rel.locator('li').count()==10
                         press(rel.get_by_role('button',name='さらに表示' if lang=='ja' else 'Show more',exact=True));assert rel.locator('li').count()==20
-                        press(rel.get_by_role('button',name='年代別' if lang=='ja' else 'By Decade',exact=True));assert rel.locator('.insight-decade').count()>=4
+                        press(rel.get_by_role('button',name='年代別' if lang=='ja' else 'By Decade',exact=True));assert rel.locator('.insight-bar').count()>=4
                     if width==390:page.screenshot(path=str(evidence/f'{area}-{lang}-ranking-yearly-decade.png'),full_page=True)
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(area,lang,width)
                     press(page.locator('#archive-screen'))

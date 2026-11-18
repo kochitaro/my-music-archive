@@ -1,0 +1,5522 @@
+[
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04996501865671642,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04996501865671642,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.016616138059701493,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06663945895522388,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 320,
+    "language": "ja",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04996501865671642,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04996501865671642,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.016616138059701493,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06663945895522388,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03329057835820896,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997097523219814,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997097523219814,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.016640866873065017,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06666021671826626,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 375,
+    "language": "ja",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997097523219814,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997097523219814,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.016640866873065017,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06666021671826626,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333010835913313,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 375,
+    "language": "en",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997226331360947,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997226331360947,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.01664201183431953,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06666050295857988,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 390,
+    "language": "ja",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997226331360947,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04997226331360947,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.01664201183431953,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06666050295857988,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03333025147928994,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.049975198412698416,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.049975198412698416,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.01665839947089947,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06663359788359788,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 430,
+    "language": "ja",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.049975198412698416,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.049975198412698416,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.01665839947089947,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06663359788359788,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03331679894179894,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 430,
+    "language": "en",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.05,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.05,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.016651785714285713,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06665178571428572,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 768,
+    "language": "ja",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.05,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.05,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.016651785714285713,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06665178571428572,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.03332589285714286,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 768,
+    "language": "en",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04999484323432343,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04999484323432343,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.01665635313531353,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020年代",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010年代",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06666408828382839,
+        "inside": true
+      },
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      },
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000年代",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 1280,
+    "language": "ja",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "single",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "single",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "multiple",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 2,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 50,
+        "ratio": 0.5,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "multiple",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "12-decades",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "12-decades",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1960s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1950s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1940s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1930s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1920s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1910s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "skewed",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 60,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04999484323432343,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 2,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 3,
+        "percent": 5,
+        "ratio": 0.04999484323432343,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 1.66667,
+        "ratio": 0.01665635313531353,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "skewed",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2020s",
+        "count": 30,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "2010s",
+        "count": 2,
+        "percent": 6.66667,
+        "ratio": 0.06666408828382839,
+        "inside": true
+      },
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      },
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 3.33333,
+        "ratio": 0.033325598184818485,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "equal",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1980s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "equal",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "1990s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      },
+      {
+        "name": "1970s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "unknown",
+    "area": "listening",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "unknown",
+    "area": "collection",
+    "rows": [
+      {
+        "name": "2000s",
+        "count": 1,
+        "percent": 100,
+        "ratio": 1,
+        "inside": true
+      }
+    ]
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "empty",
+    "area": "listening",
+    "rows": []
+  },
+  {
+    "width": 1280,
+    "language": "en",
+    "case": "empty",
+    "area": "collection",
+    "rows": []
+  }
+]

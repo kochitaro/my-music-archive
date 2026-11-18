@@ -1,0 +1,16 @@
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 320 ja
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 320 en
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 375 ja
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 375 en
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 390 ja
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 390 en
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 430 ja
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 430 en
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 768 ja
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 768 en
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 1280 ja
+PASS 7 cases x 2 areas; numeric counts/order/ratios/layout; baseline yearly/other/Live DOM; state/language; zero DB writes 1280 en
+BASELINE skewed listening scrollWidth/clientWidth [432, 338]
+BASELINE skewed collection scrollWidth/clientWidth [432, 338]
+BASELINE 12-decades listening scrollWidth/clientWidth [1048, 338]
+BASELINE 12-decades collection scrollWidth/clientWidth [1048, 338]
