@@ -9,7 +9,7 @@ function setup(){
  const record={entryId:'row',title:'Album',artist:'A',memo:'unsaved',rating:'9.0'};
  const candidate={version:3,listening:[record],collection:[],live:[]};
  const token={session:1,form};
- const ctx={JSON,formOwner:{kind:'edit',area:'listening',id:'row'},formSession:1,activeOperation:token,
+ const ctx={JSON,stable:JSON.stringify,formOwner:{kind:'edit',area:'listening',id:'row'},formSession:1,activeOperation:token,
   currentForm:form,formBaseline:form,draft:{area:'listening',recordId:'row',operation:'edit',input:form.input,proposedRecord:{photo:'actual converted bytes'}},
   draftContext:{session:1,input:form.input,fileRefs:form.fileRefs},draftPhotoFiles:form.fileRefs,draftRecovered:false,
   operationBusy:true,saving:false,db:{version:3,listening:[],collection:[],live:[]},commits:0,alerts:[],captures:[],
