@@ -69,7 +69,7 @@ def run(pw, engine):
  swipe(right);assert section()=='listening';expect(p.locator('#sort')).to_have_value('artist-asc')
  swipe(right);assert section()=='listening'
  # Vertical/diagonal, edges, multitouch, cancel, controls, and horizontal containers.
- for points,kw in [([[200,300],[198,330],[80,450]],{}),([[200,300],[210,320],[80,325]],{}),([[5,300],[150,300]],{}),([[385,300],[200,300]],{}),(left,{'multi':True}),(left,{'cancel':True}),(left,{'selector':'#query'}),(left,{'selector':'#grid-tab'}),(left,{'selector':'#library .coverbtn'})]:
+ for points,kw in [([[200,300],[198,330],[80,450]],{}),([[200,300],[210,320],[80,325]],{}),([[5,300],[150,300]],{}),([[385,300],[200,300]],{}),(left,{'multi':True}),(left,{'cancel':True}),(left,{'selector':'#query'}),(left,{'selector':'#grid-tab'})]:
   result=swipe(points,**kw);assert section()=='listening'
   if kw.get('selector') in ['#query','#grid-tab']:assert not any(result)
  p.evaluate("""()=>{const d=document.createElement('div');d.id='horizontal';d.style='overflow-x:auto;width:100px';d.innerHTML='<div id="wide" style="width:500px">wide</div>';document.querySelector('#archive-content').append(d)}""")

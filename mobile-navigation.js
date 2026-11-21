@@ -31,7 +31,12 @@ globalThis.MLAMobileNavigation = function ({busy, unsaved, getSection, setSectio
  updateTop();
  const controls = 'button,a,input,textarea,select,label,summary,[contenteditable]:not([contenteditable="false"]),[role="button"],[role="slider"],[role="textbox"],[tabindex],audio,video';
  function excluded(target) {
-  if (!(target instanceof Element) || target.closest(controls)) return true;
+  if (!(target instanceof Element)) return true;
+  // Only archive record buttons double as swipe surfaces. A nested control still
+  // wins (rating/input/etc.), and search results or other buttons stay excluded.
+  const card=target.closest('#library button.coverbtn,#library button.listrow');
+  const control=target.closest(controls);
+  if (control && (control!==card || card.disabled)) return true;
   for (let el=target; el && el!==document.body; el=el.parentElement) {
    if (el.scrollWidth > el.clientWidth + 1 && /auto|scroll/.test(getComputedStyle(el).overflowX)) return true;
   }
