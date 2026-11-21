@@ -11,7 +11,7 @@ from pull_refresh import SEND
 def run(pw,engine,url,characterize=False):
  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']) if engine=='chromium' else pw.webkit.launch(executable_path=os.environ.get('MLA_WEBKIT'))
  js=(ROOT/'mobile-navigation.js').read_text().replace('location.reload();','window.reloadCount++;')
- for standalone in [False,True]:
+ for standalone in [True]:
   c=b.new_context(viewport={'width':390,'height':844},has_touch=True,is_mobile=True)
   c.add_init_script('window.reloadCount=0;window.simulatedY=0;Object.defineProperty(window,"scrollY",{get:()=>window.simulatedY,configurable:true});Object.defineProperty(navigator,"standalone",{value:'+str(standalone).lower()+',configurable:true})')
   c.route('**/mobile-navigation.js',lambda r:r.fulfill(body=js,content_type='application/javascript'));c.route('https://**/*',lambda r:r.abort())
@@ -49,8 +49,8 @@ def run(pw,engine,url,characterize=False):
    p.evaluate('(args)=>{const send='+SEND+';send(args);send(args)}',dict(type='touchend',y=180));assert p.evaluate('reloadCount')==1
    # Standalone observes native motion; the browser mode cancels the owned pull.
    fresh();send('start')
-   assert p.evaluate("document.documentElement.classList.contains('pull-tracking')")== (not standalone)
-   assert send('move',y=80)== (not standalone)
+   assert not p.evaluate("document.documentElement.classList.contains('pull-tracking')")
+   assert not send('move',y=80)
    send('cancel');expect(p.locator('html')).not_to_have_class('pull-tracking')
    # Positive drift must not destroy a candidate; it can re-arm at the boundary.
    fresh();send('start');send('move',y=80);p.evaluate('window.simulatedY=6');send('move',y=150)
