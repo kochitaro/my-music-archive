@@ -45,6 +45,7 @@ def run(pw, engine):
  p.on('dialog',lambda d:(dialogs.append(d.message),d.accept('1') if d.type=='prompt' else d.accept()))
  def ready():
   p.wait_for_function('window.mobileProbe && !mobileProbe.busy()')
+  p.locator('#page-actions').evaluate('(el)=>{el.open=true}')
  def data():return p.evaluate('mobileProbe.data()')
  def section():return p.locator('#sections .active').get_attribute('data-section')
  def swipe(points,selector='#library-title',**kw):
@@ -54,11 +55,11 @@ def run(pw, engine):
  original=seed_data()
  c.add_init_script('if(!sessionStorage.seeded){localStorage.setItem("my-music-archive-pilot-v03", JSON.stringify('+json.dumps(original)+'));sessionStorage.seeded="yes"}')
  p.goto(url);ready();assert data()==original
- with p.expect_navigation():p.locator('#page-refresh').click()
+ with p.expect_navigation():p.locator('#reload-page').click()
  ready();assert data()==original
  print('PASS',engine,'normal refresh reloads exact migrated IndexedDB data',flush=True)
  for lang,label in [('ja','ページを更新'),('en','Reload page')]:
-  p.select_option('#ui-language',lang);ready();expect(p.locator('#page-refresh')).to_have_attribute('aria-label',label)
+  p.select_option('#ui-language',lang);ready();expect(p.locator('#reload-page')).to_have_attribute('aria-label',label)
  # State parity: tab-specific filters retained by the same setSection path.
  p.select_option('#sort','artist-asc',force=True)
  swipe(left);assert section()=='collection'
@@ -88,7 +89,7 @@ def run(pw, engine):
  # Top control, keyboard and reduced motion.
  p.evaluate("window.scrollTo(0,700)");expect(p.locator('#back-to-top')).to_be_visible()
  p.locator('#back-to-top').focus();p.keyboard.press('Enter')
- p.wait_for_function('scrollY===0');expect(p.locator('#back-to-top')).to_be_hidden();expect(p.locator('#page-refresh')).to_be_focused()
+ p.wait_for_function('scrollY===0');expect(p.locator('#back-to-top')).to_be_hidden();expect(p.locator('#page-heading')).to_be_focused()
  p.emulate_media(reduced_motion='reduce')
  p.evaluate("window.scrollTo(0,700)");expect(p.locator('#back-to-top')).to_be_visible()
  p.locator('#back-to-top').click();assert p.evaluate('scrollY')==0
@@ -96,17 +97,17 @@ def run(pw, engine):
  # Editor guard keeps exact unsaved values; modal blocks top and gestures.
  p.locator('#manual-add-trigger').click();p.locator('#manual-title').fill('Unsaved mobile');p.locator('#manual-artist').fill('Artist')
  p.evaluate("window.scrollTo(0,700)");expect(p.locator('#back-to-top')).to_be_hidden()
- n=len(dialogs);p.evaluate("document.querySelector('#page-refresh').click()")
+ n=len(dialogs);p.evaluate("document.querySelector('#reload-page').click()")
  assert len(dialogs)==n+1;expect(p.locator('#manual-title')).to_have_value('Unsaved mobile')
  swipe(left);assert section()=='listening'
  assert not any(swipe(left,selector='#modal .star-rating'))
  # Hold a real save before IndexedDB commit, attempt refresh, then finish unchanged.
  p.evaluate("mobileProbe.pause('save')");p.locator('#save').click();p.wait_for_function('window.paused')
- p.evaluate("document.querySelector('#page-refresh').click()")
+ p.evaluate("document.querySelector('#reload-page').click()")
  assert p.evaluate('mobileProbe.busy()');p.evaluate('resume()');ready();expect(p.locator('#modal')).not_to_have_class('modal open')
  created=next(x for x in data()['listening'] if x['title']=='Unsaved mobile')
  p.evaluate('window.scrollTo(0,0)')
- with p.expect_navigation():p.locator('#page-refresh').click()
+ with p.expect_navigation():p.locator('#reload-page').click()
  ready();assert created in data()['listening']
  print('PASS',engine,'smooth/reduced-motion top, focus, modal hiding, unsaved editor and active-save reload protection',flush=True)
  # CRUD and backup roundtrip across all sections using actual UI.
@@ -126,7 +127,7 @@ def run(pw, engine):
  raw=open(dl.value.path(),'rb').read();assert json.loads(raw)==expected
  p.evaluate("window.paused=false;mobileProbe.pause('save')")
  p.locator('#import-json').set_input_files(dict(name='backup.json',mimeType='application/json',buffer=raw))
- p.wait_for_function('window.paused');p.evaluate("document.querySelector('#page-refresh').click()")
+ p.wait_for_function('window.paused');p.evaluate("document.querySelector('#reload-page').click()")
  assert p.evaluate('mobileProbe.busy()');swipe(left);assert section()=='live'
  p.evaluate('resume()');ready();assert data()==expected
  p.reload();ready();assert data()==expected
@@ -136,7 +137,7 @@ def run(pw, engine):
  p.reload();ready();expect(p.locator('#storage-state')).to_be_visible()
  p.evaluate("window.paused=false;mobileProbe.pause('rescue')")
  p.locator('#recover-source').click();p.wait_for_function('window.paused')
- p.evaluate("document.querySelector('#page-refresh').click()")
+ p.evaluate("document.querySelector('#reload-page').click()")
  assert p.evaluate('mobileProbe.busy()')
  with p.expect_download():p.evaluate('resume()')
  ready()
@@ -144,7 +145,7 @@ def run(pw, engine):
  p.locator('#import-json').set_input_files([
   dict(name='current.json',mimeType='application/json',buffer=raw),
   dict(name='legacy.json',mimeType='application/json',buffer=json.dumps(divergent).encode())])
- p.wait_for_function('window.paused');p.evaluate("document.querySelector('#page-refresh').click()")
+ p.wait_for_function('window.paused');p.evaluate("document.querySelector('#reload-page').click()")
  swipe(left);assert section()=='listening';assert p.evaluate('mobileProbe.busy()')
  p.evaluate('resume()');ready();assert data()==expected
  p.reload();ready();assert data()==expected
@@ -156,14 +157,14 @@ def run(pw, engine):
  p.evaluate("()=>{mobileProbe.pause('save')}");p.locator('#save').click()
  p.wait_for_function('window.paused');p.evaluate('resume()');ready()
  expect(p.locator('#save-notice')).to_be_visible();n=len(dialogs)
- p.evaluate("document.querySelector('#page-refresh').click()")
+ p.evaluate("document.querySelector('#reload-page').click()")
  assert len(dialogs)==n+1;expect(p.locator('#manual-title')).to_have_value('Keep failed draft');assert data()==expected
  print('PASS',engine,'failed-save draft remains intact after refresh refusal',flush=True)
  # Pause initialization before migration; controls must remain inert until it settles.
  c.route(url,lambda r:r.fulfill(body=source.replace('const loaded=await lifecycle.init();','await new Promise(r=>window.releaseStartup=r);const loaded=await lifecycle.init();'),content_type='text/html'))
  other=c.new_page();other.goto(url,wait_until='domcontentloaded');other.wait_for_function('typeof window.releaseStartup==="function"')
  expect(other.locator('.shell')).to_have_attribute('inert','')
- other.evaluate("document.querySelector('#page-refresh').click()")
+ other.evaluate("document.querySelector('#reload-page').click()")
  expect(other.locator('.shell')).to_have_attribute('inert','')
  other.evaluate('releaseStartup()');other.wait_for_function('window.mobileProbe && !document.querySelector(".shell").inert')
  other.close()
