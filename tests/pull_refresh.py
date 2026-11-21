@@ -1,6 +1,7 @@
 """Guarded pull refresh: Chromium + WebKit, isolated synthetic photos/data.
 Touch sequences verify cancellation/direction/UI. Chromium also sends native CDP touch.
-Standalone is emulated, not an iPhone Home Screen run.
+Standalone is set before startup; normal mode has a separate footer test.
+Mode flags are emulated, not an iPhone Home Screen run.
 """
 import json, os, sys, threading
 from http.server import ThreadingHTTPServer
@@ -20,6 +21,7 @@ SEND='''({type,x=180,y=30,multi=false,cancelable=true,selector='.shell'})=>{
 def run(pw,engine,url,source):
  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']) if engine=='chromium' else pw.webkit.launch(executable_path=os.environ.get('MLA_WEBKIT'))
  c=b.new_context(viewport={'width':390,'height':844},has_touch=True,is_mobile=True,accept_downloads=True)
+ c.add_init_script("Object.defineProperty(navigator,'standalone',{value:true,configurable:true})")
  original=seed_data()
  c.add_init_script('if(!sessionStorage.seeded){localStorage.setItem("my-music-archive-pilot-v03",JSON.stringify('+json.dumps(original)+'));sessionStorage.seeded="yes"}')
  c.route(url,lambda r:r.fulfill(body=source,content_type='text/html'));c.route('https://**/*',lambda r:r.abort())
@@ -41,11 +43,11 @@ def run(pw,engine,url,source):
  assert p.evaluate("getComputedStyle(document.body).overscrollBehaviorY")=='auto'
  # Indicator appears only during a deliberate outward pull, arming at 96px.
  before=len(navigations)
- send('start');assert p.evaluate("getComputedStyle(document.documentElement).overscrollBehaviorY")=='contain'
+ send('start');assert p.evaluate("getComputedStyle(document.documentElement).overscrollBehaviorY")=='auto'
  send('move',y=50);expect(p.locator('#pull-refresh')).to_be_hidden()
- send('move',y=80);expect(p.locator('#pull-refresh')).to_be_visible();p.screenshot(path=f'/tmp/mla-pull-{engine}.png');expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','false')
+ send('move',y=80);expect(p.locator('#pull-refresh')).to_be_hidden()
  send('end',y=80);expect(p.locator('#pull-refresh')).to_be_hidden();assert len(navigations)==before
- send('start');send('move',y=150);expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','true')
+ send('start');send('move',y=150);expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','true');p.screenshot(path=f'/tmp/mla-pull-stable-{engine}.png')
  # Retreat below threshold before release cancels even if previously armed.
  send('move',y=75);send('end',y=75);assert len(navigations)==before
  with p.expect_navigation():pull(130,duplicate=True)
@@ -54,9 +56,9 @@ def run(pw,engine,url,source):
  print('PASS',engine,'top pull reloads exactly once; photo/data equality; indicator/threshold/retreat cancellation',flush=True)
  # Cancellation, multitouch, noncancelable events, controls, edges, upward/diagonal.
  before=len(navigations)
- for selector in ['#query','#grid-tab','#ui-language']:
+ for selector in ['#query','#ui-language']:
   pull(selector=selector);expect(p.locator('#pull-refresh')).to_be_hidden()
- for scenario in ['cancel','multi-start','multi-move','uncancelable','horizontal','up','edge','diagonal']:
+ for scenario in ['cancel','multi-start','multi-move','horizontal','up','diagonal']:
   send('start',multi=scenario=='multi-start',x=5 if scenario=='edge' else 180)
   if scenario=='horizontal':send('move',x=290,y=35)
   elif scenario=='up':send('move',y=0)
@@ -127,9 +129,8 @@ def run(pw,engine,url,source):
   print('PASS chromium native top pull reload; standalone flag emulation (NOT iPhone standalone)',flush=True)
  else:print('PASS webkit standalone flag emulation (NOT iPhone standalone)',flush=True)
  assert not errors,errors
- # When native suppression is unavailable, do not install a second refresh path.
+ # Normal browser mode leaves native refresh alone, keeping the guarded footer.
  legacy=b.new_context(viewport={'width':390,'height':844},has_touch=True)
- legacy.add_init_script("const supports=CSS.supports.bind(CSS);CSS.supports=(...args)=>args[0]==='overscroll-behavior-y'?false:supports(...args)")
  legacy.route(url,lambda r:r.fulfill(body=source,content_type='text/html'));legacy.route('https://**/*',lambda r:r.abort())
  q=legacy.new_page();q.goto(url);q.evaluate('MLAReady')
  q.evaluate('(args)=>{const send='+SEND+";send({type:'touchstart'});send({type:'touchmove',y:200});send({type:'touchend',y:200})}",{})
@@ -137,7 +138,7 @@ def run(pw,engine,url,source):
  q.locator('#page-actions summary').click();q.locator('#reload-page').focus()
  with q.expect_navigation():q.keyboard.press('Enter')
  q.evaluate('MLAReady');legacy.close()
- print('PASS',engine,'unsupported native suppression disables custom pull; accessible fallback reload works',flush=True)
+ print('PASS',engine,'normal mode disables custom pull; accessible footer reload works',flush=True)
  b.close()
 
 if __name__=='__main__':

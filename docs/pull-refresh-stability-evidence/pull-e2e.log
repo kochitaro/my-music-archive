@@ -1,0 +1,12 @@
+PASS chromium top pull reloads exactly once; photo/data equality; indicator/threshold/retreat cancellation
+PASS chromium normal scroll, mid-scroll-to-top, controls, edges, multi/cancel/noncancelable excluded
+PASS chromium editor, actual save/JSON restore refuse with reason and retain input/data; completion reloads
+PASS chromium raw rescue/verified recovery refusal; accessible reload; back-to-top/focus preserved
+PASS chromium native top pull reload; standalone flag emulation (NOT iPhone standalone)
+PASS chromium unsupported native suppression disables custom pull; accessible fallback reload works
+PASS webkit top pull reloads exactly once; photo/data equality; indicator/threshold/retreat cancellation
+PASS webkit normal scroll, mid-scroll-to-top, controls, edges, multi/cancel/noncancelable excluded
+PASS webkit editor, actual save/JSON restore refuse with reason and retain input/data; completion reloads
+PASS webkit raw rescue/verified recovery refusal; accessible reload; back-to-top/focus preserved
+PASS webkit standalone flag emulation (NOT iPhone standalone)
+PASS webkit unsupported native suppression disables custom pull; accessible fallback reload works

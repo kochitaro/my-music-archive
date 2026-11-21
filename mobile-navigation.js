@@ -49,61 +49,81 @@ globalThis.MLAMobileNavigation = function ({busy, unsaved, getSection, setSectio
   }
   return false;
  }
- // Only enable custom pull where the browser's own pull can be suppressed.
- // Older Safari keeps its browser gesture; the guarded Page actions path remains.
- const pullEnabled=CSS.supports('overscroll-behavior-y','contain');
- const indicator=document.getElementById('pull-refresh'),status=document.getElementById('pull-status');
- let pull=null;
- function resetPull() {
-  pull=null; document.documentElement.classList.remove('pull-tracking'); indicator.hidden=true; indicator.removeAttribute('data-ready'); status.textContent='';
- }
- function innerScroller(target) {
-  for (let el=target; el && el!==document.body && el!==document.documentElement; el=el.parentElement) {
-   if (el.scrollHeight>el.clientHeight+1 && /auto|scroll/.test(getComputedStyle(el).overflowY)) return true;
-  }
-  return false;
- }
- document.addEventListener('touchstart', e => {
-  resetPull(); suppressUntil=0;
-  if (!pullEnabled || reloading || e.touches.length!==1 || window.scrollY>0 ||
-      (window.visualViewport?.scale||1)>1 || excluded(e.target) || innerScroller(e.target)) return;
-  const t=e.touches[0];
-  if (t.clientX<32 || t.clientX>innerWidth-32) return;
-  pull={id:t.identifier,x:t.clientX,y:t.clientY,axis:false,distance:0};
-  document.documentElement.classList.add('pull-tracking');
- }, {passive:true,capture:true});
- document.addEventListener('touchmove', e => {
-  if (!pull) return;
-  if (e.touches.length!==1 || e.touches[0].identifier!==pull.id || window.scrollY>0) { resetPull(); return; }
-  const t=e.touches[0],dx=t.clientX-pull.x,dy=t.clientY-pull.y;
-  if (!pull.axis && Math.max(Math.abs(dx),Math.abs(dy))>=10) {
-   if (dy<=0 || dy<Math.abs(dx)*1.5) { resetPull(); return; }
-   pull.axis=true;
-  }
-  if (!pull.axis) return;
-  if (!e.cancelable) { resetPull(); return; }
-  // Only intercept the outward motion at the page boundary, never normal scroll.
-  e.preventDefault(); pull.distance=Math.max(0,dy); suppressUntil=performance.now()+700;
-  indicator.hidden=pull.distance<36;
-  const ready=pull.distance>=96;
-  if (indicator.dataset.ready!==String(ready)) {
-   indicator.dataset.ready=String(ready);
-   status.textContent=ready?(japanese()?'指を離して更新':'Release to reload'):'';
-  }
- }, {passive:false,capture:true});
- document.addEventListener('touchend', e => {
-  const current=pull;resetPull();
-  if (!current || e.touches.length || ![...e.changedTouches].some(t=>t.identifier===current.id)) return;
-  const ended=[...e.changedTouches].find(t=>t.identifier===current.id);
-  if (!current.axis || window.scrollY>0 || ended.clientY-current.y<96) return;
-  suppressUntil=performance.now()+700;
-  requestReload();
- }, {passive:true,capture:true});
- document.addEventListener('touchcancel', resetPull, {passive:true,capture:true});
- window.addEventListener('blur', resetPull);
- window.addEventListener('pagehide', resetPull);
- window.addEventListener('pageshow', () => { reloading=false; resetPull(); });
  let gesture=null, suppressUntil=0;
+ window.addEventListener('pageshow', () => { reloading=false; });
+ // Browser mode keeps its native refresh: install no custom pull listeners.
+ const isStandalone=navigator.standalone===true || matchMedia('(display-mode: standalone)').matches;
+ if (isStandalone) {
+  // Standalone has no browser refresh UI to arbitrate with. Keep its bounce
+  // native and observe moves, even after the browser makes them noncancelable.
+  const indicator=document.getElementById('pull-refresh'),status=document.getElementById('pull-status');
+  const TOP_SLOP=4,PULL_THRESHOLD=96;
+  const atTop=()=>Math.max(0,window.scrollY)<=TOP_SLOP;
+  let pull=null;
+  function resetPull() {
+   pull=null; indicator.hidden=true; indicator.removeAttribute('data-ready'); status.textContent='';
+  }
+  function innerScroller(target) {
+   for (let el=target; el && el!==document.body && el!==document.documentElement; el=el.parentElement) {
+    if (el.scrollHeight>el.clientHeight+1 && /auto|scroll/.test(getComputedStyle(el).overflowY)) return true;
+   }
+   return false;
+  }
+  function pullExcluded(target) {
+   // A vertical pull may start over an ordinary button; taps and horizontal
+   // swipe exclusions remain separate. Editors and their widgets stay native.
+   if (!(target instanceof Element) || target.closest('input,textarea,select,label,[contenteditable]:not([contenteditable="false"]),[role="slider"],[role="spinbutton"],[role="textbox"],.rating-widget,audio,video')) return true;
+   for (let el=target; el && el!==document.body; el=el.parentElement) {
+    if (el.scrollWidth>el.clientWidth+1 && /auto|scroll/.test(getComputedStyle(el).overflowX)) return true;
+   }
+   return innerScroller(target);
+  }
+  const readyToRelease=p=>p.axis && p.distance>=PULL_THRESHOLD && atTop();
+  function renderPull() {
+   if (!pull) return;
+   const ready=readyToRelease(pull),allowed=ready&&!blocked();
+   indicator.hidden=!allowed; indicator.dataset.ready=String(allowed);
+   const message=ready?(blocked()?(japanese()?'編集中または処理中のため更新できません':'Cannot reload while editing or processing'):(japanese()?'指を離して更新':'Release to reload')):'';
+   if (status.textContent!==message) status.textContent=message;
+  }
+  document.addEventListener('touchstart', e => {
+   resetPull(); suppressUntil=0;
+   if (reloading || e.touches.length!==1 || !atTop() ||
+       (window.visualViewport?.scale||1)>1.05 || pullExcluded(e.target)) return;
+   const t=e.touches[0];
+   // Edge starts are allowed for a vertical pull. Horizontal edge gestures never
+   // get claimed here, and the archive swipe still reserves both edges for iOS.
+   pull={id:t.identifier,x:t.clientX,y:t.clientY,axis:false,distance:0};
+  }, {passive:true,capture:true});
+  document.addEventListener('touchmove', e => {
+   if (!pull) return;
+   if (e.touches.length!==1 || e.touches[0].identifier!==pull.id) { resetPull(); return; }
+   const t=e.touches[0],dx=t.clientX-pull.x,dy=t.clientY-pull.y;
+   if (!pull.axis && Math.max(Math.abs(dx),Math.abs(dy))>=10) {
+    if (dy<=0 || dy<Math.abs(dx)*1.5) { resetPull(); return; }
+    pull.axis=true;
+   }
+   if (!pull.axis) return;
+   pull.distance=Math.max(0,dy); suppressUntil=performance.now()+700;
+   renderPull();
+  }, {passive:true,capture:true});
+  document.addEventListener('touchend', e => {
+   const current=pull;
+   const ended=[...e.changedTouches].find(t=>t.identifier===current?.id);
+   if (!current || e.touches.length || !ended) { resetPull(); return; }
+   current.distance=Math.max(0,ended.clientY-current.y);
+   const ready=readyToRelease(current);
+   resetPull();
+   if (!ready) return;
+   suppressUntil=performance.now()+700;
+   requestReload();
+  }, {passive:true,capture:true});
+  window.addEventListener('scroll',renderPull,{passive:true});
+  document.addEventListener('touchcancel', resetPull, {passive:true,capture:true});
+  window.addEventListener('blur', resetPull);
+  window.addEventListener('pagehide', resetPull);
+  window.addEventListener('pageshow', resetPull);
+ }
  archive.addEventListener('touchstart', e => {
   gesture=null; suppressUntil=0;
   if (e.touches.length!==1 || blocked() || !archiveVisible() || excluded(e.target)) return;
