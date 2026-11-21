@@ -2,13 +2,14 @@
  * No photo GC. All record publication/deletion shares the existing main save lock.
  */
 (()=>{'use strict';
- globalThis.MLALifecycle=({key,legacyKeys,lockName,validate,stable,photos})=>{
+ globalThis.MLALifecycle=({key,legacyKeys,lockName,validate,stable,photos,readOnly=false})=>{
   const receipts=new Map();
   const fail=message=>{throw Error(message)};
   const raws=()=>[localStorage.getItem(key),...legacyKeys.map(k=>localStorage.getItem(k))];
   const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
   async function journal(value,write=false){
-   const db=await new Promise((resolve,reject)=>{const r=indexedDB.open('mla-photo-maintenance-v1',1);r.onupgradeneeded=()=>r.result.createObjectStore('state');r.onerror=()=>reject(r.error);r.onblocked=()=>reject(Error('Maintenance storage blocked'));r.onsuccess=()=>resolve(r.result)});
+   const db=await new Promise((resolve,reject)=>{let absent=false;const r=indexedDB.open('mla-photo-maintenance-v1',1);r.onupgradeneeded=()=>{if(readOnly){absent=true;r.transaction.abort()}else r.result.createObjectStore('state')};r.onerror=()=>absent?resolve(null):reject(r.error);r.onblocked=()=>reject(Error('Maintenance storage blocked'));r.onsuccess=()=>resolve(r.result)});
+   if(!db)return undefined;
    try{return await new Promise((resolve,reject)=>{const tx=db.transaction('state',write?'readwrite':'readonly');let result;tx.oncomplete=()=>resolve(result);tx.onerror=tx.onabort=()=>reject(Error('Maintenance storage failed'));const store=tx.objectStore('state');if(write)store.put(value,'cleanup');else{const r=store.get('cleanup');r.onsuccess=()=>result=r.result}})}finally{db.close()}
   }
   async function portable(raw,index){
@@ -16,7 +17,7 @@
    const value=JSON.parse(raw);
    // v1 may lack IDs. Stable export IDs make independent file readback repeatable.
    if(index!==0&&Array.isArray(value))for(let i=0;i<value.length;i++)if(!value[i].entryId)value[i].entryId='legacy-'+await photos.idFor(raw+'#'+i);
-   const result=validate(index===0?await photos.unpack(value):value);
+   const result=validate(index===0?await photos.unpack(value,readOnly):value);
    if(['listening','collection','live'].some(a=>result[a].some(r=>Object.hasOwn(r,'photoId'))))fail('写真本体が必要です / Photo data required');
    return result;
   }
@@ -51,6 +52,7 @@
    return JSON.parse(snapshot[0]).legacyStamp===await photos.idFor(JSON.stringify(snapshot.slice(1)));
   }
   async function exclusive(action){
+   if(readOnly)fail('Legacy storage is read-only');
    if(!isSecureContext||!navigator.locks?.request)fail('安全な保存ロックを利用できません / Safe save lock unavailable');
    return navigator.locks.request(lockName,{ifAvailable:true},async lock=>{if(!lock)fail('別タブが保存中です。入力を残して再試行してください / Save lock busy');return action()});
   }

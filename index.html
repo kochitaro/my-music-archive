@@ -329,8 +329,9 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
 <div aria-label="Edit record" aria-modal="true" class="modal" id="modal" role="dialog"><div class="dialog"><div class="row between"><strong id="edit-title">Edit Record</strong><button class="btn alt" id="close">Close</button></div><div id="modal-header" style="margin:12px 0"></div><div id="album-fields"><div class="gridfields"><div class="group" id="artist-row"><label for="manual-artist">Artist</label><input class="field" id="manual-artist"/></div><div class="group"><label for="manual-title">Album Title</label><input autocomplete="off" class="field" id="manual-title"/></div><div class="group"><label for="date" id="date-label">Date Listened (optional)</label><input class="field hidden" id="date" type="date"/></div><div class="group"><label for="release-edit-year">Release Date (optional)</label><input id="release-edit" type="hidden"/></div><div class="group collection-only"><label for="store">Store (optional)</label><input class="field" id="store"/></div><div class="group collection-only"><label for="format">Format (optional)</label><select class="field" id="format"><option value="">Not Set</option><option>LP</option><option>7-inch</option><option>12-inch</option><option>CD</option><option>Cassette</option><option>Digital</option><option>Other</option></select></div><div class="group collection-only"><label for="price">Price (optional)</label><input class="field" id="price" min="0" placeholder="Amount, no currency conversion" step="0.01" type="number"/></div><div class="group collection-only" id="condition-row"><label for="condition">Condition (optional)</label><select class="field" id="condition"><option value="">Not Set</option><option value="New">New</option><option value="Used">Used</option></select></div><div class="group"><label for="label">Labels (optional · comma-separated)</label><input class="field" id="label"/></div></div><div class="group" style="margin-top:12px"><label for="genre">Genres (optional · comma-separated)</label><input autocomplete="off" class="field" id="genre"/></div><div class="group" style="margin-top:12px"><label for="tags">Tags (optional · comma-separated)</label><input class="field" id="tags" placeholder="Country, mood, occasion, etc."/></div><div class="group" style="margin-top:12px"><label for="rating">Score 0.0–5.0 (optional)</label><input class="field" id="rating" max="10" min="0" placeholder="—" step="0.1" type="hidden"/><div class="rating-widget" data-target="rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div><div class="group" style="margin:12px 0"><label for="memo">Notes (optional)</label><textarea class="field" id="memo"></textarea></div><div class="group" id="artwork-row" style="margin-top:12px"><button class="btn ghost artwork-reveal hidden" id="artwork-reveal" type="button">Change artwork</button><div id="artwork-controls"><label for="album-photo">Artwork (optional · one image)</label><input accept="image/*" class="field" id="album-photo" type="file"/><img alt="Album artwork" class="photo hidden" id="existing-album-photo"/><button class="btn ghost hidden" id="remove-album-photo" type="button">Remove Artwork</button><span class="muted small">Photos are resized for device storage. Export JSON backups regularly.</span></div></div></div><div class="hidden" id="live-edit-fields"><div class="gridfields"><div class="group"><label for="e-live-date">Date</label><input class="field hidden" id="e-live-date" type="date"/></div><div class="group"><label for="e-live-title">Show Name</label><input class="field" id="e-live-title"/></div><div class="group"><label for="e-live-venue">Venue</label><input class="field" id="e-live-venue"/></div><div class="group"><label for="e-live-rating">Score</label><input class="field" id="e-live-rating" max="10" min="0" step="0.1" type="hidden"/><div class="rating-widget" data-target="e-live-rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div></div><div class="group" style="margin-top:12px"><label for="e-live-photo">Photo (optional · one image)</label><input accept="image/*" class="field" id="e-live-photo" type="file"/><img alt="Live photo" class="photo hidden" id="existing-photo"/><button class="btn ghost hidden" id="remove-photo" type="button">Remove Photo</button></div></div><div class="row between" id="edit-actions"><button class="btn ghost" id="delete">Delete</button><button class="btn" id="save">Save Changes</button></div></div></div>
 <div aria-modal="true" class="modal" id="live-create-modal" role="dialog" aria-labelledby="live-create-title"><div class="dialog"><div class="row between"><strong id="live-create-title">Add Live Show</strong><button class="btn alt" id="close-live-create" type="button">Close</button></div><section class="" id="live-form-panel"><form id="live-form"><div class="gridfields"><div class="group"><label for="live-date">Date</label><input class="field hidden" id="live-date" type="date"/></div><div class="group"><label for="live-title">Show Name</label><input class="field" id="live-title" placeholder="Show Name" required=""/></div><div class="group"><label for="live-venue">Venue</label><input class="field" id="live-venue" placeholder="Venue"/></div><div class="group"><label for="live-rating">Score</label><input class="field" id="live-rating" max="10" min="0" step="0.1" type="hidden"/><div class="rating-widget" data-target="live-rating"><div class="row between"><strong class="rating-value" aria-live="polite">—</strong><button class="btn ghost rating-clear" type="button">Unrated</button></div><div class="star-rating" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-label="Score out of 5"></div></div></div></div><div class="group" style="margin:12px 0"><label for="live-notes">Notes (optional)</label><textarea class="field" id="live-notes"></textarea></div><div class="group" style="margin:12px 0"><label for="live-photo">Photo (optional · one image)</label><input accept="image/*" class="field" id="live-photo" type="file"/><span class="muted small">Photos are resized for device storage. Export JSON backups regularly.</span></div><button class="btn">Add Live Show</button></form></section></div></div><div aria-modal="true" class="modal" id="view-modal" role="dialog"><div class="dialog"><div class="row between"><strong id="view-heading">Details</strong><button class="btn alt" id="view-close" type="button">Close</button></div><div id="view-content"></div><div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn" id="view-edit" type="button">Edit</button></div></div></div>
 <div aria-labelledby="delete-prompt" aria-modal="true" class="modal" id="delete-confirm-modal" role="dialog"><div class="dialog" style="max-width:360px"><p id="delete-prompt" style="margin:2px 0 22px"></p><div class="row" style="justify-content:flex-end"><button class="btn alt" id="delete-cancel" type="button"></button><button class="btn" id="delete-accept" type="button"></button></div></div></div><div class="modal" id="display-modal" role="dialog" aria-modal="true" aria-labelledby="display-title"><div class="dialog"><div class="row between"><strong id="display-title"></strong><button class="btn alt" id="display-close" type="button"></button></div><p class="muted small" id="display-fixed"></p><p id="display-count" role="status"></p><ul id="display-choices"></ul><button class="btn ghost" id="display-reset" type="button"></button><p id="display-save-status" role="status"></p></div></div><script src="insights.js?v=20261118-decade-bars"></script><script src="search.js"></script><script src="photo-store.js"></script>
-<script src="recovery-export.js"></script><script src="photo-lifecycle.js"></script><script>
+<script src="archive-store.js"></script><script src="recovery-export.js"></script><script src="photo-lifecycle.js"></script><script>
 globalThis.MLAReady=(async()=>{'use strict';
+const startupShell=document.querySelector('.shell');startupShell.inert=true;startupShell.setAttribute('aria-busy','true');
 const OLD='my-music-archive-pilot-v1',LEGACY_KEY='my-music-archive-pilot-v03',KEY='my-music-archive-photos-v1';const $=id=>document.getElementById(id);let db={version:3,listening:[],collection:[],live:[]},section='listening',mode='grid',editing=null,editingSection=null,pendingRecord=null,lastResults=[];
 const text=(tag,cls,t)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(t!==undefined)e.textContent=String(t);return e};function safe(v){return typeof v==='string'?v:''}function newId(){for(let n=0;n<100;n++){const id=globalThis.crypto?.randomUUID?.()||'id-'+Date.now()+'-'+Math.random().toString(36).slice(2);if(!['listening','collection','live'].some(k=>db[k].some(r=>r.entryId===id)))return id}throw new ArchiveValidationError('entryId: could not generate unique ID / 一意なIDを生成できません')}
 function migrate(value){
@@ -377,57 +378,46 @@ class ArchiveValidationError extends Error {}
 function validationMessage(e){return (isJapanese()?'データが不正なため処理を停止しました。原本を保管し、内容を確認してください。':'Invalid data. Operation stopped. Keep the original and check its contents.')+(e instanceof ArchiveValidationError?' '+e.message:'')}
 // Set the initial language before rendering storage errors (localization runs later).
 $('ui-language').value=(navigator.language||'en').toLowerCase().startsWith('ja')?'ja':'en';
-try{const preference=localStorage.getItem('mma-ui-language');if(['ja','en'].includes(preference))$('ui-language').value=preference}catch(e){}
+
 // A failed read is never an empty archive. Keep the exact source for recovery.
-const lifecycle=MLALifecycle({key:KEY,legacyKeys:[LEGACY_KEY,OLD],lockName:'mla:'+LEGACY_KEY+':write',validate:migrate,stable,photos:MLAPhotos});
-let loadedRaw=null,legacyBase=null,oldBase=null;
-let loadFailed=false,rawSource=null,sourceKey=KEY,loadReason='',baseRaw=null,migrationCandidate=null;
+const legacyLifecycle=MLALifecycle({key:KEY,legacyKeys:[LEGACY_KEY,OLD],lockName:'mla:'+LEGACY_KEY+':write',validate:migrate,stable,photos:MLAPhotos,readOnly:true});
+const lifecycle=MLAArchive({validate:migrate,stable,legacy:legacyLifecycle,photos:MLAPhotos});
+let initialSettings=null;
+let loadFailed=false,loadReason='',baseRaw=null;
 let saving=false,externalChanged=false,operationBusy=false,draft=null,activeOperation=null,draftRecovered=false;
 // Presentation state is separate from draft ownership and recovery authorization.
 let recoveryView=null,noticeReason='',noticeConflict=false,discardReload=false;
 let formSession=0,formOwner=null,formBaseline=null,draftContext=null,draftPhotoFiles=null;
 try{
- legacyBase=localStorage.getItem(LEGACY_KEY);oldBase=localStorage.getItem(OLD);
- rawSource=localStorage.getItem(KEY);baseRaw=rawSource;
- if(rawSource!==null){const stored=JSON.parse(rawSource);externalChanged=!await lifecycle.guard();db=migrate(await MLAPhotos.unpack(stored));loadedRaw=rawSource}
- else{sourceKey=legacyBase!==null?LEGACY_KEY:OLD;rawSource=legacyBase??oldBase;if(rawSource!==null){migrationCandidate=await lifecycle.exportBranch(sourceKey===LEGACY_KEY?1:2);db=migrationCandidate}}
-}catch(e){loadFailed=true;if(e instanceof ArchiveValidationError)loadReason=e.message}
+ const loaded=await lifecycle.init();db=loaded.data;baseRaw=loaded.raw;initialSettings=loaded.settings;
+ $('ui-language').value=initialSettings.language;
+}catch(e){loadFailed=true;loadReason=e.message}
+
 function storageStoppedMessage(){return isJapanese()?'保存データを読み込めなかったため、上書きを防ぐ目的で保存を停止しています。現在の状態で新しい記録を保存できません。':'Saved data could not be read. Saving is stopped to prevent overwriting it. New records cannot be saved in the current state.'}
 function canSave(){if(!loadFailed)return true;alert(storageStoppedMessage());return false}
-// All archive writes, including startup migration, use this cooperative lock.
-const DB_LOCK='mla:'+LEGACY_KEY+':write';
+// The storage service owns the shared legacy-compatible lock and generation checks.
 class SaveStopped extends Error {}
 function stopped(reason){return new SaveStopped(reason)}
 function conflictMessage(){return isJapanese()?'別タブまたは外部で保存内容が変更されたため保存を停止しました。入力を保持し、JSON書き出しで新旧それぞれを退避してください。全ファイルをJSON読み込みで一緒に選び、照合後に採用する内容を指定できます。':'Saved content changed in another tab or externally. Saving stopped. Keep your input; use Export JSON for each branch. Select all saved branch files together in Import JSON to verify and choose which to adopt.'}
 function stable(v){return JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x)}
-async function commitDB(candidate,operation={},migration=false){
+async function commitDB(candidate,operation={}){
  if(saving)throw stopped('A save is already running / 保存処理中です');
  // Snapshot before waiting: no caller can change the candidate during lock acquisition.
  const snapshot=migrate(candidate);saving=true;
  try{
   if(!globalThis.isSecureContext||!navigator.locks?.request)throw stopped(isJapanese()?'安全な排他保存を利用できません。この環境では保存できません。必要な文章をコピーしてください。':'Safe exclusive saving is unavailable in this environment. Copy any text you want to keep.');
-  await navigator.locks.request(DB_LOCK,{mode:'exclusive',ifAvailable:true},async lock=>{
-   if(!lock)throw stopped(isJapanese()?'別タブが保存中です。入力を保持したまま再試行してください。':'Another tab holds the save lock. Retry with your input intact.');
-   if(loadFailed)throw stopped(storageStoppedMessage());
-   const currentRaw=localStorage.getItem(KEY);
-   if(externalChanged||currentRaw!==baseRaw)throw stopped(conflictMessage());
-   if(migration&&localStorage.getItem(sourceKey)!==rawSource)throw stopped(isJapanese()?'旧形式の移行元が変更されました。原本を回収し再読み込みしてください。':'Legacy migration source changed. Recover the original and reload.');
-   if(operation.record){const found=db[operation.area]?.filter(r=>r.entryId===operation.id);if(found?.length!==1||found[0]!==operation.record)throw stopped('Operation target mismatch / 操作対象が一致しません')}
-   const checkSources=()=>{if(localStorage.getItem(KEY)!==baseRaw||localStorage.getItem(LEGACY_KEY)!==legacyBase||localStorage.getItem(OLD)!==oldBase)throw stopped(conflictMessage())};
-   checkSources();
-   const validated=migrate(snapshot),packed=await MLAPhotos.pack(validated);
-   // Awaited copies may be interrupted. Nothing published yet; old data stays intact.
-   const verified=migrate(await MLAPhotos.unpack(packed));
-   if(stable(verified)!==stable(validated))throw new MLAPhotos.PhotoError('Archive readback mismatch');
-   checkSources();
-   packed.importedLegacy=await lifecycle.importsFor(validated,baseRaw,migration||operation.kind==='restore');
-   packed.legacyStamp=await MLAPhotos.idFor(JSON.stringify([legacyBase,oldBase]));
-   checkSources();
-   packed.generation=crypto.randomUUID();
-   const raw=JSON.stringify(packed);
-   localStorage.setItem(KEY,raw);
-   db=validated;baseRaw=raw; // Never roll back storage on failure.
-  });
+  await settingsQueue;
+  if(loadFailed)throw stopped(storageStoppedMessage());
+  if(externalChanged)throw stopped(conflictMessage());
+  if(operation.record){const found=db[operation.area]?.filter(r=>r.entryId===operation.id);if(found?.length!==1||found[0]!==operation.record)throw stopped('Operation target mismatch / 操作対象が一致しません')}
+  try{
+   const result=await lifecycle.save(snapshot,baseRaw);
+   db=result.data;baseRaw=result.raw;
+  }catch(e){
+   if(!lifecycle.isReady()){loadFailed=true;loadReason=e.message;showStorageState()}
+   if(e instanceof lifecycle.StorageError)throw stopped(e.message);
+   throw e;
+  }
  }finally{saving=false}
 }
 function sameFiles(a,b){return !!a&&!!b&&a.length===b.length&&a.every((file,i)=>file===b[i])}
@@ -470,7 +460,7 @@ async function saveDB(candidate=db,operation={}){
   if(sameRestore){draft=null;draftContext=null;draftPhotoFiles=null;draftRecovered=false;showDraft();return true}
   if(full&&owned){
    const persisted=db[operation.area]?.find(r=>r.entryId===operation.id);
-   if(session!==formSession||!sameForm(attempt,formState())||JSON.stringify(persisted)!==JSON.stringify(operation.proposed)){
+   if(session!==formSession||!sameForm(attempt,formState())||stable(persisted)!==stable(operation.proposed)){
     captureDraft(operation,isJapanese()?'保存した内容とは別の入力が残っています。現在の文章をコピーするか、入力全体を再保存してください。':'Saved content differs from remaining input. Copy the current text or save the entire form.',attempt.fileRefs,true);return false;
    }
    // The same form, unchanged through the await, was completely persisted.
@@ -508,7 +498,7 @@ function captureDraft(operation,reason,processedFiles=null,explain=false){
  if(!draft||explain){recoveryView='notice';noticeReason=explain?reason:'';noticeConflict=false}
  draftRecovered=false;
  draftContext={session:formSession,input:state.input,fileRefs:state.fileRefs};
- draft={format:'mla-unsaved-input',formatVersion:1,createdAt:new Date().toISOString(),area:op.area||null,operation:op.kind||'save',recordId:op.id||null,reason,base:{key:KEY,present:baseRaw!==null},input:state.input,proposedRecord:proposed,files:state.files,
+ draft={format:'mla-unsaved-input',formatVersion:1,createdAt:new Date().toISOString(),area:op.area||null,operation:op.kind||'save',recordId:op.id||null,reason,base:{database:'mla-archive-v1',generation:baseRaw,present:baseRaw!==null},input:state.input,proposedRecord:proposed,files:state.files,
   photoState:{savedPhotoRemoved:previous?.photoState?.savedPhotoRemoved||false,pendingFileProcessed:!!state.fileRefs.length&&sameFiles(draftPhotoFiles,state.fileRefs)&&!!proposed?.photo},
   limitations:photoUnavailable&&!state.files.length?'The processed photo no longer matches the current selection and is unavailable. / 処理済み写真は現在の選択と一致しないため回収データに含めません。':state.files.length?'Original photo files are not embedded. Keep the originals. Only a matching processed selection is included; otherwise current photo data is unavailable. / 元写真ファイルは含まれません。原本を保管してください。選択ファイルと対応する処理済み写真のみ含み、それ以外の現在の写真データは回収できません。':op.kind==='restore'?'Keep the selected backup file; its archive content is not duplicated here. / 選択したバックアップ原本を保管してください。':''};
  showDraft();return true;
@@ -545,8 +535,11 @@ function showDraft(){
  const dialog=document.querySelector('#modal.open .dialog,#live-create-modal.open .dialog');
  if(dialog)dialog.append(notice,confirmation);else $('storage-state').before(notice,confirmation);
 }
-window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&([KEY,LEGACY_KEY,OLD].includes(e.key)||e.key===null)){lifecycle.invalidate();externalChanged=true;$('import-json').multiple=true;$('tab-change').hidden=!!draft;$('tab-change').textContent=conflictMessage()}});
-window.addEventListener('beforeunload',e=>{if(discardReload){discardReload=false;return}if(operationBusy||draft||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')){e.preventDefault();e.returnValue=''}});
+function markExternal(){lifecycle.invalidate();externalChanged=true;$('import-json').multiple=true;$('tab-change').hidden=!!draft;$('tab-change').textContent=conflictMessage()}
+lifecycle.onChange(markExternal);
+for(const event of ['focus','pageshow'])window.addEventListener(event,()=>{if(!saving&&!operationBusy&&!settingsBusy)lifecycle.changed().then(changed=>{if(changed)markExternal()}).catch(e=>{loadFailed=true;loadReason=e.message;showStorageState()})});
+window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&([KEY,LEGACY_KEY,OLD,'mma-ui-language','mma-ui-grid-display-v1'].includes(e.key)||e.key===null)){lifecycle.invalidate();externalChanged=true;$('import-json').multiple=true;$('tab-change').hidden=!!draft;$('tab-change').textContent=conflictMessage()}});
+window.addEventListener('beforeunload',e=>{if(discardReload){discardReload=false;return}if(operationBusy||saving||settingsBusy||draft||$('modal').classList.contains('open')||$('live-create-modal').classList.contains('open')){e.preventDefault();e.returnValue=''}});
 function operationRecord(target,id,expected){
  const rows=db[target];const found=Array.isArray(rows)&&typeof id==='string'&&id.length?rows.filter(r=>r.entryId===id):[];
  if(found.length!==1||(expected&&found[0]!==expected)){alert(isJapanese()?'内部記録IDの重複または操作対象の不一致のため停止しました。画面を開き直し、原本を保管して確認してください。':'Operation stopped: duplicate internal ID or target mismatch. Reopen the record; keep and check the original data.');return null}return found[0];
@@ -561,7 +554,7 @@ function showStorageState(){
  $('export-json').disabled=false;$('import-json').disabled=false;$('import-json').parentElement.removeAttribute('aria-disabled');
  $('library').replaceChildren(text('p','',storageStoppedMessage()));$('count').textContent='—';
 }
-$('recover-source').onclick=async()=>{if(!loadFailed)return;try{const data=await MLARescue.collect([KEY,LEGACY_KEY,OLD],{key:sourceKey,raw:rawSource});download('mla-recovery-sources.json',JSON.stringify(data,null,2),'application/json')}catch(e){alert(isJapanese()?'回収に失敗しました。保存領域を消さず再試行してください。':'Recovery export failed. Keep storage and retry.')}};
+$('recover-source').onclick=async()=>{if(!loadFailed)return;try{const data=await lifecycle.rescue();download('mla-recovery-sources.json',JSON.stringify(data,null,2),'application/json')}catch(e){alert(isJapanese()?'回収に失敗しました。保存領域を消さず再試行してください。':'Recovery export failed. Keep storage and retry.')}};
 $('ui-language').addEventListener('change',showStorageState);
 
 function artist(r){return MMASearch.credit(r)||'Unknown Artist'}
@@ -754,15 +747,27 @@ function label(k){const ja=isJapanese();const map={release:ja?'発売日':'Relea
 function renderInsights(){if(!loadFailed)MLAInsights.render($(section+'-insights'),db[section],section,isJapanese())}
 
 // UI-only storage. null means the original sort-dependent presentation; [] means no optional rows.
-const DISPLAY_KEY='mma-ui-grid-display-v1';
 const displayOptionsButton=$('display-options');
 const displayFields=area=>area==='live'?['date','venue','artists','rating','memo']:['rating','date','release','label','genre','tags',...(area==='collection'?['format','store']:[])];
 function validDisplayFields(value,area){return Array.isArray(value)&&value.length<=3&&new Set(value).size===value.length&&value.every(k=>displayFields(area).includes(k))}
 let displayPreferences={listening:null,collection:null,live:[]},displaySaveFailed=false;
-try{const saved=JSON.parse(localStorage.getItem(DISPLAY_KEY));for(const area of ['listening','collection','live'])if(validDisplayFields(saved?.[area],area))displayPreferences[area]=saved[area].slice()}catch(e){}
+if(initialSettings)displayPreferences=structuredClone(initialSettings.display);
 function defaultDisplayFields(){if(section==='live')return [];const sort=$('sort').value;return ['rating',...(sort.startsWith('date-')?['date']:sort.startsWith('release-')?['release']:[])]}
 function selectedDisplayFields(){return displayPreferences[section]??defaultDisplayFields()}
-function persistDisplay(){try{localStorage.setItem(DISPLAY_KEY,JSON.stringify(displayPreferences));displaySaveFailed=false}catch(e){displaySaveFailed=true}}
+let settingsQueue=Promise.resolve(),settingsBusy=false;
+function persistSetting(key,value){
+ const snapshot=structuredClone(value);
+ const result=settingsQueue.then(async()=>{
+  settingsBusy=true;
+  try{
+  if(loadFailed||externalChanged)throw stopped(storageStoppedMessage());
+  const result=await lifecycle.setSetting(key,snapshot);baseRaw=result.raw;
+  }finally{settingsBusy=false}
+ });
+ settingsQueue=result.catch(e=>{if(!lifecycle.isReady()){loadFailed=true;loadReason=e.message;showStorageState()}});return result;
+}
+function persistDisplay(){displaySaveFailed=false;persistSetting('display',displayPreferences).then(()=>{displaySaveFailed=false;renderDisplayDialog()}).catch(e=>{displaySaveFailed=true;if(!lifecycle.isReady()){loadFailed=true;loadReason=e.message;showStorageState()}renderDisplayDialog()})}
+$('ui-language').addEventListener('change',()=>{persistSetting('language',$('ui-language').value).catch(e=>alert((isJapanese()?'言語設定を保存できませんでした。':'Language setting could not be saved. ')+e.message))});
 function changeDisplay(fields,focusKey){displayPreferences[section]=fields;persistDisplay();render();renderDisplayDialog();if(focusKey){const target=$('display-modal').querySelector(focusKey);(target&&!target.disabled?target:target?.closest('li')?.querySelector('input'))?.focus()}}
 function syncDisplayButton(){const b=displayOptionsButton;b.hidden=false;$('archive-panel').querySelector('.archive-heading').classList.toggle('album-heading',section!=='live');const name=isJapanese()?'一覧の表示設定':'Display Options';b.setAttribute('aria-label',name);b.title=name}
 function renderDisplayDialog(){
@@ -1047,12 +1052,12 @@ for(const k of ['sort','group',...archiveFilterIds.map(id=>id+'-filter')])$(k).o
 function download(name,data,type){const url=URL.createObjectURL(new Blob([data],{type})),a=text('a');a.href=url;a.download=name;a.dataset.mlaDownload='true';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000)}$('export-json').onclick=async()=>{try{
  let portable;
  if(loadFailed||externalChanged){
-  const answer=prompt(isJapanese()?'退避する保存元を選んでください：0=新版、1=旧v03、2=旧v1。各保存元を個別に保存してください。':'Choose a branch to save: 0=new, 1=old v03, 2=old v1. Save each existing branch separately.');
-  if(answer===null)return;if(!/^[012]$/.test(answer))throw Error('Invalid source / 保存元が不正です');
+  const answer=prompt(isJapanese()?'退避する保存元を選んでください：0=新版、1=旧写真ID形式、2=旧v03、3=旧v1、4=直前の検証済み保存。各保存元を個別に保存してください。':'Choose a branch to save: 0=new, 1=old photo-ID archive, 2=old v03, 3=old v1, 4=previous verified save. Save each existing branch separately.');
+  if(answer===null)return;if(!/^[01234]$/.test(answer))throw Error('Invalid source / 保存元が不正です');
   portable=await lifecycle.exportBranch(Number(answer));
   download('mla-branch-'+answer+'.json',JSON.stringify(portable,null,2),'application/json');return;
  }
- const raw=localStorage.getItem(KEY);portable=raw===null?db:migrate(await MLAPhotos.unpack(JSON.parse(raw)));
+ portable=await lifecycle.exportBranch(0);
  download('my-music-archive-backup-v0310.json',JSON.stringify(portable,null,2),'application/json');
  }catch(e){alert((isJapanese()?'JSON書き出しを停止しました。保存領域を消去せず、読み込み失敗時は原本回収も使用してください。':'JSON export stopped (a photo may be missing). Keep storage; use raw recovery after a load failure.')+' '+e.message)}};$('export-csv').onclick=()=>{if(loadFailed){canSave();return}const columns=['archive','title','artist','release','date','added','genre','label','rating','rating_5','tags','store','format','price','condition','venue','memo','id'];const rows=Object.keys({listening:1,collection:1,live:1}).flatMap(k=>db[k].map(x=>columns.map(c=>c==='archive'?k:c==='rating_5'?(rate(x)===null?'':fiveScore(rate(x)).toFixed(1)):c==='tags'?parseTags(x.tags).join('; '):c==='id'?x.entryId:x[c]??'')));const csv=[columns,...rows].map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');download('my-music-archive.csv','\uFEFF'+csv,'text/csv;charset=utf-8')};$('import-json').onchange=async e=>{
  if(loadFailed||externalChanged){try{await importStopped([...e.target.files])}catch(err){alert(err.message)}finally{e.target.value=''}return}const f=e.target.files?.[0];if(!f)return;
@@ -1116,15 +1121,12 @@ async function importStopped(files){
  const selected=candidates[Number(answer)-1];
  if(!confirm(selected.name+'\n'+['listening','collection','live'].map(a=>a+': '+selected.data[a].length+' / photos: '+selected.data[a].filter(r=>r.photo).length).join('\n')+'\n'+(isJapanese()?'このJSONを採用しますか？新旧の退避ファイルは保管してください。':'Adopt this JSON? Keep every branch backup.')))return;
  const result=await lifecycle.recover(selected.data);
- db=result.data;baseRaw=result.raw;[,legacyBase,oldBase]=lifecycle.raws();externalChanged=false;loadFailed=false;migrationCandidate=null;loadReason='';draft=null;draftContext=null;showDraft();enableAfterRecovery();render();showStorageState();
+ db=result.data;baseRaw=result.raw;externalChanged=false;loadFailed=false;loadReason='';draft=null;draftContext=null;showDraft();enableAfterRecovery();render();showStorageState();
  alert(isJapanese()?'復旧しました。記録と写真を確認してください。':'Recovered. Check records and photos.');
 }
-setSection('listening');showStorageState();
+setSection('listening');showStorageState();startupShell.inert=false;startupShell.removeAttribute('aria-busy');
 if(externalChanged){$('tab-change').hidden=false;$('tab-change').textContent=conflictMessage()}
-if(migrationCandidate){
- operationBusy=true;
- commitDB(migrationCandidate,{},true).then(()=>{render()}).catch(e=>{loadFailed=true;loadReason=(isJapanese()?'移行を保存できませんでした。旧データは保持しています。通常のJSON書き出しで旧側を選んで保存し、容量に余裕のある別の隔離環境へ復元してください。この画面で旧データを先に削除しないでください。':'Migration could not be saved. Legacy data is retained. Use Export JSON to save the legacy branch, then restore in another isolated browser with sufficient space. Do not delete legacy data first.')+(e instanceof SaveStopped?' '+e.message:'');showStorageState()}).finally(()=>operationBusy=false);
-}
+
 
 })();
 </script>
@@ -1143,7 +1145,7 @@ const reverse=Object.fromEntries(Object.entries(dictionary).map(([a,b])=>[b,a]))
 const revPrefixes=prefixes.map(([a,b])=>[b,a]);
 const selector='h2,.tab,.btn,.group label,option,.filter-control button,.details,.empty,.section,.status,#result-count,#library-title,#edit-title,#live-create-title,#date-label,.foot,.small.muted:not(.result .small):not(.record .small),#modal-header strong,#search-order-label,#more-results,#artwork-reveal,#manual-add-trigger,#add-live-trigger';
 function swap(t,lang){const map=lang==='ja'?dictionary:reverse;const pref=lang==='ja'?prefixes:revPrefixes;if(map[t]!==undefined)return map[t];for(const [a,b] of pref){if(t.startsWith(a))return b+t.slice(a.length)}if(lang==='ja'&&/^\d+ results$/.test(t))return t.replace(' results',' 件');if(lang==='en'&&/^\d+ 件$/.test(t))return t.replace(' 件',' results');return t}
-let lang=(navigator.language||'en').toLowerCase().startsWith('ja')?'ja':'en';try{lang=localStorage.getItem('mma-ui-language')||lang}catch(e){}if(!['ja','en'].includes(lang))lang='en';
+let lang=document.getElementById('ui-language').value;
 const select=document.getElementById('ui-language');select.value=lang;
 function update(){document.documentElement.lang=lang;for(const el of document.querySelectorAll(selector)){
 if(el.closest('.tile,.listrow,.result')&&!el.classList.contains('details')&&!el.classList.contains('btn'))continue;
@@ -1182,8 +1184,7 @@ function refreshCustomControls(){
   });
  }
 }
-select.addEventListener('change',()=>{lang=select.value;try{localStorage.setItem('mma-ui-language',lang)}catch(e){}update();refreshCustomControls();const activeSort=document.getElementById('sort');if(activeSort){activeSort.dispatchEvent(new Event('change'));}});update();refreshCustomControls();
+select.addEventListener('change',()=>{lang=select.value;update();refreshCustomControls();const activeSort=document.getElementById('sort');if(activeSort){activeSort.dispatchEvent(new Event('change'));}});update();refreshCustomControls();
 })();
 </script>
 </body></html>
-
