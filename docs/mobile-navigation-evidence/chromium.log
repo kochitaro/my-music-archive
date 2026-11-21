@@ -1,0 +1,7 @@
+PASS chromium normal refresh reloads exact migrated IndexedDB data
+PASS chromium bounded swipes, filter parity, exclusions, axis lock, cancel/multitouch and click suppression
+PASS chromium smooth/reduced-motion top, focus, modal hiding, unsaved editor and active-save reload protection
+PASS chromium raw-source export and verified branch recovery cannot be interrupted by refresh/swipe
+PASS chromium failed-save draft remains intact after refresh refusal
+PASS chromium initialization/migration wait keeps the refresh UI inert
+PASS chromium three-section CRUD, JSON roundtrip, restore reload/swipe protection, zero page errors
