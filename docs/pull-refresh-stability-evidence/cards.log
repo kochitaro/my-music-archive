@@ -1,0 +1,14 @@
+PASS chromium grid listening 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS chromium grid collection 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS chromium grid live 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS chromium list listening 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS chromium list collection 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS chromium list live 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS chromium edge/diagonal/cancel/multitouch and nested controls excluded; rating/input/modal preserved; page errors 0
+PASS webkit grid listening 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS webkit grid collection 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS webkit grid live 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS webkit list listening 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS webkit list collection 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS webkit list live 45 dense cards: tap details, horizontal switch once, ghost-click suppression, immediate new tap, vertical scroll
+PASS webkit edge/diagonal/cancel/multitouch and nested controls excluded; rating/input/modal preserved; page errors 0

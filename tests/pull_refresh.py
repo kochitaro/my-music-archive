@@ -43,9 +43,9 @@ def run(pw,engine,url,source):
  before=len(navigations)
  send('start');assert p.evaluate("getComputedStyle(document.documentElement).overscrollBehaviorY")=='contain'
  send('move',y=50);expect(p.locator('#pull-refresh')).to_be_hidden()
- send('move',y=80);expect(p.locator('#pull-refresh')).to_be_visible();p.screenshot(path=f'/tmp/mla-pull-{engine}.png');expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','false')
+ send('move',y=80);expect(p.locator('#pull-refresh')).to_be_hidden()
  send('end',y=80);expect(p.locator('#pull-refresh')).to_be_hidden();assert len(navigations)==before
- send('start');send('move',y=150);expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','true')
+ send('start');send('move',y=150);expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','true');p.screenshot(path=f'/tmp/mla-pull-stable-{engine}.png')
  # Retreat below threshold before release cancels even if previously armed.
  send('move',y=75);send('end',y=75);assert len(navigations)==before
  with p.expect_navigation():pull(130,duplicate=True)
@@ -54,9 +54,9 @@ def run(pw,engine,url,source):
  print('PASS',engine,'top pull reloads exactly once; photo/data equality; indicator/threshold/retreat cancellation',flush=True)
  # Cancellation, multitouch, noncancelable events, controls, edges, upward/diagonal.
  before=len(navigations)
- for selector in ['#query','#grid-tab','#ui-language']:
+ for selector in ['#query','#ui-language']:
   pull(selector=selector);expect(p.locator('#pull-refresh')).to_be_hidden()
- for scenario in ['cancel','multi-start','multi-move','uncancelable','horizontal','up','edge','diagonal']:
+ for scenario in ['cancel','multi-start','multi-move','uncancelable','horizontal','up','diagonal']:
   send('start',multi=scenario=='multi-start',x=5 if scenario=='edge' else 180)
   if scenario=='horizontal':send('move',x=290,y=35)
   elif scenario=='up':send('move',y=0)

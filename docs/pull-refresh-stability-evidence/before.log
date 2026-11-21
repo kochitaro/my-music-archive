@@ -1,0 +1,28 @@
+chromium browser fractional top ready False reloads 0
+chromium browser negative bounce ready True reloads 1
+chromium browser positive drift during pull ready False reloads 0
+chromium browser ordinary button start ready False reloads 0
+chromium browser vertical start at edge ready False reloads 0
+chromium browser small upward jitter then pull ready True reloads 1
+chromium browser noncancelable bounce ready False reloads 0
+chromium standalone fractional top ready False reloads 0
+chromium standalone negative bounce ready True reloads 1
+chromium standalone positive drift during pull ready False reloads 0
+chromium standalone ordinary button start ready False reloads 0
+chromium standalone vertical start at edge ready False reloads 0
+chromium standalone small upward jitter then pull ready True reloads 1
+chromium standalone noncancelable bounce ready False reloads 0
+webkit browser fractional top ready False reloads 0
+webkit browser negative bounce ready True reloads 1
+webkit browser positive drift during pull ready False reloads 0
+webkit browser ordinary button start ready False reloads 0
+webkit browser vertical start at edge ready False reloads 0
+webkit browser small upward jitter then pull ready True reloads 1
+webkit browser noncancelable bounce ready False reloads 0
+webkit standalone fractional top ready False reloads 0
+webkit standalone negative bounce ready True reloads 1
+webkit standalone positive drift during pull ready False reloads 0
+webkit standalone ordinary button start ready False reloads 0
+webkit standalone vertical start at edge ready False reloads 0
+webkit standalone small upward jitter then pull ready True reloads 1
+webkit standalone noncancelable bounce ready False reloads 0

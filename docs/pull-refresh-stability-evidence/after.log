@@ -1,0 +1,32 @@
+chromium browser fractional top ready True reloads 1
+chromium browser negative bounce ready True reloads 1
+chromium browser positive drift during pull ready True reloads 1
+chromium browser ordinary button start ready True reloads 1
+chromium browser vertical start at edge ready True reloads 1
+chromium browser small upward jitter then pull ready True reloads 1
+chromium browser noncancelable bounce ready False reloads 0
+PASS chromium browser threshold/readiness parity, mid-scroll, controls, cancel/multi, single reload
+chromium standalone fractional top ready True reloads 1
+chromium standalone negative bounce ready True reloads 1
+chromium standalone positive drift during pull ready True reloads 1
+chromium standalone ordinary button start ready True reloads 1
+chromium standalone vertical start at edge ready True reloads 1
+chromium standalone small upward jitter then pull ready True reloads 1
+chromium standalone noncancelable bounce ready True reloads 1
+PASS chromium standalone threshold/readiness parity, mid-scroll, controls, cancel/multi, single reload
+webkit browser fractional top ready True reloads 1
+webkit browser negative bounce ready True reloads 1
+webkit browser positive drift during pull ready True reloads 1
+webkit browser ordinary button start ready True reloads 1
+webkit browser vertical start at edge ready True reloads 1
+webkit browser small upward jitter then pull ready True reloads 1
+webkit browser noncancelable bounce ready False reloads 0
+PASS webkit browser threshold/readiness parity, mid-scroll, controls, cancel/multi, single reload
+webkit standalone fractional top ready True reloads 1
+webkit standalone negative bounce ready True reloads 1
+webkit standalone positive drift during pull ready True reloads 1
+webkit standalone ordinary button start ready True reloads 1
+webkit standalone vertical start at edge ready True reloads 1
+webkit standalone small upward jitter then pull ready True reloads 1
+webkit standalone noncancelable bounce ready True reloads 1
+PASS webkit standalone threshold/readiness parity, mid-scroll, controls, cancel/multi, single reload
