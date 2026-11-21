@@ -4,19 +4,19 @@
 (()=>{'use strict';
  const areas=['listening','collection','live'];
  class PhotoError extends Error {}
- function open(){return new Promise((resolve,reject)=>{
+ function open(readOnly=false){return new Promise((resolve,reject)=>{
   const request=indexedDB.open('mla-photos-v1',1);
-  request.onupgradeneeded=()=>request.result.createObjectStore('photos');
+  request.onupgradeneeded=()=>{if(readOnly)request.transaction.abort();else request.result.createObjectStore('photos')};
   request.onerror=()=>reject(new PhotoError('Photo storage unavailable'));
   request.onblocked=()=>reject(new PhotoError('Photo storage blocked'));
   request.onsuccess=()=>{const db=request.result;db.onversionchange=()=>db.close();resolve(db)};
  })}
- async function access(mode,action){const db=await open();try{return await new Promise((resolve,reject)=>{
+ async function access(mode,action,readOnly=false){const db=await open(readOnly);try{return await new Promise((resolve,reject)=>{
   const tx=db.transaction('photos',mode);let result;
   tx.oncomplete=()=>resolve(result);tx.onerror=tx.onabort=()=>reject(new PhotoError('Photo storage failed'));
   try{action(tx.objectStore('photos'),v=>result=v)}catch(e){tx.abort();reject(new PhotoError('Photo storage failed'))}
  })}finally{db.close()}}
- const get=id=>access('readonly',(s,done)=>{const r=s.get(id);r.onsuccess=()=>done(r.result)});
+ const get=(id,readOnly=false)=>access('readonly',(s,done)=>{const r=s.get(id);r.onsuccess=()=>done(r.result)},readOnly);
  async function idFor(value){const bytes=new TextEncoder().encode(value);return 'sha256-'+Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('')}
  async function copy(value){
   const id=await idFor(value),existing=await get(id);
@@ -32,11 +32,11 @@
   }
   out.photoStorage=1;return out;
  }
- async function unpack(archive){
+ async function unpack(archive,readOnly=false){
   const out=structuredClone(archive);delete out.photoStorage;delete out.legacyStamp;delete out.generation;delete out.importedLegacy;
   for(const area of areas)for(const r of out[area])if(Object.hasOwn(r,'photoId')){
    if(typeof r.photoId!=='string'||r.photo)throw new PhotoError('Invalid photo reference');
-   const value=await get(r.photoId);
+   const value=await get(r.photoId,readOnly);
    if(typeof value!=='string'||!value.startsWith('data:image/')||await idFor(value)!==r.photoId)throw new PhotoError('Missing or damaged photo: '+r.entryId);
    r.photo=value;delete r.photoId;
   }

@@ -1,0 +1,20 @@
+PASS new user: records/photos/settings persist without localStorage writes
+PASS v3 migration exact, repeated startup idempotent, original retained, JSON/CSV/Insights
+PASS v1 migration and deterministic IDs; historical score/date/blank fields preserved
+PASS current photo-ID archive and old IndexedDB preserved, photo bytes exact
+PASS migration quota injection in all stores: atomic abort, no empty archive publication, original intact
+PASS pre-publication exception/page close and transaction abort preserve source; fresh retry exact
+PASS malformed persistent settings stop migration without overwriting originals
+PASS published/verified/finalization exceptions: pending state blocks writes and safely resumes
+PASS page termination after atomic migration publication: resume/reload exact
+PASS corrupt/branched/missing-photo originals stop saving; raw recovery retains original
+PASS all archives: failed save retains input/file; retry, create/edit/delete and photo replace/remove
+PASS photo write failure: cancel preserves file and archive; explicit no-photo fallback saves record
+PASS lost notifications prevent stale write; real old-version tab branches; all-branch verified recovery
+PASS save pause/lock contention and legacy update during pending publication fail closed
+PASS read exceptions and photo corruption cannot become empty data or overwrite original
+PASS post-commit ordinary-save interruption retains previous verified records/photos and resumes
+PASS unsupported DB version stops normal access; raw record/photo recovery remains available
+MEASURE {"records": 1200, "portableBytes": 7457039, "saveSeconds": 2.377, "browser": "chromium"}
+PASS 1200 synthetic records >7 MB: save/reload/portable JSON exact, no localStorage writes
+{"browser": "chromium", "passed": 18, "cases": ["new user: records/photos/settings persist without localStorage writes", "v3 migration exact, repeated startup idempotent, original retained, JSON/CSV/Insights", "v1 migration and deterministic IDs; historical score/date/blank fields preserved", "current photo-ID archive and old IndexedDB preserved, photo bytes exact", "migration quota injection in all stores: atomic abort, no empty archive publication, original intact", "pre-publication exception/page close and transaction abort preserve source; fresh retry exact", "malformed persistent settings stop migration without overwriting originals", "published/verified/finalization exceptions: pending state blocks writes and safely resumes", "page termination after atomic migration publication: resume/reload exact", "corrupt/branched/missing-photo originals stop saving; raw recovery retains original", "all archives: failed save retains input/file; retry, create/edit/delete and photo replace/remove", "photo write failure: cancel preserves file and archive; explicit no-photo fallback saves record", "lost notifications prevent stale write; real old-version tab branches; all-branch verified recovery", "save pause/lock contention and legacy update during pending publication fail closed", "read exceptions and photo corruption cannot become empty data or overwrite original", "post-commit ordinary-save interruption retains previous verified records/photos and resumes", "unsupported DB version stops normal access; raw record/photo recovery remains available", "1200 synthetic records >7 MB: save/reload/portable JSON exact, no localStorage writes"]}
