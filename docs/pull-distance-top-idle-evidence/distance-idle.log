@@ -1,0 +1,6 @@
+PASS chromium finger 96/179/180/220px; bounce -10/-20/-50/-250; retreat below 180; duplicate release reloads once
+PASS chromium 399/400px; 3s idle fade; new scroll resets timer; hidden hit/focus exclusion; keyboard/footer reveal; focus hold; modal/top hiding
+PASS chromium reduced-motion immediate idle hide and instant top navigation; page errors 0
+PASS webkit finger 96/179/180/220px; bounce -10/-20/-50/-250; retreat below 180; duplicate release reloads once
+PASS webkit 399/400px; 3s idle fade; new scroll resets timer; hidden hit/focus exclusion; keyboard/footer reveal; focus hold; modal/top hiding
+PASS webkit reduced-motion immediate idle hide and instant top navigation; page errors 0

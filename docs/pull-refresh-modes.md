@@ -1,5 +1,7 @@
 # PR #44 モード別の更新仕様・検証結果
 
+> 本書はPR #44時点の仕様。後続の[更新距離・先頭ボタン改善](pull-distance-top-idle.md)で、standaloneの更新距離を180pxへ変更した。通常モードとstandaloneの分離方針は維持している。
+
 この仕様は、PR #44の初回実装（`9cf2be9`）の方針を置き換える。ブランチは引き続き `fix/pull-refresh-stability`。
 
 ## 最終仕様

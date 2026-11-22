@@ -2,6 +2,7 @@
 globalThis.MLAMobileNavigation = function ({busy, unsaved, getSection, setSection, archiveVisible, japanese}) {
  const refresh = document.getElementById('reload-page');
  const top = document.getElementById('back-to-top');
+ const showTop = document.getElementById('show-top-button');
  const archive = document.getElementById('archive-content');
  const modalOpen = () => !!document.querySelector('.modal.open,[role="alertdialog"]:not([hidden])');
  const blocked = () => busy() || unsaved() || modalOpen();
@@ -10,6 +11,7 @@ globalThis.MLAMobileNavigation = function ({busy, unsaved, getSection, setSectio
    button.setAttribute('aria-label', label); button.title = label;
    if (button===refresh) button.textContent=label;
   }
+  showTop.textContent=japanese()?'先頭へ戻るボタンを表示':'Show back-to-top button';
   document.getElementById('page-actions-label').textContent=japanese()?'ページ操作':'Page actions';
  }
  labels(); document.getElementById('ui-language').addEventListener('change', labels);
@@ -26,11 +28,46 @@ globalThis.MLAMobileNavigation = function ({busy, unsaved, getSection, setSectio
   try { location.reload(); } catch (error) { reloading=false; throw error; }
  }
  refresh.addEventListener('click', requestReload);
- function updateTop() { const hidden=window.scrollY < 400 || modalOpen(); if (top.hidden!==hidden) top.hidden=hidden; }
- window.addEventListener('scroll', updateTop, {passive:true});
- new MutationObserver(updateTop).observe(document.body, {subtree:true, attributes:true, attributeFilter:['class','hidden']});
+ // Scroll activity restarts the idle clock. Modal/DOM changes only update
+ // eligibility, so our own fade attributes cannot keep the button awake.
+ const TOP_IDLE_MS=3000,TOP_FADE_MS=180;
+ let idleTimer=null,fadeTimer=null,topEligible=false;
+ function clearTopTimers() { clearTimeout(idleTimer);clearTimeout(fadeTimer);idleTimer=fadeTimer=null; }
+ function disableTop() { top.inert=true;top.tabIndex=-1;top.setAttribute('aria-hidden','true'); }
+ function hideTop() {
+  clearTopTimers();disableTop();if(!top.hidden)top.hidden=true;if(top.classList.contains('is-idle'))top.classList.remove('is-idle');
+ }
+ function scheduleTopHide() {
+  clearTopTimers();
+  if (!topEligible || document.activeElement===top) return;
+  idleTimer=setTimeout(()=>{
+   if (document.activeElement===top) return;
+   disableTop();
+   top.classList.add('is-idle');
+   if (matchMedia('(prefers-reduced-motion: reduce)').matches) hideTop();
+   else fadeTimer=setTimeout(hideTop,TOP_FADE_MS);
+  },TOP_IDLE_MS);
+ }
+ function revealTop() {
+  if (!topEligible) return;
+  clearTopTimers();top.hidden=false;top.classList.remove('is-idle');top.inert=false;top.tabIndex=0;top.removeAttribute('aria-hidden');
+  scheduleTopHide();
+ }
+ function updateTop(activity=false) {
+  const eligible=window.scrollY>=400&&!modalOpen(),changed=eligible!==topEligible;
+  topEligible=eligible;
+  if (showTop.hidden!==!eligible) showTop.hidden=!eligible;
+  if (!eligible) hideTop();
+  else if (activity||changed) revealTop();
+ }
+ window.addEventListener('scroll',()=>updateTop(true),{passive:true});
+ new MutationObserver(()=>updateTop()).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden']});
+ top.addEventListener('focus',clearTopTimers);
+ top.addEventListener('blur',scheduleTopHide);
+ window.addEventListener('keydown',e=>{if(e.key==='Tab'&&!e.defaultPrevented)revealTop()});
+ showTop.addEventListener('click',()=>{revealTop();if(topEligible)top.focus({preventScroll:true})});
  top.addEventListener('click', () => {
-  if (modalOpen()) return;
+  if (modalOpen()||top.hidden||top.inert) return;
   window.scrollTo({top:0, behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
   // Keep keyboard/VoiceOver focus at the destination when this button disappears.
   document.getElementById('page-heading').focus({preventScroll:true});
@@ -57,7 +94,7 @@ globalThis.MLAMobileNavigation = function ({busy, unsaved, getSection, setSectio
   // Standalone has no browser refresh UI to arbitrate with. Keep its bounce
   // native and observe moves, even after the browser makes them noncancelable.
   const indicator=document.getElementById('pull-refresh'),status=document.getElementById('pull-status');
-  const TOP_SLOP=4,PULL_THRESHOLD=96;
+  const TOP_SLOP=4,PULL_THRESHOLD=180;
   const atTop=()=>Math.max(0,window.scrollY)<=TOP_SLOP;
   let pull=null;
   function resetPull() {
