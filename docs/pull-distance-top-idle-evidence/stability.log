@@ -1,0 +1,16 @@
+chromium standalone fractional top ready True reloads 1
+chromium standalone negative bounce ready True reloads 1
+chromium standalone positive drift during pull ready True reloads 1
+chromium standalone ordinary button start ready True reloads 1
+chromium standalone vertical start at edge ready True reloads 1
+chromium standalone small upward jitter then pull ready True reloads 1
+chromium standalone noncancelable bounce ready True reloads 1
+PASS chromium standalone threshold/readiness parity, mid-scroll, controls, cancel/multi, single reload
+webkit standalone fractional top ready True reloads 1
+webkit standalone negative bounce ready True reloads 1
+webkit standalone positive drift during pull ready True reloads 1
+webkit standalone ordinary button start ready True reloads 1
+webkit standalone vertical start at edge ready True reloads 1
+webkit standalone small upward jitter then pull ready True reloads 1
+webkit standalone noncancelable bounce ready True reloads 1
+PASS webkit standalone threshold/readiness parity, mid-scroll, controls, cancel/multi, single reload

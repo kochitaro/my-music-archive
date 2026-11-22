@@ -31,7 +31,7 @@ def run(pw,engine,url,source):
  p.on('framenavigated',lambda f:navigations.append(f.url) if f==p.main_frame else None)
  def ready():p.wait_for_function('window.mobileProbe && !mobileProbe.busy()')
  def send(kind,**kwargs):return p.evaluate(SEND,dict(type='touch'+kind,**kwargs))
- def pull(distance=130,selector='.shell',duplicate=False):
+ def pull(distance=200,selector='.shell',duplicate=False):
   send('start',selector=selector);send('move',y=50,selector=selector);send('move',y=30+distance,selector=selector)
   if duplicate:p.evaluate('(args)=>{const send='+SEND+';send(args);send(args)}',dict(type='touchend',y=30+distance,selector=selector))
   else:send('end',y=30+distance,selector=selector)
@@ -41,16 +41,16 @@ def run(pw,engine,url,source):
  assert p.locator('.langbar #page-refresh').count()==0
  assert p.evaluate("getComputedStyle(document.documentElement).overscrollBehaviorY")=='auto'
  assert p.evaluate("getComputedStyle(document.body).overscrollBehaviorY")=='auto'
- # Indicator appears only during a deliberate outward pull, arming at 96px.
+ # Indicator appears only during a deliberate outward pull, arming at 180px.
  before=len(navigations)
  send('start');assert p.evaluate("getComputedStyle(document.documentElement).overscrollBehaviorY")=='auto'
  send('move',y=50);expect(p.locator('#pull-refresh')).to_be_hidden()
  send('move',y=80);expect(p.locator('#pull-refresh')).to_be_hidden()
  send('end',y=80);expect(p.locator('#pull-refresh')).to_be_hidden();assert len(navigations)==before
- send('start');send('move',y=150);expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','true');p.screenshot(path=f'/tmp/mla-pull-stable-{engine}.png')
+ send('start');send('move',y=210);expect(p.locator('#pull-refresh')).to_have_attribute('data-ready','true');p.screenshot(path=f'/tmp/mla-pull-stable-{engine}.png')
  # Retreat below threshold before release cancels even if previously armed.
  send('move',y=75);send('end',y=75);assert len(navigations)==before
- with p.expect_navigation():pull(130,duplicate=True)
+ with p.expect_navigation():pull(200,duplicate=True)
  ready();assert len(navigations)==before+1;assert data()==original
  expect(p.locator('#pull-refresh')).to_be_hidden()
  print('PASS',engine,'top pull reloads exactly once; photo/data equality; indicator/threshold/retreat cancellation',flush=True)
@@ -79,7 +79,7 @@ def run(pw,engine,url,source):
  expect(p.locator('[data-section=collection]')).to_have_class('tab active');expect(p.locator('.modal.open')).to_have_count(0)
  p.wait_for_timeout(750);p.locator('[data-section=listening]').click();top()
  p.select_option('#ui-language','ja');ready();top()
- send('start');send('move',y=180);expect(p.locator('#pull-status')).to_have_text('指を離して更新');send('cancel')
+ send('start');send('move',y=210);expect(p.locator('#pull-status')).to_have_text('指を離して更新');send('cancel')
  p.select_option('#ui-language','en');ready();top();p.wait_for_timeout(750)
  # Editor / failed-save / active save / restore all use the same release-time guard.
  p.locator('#manual-add-trigger').click();p.locator('#manual-title').fill('Synthetic pull input');p.locator('#manual-artist').fill('Synthetic')
@@ -122,7 +122,7 @@ def run(pw,engine,url,source):
   # Real browser touch, not a DOM-only event sequence, at a noninteractive header.
   session=c.new_cdp_session(p);top()
   with p.expect_navigation():
-   for i,y in enumerate([45,65,100,160,200]):
+   for i,y in enumerate([45,65,110,190,225]):
     session.send('Input.dispatchTouchEvent',{'type':'touchStart' if i==0 else 'touchMove','touchPoints':[dict(x=180,y=y)]});p.wait_for_timeout(35)
    session.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]})
   ready();assert data()==saved

@@ -1,0 +1,3 @@
+PASS chromium native touch left/right switch once, vertical touch scroll, no accidental modal
+PASS chromium native wheel scroll + smooth top on 390px viewport; no horizontal page overflow
+PASS webkit native wheel scroll + smooth top on 390px viewport; no horizontal page overflow

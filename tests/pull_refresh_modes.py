@@ -38,13 +38,13 @@ def run(pw,engine,url):
   for cancelable in [True,False]:
    # Use a fresh load to reset the counted reload's once-only flag.
    if cancelable is False:p.reload();p.evaluate('MLAReady')
-   for t,y in [('start',30),('move',80),('move',150)]:
+   for t,y in [('start',30),('move',80),('move',230)]:
     prevented=p.evaluate(SEND,dict(type='touch'+t,y=y,cancelable=cancelable))
     assert not prevented
    assert p.locator('#pull-refresh').is_visible()==standalone
    assert p.evaluate("getComputedStyle(document.documentElement).overscrollBehaviorY")=='auto'
    assert not p.evaluate("document.documentElement.classList.contains('pull-tracking')")
-   p.evaluate('(args)=>{const send='+SEND+';send(args);send(args)}',dict(type='touchend',y=150,cancelable=cancelable))
+   p.evaluate('(args)=>{const send='+SEND+';send(args);send(args)}',dict(type='touchend',y=230,cancelable=cancelable))
    assert p.evaluate('reloadCount')==int(standalone)
    expect(p.locator('#pull-refresh')).to_be_hidden()
    if not standalone and cancelable:assert p.evaluate('pullMutations')==[]
