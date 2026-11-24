@@ -60,8 +60,8 @@ with sync_playwright() as pw:
    p.evaluate('scrollTo(0,document.body.scrollHeight)');p.wait_for_timeout(100)
    assert p.locator('footer').evaluate('e=>e.getBoundingClientRect().bottom')<=p.locator('#archive-toolbar').bounding_box()['y']
    # Safe-area CSS formula with a simulated 34px inset (no real iPhone claim).
-   p.add_style_tag(content=':root{--archive-bar-height:100px}#archive-toolbar{padding-bottom:34px}')
-   assert p.locator('#archive-toolbar').bounding_box()['height']==100
+   p.add_style_tag(content=':root{--archive-bar-height:103px}#archive-toolbar{padding-bottom:34px}')
+   assert p.locator('#archive-toolbar').bounding_box()['height']==103
    if width==390:
     p.evaluate('scrollTo(0,0)');p.evaluate(TOUCH,dict(selector='#library-title',points=[[280,300],[200,301],[100,302]]));expect(p.locator('[data-section=collection]')).to_have_class('tab active')
     p.wait_for_timeout(720);p.evaluate(TOUCH,dict(selector='#library-title',points=[[200,300],[201,380],[202,470]]));expect(p.locator('[data-section=collection]')).to_have_class('tab active')
