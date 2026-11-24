@@ -1,12 +1,13 @@
-:root{--archive-bar-height:calc(66px + env(safe-area-inset-bottom,0px))}
-body.has-archive-toolbar{padding-bottom:var(--archive-bar-height)}
-#archive-toolbar{position:fixed;inset:auto 0 0;z-index:4;background:#1c222b;border-top:1px solid #445060;padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+:root{--archive-bar-height:calc(69px + env(safe-area-inset-bottom,0px))}
+body.has-archive-toolbar{padding-bottom:var(--archive-bar-height);transition:padding-bottom 180ms ease}
+body.archive-toolbar-collapsed{--archive-bar-height:calc(29px + env(safe-area-inset-bottom,0px))}
+#archive-toolbar{position:fixed;inset:auto 0 0;z-index:4;background:#1c222b;border:1px solid #445060;border-bottom:0;border-radius:18px 18px 0 0;padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
 #archive-toolbar[hidden],#archive-toolbar-panels[hidden]{display:none}
-.archive-toolbar-inner{display:flex;max-width:1030px;margin:auto;height:65px;padding:4px 12px;gap:4px}
-#archive-toolbar .archive-toolbar-inner>button{flex:1;min-width:0;min-height:48px;margin:0;padding:3px 2px;border:0;border-radius:8px;background:transparent;color:#c6e7ef;font-size:12px;font-weight:500;line-height:23px;text-align:center;white-space:pre-line;text-decoration:none}
+.archive-toolbar-inner{display:flex;max-width:1030px;margin:auto;height:48px;padding:0 12px;gap:4px;overflow:hidden;transition:height 180ms ease}
+#archive-toolbar .archive-toolbar-inner>button{flex:1;min-width:0;min-height:44px;margin:0;padding:3px 2px;border:0;border-radius:8px;background:transparent;color:#c6e7ef;font-size:12px;font-weight:500;line-height:21px;text-align:center;white-space:pre-line;text-decoration:none}
 #archive-toolbar button:focus-visible{outline:2px solid #c6e7ef;outline-offset:-2px}
-#archive-toolbar button[aria-expanded=true]{background:#304451}
-#archive-toolbar #filters-toggle{position:relative;font-size:0;line-height:23px}
+#archive-toolbar .archive-toolbar-inner>button[aria-expanded=true]{background:#304451}
+#archive-toolbar #filters-toggle{position:relative;font-size:0;line-height:21px}
 #archive-toolbar #filters-toggle::before{content:'☷';display:block;font-size:18px}
 #archive-toolbar #filter-label{font-size:12px}
 #archive-toolbar #filters-icon{display:none}
@@ -17,3 +18,12 @@ body.has-archive-toolbar{padding-bottom:var(--archive-bar-height)}
 .toolbar-panel-close{display:block;margin-left:auto;min-height:44px;padding:8px 15px;border:1px solid #536171;border-radius:8px;background:transparent;color:#c6e7ef}
 body.has-archive-toolbar #back-to-top{bottom:calc(var(--archive-toolbar-occupied,var(--archive-bar-height)) + 16px)}
 @media(max-width:540px){#archive-toolbar-panels #sort-wrap,#archive-toolbar-panels #filters-wrap{grid-template-columns:1fr}}
+
+#archive-toolbar-handle{position:relative;display:block;width:88px;height:20px;padding:0;margin:auto;border:0;background:transparent;touch-action:none;color:#c6e7ef;transition:height 180ms ease}
+#archive-toolbar-handle::before{content:'';display:block;width:34px;height:4px;margin:auto;border-radius:4px;background:#8dabb8}
+/* A 44px hit area extends above the compact handle without taking artwork space. */
+#archive-toolbar-handle::after{content:'';position:absolute;left:0;right:0;bottom:0;height:44px}
+#archive-toolbar.is-collapsed #archive-toolbar-handle{height:28px}
+#archive-toolbar.is-collapsed .archive-toolbar-inner{height:0;visibility:hidden}
+.langbar{margin:18px 0 0;padding-top:10px}
+@media(prefers-reduced-motion:reduce){body.has-archive-toolbar,.archive-toolbar-inner,#archive-toolbar-handle{transition:none}}
