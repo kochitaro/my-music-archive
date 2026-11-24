@@ -51,7 +51,7 @@ with sync_playwright() as pw:
       value='Ambient' if area=='listening' else 'Shop' if area=='collection' else 'Tokyo'
       p.locator('#'+fid).select_option(value)
       if i==0:p.locator('.toolbar-panel-close').click()
-      elif i==1:p.locator('#library-title').click()
+      elif i==1:p.locator('.brand').click()
       else:p.keyboard.press('Escape')
       expect(panels).to_be_hidden();settle();assert abs(bar.bounding_box()['height']-normal)<1
       assert p.locator('#sort').input_value()=='date-asc';assert p.locator('#'+fid).input_value()==value

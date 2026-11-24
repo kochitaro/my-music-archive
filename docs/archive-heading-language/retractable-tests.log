@@ -1,0 +1,4 @@
+PASS chromium 390 ja/en collapse padding tap keyboard handle-swipe panel-repeat inner-close select-focus language modal insights top footer gestures reduced-motion
+PASS chromium 1280 ja/en collapse padding tap keyboard handle-swipe panel-repeat inner-close select-focus language modal insights top footer gestures reduced-motion
+PASS webkit 390 ja/en collapse padding tap keyboard handle-swipe panel-repeat inner-close select-focus language modal insights top footer gestures reduced-motion
+PASS webkit 1280 ja/en collapse padding tap keyboard handle-swipe panel-repeat inner-close select-focus language modal insights top footer gestures reduced-motion

@@ -1,0 +1,28 @@
+PASS chromium 390 ja listening year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS chromium 390 ja collection year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS chromium 390 ja live year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS chromium 390 en listening year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS chromium 390 en collection year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS chromium 390 en live year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS chromium 390 language CSS scope / footer / reload persistence / manual add and IDB persistence / no JS errors
+PASS chromium 1280 ja listening year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS chromium 1280 ja collection year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS chromium 1280 ja live year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS chromium 1280 en listening year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS chromium 1280 en collection year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS chromium 1280 en live year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS chromium 1280 language CSS scope / footer / reload persistence / manual add and IDB persistence / no JS errors
+PASS webkit 390 ja listening year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS webkit 390 ja collection year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS webkit 390 ja live year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS webkit 390 en listening year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS webkit 390 en collection year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS webkit 390 en live year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS webkit 390 language CSS scope / footer / reload persistence / manual add and IDB persistence / no JS errors
+PASS webkit 1280 ja listening year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS webkit 1280 ja collection year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS webkit 1280 ja live year moved up 26 px; card/search unchanged; label references, year options, insights
+PASS webkit 1280 en listening year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS webkit 1280 en collection year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS webkit 1280 en live year moved up 21 px; card/search unchanged; label references, year options, insights
+PASS webkit 1280 language CSS scope / footer / reload persistence / manual add and IDB persistence / no JS errors

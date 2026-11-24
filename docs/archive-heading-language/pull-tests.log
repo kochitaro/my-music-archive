@@ -1,0 +1,8 @@
+PASS chromium navigator.standalone=False display-mode=False document pull handlers=0 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS chromium navigator.standalone=True display-mode=False document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS chromium navigator.standalone=False display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS chromium navigator.standalone=True display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=False display-mode=False document pull handlers=0 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=True display-mode=False document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=False display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=True display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection

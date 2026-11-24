@@ -1,0 +1,4 @@
+PASS chromium 390 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
+PASS chromium 1280 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
+PASS webkit 390 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
+PASS webkit 1280 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
