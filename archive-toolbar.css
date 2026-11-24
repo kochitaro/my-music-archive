@@ -1,0 +1,19 @@
+:root{--archive-bar-height:calc(66px + env(safe-area-inset-bottom,0px))}
+body.has-archive-toolbar{padding-bottom:var(--archive-bar-height)}
+#archive-toolbar{position:fixed;inset:auto 0 0;z-index:4;background:#1c222b;border-top:1px solid #445060;padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+#archive-toolbar[hidden],#archive-toolbar-panels[hidden]{display:none}
+.archive-toolbar-inner{display:flex;max-width:1030px;margin:auto;height:65px;padding:4px 12px;gap:4px}
+#archive-toolbar .archive-toolbar-inner>button{flex:1;min-width:0;min-height:48px;margin:0;padding:3px 2px;border:0;border-radius:8px;background:transparent;color:#c6e7ef;font-size:12px;font-weight:500;line-height:23px;text-align:center;white-space:pre-line;text-decoration:none}
+#archive-toolbar button:focus-visible{outline:2px solid #c6e7ef;outline-offset:-2px}
+#archive-toolbar button[aria-expanded=true]{background:#304451}
+#archive-toolbar #filters-toggle{position:relative;font-size:0;line-height:23px}
+#archive-toolbar #filters-toggle::before{content:'☷';display:block;font-size:18px}
+#archive-toolbar #filter-label{font-size:12px}
+#archive-toolbar #filters-icon{display:none}
+#archive-toolbar .has-filter::after{content:'';position:absolute;top:7px;left:calc(50% + 12px);width:7px;height:7px;background:#c6e7ef;border-radius:50%}
+#archive-toolbar-panels{max-width:998px;margin:auto;padding:10px 14px;background:#202834;border:1px solid #536171;border-radius:14px 14px 0 0;max-height:55dvh;overflow-y:auto;overscroll-behavior:contain}
+#archive-toolbar-panels .field{width:100%;font-size:16px;min-height:44px}
+#archive-toolbar-panels #sort-wrap,#archive-toolbar-panels #filters-wrap{margin:8px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.toolbar-panel-close{display:block;margin-left:auto;min-height:44px;padding:8px 15px;border:1px solid #536171;border-radius:8px;background:transparent;color:#c6e7ef}
+body.has-archive-toolbar #back-to-top{bottom:calc(var(--archive-toolbar-occupied,var(--archive-bar-height)) + 16px)}
+@media(max-width:540px){#archive-toolbar-panels #sort-wrap,#archive-toolbar-panels #filters-wrap{grid-template-columns:1fr}}
