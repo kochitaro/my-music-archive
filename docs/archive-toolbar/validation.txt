@@ -1,0 +1,37 @@
+PASS chromium 390 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
+PASS chromium 1280 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
+PASS webkit 390 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
+PASS webkit 1280 3 sections / ja+en / sort+filter retention / modal / Live IDB save / top idle / footer / safe inset / gestures
+
+PASS chromium normal refresh reloads exact migrated IndexedDB data
+PASS chromium bounded swipes, filter parity, exclusions, axis lock, cancel/multitouch and click suppression
+PASS chromium smooth/reduced-motion top, focus, modal hiding, unsaved editor and active-save reload protection
+PASS chromium raw-source export and verified branch recovery cannot be interrupted by refresh/swipe
+PASS chromium failed-save draft remains intact after refresh refusal
+PASS chromium initialization/migration wait keeps the refresh UI inert
+PASS chromium three-section CRUD, JSON roundtrip, restore reload/swipe protection, zero page errors
+PASS webkit normal refresh reloads exact migrated IndexedDB data
+PASS webkit bounded swipes, filter parity, exclusions, axis lock, cancel/multitouch and click suppression
+PASS webkit smooth/reduced-motion top, focus, modal hiding, unsaved editor and active-save reload protection
+PASS webkit raw-source export and verified branch recovery cannot be interrupted by refresh/swipe
+PASS webkit failed-save draft remains intact after refresh refusal
+PASS webkit initialization/migration wait keeps the refresh UI inert
+PASS webkit three-section CRUD, JSON roundtrip, restore reload/swipe protection, zero page errors
+
+PASS chromium navigator.standalone=False display-mode=False document pull handlers=0 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS chromium navigator.standalone=True display-mode=False document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS chromium navigator.standalone=False display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS chromium navigator.standalone=True display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=False display-mode=False document pull handlers=0 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=True display-mode=False document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=False display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+PASS webkit navigator.standalone=True display-mode=True document pull handlers=4 native defaults untouched; mode-specific reload, swipe/top/footer protection
+
+ℹ tests 164
+ℹ suites 0
+ℹ pass 164
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 888.385864
