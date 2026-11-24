@@ -1,0 +1,16 @@
+Chromium 156.0.8078.79 / Playwright WebKit 26.5 (Linux)
+PASS chromium-390-en-standalone-False fonts, focus/input/close, geometry, containment, edit/save
+PASS chromium-320-ja-standalone-True fonts, focus/input/close, geometry, containment, edit/save
+PASS chromium-375-ja-standalone-False fonts, focus/input/close, geometry, containment, edit/save
+PASS chromium-430-en-standalone-True fonts, focus/input/close, geometry, containment, edit/save
+PASS chromium-844-en-standalone-True fonts, focus/input/close, geometry, containment, edit/save
+PASS chromium-1030-en-standalone-False fonts, focus/input/close, geometry, containment, edit/save
+PASS webkit-390-en-standalone-False fonts, focus/input/close, geometry, containment, edit/save
+PASS webkit-320-ja-standalone-True fonts, focus/input/close, geometry, containment, edit/save
+PASS webkit-375-ja-standalone-False fonts, focus/input/close, geometry, containment, edit/save
+PASS webkit-430-en-standalone-True fonts, focus/input/close, geometry, containment, edit/save
+PASS webkit-844-en-standalone-True fonts, focus/input/close, geometry, containment, edit/save
+PASS webkit-1030-en-standalone-False fonts, focus/input/close, geometry, containment, edit/save
+PASS node --test tests/display_preferences.test.cjs
+PASS git diff --check
+Physical iPhone Safari and OS keyboard: NOT VERIFIED
