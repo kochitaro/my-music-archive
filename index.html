@@ -255,10 +255,13 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
   :lang(ja) #format:has(option:checked:not([value=""])){padding-block:10.5px}
  }
 }
-/* Center only the closed footer language selector; keep the native option picker. */
+/* The archive no longer has a visible title or controls above its first group. */
+#library{margin-top:0}
+#library>.section:first-child{margin-top:0}
+/* Center the native select text across the full box, without a padding inset. */
 #ui-language{
  appearance:none;-webkit-appearance:none;
- width:104px;padding-inline:22px;text-align:center;text-align-last:center;
+ width:104px;padding-inline:0;text-indent:0;text-align:center;text-align-last:center;
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='m2 2 4 4 4-4' fill='none' stroke='%23e2eaf0' stroke-width='1.5'/%3E%3C/svg%3E");
  background-repeat:no-repeat;background-position:right 7px center;background-size:12px 8px;
 }
