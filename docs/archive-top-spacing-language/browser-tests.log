@@ -1,0 +1,4 @@
+PASS chromium 390 ja/en 3 areas: top margin -16px; year-card gap and card/art sizes unchanged; settings/labels; language box+right alignment unchanged; ink center <=1.5px; persistence
+PASS chromium 1280 ja/en 3 areas: top margin -16px; year-card gap and card/art sizes unchanged; settings/labels; language box+right alignment unchanged; ink center <=1.5px; persistence
+PASS webkit 390 ja/en 3 areas: top margin -16px; year-card gap and card/art sizes unchanged; settings/labels; language box+right alignment unchanged; ink center <=1.5px; persistence
+PASS webkit 1280 ja/en 3 areas: top margin -16px; year-card gap and card/art sizes unchanged; settings/labels; language box+right alignment unchanged; ink center <=1.5px; persistence

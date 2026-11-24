@@ -1,0 +1,690 @@
+[
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "phase": "before",
+    "ink": {
+      "left": 31.0,
+      "right": 75.33333333333333,
+      "center": 53.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 1.1666666666666643
+    },
+    "select": {
+      "x": 274,
+      "y": 677.375,
+      "w": 104,
+      "h": 33
+    }
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "phase": "before",
+    "ink": {
+      "left": 27.0,
+      "right": 77.33333333333333,
+      "center": 52.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666643
+    },
+    "select": {
+      "x": 274,
+      "y": 680.375,
+      "w": 104,
+      "h": 30
+    }
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "ja",
+    "phase": "after",
+    "ink": {
+      "left": 31.0,
+      "right": 75.33333333333333,
+      "center": 53.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 1.1666666666666643
+    },
+    "select": {
+      "x": 274,
+      "y": 677.375,
+      "w": 104,
+      "h": 33
+    }
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "lang": "en",
+    "phase": "after",
+    "ink": {
+      "left": 27.0,
+      "right": 77.33333333333333,
+      "center": 52.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666643
+    },
+    "select": {
+      "x": 274,
+      "y": 680.375,
+      "w": 104,
+      "h": 30
+    }
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "phase": "before",
+    "ink": {
+      "left": 36.0,
+      "right": 69.66666666666667,
+      "center": 52.833333333333336,
+      "boxCenter": 52.0,
+      "offset": 0.8333333333333357
+    },
+    "select": {
+      "x": 1160,
+      "y": 664.265625,
+      "w": 104,
+      "h": 31
+    }
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "phase": "before",
+    "ink": {
+      "left": 33.333333333333336,
+      "right": 71.0,
+      "center": 52.16666666666667,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666714
+    },
+    "select": {
+      "x": 1160,
+      "y": 667.46875,
+      "w": 104,
+      "h": 28
+    }
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "ja",
+    "phase": "after",
+    "ink": {
+      "left": 36.0,
+      "right": 69.66666666666667,
+      "center": 52.833333333333336,
+      "boxCenter": 52.0,
+      "offset": 0.8333333333333357
+    },
+    "select": {
+      "x": 1160,
+      "y": 664.265625,
+      "w": 104,
+      "h": 31
+    }
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "chromium",
+    "width": 1280,
+    "lang": "en",
+    "phase": "after",
+    "ink": {
+      "left": 33.333333333333336,
+      "right": 71.0,
+      "center": 52.16666666666667,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666714
+    },
+    "select": {
+      "x": 1160,
+      "y": 667.46875,
+      "w": 104,
+      "h": 28
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "phase": "before",
+    "ink": {
+      "left": 31.0,
+      "right": 75.33333333333333,
+      "center": 53.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 1.1666666666666643
+    },
+    "select": {
+      "x": 274,
+      "y": 669.375,
+      "w": 104,
+      "h": 41
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "phase": "before",
+    "ink": {
+      "left": 26.666666666666668,
+      "right": 77.66666666666667,
+      "center": 52.16666666666667,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666714
+    },
+    "select": {
+      "x": 274,
+      "y": 672.375,
+      "w": 104,
+      "h": 38
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "ja",
+    "phase": "after",
+    "ink": {
+      "left": 31.0,
+      "right": 75.33333333333333,
+      "center": 53.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 1.1666666666666643
+    },
+    "select": {
+      "x": 274,
+      "y": 669.375,
+      "w": 104,
+      "h": 41
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "lang": "en",
+    "phase": "after",
+    "ink": {
+      "left": 26.666666666666668,
+      "right": 77.66666666666667,
+      "center": 52.16666666666667,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666714
+    },
+    "select": {
+      "x": 274,
+      "y": 672.375,
+      "w": 104,
+      "h": 38
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "phase": "before",
+    "ink": {
+      "left": 36.0,
+      "right": 69.66666666666667,
+      "center": 52.833333333333336,
+      "boxCenter": 52.0,
+      "offset": 0.8333333333333357
+    },
+    "select": {
+      "x": 1160,
+      "y": 664.46875,
+      "w": 104,
+      "h": 31
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "area": "listening",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "area": "collection",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "area": "live",
+    "phase": "before",
+    "panelToYear": 29
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "phase": "before",
+    "ink": {
+      "left": 33.0,
+      "right": 71.33333333333333,
+      "center": 52.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666643
+    },
+    "select": {
+      "x": 1160,
+      "y": 667.265625,
+      "w": 104,
+      "h": 28
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "ja",
+    "phase": "after",
+    "ink": {
+      "left": 36.0,
+      "right": 69.66666666666667,
+      "center": 52.833333333333336,
+      "boxCenter": 52.0,
+      "offset": 0.8333333333333357
+    },
+    "select": {
+      "x": 1160,
+      "y": 664.46875,
+      "w": 104,
+      "h": 31
+    }
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "area": "listening",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "area": "collection",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "area": "live",
+    "phase": "after",
+    "panelToYear": 13
+  },
+  {
+    "engine": "webkit",
+    "width": 1280,
+    "lang": "en",
+    "phase": "after",
+    "ink": {
+      "left": 33.0,
+      "right": 71.33333333333333,
+      "center": 52.166666666666664,
+      "boxCenter": 52.0,
+      "offset": 0.1666666666666643
+    },
+    "select": {
+      "x": 1160,
+      "y": 667.265625,
+      "w": 104,
+      "h": 28
+    }
+  }
+]
