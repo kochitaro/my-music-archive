@@ -1,0 +1,5 @@
+PASS chromium ja: suggestions, IME guards, tags, compound filters, close paths, JSON/photos, failure/retry
+PASS chromium en: suggestions, IME guards, tags, compound filters, close paths, JSON/photos, failure/retry
+Skipping host requirements validation logic because `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS` env variable is set.
+PASS webkit ja: suggestions, IME guards, tags, compound filters, close paths, JSON/photos, failure/retry
+PASS webkit en: suggestions, IME guards, tags, compound filters, close paths, JSON/photos, failure/retry
