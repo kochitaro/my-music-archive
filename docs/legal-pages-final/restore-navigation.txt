@@ -1,0 +1,10 @@
+PASS ja corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja syntax dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja validation dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja new-corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja failed edit retains draft and tab protection
+PASS en corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en syntax dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en validation dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en new-corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en failed edit retains draft and tab protection

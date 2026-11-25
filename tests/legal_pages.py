@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright, expect
 from ui_v0322 import ROOT, KEY, QuietHandler
 from data_preservation import seed_data
 
-OUT=ROOT/'docs/legal-pages'; OUT.mkdir(exist_ok=True)
+OUT=Path(os.environ.get('MLA_LEGAL_OUTPUT',str(ROOT/'docs/legal-pages-final'))); OUT.mkdir(exist_ok=True)
 SNAPSHOT='''async()=>{
  const db=await new Promise((resolve,reject)=>{const r=indexedDB.open('mla-archive-v1');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});
  try{return await new Promise((resolve,reject)=>{const names=[...db.objectStoreNames],out={},tx=db.transaction(names,'readonly');for(const name of names){const store=tx.objectStore(name);store.getAllKeys().onsuccess=e=>{out[name]={keys:e.target.result};store.getAll().onsuccess=e=>out[name].values=e.target.result}}tx.oncomplete=()=>resolve(out);tx.onerror=()=>reject(tx.error)})}finally{db.close()}
@@ -26,9 +26,9 @@ def main():
    for width in [390,1280]:
     c=browser.new_context(viewport=dict(width=width,height=844),is_mobile=width==390,has_touch=width==390,accept_downloads=True)
     c.route('https://**/*',lambda r:r.abort());c.add_init_script(DENY_STORAGE)
-    p=c.new_page();errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
+    p=c.new_page();p.on('dialog',lambda d:d.accept());errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
     # Empty-browser direct access must not create an IndexedDB database.
-    for doc,count in [('terms',13),('privacy',11)]:
+    for doc,count in [('terms',13),('privacy',14)]:
      for language in ['ja','en']:
       response=p.goto(url+doc+'.html?lang='+language+'#'+language);assert response.status==200
       expect(p.locator('#'+language)).to_be_visible()
@@ -43,6 +43,10 @@ def main():
       p.locator(f'[data-language={other}]').click();expect(p.locator('#'+other)).to_be_visible()
       p.go_back();expect(p.locator('#'+language)).to_be_visible()
       p.screenshot(path=str(OUT/f'{engine}-{width}-{doc}-{language}.png'),full_page=True)
+      other_doc='privacy' if doc=='terms' else 'terms'
+      p.locator(f'#{language} footer a[href^="{other_doc}.html"]').click()
+      assert f'/{other_doc}.html' in p.url;expect(p.locator('#'+language)).to_be_visible()
+      assert p.evaluate('storageCalls')==[]
     # Seed before the app first initializes IndexedDB; never branch legacy storage later.
     original=seed_data()
     c.add_init_script('if(location.pathname.endsWith("/") && localStorage.getItem('+json.dumps(KEY)+')===null)localStorage.setItem('+json.dumps(KEY)+','+json.dumps(json.dumps(seed_data()))+')')
@@ -76,12 +80,12 @@ def main():
      p.reload();ready(p)
      assert snapshot(p)['archive']==before['archive']
     assert not errors,errors
-    print('PASS',engine,width,'ja/en direct URLs; switching/history; storage denied; 13/11 clauses; no overflow; footer/bar; archive/photos; exact IDB navigation; JSON export/import',flush=True)
+    print('PASS',engine,width,'ja/en direct URLs; switching/history; storage denied; 13/14 clauses; no overflow; footer/bar; archive/photos; exact IDB navigation; JSON export/import',flush=True)
     c.close()
     # No JavaScript: both complete language versions and anchor switching remain available.
     c=browser.new_context(java_script_enabled=False,viewport=dict(width=width,height=844))
     p=c.new_page()
-    for doc,count in [('terms',13),('privacy',11)]:
+    for doc,count in [('terms',13),('privacy',14)]:
      p.goto(url+doc+'.html')
      for language in ['ja','en']:
       p.locator(f'[data-language={language}]').click();expect(p.locator('#'+language)).to_be_visible()

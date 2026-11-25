@@ -1,0 +1,12 @@
+PASS mla-pages source html / ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages source html / en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages source html /my-music-archive/ ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages source html /my-music-archive/ en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist html / ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist html / en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist html /my-music-archive/ ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist html /my-music-archive/ en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist clean / ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist clean / en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist clean /my-music-archive/ ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-pages dist clean /my-music-archive/ en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
