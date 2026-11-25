@@ -1,0 +1,8 @@
+PASS chromium 390 ja/en direct URLs; switching/history; storage denied; 13/14 clauses; no overflow; footer/bar; archive/photos; exact IDB navigation; JSON export/import
+PASS chromium 390 JavaScript disabled: both languages, complete clauses, return links
+PASS chromium 1280 ja/en direct URLs; switching/history; storage denied; 13/14 clauses; no overflow; footer/bar; archive/photos; exact IDB navigation; JSON export/import
+PASS chromium 1280 JavaScript disabled: both languages, complete clauses, return links
+PASS webkit 390 ja/en direct URLs; switching/history; storage denied; 13/14 clauses; no overflow; footer/bar; archive/photos; exact IDB navigation; JSON export/import
+PASS webkit 390 JavaScript disabled: both languages, complete clauses, return links
+PASS webkit 1280 ja/en direct URLs; switching/history; storage denied; 13/14 clauses; no overflow; footer/bar; archive/photos; exact IDB navigation; JSON export/import
+PASS webkit 1280 JavaScript disabled: both languages, complete clauses, return links

@@ -156,7 +156,7 @@ def main():
                             page.wait_for_url(base)
                             page.wait_for_function('typeof MLAReady !== "undefined"')
                             page.evaluate('MLAReady')
-                            for file, count in [('terms', 13), ('privacy', 11)]:
+                            for file, count in [('terms', 13), ('privacy', 14)]:
                                 page.goto(base + file + '.html#' + lang)
                                 expect(page.locator('#' + lang)).to_be_visible()
                                 assert page.locator('#' + lang + ' section').count() == count

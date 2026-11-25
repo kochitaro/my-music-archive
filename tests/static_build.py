@@ -1,5 +1,6 @@
 """Publication boundary tests. Run: python tests/static_build.py (Node 22+ required)."""
 import hashlib
+import re
 import shutil
 import subprocess
 import tempfile
@@ -21,6 +22,10 @@ class StaticBuild(unittest.TestCase):
         shutil.copy2(ROOT / 'scripts/build-static.cjs', self.root / 'scripts')
         for file in CORE:
             shutil.copy2(ROOT / file, self.root / file)
+        # Core-only fixture represents the pre-legal site. The real site now
+        # requires the complete legal bundle; keep that boundary enforced.
+        index = self.root / 'index.html'
+        index.write_text(re.sub(r'<nav class="legal-links".*?</nav>', '', index.read_text(), flags=re.S))
 
     def tearDown(self):
         self.temp.cleanup()

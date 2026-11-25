@@ -1,0 +1,12 @@
+PASS terms ja numbering / list counts / date / contact; unchanged clauses preserved
+PASS terms en numbering / list counts / date / contact; unchanged clauses preserved
+PASS privacy ja numbering / list counts / date / contact; unchanged clauses preserved
+PASS privacy en numbering / list counts / date / contact; unchanged clauses preserved
+PASS latest main byte parity: archive-store.js
+PASS latest main byte parity: photo-store.js
+PASS latest main byte parity: photo-lifecycle.js
+PASS latest main byte parity: recovery-export.js
+PASS latest main byte parity: scripts/build-static.cjs
+PASS existing legal UI unchanged: legal.css
+PASS existing legal UI unchanged: legal.js
+PASS dist: exact 17-file allowlist; byte parity; no docs/tests/evidence/backups
