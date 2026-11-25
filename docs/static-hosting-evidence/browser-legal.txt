@@ -1,0 +1,13 @@
+PASS mla-with-legal source html / ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal source html / en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal source html /my-music-archive/ ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal source html /my-music-archive/ en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist html / ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist html / en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist html /my-music-archive/ ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist html /my-music-archive/ en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist clean / ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist clean / en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist clean /my-music-archive/ ja 390 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS mla-with-legal dist clean /my-music-archive/ en 1280 source parity; 3-area CRUD/photos/IDB/JSON; legal; nested 404
+PASS legal Japanese/English without JavaScript
