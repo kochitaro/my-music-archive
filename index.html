@@ -1215,7 +1215,15 @@ for(const event of ['click','keydown','pointerdown','pointermove'])document.addE
  // Failed drafts cannot be silently replaced by closing/reopening a form.
  if(draft&&!draftRecovered&&(e.target.closest('#close,#close-live-create,#sections,#manual-add-trigger,#add-live-trigger')||e.target===$('modal')||e.target===$('live-create-modal'))){e.preventDefault();e.stopImmediatePropagation();recoveryView='notice';showDraft()}
 },true);
-function returnToEditing(){recoveryView=null;showDraft();const root=document.querySelector('#modal.open,#live-create-modal.open');root?.querySelector('textarea:not([readonly]),input:not([type=file])')?.focus()}
+function returnToEditing(){
+ // A rejected restore owns a notification, not unsaved form input. Closing it
+ // must release navigation guards without changing storage/recovery readiness.
+ if(draft?.operation==='restore'&&!noticePublished){
+  draft=null;draftContext=null;draftPhotoFiles=null;draftRecovered=false;
+  noticeReason='';noticeConflict=false;$('import-json').value='';
+ }
+ recoveryView=null;showDraft();const root=document.querySelector('#modal.open,#live-create-modal.open');root?.querySelector('textarea:not([readonly]),input:not([type=file])')?.focus()
+}
 $('save-return').onclick=returnToEditing;
 $('save-again').onclick=()=>{if(operationBusy||saving||!draft)return;recoveryView='confirm';showDraft();$('discard-cancel').focus()};
 $('discard-cancel').onclick=()=>{recoveryView='notice';showDraft();$('save-again').focus()};

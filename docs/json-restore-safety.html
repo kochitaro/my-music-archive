@@ -23,4 +23,10 @@
 <h2>iPhone Safariでの追加確認</h2>
 <p>実機の画像形式（JPEG/PNG・利用するHEIC等）、大容量JSONの待ち時間とメモリ、バックグラウンド／タブ終了からのpending再開、日英の案内・Filesへの回収JSON保存と再復元を確認する必要があります。今回のCloud Chromium合格をiPhone異常系合格とは扱いません。実配信の自動確認も今回の対象外です。</p>
 <p>再現：<code>python3 tests/restore_safety.py</code>。<code>MLA_TEST_OUTPUT</code>でJSONスナップショットと画面画像の出力先を指定できます。固定時点の結果を証跡として同梱しています。</p>
+<h2>復元拒否後のタブ切り替え修正（2026-11-25）</h2>
+<p>破損写真の復元拒否はsaveDBのcatchでcaptureDraftを呼び、draft.operation=restoreを残していました。閉じる操作はrecoveryViewだけを消すため、タブのcaptureイベントとcanReplaceFormが残ったdraftを未保存入力として扱い、遷移を止めて同じ通知を再表示しました。修正前の隔離Chromiumでも、通知を閉じた後のCollection切り替え失敗を再現しました。JSON構文・項目検証エラーは保存処理前のalert経路であり、この状態を作りません。</p>
+<p>returnToEditingで、保存成立前に失敗した復元の通知を閉じる場合だけdraftと関連するUI状態・ファイル選択を解放します。保存済みデータ、回収コピー、保存停止状態、排他制御は操作しません。未保存の編集入力と、保存成立後の確認失敗（noticePublished）の保護は従来のままです。</p>
+<p>再発防止：<code>python3 tests/restore_failure_navigation.py</code>。日英それぞれで破損写真、JSON構文、必須項目不正、再度の破損写真を検証。Listening以外からの操作も含め、通知を閉じた直後の選択タブ保持、3タブ往復、過去通知の非再表示、写真表示、全保存ストア・現在のJSON・復元前回収JSONの一致、失敗した編集入力の保護を確認します。Listening 3件・Live 1件の合成データを使用し、リロードで回避しません。</p>
+<p>配信対応：従来deploy-previewの成功デプロイは88fa7b0e1db0687a4f1dbfb6f1c89782b55d77db（Cloudflareデプロイ640c5814-4ddc-4b3d-af13-0562aa94e74f）、treeは修正前PR head e772d9499e1c45e974cc37afc90f794872e7b556と一致。review URLはAccessの認証へ302を返しますが、認証後コンテンツとデプロイSHAの対応は未確認です。同じ配信とは断定しません。本修正では配信ブランチ・Cloudflare設定を変更しません。</p>
+<p>実機の最小再検証：修正コミットを配信したことをCloudflareで確認し、iPhone 15 Safariで架空のListening 3件・写真付きLive 1件を準備。破損写真JSONを復元して拒否理由を確認し、閉じる。再読み込みせず購入→ライブ→Listeningを往復し、通知が再表示されず4件と写真が残ることを確認。破損JSONをもう一度選ぶと新しいエラーが表示されること、正常JSON書き出しと復元前JSONのFiles保存ができることを確認。英語表示でも繰り返します。実機確認は未完了です。</p>
 </html>
