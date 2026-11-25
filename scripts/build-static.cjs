@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
-// This branch is a holding page only, regardless of environment variables.
+// This branch is a Preview authentication test page only, regardless of environment variables.
 const files = ['index.html', '404.html'];
 
 function statIfPresent(file) {

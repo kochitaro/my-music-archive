@@ -1,4 +1,4 @@
-"""Holding branch only: build boundary and local Chromium checks; no deployment."""
+"""Preview authentication test branch only: build boundary and local Chromium checks; no deployment."""
 import functools
 import hashlib
 import json
@@ -34,7 +34,7 @@ def main():
         for name in ['index.html', '404.html', 'scripts/build-static.cjs']:
             shutil.copyfile(ROOT/name, root/name)
         # Existing app files, optional legal bundle, backups and host configuration
-        # must never expand the holding publication boundary.
+        # must never expand the Preview publication boundary.
         for name in ['archive-store.js', 'index.json', '.env', 'CNAME', '_redirects',
                      'terms.html', 'privacy.html', 'legal.css', 'legal.js']:
             (root/name).write_text('SYNTHETIC_DO_NOT_PUBLISH')
@@ -80,6 +80,7 @@ def main():
                         storageAttempts.push('cookie'); throw Error('Unexpected cookie read');
                       }, set() { storageAttempts.push('cookie write'); }});
                     ''')
+                    context.route('**/*', lambda route: route.continue_() if route.request.url.startswith(origin + '/') else route.abort())
                     page = context.new_page()
                     requests, errors = [], []
                     page.on('request', lambda r: requests.append(r.url))
@@ -88,7 +89,7 @@ def main():
                         requests.clear()
                         response = page.goto(origin + path)
                         assert response.status == 200
-                        assert page.locator('h1').inner_text() == '公開準備中'
+                        assert page.locator('h1').inner_text() == 'MLA Preview 認証テスト中'
                         assert page.locator('h1').is_visible()
                         assert page.locator('script, iframe, form, input, img, link').count() == 0
                         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
@@ -96,6 +97,8 @@ def main():
                         if js:
                             assert page.evaluate('storageAttempts') == []
                         assert not errors, errors
+                        if not js and width == 390:
+                            page.screenshot(path='/tmp/mla-preview-' + ('index' if path == '/' else '404') + '.png', full_page=True)
                     context.close()
                     print(f'PASS Chromium width={width} JavaScript={js}: both pages visible; no overflow, extra requests or storage access')
             browser.close()
