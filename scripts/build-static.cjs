@@ -5,13 +5,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
-const core = [
-  'index.html', 'insights.css', 'archive-toolbar.css',
-  'insights.js', 'search.js', 'photo-store.js', 'archive-toolbar.js',
-  'mobile-navigation.js', 'archive-store.js', 'recovery-export.js',
-  'photo-lifecycle.js', '404.html',
-];
-const legal = ['terms.html', 'privacy.html', 'legal.css', 'legal.js'];
+// This branch is a holding page only, regardless of environment variables.
+const files = ['index.html', '404.html'];
 
 function statIfPresent(file) {
   try { return fs.lstatSync(file); }
@@ -32,11 +27,6 @@ if (previous) {
   fs.rmSync(out, { recursive: true });
 }
 try {
-  const present = legal.filter(name => statIfPresent(path.join(root, name)));
-  if (present.length && present.length !== legal.length) {
-    throw new Error('Incomplete legal bundle; expected all of: ' + legal.join(', '));
-  }
-  const files = [...core, ...(present.length ? legal : [])];
   files.forEach(regularFile);
   const allowed = new Set(files);
   function checkReference(ref, owner) {
@@ -61,7 +51,6 @@ try {
   // Enables direct static publishing with GitHub Pages as well as artifact workflows.
   fs.writeFileSync(path.join(out, '.nojekyll'), '');
   console.log('Static files in dist (' + (files.length + 1) + '):\n' + [...files, '.nojekyll'].sort().join('\n'));
-  if (!present.length) console.log('Legal bundle not present; no legal pages were generated.');
 } catch (error) {
   fs.rmSync(out, { recursive: true, force: true });
   console.error(error.message);
