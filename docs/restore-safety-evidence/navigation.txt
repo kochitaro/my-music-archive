@@ -1,0 +1,21 @@
+2026-11-25 — restore failure navigation regression
+Synthetic Chromium, 390 x 844, ja/en; no production data.
+
+Before fix: AssertionError: ('ja', 'corrupt-photo', 'collection')
+
+After fix:
+PASS ja corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja syntax dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja validation dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja new-corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS ja failed edit retains draft and tab protection
+PASS en corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en syntax dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en validation dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en new-corrupt-photo dismiss/tab navigation, exact stores/photos/current/recovery, no reload
+PASS en failed edit retains draft and tab protection
+
+Existing checks: Node 166/166; static boundary 5/5; unified archive 18 groups PASS; static build 13 allowlisted files.
+WebKit unavailable in this environment; iPhone Safari remains unverified.
+review deployment SHA remains unverified behind Access; no deployment configuration changes.
+Existing restore safety regression: 37/37 PASS, including post-publication boundaries, pinned recovery, quota and decode timeout.
