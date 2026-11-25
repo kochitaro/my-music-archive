@@ -1,0 +1,542 @@
+[
+  {
+    "name": "listening/write-error",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "74304ac5225ea61c7bb9c2d19deadbb46f452f99d838906b2c9cfcb2a66a5226",
+    "afterHash": "74304ac5225ea61c7bb9c2d19deadbb46f452f99d838906b2c9cfcb2a66a5226",
+    "reloadHash": "74304ac5225ea61c7bb9c2d19deadbb46f452f99d838906b2c9cfcb2a66a5226",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "listening/transaction-abort",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "dd4ebae65c75852d8c584759cb0151e5ffe56d17f44a39739cbdb787dc2e252a",
+    "afterHash": "dd4ebae65c75852d8c584759cb0151e5ffe56d17f44a39739cbdb787dc2e252a",
+    "reloadHash": "dd4ebae65c75852d8c584759cb0151e5ffe56d17f44a39739cbdb787dc2e252a",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "listening/quota",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "e9e2933c884da1ccd5ebc80d7a59b4728e02740bcc94cc34e8c8618f535fa3ea",
+    "afterHash": "e9e2933c884da1ccd5ebc80d7a59b4728e02740bcc94cc34e8c8618f535fa3ea",
+    "reloadHash": "e9e2933c884da1ccd5ebc80d7a59b4728e02740bcc94cc34e8c8618f535fa3ea",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "listening/photo-partial",
+    "photoAdds": 2,
+    "status": "PASS",
+    "beforeHash": "0760b90a112babc790e02f44c3ad2a898902dafd2e3f5642058157bb7f7b0d44",
+    "afterHash": "0760b90a112babc790e02f44c3ad2a898902dafd2e3f5642058157bb7f7b0d44",
+    "reloadHash": "0760b90a112babc790e02f44c3ad2a898902dafd2e3f5642058157bb7f7b0d44",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "collection/write-error",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "0a41144284c9cf3a55978ce4f69be45a86f307c3ed9a68834025d5dca9a3a4be",
+    "afterHash": "0a41144284c9cf3a55978ce4f69be45a86f307c3ed9a68834025d5dca9a3a4be",
+    "reloadHash": "0a41144284c9cf3a55978ce4f69be45a86f307c3ed9a68834025d5dca9a3a4be",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "collection/transaction-abort",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "1c1632d72dfdaaa427ee9d690b91599a254156bf9ea942385c2e30322074359a",
+    "afterHash": "1c1632d72dfdaaa427ee9d690b91599a254156bf9ea942385c2e30322074359a",
+    "reloadHash": "1c1632d72dfdaaa427ee9d690b91599a254156bf9ea942385c2e30322074359a",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "collection/quota",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "c5acbe8efa1d91829b8e4ae3d97fbda3b5aa96a3ce107ecd11ab65495d9316c7",
+    "afterHash": "c5acbe8efa1d91829b8e4ae3d97fbda3b5aa96a3ce107ecd11ab65495d9316c7",
+    "reloadHash": "c5acbe8efa1d91829b8e4ae3d97fbda3b5aa96a3ce107ecd11ab65495d9316c7",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "collection/photo-partial",
+    "photoAdds": 2,
+    "status": "PASS",
+    "beforeHash": "5731b5ff40beecc03d8bf5763c218b1a97df2e37b3ab0ab4e969d90f4c390b7a",
+    "afterHash": "5731b5ff40beecc03d8bf5763c218b1a97df2e37b3ab0ab4e969d90f4c390b7a",
+    "reloadHash": "5731b5ff40beecc03d8bf5763c218b1a97df2e37b3ab0ab4e969d90f4c390b7a",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "live/write-error",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "51b83a3a7554b6d8046ec4f625cc37a42f7d4d57d7b321e6995bc43bdb98fb5f",
+    "afterHash": "51b83a3a7554b6d8046ec4f625cc37a42f7d4d57d7b321e6995bc43bdb98fb5f",
+    "reloadHash": "51b83a3a7554b6d8046ec4f625cc37a42f7d4d57d7b321e6995bc43bdb98fb5f",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "live/transaction-abort",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "3d34c74b63de57e90fa829de1cb198aef04e4d6ccf4b3b0df4d504c42759d2f9",
+    "afterHash": "3d34c74b63de57e90fa829de1cb198aef04e4d6ccf4b3b0df4d504c42759d2f9",
+    "reloadHash": "3d34c74b63de57e90fa829de1cb198aef04e4d6ccf4b3b0df4d504c42759d2f9",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "live/quota",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "3ae260f07f96daf8fee1c8f9d1b4690c2980cccc0bcacca713279a96cdcee91d",
+    "afterHash": "3ae260f07f96daf8fee1c8f9d1b4690c2980cccc0bcacca713279a96cdcee91d",
+    "reloadHash": "3ae260f07f96daf8fee1c8f9d1b4690c2980cccc0bcacca713279a96cdcee91d",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "live/photo-partial",
+    "photoAdds": 2,
+    "status": "PASS",
+    "beforeHash": "adb3a548ffb2a46804b330feb836d6b0be55b4e1395941f7db7e9855194a1d3f",
+    "afterHash": "adb3a548ffb2a46804b330feb836d6b0be55b4e1395941f7db7e9855194a1d3f",
+    "reloadHash": "adb3a548ffb2a46804b330feb836d6b0be55b4e1395941f7db7e9855194a1d3f",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      ""
+    ]
+  },
+  {
+    "name": "invalid-json",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "dc93bfd45c2a85ca1f34c292884a40dce2466dfe9e6d3f26e44e40b8ff8f0c16",
+    "afterHash": "dc93bfd45c2a85ca1f34c292884a40dce2466dfe9e6d3f26e44e40b8ff8f0c16",
+    "reloadHash": "dc93bfd45c2a85ca1f34c292884a40dce2466dfe9e6d3f26e44e40b8ff8f0c16",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "データが不正なため処理を停止しました。原本を保管し、内容を確認してください。 JSON: invalid syntax / JSON構文が不正です"
+    ]
+  },
+  {
+    "name": "missing-area",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "e20327c75daccdef0c19d5f497dd63a7807556420788fb27aed460b7a99a2bb4",
+    "afterHash": "e20327c75daccdef0c19d5f497dd63a7807556420788fb27aed460b7a99a2bb4",
+    "reloadHash": "e20327c75daccdef0c19d5f497dd63a7807556420788fb27aed460b7a99a2bb4",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "データが不正なため処理を停止しました。原本を保管し、内容を確認してください。 live: required array / 配列が必要です"
+    ]
+  },
+  {
+    "name": "unsupported-format",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "b22f7f816d3ec7ea7e15e2b90786f54e32a6066ee723d3b4c71a26a85a2d2877",
+    "afterHash": "b22f7f816d3ec7ea7e15e2b90786f54e32a6066ee723d3b4c71a26a85a2d2877",
+    "reloadHash": "b22f7f816d3ec7ea7e15e2b90786f54e32a6066ee723d3b4c71a26a85a2d2877",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "データが不正なため処理を停止しました。原本を保管し、内容を確認してください。 DB.version: unsupported format/version / 未対応の形式・バージョンです"
+    ]
+  },
+  {
+    "name": "missing-required",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "392091a22459a21547af61b3298da912c88d42221c1b9cdfef171eb6e49c903b",
+    "afterHash": "392091a22459a21547af61b3298da912c88d42221c1b9cdfef171eb6e49c903b",
+    "reloadHash": "392091a22459a21547af61b3298da912c88d42221c1b9cdfef171eb6e49c903b",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "データが不正なため処理を停止しました。原本を保管し、内容を確認してください。 listening[1].title: required string / 必須の文字列です"
+    ]
+  },
+  {
+    "name": "photoId-without-bytes",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "a39050f36ca1cd9b4050094f4904d7d1f38de60d47c3a2b79c3ea6eb6eb18e42",
+    "afterHash": "a39050f36ca1cd9b4050094f4904d7d1f38de60d47c3a2b79c3ea6eb6eb18e42",
+    "reloadHash": "a39050f36ca1cd9b4050094f4904d7d1f38de60d47c3a2b79c3ea6eb6eb18e42",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "データが不正なため処理を停止しました。原本を保管し、内容を確認してください。 JSON: photo data required / 写真本体が必要です"
+    ]
+  },
+  {
+    "name": "restore-quota",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "4481120674871407c81b9886e330bdf7649a5a106774da8a5af8dd1b82cc325b",
+    "afterHash": "4481120674871407c81b9886e330bdf7649a5a106774da8a5af8dd1b82cc325b",
+    "reloadHash": "4481120674871407c81b9886e330bdf7649a5a106774da8a5af8dd1b82cc325b",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "現在の記録をバックアップの内容に置き換えます。回収用の退避も現在の記録に更新されます。事前にJSONを保存しましたか？",
+      ""
+    ]
+  },
+  {
+    "name": "restore-photo-partial",
+    "photoAdds": 2,
+    "status": "PASS",
+    "beforeHash": "12222518925cb915e63853ae2f9d57eb296164283d35f9b70fa6919ce299521b",
+    "afterHash": "12222518925cb915e63853ae2f9d57eb296164283d35f9b70fa6919ce299521b",
+    "reloadHash": "12222518925cb915e63853ae2f9d57eb296164283d35f9b70fa6919ce299521b",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "現在の記録をバックアップの内容に置き換えます。回収用の退避も現在の記録に更新されます。事前にJSONを保存しましたか？",
+      ""
+    ]
+  },
+  {
+    "name": "undecodable-photo",
+    "photoAdds": 0,
+    "status": "PASS",
+    "beforeHash": "3fdce377e6a78c07da1db03a25245e2e035263de9723f8a65e72b7ccad7e99f7",
+    "afterHash": "3fdce377e6a78c07da1db03a25245e2e035263de9723f8a65e72b7ccad7e99f7",
+    "reloadHash": "3fdce377e6a78c07da1db03a25245e2e035263de9723f8a65e72b7ccad7e99f7",
+    "memoryExact": true,
+    "loadedExact": true,
+    "backupExact": true,
+    "counts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "alerts": [
+      "現在の記録をバックアップの内容に置き換えます。回収用の退避も現在の記録に更新されます。事前にJSONを保存しましたか？",
+      ""
+    ]
+  },
+  {
+    "name": "pinned-recovery-settings-create-edit-reload",
+    "status": "PASS",
+    "archiveSlots": 2,
+    "photoCount": 3,
+    "packedArchiveBytes": 4724,
+    "photoStringBytes": 450
+  },
+  {
+    "name": "recovered-json-restores-and-next-restore-replaces-recovery",
+    "status": "PASS"
+  },
+  {
+    "name": "legacy-json",
+    "status": "PASS"
+  },
+  {
+    "name": "pinned-recovery-quota-archive",
+    "status": "PASS",
+    "beforeHash": "b4590dd0608572266307e0c0f1f3a30302f59868468135bc4e1f29a05833f665",
+    "afterHash": "b4590dd0608572266307e0c0f1f3a30302f59868468135bc4e1f29a05833f665"
+  },
+  {
+    "name": "pinned-recovery-quota-photos",
+    "status": "PASS",
+    "beforeHash": "edb48dc2289570ed3f3a6a4707262b07126b10568b5854e046e43103f202fc0e",
+    "afterHash": "edb48dc2289570ed3f3a6a4707262b07126b10568b5854e046e43103f202fc0e"
+  },
+  {
+    "name": "pinned-recovery-quota-settings",
+    "status": "PASS",
+    "beforeHash": "ccd5f5ec3279f05a83d3bf26ea9db64cf9fe0bb82d8ce749feb804953b4bb195",
+    "afterHash": "ccd5f5ec3279f05a83d3bf26ea9db64cf9fe0bb82d8ce749feb804953b4bb195"
+  },
+  {
+    "name": "pinned-recovery-quota-meta",
+    "status": "PASS",
+    "beforeHash": "9eee1d1dceee4ab467a5ba1f9ac5dc926dd38424ab3322fce6f4a869891557b3",
+    "afterHash": "9eee1d1dceee4ab467a5ba1f9ac5dc926dd38424ab3322fce6f4a869891557b3"
+  },
+  {
+    "name": "invalid-image-content-all-areas",
+    "status": "PASS"
+  },
+  {
+    "name": "jpeg-png-optional-fields-ja-en-mobile",
+    "status": "PASS"
+  },
+  {
+    "name": "stopped-restore-photo-preflight",
+    "status": "PASS"
+  },
+  {
+    "name": "large-json-performance",
+    "status": "PASS",
+    "records": 1200,
+    "uniquePhotos": 60,
+    "portableBytes": 8738639,
+    "decodeSeconds": 1.458,
+    "decodeInPageMilliseconds": 38.2,
+    "restoreSeconds": 3.172,
+    "archiveSlots": 2,
+    "photoCount": 63,
+    "packedArchiveBytes": 7405686,
+    "photoStringBytes": 71610
+  },
+  {
+    "name": "large-pre-restore-retention-and-quota",
+    "status": "PASS",
+    "archiveSlots": 2,
+    "pinnedArchiveBytes": 7403039,
+    "photoCount": 63,
+    "browserStorageEstimate": {
+      "quota": 10737623040,
+      "usage": 204800,
+      "usageDetails": {
+        "indexedDB": 204800
+      }
+    }
+  },
+  {
+    "name": "restore-postcommit-published",
+    "status": "PASS",
+    "previousExact": true,
+    "previousPortableExact": true,
+    "currentAfterReloadIsIncoming": true,
+    "oldCounts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "reloadCounts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 0
+    },
+    "currentStatus": "pending",
+    "reloadStatus": "ready",
+    "alerts": [
+      "現在の記録をバックアップの内容に置き換えます。回収用の退避も現在の記録に更新されます。事前にJSONを保存しましたか？",
+      ""
+    ]
+  },
+  {
+    "name": "restore-postcommit-verified",
+    "status": "PASS",
+    "previousExact": true,
+    "previousPortableExact": true,
+    "currentAfterReloadIsIncoming": true,
+    "oldCounts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "reloadCounts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 0
+    },
+    "currentStatus": "pending",
+    "reloadStatus": "ready",
+    "alerts": [
+      "現在の記録をバックアップの内容に置き換えます。回収用の退避も現在の記録に更新されます。事前にJSONを保存しましたか？",
+      ""
+    ]
+  },
+  {
+    "name": "restore-postcommit-finalization",
+    "status": "PASS",
+    "previousExact": true,
+    "previousPortableExact": true,
+    "currentAfterReloadIsIncoming": true,
+    "oldCounts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    },
+    "reloadCounts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 0
+    },
+    "currentStatus": "pending",
+    "reloadStatus": "ready",
+    "alerts": [
+      "現在の記録をバックアップの内容に置き換えます。回収用の退避も現在の記録に更新されます。事前にJSONを保存しましたか？",
+      ""
+    ]
+  },
+  {
+    "name": "settings-interruption-is-not-a-restore-resume",
+    "status": "PASS"
+  },
+  {
+    "name": "photo-decoder-timeout-preserves-existing-data",
+    "status": "PASS"
+  }
+]

@@ -42,5 +42,27 @@
   }
   return out;
  }
- globalThis.MLAPhotos=Object.freeze({pack,unpack,PhotoError,idFor});
+ // Restore preflight only: never prevent an existing damaged source from being exported.
+ // Decode at most two distinct images at once, without re-encoding their bytes.
+ async function validateRestore(archive){
+  const unique=new Map();
+  for(const area of areas)for(const r of archive[area]){
+   if(r.photo==null||r.photo==='')continue;
+   const path=area+' / '+r.entryId;
+   if(typeof r.photo!=='string'||!/^data:image\/[^;,]+(?:;[^,]*)?,[\s\S]+$/i.test(r.photo))throw new PhotoError(path+': 埋め込み画像が必要です / Embedded image required');
+   if(!unique.has(r.photo))unique.set(r.photo,path);
+  }
+  const entries=unique.entries();let failure;
+  async function worker(){for(const [value,path] of entries){
+   if(failure)return;
+   try{await new Promise((resolve,reject)=>{
+    const image=new Image();let settled=false;
+    const finish=ok=>{if(settled)return;settled=true;clearTimeout(timer);image.onload=image.onerror=null;image.removeAttribute('src');ok?resolve():reject(new PhotoError(path+': 写真を解読できません（非対応形式・破損・時間切れ） / Photo could not be decoded (unsupported, damaged or timed out)'))};
+    const timer=setTimeout(()=>finish(false),15000);
+    image.onload=()=>finish(image.naturalWidth>0&&image.naturalHeight>0);image.onerror=()=>finish(false);image.src=value;
+   })}catch(e){failure=e;return}
+  }}
+  await Promise.all([worker(),worker()]);if(failure)throw failure;
+ }
+ globalThis.MLAPhotos=Object.freeze({pack,unpack,PhotoError,idFor,validateRestore});
 })();
