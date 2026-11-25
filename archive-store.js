@@ -7,6 +7,9 @@
  const KEYS=['my-music-archive-photos-v1','my-music-archive-pilot-v03','my-music-archive-pilot-v1','mma-ui-language','mma-ui-grid-display-v1'];
  const LOCK='mla:my-music-archive-pilot-v03:write',AREAS=['listening','collection','live'];
  class StorageError extends Error {}
+ class PublicationError extends StorageError {
+  constructor(cause,phase,recoveryAvailable){super(cause.message);this.name='PublicationError';this.published=true;this.phase=phase;this.recoveryAvailable=recoveryAvailable;this.cause=cause}
+ }
  const fail=message=>{throw new StorageError(message)};
  globalThis.MLAArchive=({validate,stable,legacy,photos})=>{
   let ready=false,observed=null,baseline=null,onchange=()=>{};
@@ -78,6 +81,7 @@
    return navigator.locks.request(LOCK,{mode:'exclusive',ifAvailable:true},lock=>{if(!lock)fail('別タブが保存中です。入力を保持して再試行してください / Save lock busy');return action()});
   }
   async function finish(state,sources){
+   const resumed=state.meta.status==='pending';
    const value=await unpack(state);check(sources);
    if(!equal(await hashes(sources),state.meta.sources))fail('新旧の保存元が分岐しています / Legacy branches diverged');
    check(sources);
@@ -85,9 +89,9 @@
     check(sources);if(!equal(m,state.meta))fail('保存世代が変わりました / Archive generation changed');
     tx.objectStore('meta').put({...m,status:'ready'},'current');
    },abort));
-   observed=state.meta.generation;baseline=sources;ready=true;return {...value,raw:observed};
+   observed=state.meta.generation;baseline=sources;ready=true;return {...value,raw:observed,resumed,resumedRestore:resumed&&state.meta.restorePublication===true,recoveryAvailable:state.meta.restoreBackup===true};
   }
-  async function publish(prepared,expected,sources,settingsRevision,allowPending=false){
+  async function publish(prepared,expected,sources,settingsRevision,allowPending=false,restoring=false){
    const meta={schema:1,status:'pending',generation:crypto.randomUUID(),sources:await hashes(sources),digest:prepared.digest};check(sources);
    await transaction('readwrite',(tx,done,abort)=>request(tx,'meta','current',m=>{
     check(sources);
@@ -95,18 +99,27 @@
     // A separate settings generation prevents a queued settings write being lost.
     if(settingsRevision!==undefined&&(m?.settingsRevision??0)!==settingsRevision)fail('設定が更新されました / Settings changed');
     meta.settingsRevision=(m?.settingsRevision??0)+1;
+    meta.restorePublication=restoring;
     // Preserve the last verified snapshot until and after readback. Failed or
     // interrupted publication must not erase the latest recoverable original.
-    if(m?.status==='ready'){
+    if(m?.status==='ready'&&(restoring||!m.restoreBackup)){
      for(const name of ['archive','settings'])request(tx,name,'current',v=>tx.objectStore(name).put(v,'previous'),abort);
      tx.objectStore('meta').put(m,'previous');
     }
+    // Pin the same previous slot across edits/settings until the next explicit restore.
+    meta.restoreBackup=!!m&&(m.restoreBackup===true||restoring&&m.status==='ready');
     for(const [id,value] of prepared.photoValues){const store=tx.objectStore('photos'),r=store.get(id);r.onsuccess=()=>{try{if(r.result===undefined){const add=store.add(value,id);add.onerror=()=>abort(new photos.PhotoError('写真を保存できません / Photo storage failed'))}else if(r.result!==value)throw new photos.PhotoError('写真が一致しません / Photo mismatch')}catch(e){abort(e instanceof photos.PhotoError?e:new photos.PhotoError('写真を保存できません / Photo storage failed'))}}}
-    tx.objectStore('archive').put(prepared.packed,'current');tx.objectStore('settings').put(prepared.settings,'current');tx.objectStore('meta').put(meta,'current');
+    tx.objectStore('archive').put(prepared.packed,'current');tx.objectStore('settings').put(prepared.settings,'current');
+    if(restoring&&m?.status==='pending'&&!meta.restoreBackup){
+     // A stopped, older publication may already have a verified previous slot.
+     request(tx,'meta','previous',previous=>{meta.restoreBackup=previous?.status==='ready';tx.objectStore('meta').put(meta,'current')},abort);
+    }else tx.objectStore('meta').put(meta,'current');
    },abort));
+   try{
    ready=false;
    const state=await read();if(state?.meta.generation!==meta.generation)fail('保存世代が変わりました / Archive generation changed');
-   const result=await finish(state,sources);receipts.clear();broadcast();return result;
+    const result=await finish(state,sources);receipts.clear();broadcast();return {...result,resumed:false,resumedRestore:false};
+   }catch(e){throw new PublicationError(e,'verification-or-finalization',meta.restoreBackup)}
   }
   async function init(){ready=false;return exclusive(async()=>{
    const sources=rawSources(),state=await read();
@@ -118,14 +131,14 @@
    const prepared=await prepare(data,legacySettings(sources));check(sources);
    return publish(prepared,null,sources);
   })}
-  async function save(value,expected){
-   const data=validate(value);return exclusive(async()=>{
+  async function save(value,expected,{restore=false}={}){
+   const data=validate(value);if(restore)await photos.validateRestore(data);return exclusive(async()=>{
     if(!ready||expected!==observed)fail('保存が停止しています / Saving stopped');
     const sources=rawSources();check(baseline);let state;try{state=await read();await unpack(state)}catch(e){ready=false;throw e}
     if(!state||state.meta.generation!==expected||state.meta.status!=='ready')fail('保存世代が変わりました / Archive generation changed');
     // Validate current photos too, even when the proposed edit deletes their references.
     await unpack(state);check(sources);
-    return publish(await prepare(data,state.settings),expected,sources,state.meta.settingsRevision??0);
+    return publish(await prepare(data,state.settings),expected,sources,state.meta.settingsRevision??0,false,restore);
    });
   }
   async function setSetting(key,value){return exclusive(async()=>{
@@ -151,13 +164,13 @@
    if(!matched.length)throw Error('File does not match a current branch');
    for(const i of matched)receipts.set(i,snapshot[i]);return matched;
   }
-  async function recover(value){const data=validate(value);return exclusive(async()=>{
+  async function recover(value){const data=validate(value);await photos.validateRestore(data);return exclusive(async()=>{
    const snapshot=await branches(),sources=rawSources(),state=await read();
    snapshot.forEach((v,i)=>{if(v!==null&&receipts.get(i)!==v)fail('新旧すべてのJSONを退避・読み戻し確認してください / Export and verify every branch first')});
    if(!state)fail('保存元がありません / Archive absent');
    const current=await unpack(state),prepared=await prepare(data,current.settings);
    if(!equal(snapshot,await branches()))fail('保存元が更新されました / Sources changed');
-   return publish(prepared,state.meta.generation,sources,state.meta.settingsRevision??0,true);
+   return publish(prepared,state.meta.generation,sources,state.meta.settingsRevision??0,true,true);
   })}
   async function rescue(){
    const out={format:'mla-unified-recovery',version:1,legacy:await MLARescue.collect(KEYS,null)};

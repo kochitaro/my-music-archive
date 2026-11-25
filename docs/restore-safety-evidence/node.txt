@@ -1,0 +1,17 @@
+✔ tests/display_preferences.test.cjs (361.740565ms)
+✔ tests/insights.test.cjs (315.305614ms)
+✔ tests/live_input_support.test.cjs (206.173481ms)
+✔ tests/multi_label.test.cjs (313.982965ms)
+✔ tests/pr_a.test.cjs (357.343154ms)
+✔ tests/pr_a_required.test.cjs (486.758357ms)
+✔ tests/pr_b_draft.test.cjs (233.709296ms)
+✔ tests/recovery_export.test.cjs (194.035581ms)
+✔ tests/search.test.cjs (500.769755ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2997.887158

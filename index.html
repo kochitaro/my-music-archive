@@ -288,6 +288,8 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
 <section id="live-insights" aria-label="Live Insights" hidden></section>
 </section>
 <section class="panel"><div class="row between wrap"><div><h2>Backup &amp; Restore</h2><div class="muted small">This pilot saves data in this browser only. Export backups before updating or clearing Safari data.</div></div><div class="row wrap" style="margin-top:10px"><button class="btn alt" id="export-json">Export JSON</button><button class="btn alt" id="export-csv">Export CSV</button><label class="btn ghost" style="cursor:pointer">Import JSON<input accept=".json,application/json" hidden="" id="import-json" type="file"/></label></div></div>
+<details class="storage-guide" id="restore-recovery" hidden><summary id="restore-recovery-title"></summary><p id="restore-recovery-info"></p><button class="btn alt" id="export-before-restore" type="button"></button></details>
+<p id="restore-result" role="status" hidden></p>
 <details class="storage-guide" id="backup-guide">
 <summary>
 <span lang="ja">バックアップ・復元・保存について</span>
@@ -435,16 +437,26 @@ $('ui-language').value=(navigator.language||'en').toLowerCase().startsWith('ja')
 // A failed read is never an empty archive. Keep the exact source for recovery.
 const legacyLifecycle=MLALifecycle({key:KEY,legacyKeys:[LEGACY_KEY,OLD],lockName:'mla:'+LEGACY_KEY+':write',validate:migrate,stable,photos:MLAPhotos,readOnly:true});
 const lifecycle=MLAArchive({validate:migrate,stable,legacy:legacyLifecycle,photos:MLAPhotos});
-let initialSettings=null;
+let initialSettings=null,recoveryAvailable=false,resumedRestore=false;
 let loadFailed=false,loadReason='',baseRaw=null;
 let saving=false,externalChanged=false,operationBusy=false,draft=null,activeOperation=null,draftRecovered=false;
 // Presentation state is separate from draft ownership and recovery authorization.
-let recoveryView=null,noticeReason='',noticeConflict=false,discardReload=false;
+let recoveryView=null,noticeReason='',noticeConflict=false,noticePublished=false,discardReload=false;
 let formSession=0,formOwner=null,formBaseline=null,draftContext=null,draftPhotoFiles=null;
 try{
- const loaded=await lifecycle.init();db=loaded.data;baseRaw=loaded.raw;initialSettings=loaded.settings;
+ const loaded=await lifecycle.init();db=loaded.data;baseRaw=loaded.raw;initialSettings=loaded.settings;recoveryAvailable=loaded.recoveryAvailable;resumedRestore=loaded.resumedRestore&&loaded.recoveryAvailable;
  $('ui-language').value=initialSettings.language;
 }catch(e){loadFailed=true;loadReason=e.message}
+
+function showRestoreRecovery(){
+ $('restore-recovery').hidden=!recoveryAvailable;
+ $('restore-recovery-title').textContent=isJapanese()?'復元前の記録を回収':'Recover pre-restore records';
+ $('restore-recovery-info').textContent=isJapanese()?'次のJSON復元を確定するまで、復元前の記録と写真を回収できます。設定変更や記録の追加・編集では消えません。このブラウザの保存データを消すと失われます。端末外にもJSONを保管してください。':'Recover the records and photos from before your last restore until you confirm another JSON restore. Settings and record edits do not remove this copy. Clearing this browser’s data removes it. Keep an external JSON backup too.';
+ $('export-before-restore').textContent=isJapanese()?'復元前のJSONを書き出す':'Export pre-restore JSON';
+ if(resumedRestore){$('restore-result').hidden=false;$('restore-result').textContent=isJapanese()?'中断された復元を確認しました。復元後の記録を表示しています。復元前の記録も回収できます。':'The interrupted restore was checked. Restored records are shown; pre-restore records remain available.'}else $('restore-result').hidden=true;
+}
+$('export-before-restore').onclick=async()=>{if(operationBusy||saving||settingsBusy)return;try{download('mla-before-restore.json',JSON.stringify(await lifecycle.exportBranch(4),null,2),'application/json')}catch(e){alert((isJapanese()?'回収できませんでした。保存領域を消さず再試行してください。':'Recovery export failed. Keep browser data and retry. ')+e.message)}};
+$('ui-language').addEventListener('change',showRestoreRecovery);
 
 function storageStoppedMessage(){return isJapanese()?'保存データを読み込めなかったため、上書きを防ぐ目的で保存を停止しています。現在の状態で新しい記録を保存できません。':'Saved data could not be read. Saving is stopped to prevent overwriting it. New records cannot be saved in the current state.'}
 function canSave(){if(!loadFailed)return true;alert(storageStoppedMessage());return false}
@@ -464,10 +476,11 @@ async function commitDB(candidate,operation={}){
   if(externalChanged)throw stopped(conflictMessage());
   if(operation.record){const found=db[operation.area]?.filter(r=>r.entryId===operation.id);if(found?.length!==1||found[0]!==operation.record)throw stopped('Operation target mismatch / 操作対象が一致しません')}
   try{
-   const result=await lifecycle.save(snapshot,baseRaw);
-   db=result.data;baseRaw=result.raw;
+   const result=await lifecycle.save(snapshot,baseRaw,{restore:operation.kind==='restore'});
+   db=result.data;baseRaw=result.raw;recoveryAvailable=result.recoveryAvailable;if(operation.kind==='restore')resumedRestore=false;showRestoreRecovery();
   }catch(e){
    if(!lifecycle.isReady()){loadFailed=true;loadReason=e.message;showStorageState()}
+   if(e.published){recoveryAvailable=e.recoveryAvailable;showRestoreRecovery();const error=stopped(e.message);error.published=true;throw error}
    if(e instanceof lifecycle.StorageError)throw stopped(e.message);
    throw e;
   }
@@ -529,11 +542,12 @@ async function saveDB(candidate=db,operation={}){
   }
   showDraft();return true;
  }catch(e){
-  const reason=e instanceof ArchiveValidationError?validationMessage(e):e instanceof SaveStopped?e.message:(isJapanese()?'保存できませんでした':'Couldn’t Save Changes');
+  noticePublished=operation.kind==='restore'&&e.published===true;
+  const reason=e instanceof ArchiveValidationError?validationMessage(e):e instanceof SaveStopped||e instanceof MLAPhotos.PhotoError?e.message:(isJapanese()?'保存できませんでした':'Couldn’t Save Changes');
   captureDraft(operation,reason,full&&operation.proposed?attempt?.fileRefs:null);
   if(operation.kind==='restore')draftContext.restoreRaw=JSON.stringify(candidate);
   noticeConflict=e instanceof SaveStopped&&e.message===conflictMessage();
-  noticeReason=noticeConflict?(isJapanese()?'別のタブで記録が更新されています。':'The records were updated in another tab.'):e instanceof SaveStopped||e instanceof ArchiveValidationError?reason:'';
+  noticeReason=noticePublished?'':noticeConflict?(isJapanese()?'別のタブで記録が更新されています。':'The records were updated in another tab.'):e instanceof SaveStopped||e instanceof ArchiveValidationError||e instanceof MLAPhotos.PhotoError?reason:'';
   recoveryView='notice';showDraft();$('save-notice').focus();return false;
  }
 }
@@ -573,10 +587,10 @@ function showDraft(){
  notice.hidden=!draft||recoveryView!=='notice';confirmation.hidden=!draft||recoveryView!=='confirm';
  if(!draft){recoveryView=null;return}
  const retained=hasDraftForm();
- $('save-notice-title').textContent=isJapanese()?'保存できませんでした':'Couldn’t Save Changes';
+ $('save-notice-title').textContent=noticePublished?(isJapanese()?'復元結果の確認が必要です':'Restore needs confirmation'):(isJapanese()?'保存できませんでした':'Couldn’t Save Changes');
  $('save-notice-reason').textContent=noticeConflict?(isJapanese()?'別のタブで記録が更新されています。':'The records were updated in another tab.'):noticeReason;
  $('save-notice-reason').hidden=!noticeReason;
- $('save-notice-info').textContent=retained?(isJapanese()?'入力内容はこの画面に残っています。必要な文章はコピーしてから、再読み込みして入力し直してください。':'Your input is still on this screen. Copy any text you want to keep, then reload the page and enter your changes again.'):(draft.operation==='restore'?(isJapanese()?'選択したバックアップの元ファイルを保管してください。再読み込みして最新の記録を確認してから、正常なバックアップで復元をやり直してください。':'Keep the original backup file you selected. Reload to check the latest records, then retry restoring a valid backup.'):(isJapanese()?'再読み込みして最新の保存済み記録を確認してください。':'Reload to check the latest saved records.'));
+ $('save-notice-info').textContent=noticePublished?(isJapanese()?'復元データは保存されましたが、確認を完了できませんでした。復元前の記録をJSONで回収してから、再読み込みして内容を確認してください。':'Restore data was saved, but confirmation did not finish. Export the pre-restore records, then reload to check the result.'):retained?(isJapanese()?'入力内容はこの画面に残っています。必要な文章はコピーしてから、再読み込みして入力し直してください。':'Your input is still on this screen. Copy any text you want to keep, then reload the page and enter your changes again.'):(draft.operation==='restore'?(isJapanese()?'復元を中止しました。この操作による記録の変更はありません。元のJSONを保管し、表示された理由を確認してください。':'Restore stopped. This operation did not change your records. Keep the original JSON and check the reason shown.'):(isJapanese()?'再読み込みして最新の保存済み記録を確認してください。':'Reload to check the latest saved records.'));
  $('save-photo-info').hidden=!retained||!draft.files.length;
  $('save-photo-info').textContent=isJapanese()?'写真は元ファイルを保管し、やり直す際に選び直してください。':'Keep the original photo files and select them again when you start over.';
  $('save-return').textContent=retained?(isJapanese()?'入力に戻る':'Return to Editing'):(isJapanese()?'閉じる':'Close');
@@ -1167,11 +1181,11 @@ function download(name,data,type){const url=URL.createObjectURL(new Blob([data],
  portable=await lifecycle.exportBranch(0);
  download('my-music-archive-backup-v0310.json',JSON.stringify(portable,null,2),'application/json');
  }catch(e){alert((isJapanese()?'JSON書き出しを停止しました。保存領域を消去せず、読み込み失敗時は原本回収も使用してください。':'JSON export stopped (a photo may be missing). Keep storage; use raw recovery after a load failure.')+' '+e.message)}};$('export-csv').onclick=()=>{if(loadFailed){canSave();return}const columns=['archive','title','artist','release','date','added','genre','label','rating','rating_5','tags','store','format','price','condition','venue','memo','id'];const rows=Object.keys({listening:1,collection:1,live:1}).flatMap(k=>db[k].map(x=>columns.map(c=>c==='archive'?k:c==='rating_5'?(rate(x)===null?'':fiveScore(rate(x)).toFixed(1)):c==='tags'?parseTags(x.tags).join('; '):c==='id'?x.entryId:x[c]??'')));const csv=[columns,...rows].map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');download('my-music-archive.csv','\uFEFF'+csv,'text/csv;charset=utf-8')};$('import-json').onchange=async e=>{
- if(loadFailed||externalChanged){try{await importStopped([...e.target.files])}catch(err){alert(err.message)}finally{e.target.value=''}return}const f=e.target.files?.[0];if(!f)return;
+ if(loadFailed||externalChanged){try{await importStopped([...e.target.files])}catch(err){if(err.published){recoveryAvailable=err.recoveryAvailable;showRestoreRecovery();alert(isJapanese()?'復元データは保存されましたが、確認を完了できませんでした。復元前のJSONを回収してから再読み込みしてください。':'Restore data was saved, but confirmation did not finish. Export pre-restore JSON before reloading.')}else alert(err.message)}finally{e.target.value=''}return}const f=e.target.files?.[0];if(!f)return;
  try{
   let raw;try{raw=await f.text()}catch(err){alert(isJapanese()?'ファイルを読み込めませんでした。元の記録は変更されていません。ファイルを確認し再試行してください。':'File could not be read. Existing records are unchanged. Check the file and retry.');return}
   let incoming;try{let parsed;try{parsed=JSON.parse(raw)}catch(err){throw new ArchiveValidationError('JSON: invalid syntax / JSON構文が不正です')}incoming=migrate(parsed);if(['listening','collection','live'].some(a=>incoming[a].some(r=>Object.hasOwn(r,'photoId'))))throw new ArchiveValidationError('JSON: photo data required / 写真本体が必要です')}catch(err){alert(validationMessage(err));return}
-  if(!confirm(isJapanese()?'現在の記録をバックアップの内容に置き換えます。事前にバックアップを保存しましたか？':'Import '+(incoming.listening.length+incoming.collection.length+incoming.live.length)+' records? Current archive data will be replaced. Export a backup first.')){alert(isJapanese()?'復元を取り消しました。元の記録は変更されていません。':'Import cancelled. Existing records are unchanged.');return}
+  if(!confirm(isJapanese()?'現在の記録をバックアップの内容に置き換えます。回収用の退避も現在の記録に更新されます。事前にJSONを保存しましたか？':'The recovery copy will also be replaced with the current records. Export JSON first. Import '+(incoming.listening.length+incoming.collection.length+incoming.live.length)+' records? Current archive data will be replaced. Export a backup first.')){alert(isJapanese()?'復元を取り消しました。元の記録は変更されていません。':'Import cancelled. Existing records are unchanged.');return}
   if(!await saveDB(incoming,{operationToken:activeOperation,kind:"restore"}))return;
   try{render()}catch(err){alert(isJapanese()?'保存は完了しましたが、画面反映に失敗しました。再読み込みしてください。':'Saving completed, but the display could not be updated. Reload the page.');return}
   alert(isJapanese()?'復元が完了しました。':'Import completed.');
@@ -1226,16 +1240,16 @@ async function importStopped(files){
  if(answer===null)return;
  if(!/^[1-9]\d*$/.test(answer)||!candidates[Number(answer)-1])throw Error(isJapanese()?'ファイル番号が不正です。保存内容は変更していません。':'Invalid file number. Saved data is unchanged.');
  const selected=candidates[Number(answer)-1];
- if(!confirm(selected.name+'\n'+['listening','collection','live'].map(a=>a+': '+selected.data[a].length+' / photos: '+selected.data[a].filter(r=>r.photo).length).join('\n')+'\n'+(isJapanese()?'このJSONを採用しますか？新旧の退避ファイルは保管してください。':'Adopt this JSON? Keep every branch backup.')))return;
+ if(!confirm((isJapanese()?'回収用の退避は、現在の検証済み記録に更新されます。JSONを先に保管してください。\n':'The recovery copy will be updated to the current verified records. Keep your JSON files first.\n')+selected.name+'\n'+['listening','collection','live'].map(a=>a+': '+selected.data[a].length+' / photos: '+selected.data[a].filter(r=>r.photo).length).join('\n')+'\n'+(isJapanese()?'このJSONを採用しますか？新旧の退避ファイルは保管してください。':'Adopt this JSON? Keep every branch backup.')))return;
  const result=await lifecycle.recover(selected.data);
- db=result.data;baseRaw=result.raw;externalChanged=false;loadFailed=false;loadReason='';draft=null;draftContext=null;showDraft();enableAfterRecovery();render();showStorageState();
+ db=result.data;baseRaw=result.raw;recoveryAvailable=result.recoveryAvailable;resumedRestore=false;showRestoreRecovery();externalChanged=false;loadFailed=false;loadReason='';draft=null;draftContext=null;showDraft();enableAfterRecovery();render();showStorageState();
  alert(isJapanese()?'復旧しました。記録と写真を確認してください。':'Recovered. Check records and photos.');
 }
 MLAArchiveToolbar({japanese:isJapanese,getMode:()=>mode,view,closeSort,closeFilter,filterIds:archiveFilterIds});
 MLAMobileNavigation({busy:()=>operationBusy||saving||settingsBusy||startupShell.inert,
  unsaved:()=>!!pendingDraft()||!!document.querySelector('#modal.open,#live-create-modal.open'),
  getSection:()=>section,setSection:next=>setSection(next),archiveVisible:()=>screenMode==='archive',japanese:isJapanese});
-setSection('listening');showStorageState();startupShell.inert=false;startupShell.removeAttribute('aria-busy');
+setSection('listening');showStorageState();showRestoreRecovery();startupShell.inert=false;startupShell.removeAttribute('aria-busy');
 if(externalChanged){$('tab-change').hidden=false;$('tab-change').textContent=conflictMessage()}
 
 
