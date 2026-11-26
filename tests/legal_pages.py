@@ -38,7 +38,8 @@ def main():
       assert p.evaluate('document.documentElement.scrollWidth<=innerWidth')
       for code in ['ja','en']:
        expect(p.locator(f'#{code} a[href="mailto:mylisteningarchive@gmail.com"]')).to_have_count(1)
-       expect(p.locator(f'#{code} a[href="https://x.com/MLArchive"]')).to_have_count(1)
+       expect(p.locator(f'#{code} a[href="https://x.com/MLArchive_"]')).to_have_count(1)
+       expect(p.locator(f'#{code} a[href="https://x.com/MLArchive_"]')).to_have_text('@MLArchive_')
       other='en' if language=='ja' else 'ja'
       p.locator(f'[data-language={other}]').click();expect(p.locator('#'+other)).to_be_visible()
       p.go_back();expect(p.locator('#'+language)).to_be_visible()
