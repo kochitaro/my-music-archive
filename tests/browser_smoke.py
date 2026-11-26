@@ -1,5 +1,5 @@
 """Mock-only browser regression tests. Run from the repository root with Playwright installed."""
-import json, os, threading, time, urllib.parse
+import argparse, base64, json, os, threading, urllib.parse
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright, expect
@@ -7,6 +7,7 @@ from playwright.sync_api import sync_playwright, expect
 ROOT=Path(__file__).resolve().parents[1]
 ARTISTS=json.loads((ROOT/'tests/fixtures/artists.json').read_text())
 MODES=json.loads((ROOT/'tests/fixtures/search-v0.3.21.json').read_text())
+# Legacy migration source only; never used to check normal saves.
 KEY='my-music-archive-pilot-v03'
 SEED={'version':3,'listening':[{'entryId':'old','id':'old','title':'Existing','artist':'Existing Artist','release':'1999','date':'2024-01-02','rating':'7','memo':'keep','tags':['tag'],'photo':''}],'collection':[],'live':[{'entryId':'live-old','title':'Existing Live','date':'2024-02-03','venue':'Tokyo','rating':'8'}]}
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -18,6 +19,9 @@ BASE=f'http://127.0.0.1:{server.server_port}'
 rows=[{'id':f'work-{i}','title':f'Work {i:03}','primary-type':['Single','EP','Album'][i%3],'first-release-date':f'{1900+i}-01-02','artist-credit':[{'name':'細野晴臣','joinphrase':''}]} for i in range(145)]
 rows[101]=rows[0] # duplicated raw record must not shift API offsets
 errors=[];calls=[];fail_next=True
+checks=[]
+def passed(name):
+ checks.append(name);print('PASS',name,flush=True)
 def mock(route):
  u=urllib.parse.urlparse(route.request.url);q=urllib.parse.parse_qs(u.query);calls.append(route.request.url)
  if '/artist/' in u.path:
@@ -51,16 +55,78 @@ def search(page,q,count=30):
  try:expect(page.locator('#results .result')).to_have_count(count,timeout=30000)
  except AssertionError as e:raise AssertionError(f'{q}: {page.locator("#status").text_content()}; JS errors={errors}') from e
  expect(page.locator('#status')).to_contain_text('追加' if page.locator('#ui-language').input_value()=='ja' else 'Select',timeout=30000)
-def stored(page):return page.evaluate('(key)=>JSON.parse(localStorage.getItem(key))',KEY)
+# Read one committed snapshot; never create a missing database during an assertion.
+SNAPSHOT="""async () => {
+ const db=await new Promise((ok,no)=>{
+  const r=indexedDB.open('mla-archive-v1',1);
+  r.onupgradeneeded=()=>r.transaction.abort();
+  r.onerror=()=>no(r.error);r.onblocked=()=>no(Error('Archive DB blocked'));
+  r.onsuccess=()=>ok(r.result);
+ });
+ try{return await new Promise((ok,no)=>{
+  const tx=db.transaction(['archive','meta','photos','settings'],'readonly'),out={};
+  for(const name of ['archive','meta','settings']){
+   const r=tx.objectStore(name).get('current');r.onsuccess=()=>out[name]=r.result;
+  }
+  const keys=tx.objectStore('photos').getAllKeys(),values=tx.objectStore('photos').getAll();
+  tx.oncomplete=()=>{out.photos=Object.fromEntries(keys.result.map((k,i)=>[k,values.result[i]]));ok(out)};
+  tx.onerror=tx.onabort=()=>no(tx.error||Error('Snapshot aborted'));
+ })}finally{db.close()}
+}"""
+def ready(page):
+ page.evaluate('() => globalThis.MLAReady')
+ # Operation wrappers disable inputs until their asynchronous work has finished.
+ expect(page.locator('#ui-language')).to_be_enabled()
+ expect(page.locator('#storage-state')).to_be_hidden()
+ expect(page.locator('#save-notice')).to_be_hidden()
+ assert not errors,errors
+
+def snapshot(page):
+ ready(page)
+ state=page.wait_for_function('async()=>{const s=await ('+SNAPSHOT+')();return s.meta?.status==="ready"&&s.settings.language===document.querySelector("#ui-language").value?s:false}').json_value()
+ assert state['meta']['status']=='ready',state['meta']
+ assert state['settings']['language']==page.locator('#ui-language').input_value()
+ return state
+
+def stored(page):
+ state=snapshot(page);data=state['archive']
+ for area in ['listening','collection','live']:
+  for record in data[area]:
+   if 'photoId' in record:
+    record['photo']=state['photos'][record.pop('photoId')]
+ return data
+
+def exported(page):
+ ready(page)
+ with page.expect_download() as download:page.locator('#export-json').click()
+ data=json.loads(Path(download.value.path()).read_text())
+ assert data['version']==3
+ assert data==stored(page)
+ return data
+
+parser=argparse.ArgumentParser()
+parser.add_argument('--browser',choices=['chromium','webkit'],default='chromium')
+args=parser.parse_args()
 with sync_playwright() as p:
- browser=p.chromium.launch(headless=True,executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox'])
+ browser=p.chromium.launch(headless=True,executable_path=os.environ.get('MMA_CHROMIUM','/usr/bin/chromium'),args=['--no-sandbox']) if args.browser=='chromium' else p.webkit.launch(headless=True)
  context=browser.new_context(viewport={'width':390,'height':844},device_scale_factor=3,is_mobile=True,has_touch=True,locale='ja-JP')
- context.route('https://musicbrainz.org/**',mock);context.route('https://coverartarchive.org/**',lambda r:r.abort())
+ # Fail closed: only this test server and mocked MusicBrainz may receive requests.
+ def local_only(route):
+  if urllib.parse.urlparse(route.request.url).netloc==urllib.parse.urlparse(BASE).netloc:route.continue_()
+  else:route.abort()
+ context.route('**/*',local_only)
+ context.route('https://musicbrainz.org/**',mock)
  # Accelerate retry/spacing waits, preserving the 20s request-abort timeout.
  context.add_init_script('''const nativeTimeout=window.setTimeout;window.setTimeout=(fn,ms,...args)=>nativeTimeout(fn,ms>=1000&&ms<20000?Math.min(ms,15):ms,...args);''')
  page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
- print('Loading MMA',flush=True);page.goto(BASE);print('Loaded MMA',flush=True);page.evaluate('([key,seed])=>localStorage.setItem(key,JSON.stringify(seed))',[KEY,SEED]);page.reload()
+ # Seed before the first app load; changing legacy sources after IDB init is a conflict.
+ context.route(BASE+'/smoke-seed',lambda r:r.fulfill(body='<p>isolated synthetic seed</p>',content_type='text/html'))
+ page.goto(BASE+'/smoke-seed')
+ page.evaluate('([key,seed])=>localStorage.setItem(key,JSON.stringify(seed))',[KEY,SEED])
+ legacy=page.evaluate('(key)=>localStorage.getItem(key)',KEY)
+ print('Loading MMA',flush=True);page.goto(BASE);ready(page);print('Loaded MMA',flush=True)
  assert stored(page)==SEED
+ passed('legacy v3 migration into ready IndexedDB, exact seed retained')
  expect(page.locator('[data-search-mode=artist]')).to_have_attribute('aria-pressed','true')
  assert page.locator('#query').get_attribute('placeholder')==('アーティストを検索' if page.locator('[data-search-mode=artist]').get_attribute('aria-pressed')=='true' else 'アルバムを検索')
  assert page.locator('#search-modes').evaluate('(el)=>el.parentElement.id==="search-form"&&el.nextElementSibling.id==="query"')
@@ -75,7 +141,7 @@ with sync_playwright() as p:
  page.locator('#query').fill('MMA nonexistent qzxvkwp 0321');page.locator('#search-btn').click();expect(page.locator('#status')).to_contain_text('作品が見つかりませんでした');expect(page.locator('#results .result')).to_have_count(0)
  page.screenshot(path='/tmp/mma-v0321-ja.png',full_page=True)
  page.locator('[data-search-mode=artist]').click()
- print('PASS modes, short prefix, candidate choice, input preservation, actual album fixtures and nonexistent title')
+ passed('modes, short prefix, candidate choice, input preservation, actual album fixtures and nonexistent title')
  for name in ARTISTS:
   print('Searching',name,flush=True)
   search(page,name)
@@ -84,7 +150,7 @@ with sync_playwright() as p:
   assert 'Unknown Artist' not in page.locator('#results').inner_text()
   titles=page.locator('#results .title').all_text_contents();assert titles[0]=='Work 143'
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
- print('PASS actual artist fixtures, same artist IDs, whole-catalog sorting, 390px width')
+ passed('actual artist fixtures, same artist IDs, whole-catalog sorting, 390px width')
  for count in [60,90,120,144]:page.locator('#more-results').click();expect(page.locator('#results .result')).to_have_count(count)
  assert len(set(page.locator('#results .title').all_text_contents()))==144
  assert page.locator('#more-results').is_hidden()
@@ -95,22 +161,23 @@ with sync_playwright() as p:
  page.locator('[data-section="collection"]').click();page.locator('#ui-language').select_option('en');search(page,'Haruomi Hosono')
  page.locator('#results .result button').first.click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-title').input_value()=='Work 143'
  page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open');assert stored(page)['collection'][0]['release']=='2043-01-02'
- print('PASS Listening/Collection saves, metadata/date inheritance, Japanese/English, existing data intact')
+ passed('Listening/Collection saves, metadata/date inheritance, Japanese/English, existing data intact')
  page.locator('[data-search-mode=title]').click();search(page,'missing',1);page.locator('#results button').click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-artist').input_value()==''
- dialogs=[];page.on('dialog',lambda d:(dialogs.append(d.message),d.accept()))
- page.locator('#save').click();expect(page.locator('#save-notice')).to_be_visible();expect(page.locator('#save-notice-reason')).to_contain_text('album title and artist');assert len(stored(page)['collection'])==1
+ dialogs=[];page.on('dialog',lambda d:(dialogs.append((d.type,d.message)),d.accept()))
+ saved_collection=stored(page)['collection']
+ page.locator('#save').click();expect(page.locator('#save-notice')).to_be_visible();expect(page.locator('#save-notice-reason')).to_contain_text('album title and artist');assert page.evaluate(SNAPSHOT)['archive']['collection']==saved_collection
  page.locator('#manual-artist').fill('Manual Artist');page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open');assert stored(page)['collection'][0]['artist']=='Manual Artist'
  search(page,'repair',1);page.locator('#results button').click();expect(page.locator('#modal')).to_have_class('modal open');assert page.locator('#manual-artist').input_value()=='Recovered Artist';page.locator('#close').click()
  search(page,'title fallback');
  for count in [60,90,120,135]:page.locator('#more-results').click();expect(page.locator('#results .result')).to_have_count(count,timeout=10000)
  assert page.locator('#more-results').is_hidden();assert len(set(page.locator('#results .title').all_text_contents()))==135
- print('PASS missing-credit guard/manual correction, extra metadata lookup, title mode and 30-item pagination')
+ passed('missing-credit guard/manual correction, extra metadata lookup, title mode and 30-item pagination')
  search(page,'retry-page')
  for count in [60,90]:page.locator('#more-results').click();expect(page.locator('#results .result')).to_have_count(count)
  page.locator('#more-results').click();expect(page.locator('#status')).to_contain_text('Search failed',timeout=10000);expect(page.locator('#results .result')).to_have_count(90)
  fail_next=False;page.locator('#more-results').click();expect(page.locator('#results .result')).to_have_count(120,timeout=10000)
  assert len(set(page.locator('#results .title').all_text_contents()))==120
- print('PASS failed next page preserves offset/results and can retry without duplicates')
+ passed('failed next page preserves offset/results and can retry without duplicates')
  page.locator('#query').fill('failure');page.locator('#search-btn').click();expect(page.locator('#status')).to_contain_text('Search failed',timeout=15000)
  assert page.locator('#search-btn').is_enabled();page.locator('[data-search-mode=artist]').click();search(page,'Number Girl')
  # Hold one artist request in the browser before submitting a newer query.
@@ -124,7 +191,7 @@ with sync_playwright() as p:
  page.locator('[data-section="listening"]').click();page.locator('#manual-add-trigger').click();expect(page.locator('#manual-artist')).to_have_value('');page.locator('#close').click()
  page.screenshot(path='/tmp/mma-v0321-en.png',full_page=True)
  assert not errors,errors
- print('PASS final API failure/re-search, stale-result race, tab reset, manual entry, no page errors')
+ passed('final API failure/re-search, stale-result race, tab reset, manual entry, no page errors')
  # Save actual response titles in both archives and check the exact artist credits.
  for archive,title,artist in [('listening','Punisher','Phoebe Bridgers'),('collection','Hard Life','The Tubs')]:
   page.locator(f'[data-section="{archive}"]').click();page.locator('[data-search-mode=title]').click();search(page,title)
@@ -133,12 +200,51 @@ with sync_playwright() as p:
   release=page.locator('#release-edit').input_value();page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open')
   saved=stored(page)[archive][0];assert saved['artist']==artist and saved['title']==title and saved['release']==release
  assert SEED['listening'][0] in stored(page)['listening'];assert stored(page)['live']==SEED['live']
- print('PASS Punisher/Hard Life from API fixtures save correct artists and release dates in Listening/Collection')
+ passed('Punisher/Hard Life from API fixtures save correct artists and release dates in Listening/Collection')
+ # Exercise persistence paths absent from the original search-oriented smoke.
+ expected=exported(page)
+ page.reload();ready(page);assert stored(page)==expected
+ passed('JSON v3 export and full archive equality after reload')
+ page.locator('[data-section="listening"]').click()
+ page.locator('#manual-add-trigger').click()
+ page.locator('#manual-title').fill('Synthetic photo record');page.locator('#manual-artist').fill('Synthetic artist')
+ photo=page.evaluate("()=>{const c=document.createElement('canvas');c.width=c.height=8;c.getContext('2d').fillRect(0,0,8,8);return c.toDataURL()}")
+ page.locator('#album-photo').set_input_files(dict(name='synthetic.png',mimeType='image/png',buffer=base64.b64decode(photo.split(',')[1])))
+ page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open')
+ created=stored(page)['listening'][0];assert created['title']=='Synthetic photo record' and created['photo'].startswith('data:image/')
+ state=snapshot(page);packed=state['archive']['listening'][0]
+ assert 'photo' not in packed and state['photos'][packed['photoId']]==created['photo']
+ card=page.locator('#library button').filter(has=page.get_by_text('Synthetic photo record',exact=True))
+ expect(card.locator('img')).to_be_visible()
+ assert card.locator('img').evaluate('(img)=>img.complete&&img.naturalWidth>0')
+ card.click();page.locator('#view-edit').click();page.locator('#memo').fill('Synthetic edit')
+ page.locator('#save').click();expect(page.locator('#modal')).not_to_have_class('modal open')
+ assert stored(page)['listening'][0]['memo']=='Synthetic edit'
+ photo_backup=exported(page)
+ passed('photo create/display, photos store reference, edit and portable JSON equality')
+ card.click();page.locator('#view-edit').click();page.locator('#delete').click();page.locator('#delete-accept').click()
+ expect(page.locator('#modal')).not_to_have_class('modal open')
+ assert stored(page)==expected
+ passed('delete restores exact pre-create archive')
+ page.locator('#import-json').set_input_files(dict(name='synthetic-backup.json',mimeType='application/json',buffer=json.dumps(photo_backup).encode()))
+ expect(page.locator('#import-json')).to_have_value('')
+ assert stored(page)==photo_backup
+ page.reload();ready(page);assert stored(page)==photo_backup
+ expect(page.locator('#library img').first).to_be_visible()
+ assert page.locator('#library img').first.evaluate('(img)=>img.complete&&img.naturalWidth>0')
+ assert page.evaluate('(key)=>localStorage.getItem(key)',KEY)==legacy
+ assert all('photoId' not in r for area in ['listening','collection','live'] for r in photo_backup[area])
+ passed('JSON restore, photo/record reload persistence, ready state and unchanged legacy source')
  # Lab shares the same core, renders credits, and survives switching modes.
  page.goto(BASE+'/search-test/');page.locator('#q').fill('細野晴臣');page.locator('#submit').click();expect(page.locator('#results .result')).to_have_count(30,timeout=15000)
  assert '細野晴臣' in page.locator('#results .meta').first.inner_text();page.locator('#loadMore').click();expect(page.locator('#results .result')).to_have_count(60)
  page.locator('#mode button').first.click();expect(page.locator('#results .title').first).to_have_text('Title 000',timeout=10000)
  assert not errors,errors
- print('PASS Search Lab shared core, artist credits, pagination and title-mode switch')
+ passed('Search Lab shared core, artist credits, pagination and title-mode switch')
+ assert not errors,errors
+ assert [kind for kind,_ in dialogs]==['confirm','alert'],dialogs
+ assert dialogs[-1][1]=='Import completed.',dialogs
+ passed('expected restore dialogs only and final no page errors')
+ print('COMPLETE',args.browser,f'{len(checks)} check groups passed; failures=0',flush=True)
  browser.close()
 server.shutdown()
