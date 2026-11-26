@@ -1,0 +1,41 @@
+2026-11-26 PR #56 WebKit environment follow-up
+Test source: 18223d9f60b7ca2a514049394940faddaa812d2f
+No Chromium/Node/build regression reruns.
+
+Host: Debian 13 (trixie), uid=1000
+/usr/local/bin/cloud-agent-packages: absent
+sudo: absent
+/var/lib/apt/lists: empty, administrator-owned
+
+ctypes.util.find_library:
+gtk-4: None
+graphene-1.0: None
+harfbuzz-icu: None
+manette-0.2: None
+hyphen: None
+GLESv2: None
+
+dpkg-query: no packages found matching:
+libgtk-4-1 libgraphene-1.0-0 libharfbuzz-icu0
+libmanette-0.2-0 libhyphen0 libgles2
+
+Docker managed endpoint: unix:///var/run/docker.sock
+Docker ServerVersion: 29.9.2
+Official image: mcr.microsoft.com/playwright/python:v1.62.0-noble
+Digest: sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d
+Pull: success
+
+Attempted command:
+env -u DOCKER_HOST -u DOCKER_CONTEXT -u DOCKER_TLS -u DOCKER_TLS_VERIFY -u DOCKER_CERT_PATH docker --host=unix:///var/run/docker.sock run --rm --network none --cap-drop ALL --security-opt no-new-privileges --mount type=bind,src=/workspace/my-music-archive,dst=/repo,readonly --mount type=bind,src=/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages,dst=/opt/mla-python,readonly -e PYTHONPATH=/opt/mla-python -w /repo mcr.microsoft.com/playwright/python@sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d python -u tests/browser_smoke.py --browser webkit
+
+Result: exit 125, before container/test startup
+docker: Error response from daemon: mkdir /home/dockerd/.local/share/docker/vfs/dir/e1c5528839e5fa887552503b802f583e6bca0b02a5908ed44f6615a36cfb0045/usr/lib/x86_64-linux-gnu/vdpau: no space left on device
+
+Run 'docker run --help' for more information
+
+Disk at failure: 7.9G total, 7.5G used, 0 available, 100%.
+Cleanup: removed only the official image pulled for this task.
+Disk after cleanup: 7.9G total, 4.7G used, 2.8G available, 63%.
+docker images / docker ps -a: empty.
+WebKit test body not started: passed=0, assertion failures=0, 14 groups unverified.
+Classification: B (environment).

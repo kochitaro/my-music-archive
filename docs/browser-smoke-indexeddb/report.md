@@ -65,7 +65,7 @@ WebKit：--browser webkitを追加し起動を試行。ブラウザ本体取得�
 
 - A：初期投入がDB作成後に旧移行元を書き換える問題も発見。初回アプリ起動前の投入に修正。
 - B：シェルsandboxではローカルsocket/Node子プロセス起動がEPERM。実行権限を付けた再実行でChromium/Nodeは解消。テスト期待値の変更なし。
-- B：WebKitにlibgtk-4.so.1、libgraphene-1.0.so.0、libharfbuzz-icu.so.0、libmanette-0.2.so.0、libhyphen.so.0、libGLESv2.so.2が不足。環境用パッケージhelperなし、パッケージ索引にも対象なし。WebKit実行環境を用意した上で再実行が必要。影響はWebKitの検証可否、アプリ不具合の証拠ではない。
+- B：WebKitにlibgtk-4.so.1、libgraphene-1.0.so.0、libharfbuzz-icu.so.0、libmanette-0.2.so.0、libhyphen.so.0、libGLESv2.so.2が不足。環境用パッケージhelper・sudoなし、APT索引は空。追検証では公式Dockerイメージも試行したが、コンテナ作成時の容量不足で起動不可。WebKit実行環境を用意した上で再実行が必要（詳細は末尾）。影響はWebKitの検証可否、アプリ不具合の証拠ではない。
 - C/D：今回の実行範囲ではなし。アプリ本体の修正なし。
 
 ## 回帰検証
@@ -82,3 +82,41 @@ WebKit：--browser webkitを追加し起動を試行。ブラウザ本体取得�
 static_distribution.pyはローカルsource/dist（HTML URL/clean URL）、ルート/サブパス、ja 390px/en 1280pxで、3領域CRUD・写真・IDB/JSON・規約/プライバシー・nested 404を確認。公開サイトへの通信/デプロイなし。ビルド成果物distはgit対象外。大容量・保存中断・CAA画像比較・iPhone実機の再検証は変更との関連がないため実施せず。
 
 残存事項：WebKitの14グループは未確認。PR番号・最終HEADはPRおよび作業完了報告を参照。マージは別途承認が必要。
+
+
+## PR #56 WebKit環境の追確認（2026-11-26）
+
+検証対象HEAD：18223d9f60b7ca2a514049394940faddaa812d2f。
+本追確認ではアプリ本体・テストコードを変更していない。Chromium、Node、静的ビルド等の合格済み検証は再実行していない。
+
+### 不足ライブラリと対応パッケージ
+
+| 共有ライブラリ | Debian 13 amd64パッケージ |
+| --- | --- |
+| libgtk-4.so.1 | libgtk-4-1 |
+| libgraphene-1.0.so.0 | libgraphene-1.0-0 |
+| libharfbuzz-icu.so.0 | libharfbuzz-icu0 |
+| libmanette-0.2.so.0 | libmanette-0.2-0 |
+| libhyphen.so.0 | libhyphen0 |
+| libGLESv2.so.2 | libgles2 |
+
+ctypes.util.find_libraryで6種とも未検出、dpkg-queryで6パッケージとも未導入を確認。Playwright配布物のinstall-dependencies.shにも対応する6パッケージを確認した。配布物のlib/sys/libを加えたlddでもGTK側でGTK/Graphene/HarfBuzz ICU/Manette/Hyphenの欠落、headless WPE側でHarfBuzz ICU/Hyphenの欠落を確認した。GTK/WPEで使用する依存関係は異なるが、現行PlaywrightのWebKit起動前検査は6種の不足を報告する。
+
+### 導入可否・安全な代替手段の確認
+
+1. ホストはDebian 13、作業ユーザーはuid=1000。管理用の /usr/local/bin/cloud-agent-packages とsudoは存在しない。APTパッケージ索引 /var/lib/apt/lists は空で、管理者所有。通常のシステム依存導入手段を利用できない。
+2. 配布物の依存導入スクリプトも非rootではsudo apt-getを使用する。システム領域の直接変更、独自パッケージ配布元の追加、権限設定変更は行わなかった。
+3. 管理済みDockerの標準ソケットを利用できたため、ホストOSを変更しない代替として公式 mcr.microsoft.com/playwright/python:v1.62.0-noble を取得した。イメージdigestは sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d。
+4. リポジトリと既存Playwright Pythonパッケージを読み取り専用mountし、--network none、--cap-drop ALL、--security-opt no-new-privilegesで、同じbrowser_smoke.py --browser webkitの実行を試みた。
+5. Dockerのvfsストレージでコンテナ作成時に「no space left on device」となりexit 125。Python/WebKitおよびテスト本体の起動前に停止。約7.9GiBのファイルシステムが100%使用となった。
+6. 今回取得したイメージだけを削除し、空き約2.8GiB（使用63%）へ回復したことを確認。Dockerに残るイメージ・コンテナはなし。既存ファイルの削除、ストレージドライバ変更、デーモン再起動、容量拡張は行わず、これ以上の導入は中止した。
+
+### 追確認結果
+
+- WebKitは環境制約により未完走。14グループ未確認、成功0・assert失敗0。今回の追加試行はコンテナ起動環境失敗1件（exit 125）。
+- 分類B：ホスト依存導入手段の不足、および代替コンテナの容量不足。再現条件は上記公式イメージを現在のDocker vfs/約7.9GiB環境で起動すること。
+- 影響：この環境でWebKitスモークを実行できない。一般公開前のWebKit検証が未完了というテスト基盤上の制約。アプリ本体の不具合を示すものではない。
+- 新たなテストassert失敗、C（アプリ不具合）、D（原因未特定）は発見していない。テストは未起動のためWebKitでのアプリ正常性は判断できない。
+- 次に必要なのは、WebKit依存が導入済みの環境、または公式Playwrightコンテナの作成に十分な容量を持つ環境。そこで同じ14グループの実行が必要。
+- mainマージ、公開環境変更、デプロイなし。追加コミット前に実効author/committerを指定済みGitHub noreplyと照合。
+- 追確認ログ：[webkit-environment-followup.log](webkit-environment-followup.log)。初回起動失敗ログは履歴として保持。
