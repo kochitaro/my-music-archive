@@ -1,0 +1,18 @@
+PASS five simultaneous tabs, retry, real spacing {"minFetchMs":1251.89990234375,"minReceiveMs":1250.914794921875}
+PASS two simultaneous tabs {"minFetchMs":1253.300048828125}
+PASS HTTP-date not shortened {"minFetchMs":3206.800048828125}
+PASS CORS-hidden Retry-After uses backoff {"minFetchMs":2008.599853515625}
+PASS four attempts; final cooldown survives another URL/tab/reload {"cooldownUntil":1795727133921,"lastStart":1795727133927.5}
+PASS long suppresses other tab and reload without shortening {}
+PASS overflow suppresses other tab and reload without shortening {}
+PASS cancel waiting search, keep valid deduplicated listener {}
+PASS tab closure during fetch releases lock {}
+PASS real 30-second lock wait stops without unprotected fetch {}
+PASS real 20-second abort then backoff/retry {"minFetchMs":22003.800048828125}
+PASS synthetic hidden/restore discards old task and permits explicit re-search {}
+PASS fail closed: corrupt {}
+PASS fail closed: write {}
+PASS fail closed: locks {}
+PASS archive CRUD/photos/Insights/JSON and JA/EN while search corrupt {}
+PASS archive CRUD/photos/Insights/JSON and JA/EN while search busy {}
+PASS complete {"browser":"chromium","version":"156.0.8078.79"}

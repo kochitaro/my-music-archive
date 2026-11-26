@@ -634,7 +634,19 @@ function art(r){if(r.photo){const i=text('img','art');i.src=r.photo;i.alt='Live 
 // Search state never owns a saved record. Request IDs also invalidate retry notices and metadata lookups.
 let searchRequest=0,addRequest=0,searchQuery='',searchState=null,searchVisible=0,searchLoading=false,searchMode='artist';
 function status(v){$('status').textContent=v}
-function searchContext(seq){return {isCurrent:()=>seq===searchRequest}}
+const searchNotices={
+ unsupported:['Safe search coordination is unavailable. MusicBrainz search is paused.','安全な通信制御を利用できないため、MusicBrainz検索を停止しています。'],
+ storage:['Search coordination data is unavailable. MusicBrainz search is paused.','通信制御データを利用できないため、MusicBrainz検索を停止しています。'],
+ clock:['The device clock changed. MusicBrainz search is paused.','端末時計の変更を検出したため、MusicBrainz検索を停止しています。'],
+ cooldown:['MusicBrainz search is cooling down. Please try again later.','MusicBrainz検索は待機中です。時間をおいて再検索してください。'],
+ waiting:['Search waited for 30 seconds. Please try again later.','検索の待機が30秒に達しました。時間をおいて再検索してください。'],
+ background:['Search was interrupted in the background. Please search again.','バックグラウンド移行により検索を中止しました。再検索してください。'],
+ cancelled:['Search was cancelled. Please search again.','検索を中止しました。再検索してください。'],
+ wait:['Waiting for MusicBrainz search access…','MusicBrainz検索の通信開始を待っています…']
+};
+function searchNotice(code){const pair=searchNotices[code];return pair?pair[isJapanese()?1:0]:(isJapanese()?'検索できませんでした。時間をおいて再度お試しください。':'Search failed. Please try again later.')}
+function searchContext(seq){return {isCurrent:()=>seq===searchRequest,onWait:()=>{if(seq===searchRequest)status(searchNotice('wait'))}}}
+$('ui-language').addEventListener('change',()=>{for(const pair of Object.values(searchNotices))if(pair.includes($('status').textContent)){status(pair[isJapanese()?1:0]);break}});
 function resetSearchView(){lastResults=[];$('results').replaceChildren();$('result-count').textContent='';$('more-results').classList.add('hidden');$('artist-candidates').replaceChildren();$('artist-candidates').classList.add('hidden')}
 function clearSearch(keepInput=false){++searchRequest;++addRequest;searchQuery='';searchState=null;searchVisible=0;searchLoading=false;resetSearchView();if(!keepInput)$('query').value='';$('clear-search').classList.add('hidden');$('search-btn').disabled=false;$('more-results').disabled=false;status('')}
 $('clear-search').onclick=()=>clearSearch();
@@ -698,7 +710,7 @@ async function fetchSearch(more=false,chosenArtist=null){
   if(next.mode==='title')next.items=MMASearch.sortTitles(next.items,q);
   searchState=next;searchVisible=Math.min(visible,next.items.length);renderResults();
   status(lastResults.length?(isJapanese()?'作品を選んで追加してください。':'Select an album to add.'):(isJapanese()?'作品が見つかりませんでした。':(searchMode==='artist'?'No artists found. Try another spelling.':'No albums found. Try another spelling.')));
- }catch(err){if(ctx.isCurrent())status(isJapanese()?'検索できませんでした。時間をおいて再度お試しください。':'Search failed. Please try again later.')}
+ }catch(err){if(ctx.isCurrent())status(searchNotice(err.searchCode))}
  finally{if(ctx.isCurrent()){searchLoading=false;$('more-results').disabled=false}}
 }
 $('search-form').onsubmit=e=>{e.preventDefault();const q=$('query').value.trim();if(q.length<2)return;searchQuery=q;fetchSearch()};

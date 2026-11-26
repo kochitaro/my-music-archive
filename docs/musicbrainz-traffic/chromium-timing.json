@@ -1,0 +1,683 @@
+{
+  "browser": "chromium",
+  "checks": [
+    {
+      "name": "five simultaneous tabs, retry, real spacing",
+      "minFetchMs": 1251.89990234375,
+      "minReceiveMs": 1250.914794921875
+    },
+    {
+      "name": "two simultaneous tabs",
+      "minFetchMs": 1253.300048828125
+    },
+    {
+      "name": "HTTP-date not shortened",
+      "minFetchMs": 3206.800048828125
+    },
+    {
+      "name": "CORS-hidden Retry-After uses backoff",
+      "minFetchMs": 2008.599853515625
+    },
+    {
+      "name": "four attempts; final cooldown survives another URL/tab/reload",
+      "cooldownUntil": 1795727133921,
+      "lastStart": 1795727133927.5
+    },
+    {
+      "name": "long suppresses other tab and reload without shortening"
+    },
+    {
+      "name": "overflow suppresses other tab and reload without shortening"
+    },
+    {
+      "name": "cancel waiting search, keep valid deduplicated listener"
+    },
+    {
+      "name": "tab closure during fetch releases lock"
+    },
+    {
+      "name": "real 30-second lock wait stops without unprotected fetch"
+    },
+    {
+      "name": "real 20-second abort then backoff/retry",
+      "minFetchMs": 22003.800048828125
+    },
+    {
+      "name": "synthetic hidden/restore discards old task and permits explicit re-search"
+    },
+    {
+      "name": "fail closed: corrupt"
+    },
+    {
+      "name": "fail closed: write"
+    },
+    {
+      "name": "fail closed: locks"
+    },
+    {
+      "name": "archive CRUD/photos/Insights/JSON and JA/EN while search corrupt"
+    },
+    {
+      "name": "archive CRUD/photos/Insights/JSON and JA/EN while search busy"
+    },
+    {
+      "name": "complete",
+      "browser": "chromium",
+      "version": "156.0.8078.79"
+    }
+  ],
+  "timing": [
+    {
+      "group": "five",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/retry?g=five&i=0&step=0",
+          "at": 1795727093090.0999
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=1&step=0",
+          "at": 1795727095100.5999
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=4&step=0",
+          "at": 1795727096354
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=1&step=1",
+          "at": 1795727097608.0999
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=4&step=1",
+          "at": 1795727098861.2
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/retry?g=five&i=0&step=0",
+          "at": 1795727100113.0999
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=2&step=0",
+          "at": 1795727101367.0999
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=0&step=1",
+          "at": 1795727102622.2
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=3&step=0",
+          "at": 1795727103875.6
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=2&step=1",
+          "at": 1795727105129
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=five&i=3&step=1",
+          "at": 1795727106383.8
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/retry?g=five&i=0&step=0",
+          "method": "GET",
+          "at": 1795727093096.88,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=1&step=0",
+          "method": "GET",
+          "at": 1795727095105.2097,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=4&step=0",
+          "method": "GET",
+          "at": 1795727096358.5505,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=1&step=1",
+          "method": "GET",
+          "at": 1795727097614.777,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=4&step=1",
+          "method": "GET",
+          "at": 1795727098865.692,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/retry?g=five&i=0&step=0",
+          "method": "GET",
+          "at": 1795727100118.6992,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=2&step=0",
+          "method": "GET",
+          "at": 1795727101377.3572,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=0&step=1",
+          "method": "GET",
+          "at": 1795727102629.281,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=3&step=0",
+          "method": "GET",
+          "at": 1795727103881.0613,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=2&step=1",
+          "method": "GET",
+          "at": 1795727105133.1597,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=five&i=3&step=1",
+          "method": "GET",
+          "at": 1795727106387.7065,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 1251.89990234375,
+      "minReceiveMs": 1250.914794921875
+    },
+    {
+      "group": "two",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=two&i=0",
+          "at": 1795727107101.3
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=two&i=1",
+          "at": 1795727108354.6
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/ok?g=two&i=0",
+          "method": "GET",
+          "at": 1795727107106.178,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=two&i=1",
+          "method": "GET",
+          "at": 1795727108359.1953,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 1253.300048828125,
+      "minReceiveMs": 1253.017333984375
+    },
+    {
+      "group": "date",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/date?g=date",
+          "at": 1795727108795.2
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/date?g=date",
+          "at": 1795727112002
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/date?g=date",
+          "method": "GET",
+          "at": 1795727108805.4512,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/date?g=date",
+          "method": "GET",
+          "at": 1795727112006.4487,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 3206.800048828125,
+      "minReceiveMs": 3200.99755859375
+    },
+    {
+      "group": "hidden",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:42225/api/hidden?g=hidden",
+          "at": 1795727112394.9001
+        },
+        {
+          "url": "http://127.0.0.1:42225/api/hidden?g=hidden",
+          "at": 1795727114403.5
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/hidden?g=hidden",
+          "method": "GET",
+          "at": 1795727112399.647,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/hidden?g=hidden",
+          "method": "GET",
+          "at": 1795727114410.1462,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 2008.599853515625,
+      "minReceiveMs": 2010.499267578125
+    },
+    {
+      "group": "final",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/always?g=final",
+          "at": 1795727115779.2
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/always?g=final",
+          "at": 1795727117850.3
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/always?g=final",
+          "at": 1795727121870.5999
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/always?g=final",
+          "at": 1795727127901
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=final",
+          "at": 1795727133927.5
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/always?g=final",
+          "method": "GET",
+          "at": 1795727115800.6406,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/always?g=final",
+          "method": "GET",
+          "at": 1795727117858.8262,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/always?g=final",
+          "method": "GET",
+          "at": 1795727121886.792,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/always?g=final",
+          "method": "GET",
+          "at": 1795727127915.9836,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=final",
+          "method": "GET",
+          "at": 1795727133936.0364,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 2071.10009765625,
+      "minReceiveMs": 2058.185546875
+    },
+    {
+      "group": "long",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/long?g=long",
+          "at": 1795727134882.0999
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/long?g=long",
+          "method": "GET",
+          "at": 1795727134895.9092,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": null,
+      "minReceiveMs": null
+    },
+    {
+      "group": "overflow",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/overflow?g=overflow",
+          "at": 1795727136312
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/overflow?g=overflow",
+          "method": "GET",
+          "at": 1795727136354.4072,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": null,
+      "minReceiveMs": null
+    },
+    {
+      "group": "cancel",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=cancel&seed=1",
+          "at": 1795727137653.2998
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=cancel&dedup=1",
+          "at": 1795727138912.0999
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/ok?g=cancel&seed=1",
+          "method": "GET",
+          "at": 1795727137681.97,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=cancel&dedup=1",
+          "method": "GET",
+          "at": 1795727138925.9495,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 1258.800048828125,
+      "minReceiveMs": 1243.9794921875
+    },
+    {
+      "group": "busylock",
+      "fetchStarts": [],
+      "received": [],
+      "minFetchMs": null,
+      "minReceiveMs": null
+    },
+    {
+      "group": "timeout",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/timeout?g=timeout",
+          "at": 1795727174101.5
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/timeout?g=timeout",
+          "at": 1795727196105.3
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/timeout?g=timeout",
+          "method": "GET",
+          "at": 1795727174113.9775,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/timeout?g=timeout",
+          "method": "GET",
+          "at": 1795727196112.0486,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 22003.800048828125,
+      "minReceiveMs": 21998.071044921875
+    },
+    {
+      "group": "background",
+      "fetchStarts": [
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=background&seed=1",
+          "at": 1795727196754.8
+        },
+        {
+          "url": "http://127.0.0.1:38133/api/ok?g=background&new=1",
+          "at": 1795727198011
+        }
+      ],
+      "received": [
+        {
+          "url": "/api/ok?g=background&seed=1",
+          "method": "GET",
+          "at": 1795727196765.346,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        },
+        {
+          "url": "/api/ok?g=background&new=1",
+          "method": "GET",
+          "at": 1795727198024.1416,
+          "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+        }
+      ],
+      "minFetchMs": 1256.199951171875,
+      "minReceiveMs": 1258.795654296875
+    },
+    {
+      "group": "fault-corrupt",
+      "fetchStarts": [],
+      "received": [],
+      "minFetchMs": null,
+      "minReceiveMs": null
+    },
+    {
+      "group": "fault-write",
+      "fetchStarts": [],
+      "received": [],
+      "minFetchMs": null,
+      "minReceiveMs": null
+    },
+    {
+      "group": "fault-locks",
+      "fetchStarts": [],
+      "received": [],
+      "minFetchMs": null,
+      "minReceiveMs": null
+    }
+  ],
+  "received": [
+    {
+      "url": "/api/retry?g=five&i=0&step=0",
+      "method": "GET",
+      "at": 1795727093096.88,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=1&step=0",
+      "method": "GET",
+      "at": 1795727095105.2097,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=4&step=0",
+      "method": "GET",
+      "at": 1795727096358.5505,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=1&step=1",
+      "method": "GET",
+      "at": 1795727097614.777,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=4&step=1",
+      "method": "GET",
+      "at": 1795727098865.692,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/retry?g=five&i=0&step=0",
+      "method": "GET",
+      "at": 1795727100118.6992,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=2&step=0",
+      "method": "GET",
+      "at": 1795727101377.3572,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=0&step=1",
+      "method": "GET",
+      "at": 1795727102629.281,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=3&step=0",
+      "method": "GET",
+      "at": 1795727103881.0613,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=2&step=1",
+      "method": "GET",
+      "at": 1795727105133.1597,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=five&i=3&step=1",
+      "method": "GET",
+      "at": 1795727106387.7065,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=two&i=0",
+      "method": "GET",
+      "at": 1795727107106.178,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=two&i=1",
+      "method": "GET",
+      "at": 1795727108359.1953,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/date?g=date",
+      "method": "GET",
+      "at": 1795727108805.4512,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/date?g=date",
+      "method": "GET",
+      "at": 1795727112006.4487,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/hidden?g=hidden",
+      "method": "GET",
+      "at": 1795727112399.647,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/hidden?g=hidden",
+      "method": "GET",
+      "at": 1795727114410.1462,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/always?g=final",
+      "method": "GET",
+      "at": 1795727115800.6406,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/always?g=final",
+      "method": "GET",
+      "at": 1795727117858.8262,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/always?g=final",
+      "method": "GET",
+      "at": 1795727121886.792,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/always?g=final",
+      "method": "GET",
+      "at": 1795727127915.9836,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=final",
+      "method": "GET",
+      "at": 1795727133936.0364,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/long?g=long",
+      "method": "GET",
+      "at": 1795727134895.9092,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/overflow?g=overflow",
+      "method": "GET",
+      "at": 1795727136354.4072,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=cancel&seed=1",
+      "method": "GET",
+      "at": 1795727137681.97,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=cancel&dedup=1",
+      "method": "GET",
+      "at": 1795727138925.9495,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/timeout?g=close",
+      "method": "GET",
+      "at": 1795727140198.7227,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=close",
+      "method": "GET",
+      "at": 1795727142232.7285,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/timeout?g=timeout",
+      "method": "GET",
+      "at": 1795727174113.9775,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/timeout?g=timeout",
+      "method": "GET",
+      "at": 1795727196112.0486,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=background&seed=1",
+      "method": "GET",
+      "at": 1795727196765.346,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "url": "/api/ok?g=background&new=1",
+      "method": "GET",
+      "at": 1795727198024.1416,
+      "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    }
+  ]
+}
