@@ -1,0 +1,15 @@
+browserType.launch: 
+╔══════════════════════════════════════════════════════╗
+║ Host system is missing dependencies to run browsers. ║
+║ Missing libraries:                                   ║
+║     libgtk-4.so.1                                    ║
+║     libgraphene-1.0.so.0                             ║
+║     libharfbuzz-icu.so.0                             ║
+║     libmanette-0.2.so.0                              ║
+║     libhyphen.so.0                                   ║
+║     libGLESv2.so.2                                   ║
+╚══════════════════════════════════════════════════════╝
+    at /workspace/my-music-archive/tests/transport_browser.cjs:39:58 {
+  log: [],
+  name: 'Error'
+}

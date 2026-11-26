@@ -116,8 +116,7 @@ with sync_playwright() as p:
   else:route.abort()
  context.route('**/*',local_only)
  context.route('https://musicbrainz.org/**',mock)
- # Accelerate retry/spacing waits, preserving the 20s request-abort timeout.
- context.add_init_script('''const nativeTimeout=window.setTimeout;window.setTimeout=(fn,ms,...args)=>nativeTimeout(fn,ms>=1000&&ms<20000?Math.min(ms,15):ms,...args);''')
+ # Keep real traffic/cooldown timing; the separate timing suite records both ends.
  page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
  # Seed before the first app load; changing legacy sources after IDB init is a conflict.
  context.route(BASE+'/smoke-seed',lambda r:r.fulfill(body='<p>isolated synthetic seed</p>',content_type='text/html'))
@@ -174,11 +173,11 @@ with sync_playwright() as p:
  passed('missing-credit guard/manual correction, extra metadata lookup, title mode and 30-item pagination')
  search(page,'retry-page')
  for count in [60,90]:page.locator('#more-results').click();expect(page.locator('#results .result')).to_have_count(count)
- page.locator('#more-results').click();expect(page.locator('#status')).to_contain_text('Search failed',timeout=10000);expect(page.locator('#results .result')).to_have_count(90)
+ page.locator('#more-results').click();expect(page.locator('#status')).to_contain_text('Search failed',timeout=25000);expect(page.locator('#results .result')).to_have_count(90)
  fail_next=False;page.locator('#more-results').click();expect(page.locator('#results .result')).to_have_count(120,timeout=10000)
  assert len(set(page.locator('#results .title').all_text_contents()))==120
  passed('failed next page preserves offset/results and can retry without duplicates')
- page.locator('#query').fill('failure');page.locator('#search-btn').click();expect(page.locator('#status')).to_contain_text('Search failed',timeout=15000)
+ page.locator('#query').fill('failure');page.locator('#search-btn').click();expect(page.locator('#status')).to_contain_text('Search failed',timeout=25000)
  assert page.locator('#search-btn').is_enabled();page.locator('[data-search-mode=artist]').click();search(page,'Number Girl')
  # Hold one artist request in the browser before submitting a newer query.
  page.evaluate('''()=>{const fetch=window.fetch;window.fetch=async(...args)=>{if(String(args[0]).includes('artist/')&&String(args[0]).includes('old'))await new Promise(r=>{window.releaseOld=r});return fetch(...args)}}''')

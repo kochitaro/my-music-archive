@@ -1,0 +1,18 @@
+PASS five simultaneous tabs, retry, real spacing {"minFetchMs":1252,"minReceiveMs":1242.919677734375}
+PASS two simultaneous tabs {"minFetchMs":1260}
+PASS HTTP-date not shortened {"minFetchMs":3813}
+PASS CORS-hidden Retry-After uses backoff {"minFetchMs":2022}
+PASS four attempts; final cooldown survives another URL/tab/reload {"cooldownUntil":1795727148783,"lastStart":1795727148784}
+PASS long suppresses other tab and reload without shortening {}
+PASS overflow suppresses other tab and reload without shortening {}
+PASS cancel waiting search, keep valid deduplicated listener {}
+PASS tab closure during fetch releases lock {}
+PASS real 30-second lock wait stops without unprotected fetch {}
+PASS real 20-second abort then backoff/retry {"minFetchMs":22038}
+PASS synthetic hidden/restore discards old task and permits explicit re-search {}
+PASS fail closed: corrupt {}
+PASS fail closed: write {}
+PASS fail closed: locks {}
+PASS archive CRUD/photos/Insights/JSON and JA/EN while search corrupt {}
+PASS archive CRUD/photos/Insights/JSON and JA/EN while search busy {}
+PASS complete {"browser":"firefox","version":"153.0"}
