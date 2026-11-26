@@ -8,7 +8,12 @@ const credits=require('./fixtures/credits.json');
 function harness(handler,timeouts=false,onSleep=()=>{}){
  let now=1000000,active=0,maxActive=0;
  const calls=[],delays=[];
- const context={window:{},URLSearchParams,AbortController,Date:{now:()=>now},
+ const values=new Map();
+ const context={window:{addEventListener(){}},document:{hidden:false,addEventListener(){}},isSecureContext:true,
+  navigator:{locks:{request:async(name,options,fn)=>fn({name})}},
+  localStorage:{getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,v)},
+  performance:{now:()=>now},setInterval:()=>null,clearInterval,
+  URLSearchParams,AbortController,Date:class extends Date{static now(){return now}},
   setTimeout:(fn,ms)=>{if(String(fn).includes("controller.abort"))return timeouts?setTimeout(fn,0):null;delays.push(ms);now+=ms;onSleep(ms);return setTimeout(fn,0)},clearTimeout,
   fetch:async(address,options)=>{calls.push({url:new URL(address),at:now});active++;maxActive=Math.max(maxActive,active);try{return await handler(new URL(address),calls.length,options)}finally{active--}}
  };
@@ -25,7 +30,7 @@ for(const code of [429,502,503,504,'network'])test(`${code}: max four attempts, 
  assert.equal((await h.api.request('https://example.test/good')).ok,true);
 });
 test('Retry-After is honoured above 15 seconds, malformed values use backoff',async()=>{
- for(const header of ['20','1.5','Wed, 21 Oct 2026 12:00:00 GMT','garbage']){
+ for(const header of ['20','1.5','Thu, 01 Jan 1970 00:00:00 GMT','garbage']){
   const h=harness((u,n)=>response({},n===1?503:200,header));await h.api.request('https://example.test/a');
   assert.equal(h.calls[1].at-h.calls[0].at,header==='20'?20000:2000);
  }

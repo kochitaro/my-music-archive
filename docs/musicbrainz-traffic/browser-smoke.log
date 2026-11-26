@@ -1,0 +1,21 @@
+Loading MMA
+Loaded MMA
+PASS legacy v3 migration into ready IndexedDB, exact seed retained
+PASS modes, short prefix, candidate choice, input preservation, actual album fixtures and nonexistent title
+Searching Number Girl
+Searching ナンバーガール
+Searching 細野晴臣
+Searching Haruomi Hosono
+PASS actual artist fixtures, same artist IDs, whole-catalog sorting, 390px width
+PASS Listening/Collection saves, metadata/date inheritance, Japanese/English, existing data intact
+PASS missing-credit guard/manual correction, extra metadata lookup, title mode and 30-item pagination
+PASS failed next page preserves offset/results and can retry without duplicates
+PASS final API failure/re-search, stale-result race, tab reset, manual entry, no page errors
+PASS Punisher/Hard Life from API fixtures save correct artists and release dates in Listening/Collection
+PASS JSON v3 export and full archive equality after reload
+PASS photo create/display, photos store reference, edit and portable JSON equality
+PASS delete restores exact pre-create archive
+PASS JSON restore, photo/record reload persistence, ready state and unchanged legacy source
+PASS Search Lab shared core, artist credits, pagination and title-mode switch
+PASS expected restore dialogs only and final no page errors
+COMPLETE chromium 14 check groups passed; failures=0
