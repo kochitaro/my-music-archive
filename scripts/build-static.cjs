@@ -7,6 +7,7 @@ const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
 const core = [
   'index.html', 'insights.css', 'archive-toolbar.css',
+  'brand.css', 'josefin-sans.woff2', 'JosefinSans-OFL.txt',
   'insights.js', 'search.js', 'photo-store.js', 'archive-toolbar.js',
   'mobile-navigation.js', 'archive-store.js', 'recovery-export.js',
   'photo-lifecycle.js', '404.html',
@@ -48,6 +49,7 @@ try {
     }
   }
   for (const file of files) {
+    if (!/\.(?:html|css)$/.test(file)) continue;
     const text = fs.readFileSync(path.join(root, file), 'utf8');
     if (file.endsWith('.html')) {
       for (const match of text.matchAll(/\b(?:src|href)\s*=\s*["']([^"']*)["']/gi)) checkReference(match[1], file);
