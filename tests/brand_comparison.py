@@ -5,7 +5,7 @@ from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright,expect
 from static_distribution import SNAPSHOT
 from data_preservation import seed_data
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'docs/brand-logo-02-round2';OUT.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'docs/brand-logo-02-round3';OUT.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
 records=[];servers=[]
@@ -20,7 +20,11 @@ with sync_playwright() as pw:
    for lang in ['ja','en']:
     p.locator('#ui-language').select_option(lang);expect(p.locator('#ui-language')).to_be_enabled()
     positions=[]
-    for name in ['C-1','B','E']:
+    controls=p.locator('.brand-comparison button').evaluate_all('(nodes)=>nodes.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom}})')
+    assert len(controls)==5 and all(r['w']>=44 and r['h']>=44 and r['x']>=0 and r['right']<=width for r in controls),controls
+    for i,r in enumerate(controls):
+     for q in controls[i+1:]:assert r['right']<=q['x']+.1 or q['right']<=r['x']+.1 or r['bottom']<=q['y']+.1 or q['bottom']<=r['y']+.1
+    for name in ['B-1','B-2','B-3','B-4','B-5']:
      button=p.locator('.brand-comparison button').filter(has_text=re.compile('^'+re.escape(name)+'$'));button.tap() if width<600 else button.click()
      expect(button).to_have_attribute('aria-pressed','true');expect(p.locator(f'[data-brand-symbol="{name}"]')).to_be_visible()
      info=p.locator('.brand').evaluate('''e=>{let h=e.querySelector('h1'),s=[...e.querySelectorAll('[data-brand-symbol]')].find(n=>n.getClientRects().length).querySelector('svg'),r=h.getBoundingClientRect(),v=s.getBoundingClientRect(),st=getComputedStyle(h);return {x:r.x,y:r.y,height:r.height,size:parseFloat(st.fontSize),weight:st.fontWeight,spacing:st.letterSpacing,lineHeight:st.lineHeight,symbol:[v.width,v.height],ratio:s.viewBox.baseVal.width/s.viewBox.baseVal.height,overflow:h.scrollWidth>h.clientWidth||r.right>innerWidth,font:st.fontFamily}}''')
@@ -46,7 +50,8 @@ with sync_playwright() as pw:
     c.route(url+'**',lambda r:r.fulfill(body=(root/'index.html').read_text(),content_type='text/html') if r.request.resource_type=='document' else r.fulfill(body=(root/'brand-compare.js').read_text(),content_type='text/javascript') if 'brand-compare.js' in r.request.url else r.abort());p.goto(url+'?logo-compare=1')
    assert p.locator('.brand-comparison').count()==int(enabled),(kind,host)
    if host=='127.0.0.1':
-    expect(p.locator('[data-brand-symbol="C-1"]')).to_be_visible();expect(p.locator('[data-brand-symbol="B"]')).not_to_be_visible();expect(p.locator('[data-brand-symbol="E"]')).not_to_be_visible()
+    for name in ['B-1','B-2','B-3','B-4','B-5']:
+     assert p.locator(f'[data-brand-symbol="{name}"]').is_visible()==(name=='B-3')
    c.close()
  # Synthetic state retention in actual search/archive/Insights, with read/write instrumentation.
  c=b.new_context(viewport={'width':393,'height':852},is_mobile=True,has_touch=True);p=c.new_page();c.route('https://**/*',lambda r:r.abort());p.goto(base+'?logo-compare=1');p.evaluate('MLAReady');p.on('dialog',lambda d:d.accept())
@@ -67,23 +72,22 @@ with sync_playwright() as pw:
   before=p.evaluate(SNAPSHOT)
   panel_state=p.locator('#filters-wrap').get_attribute('class')
   p.evaluate('''()=>{window.logoOriginalNodes=[document.querySelector('#library').firstChild,document.querySelector('#results').firstChild,document.querySelector('#listening-insights').firstChild];window.logoReads=window.logoWrites=window.logoStorageWrites=window.logoRequests=window.logoMutations=0;window.logoObserver=new MutationObserver(m=>logoMutations+=m.length);for(const id of ['library','results','listening-insights'])logoObserver.observe(document.getElementById(id),{childList:true,subtree:true,attributes:true});window.logoY=scrollY}''')
-  for name in ['B','E','C-1','E']:
+  for name in ['B-1','B-2','B-3','B-4','B-5','B-1']:
    p.locator('.brand-comparison button').filter(has_text=re.compile('^'+re.escape(name)+'$')).tap()
    assert p.evaluate('scrollY===logoY'),(screen,name)
   # Keyboard activation is also local and must not scroll.
-  btn=p.locator('.brand-comparison button').filter(has_text='B');btn.evaluate('(e)=>e.focus({preventScroll:true})');btn.press('Space')
+  btn=p.locator('.brand-comparison button').filter(has_text='B-2');btn.evaluate('(e)=>e.focus({preventScroll:true})');btn.press('Space')
   counters=p.evaluate('''()=>({reads:logoReads,writes:logoWrites,storage:logoStorageWrites,requests:logoRequests,mutations:logoMutations,nodes:logoOriginalNodes.every((n,i)=>n===[document.querySelector('#library').firstChild,document.querySelector('#results').firstChild,document.querySelector('#listening-insights').firstChild][i]),y:scrollY===logoY})''')
   assert counters==dict(reads=0,writes=0,storage=0,requests=0,mutations=0,nodes=True,y=True),counters
   assert p.locator('#filters-wrap').get_attribute('class')==panel_state
   assert p.evaluate(SNAPSHOT)==before;expect(p.locator('#results .result')).to_have_count(1);assert p.locator('#query').input_value()=='Synthetic search'
   p.evaluate('logoObserver.disconnect()');print('PASS state retention',screen,counters,flush=True)
- p.reload();expect(p.locator('[data-brand-symbol="C-1"]')).to_be_visible();c.close()
- # SVG shape rendering for original/SVG visual comparison; C-1 bytes must be untouched.
- before=subprocess.check_output(['git','show','bdc4ddd:index.html'],cwd=ROOT,text=True);c1=re.search(r'<svg.*?</svg>',before,re.S)[0];assert c1 in (ROOT/'index.html').read_text()
+ p.reload();expect(p.locator('[data-brand-symbol="B-3"]')).to_be_visible();c.close()
+ # All five SVGs share one coordinate frame; render without additional assets.
  p=b.new_page()
- for name in ['B','E']:
+ for name in ['B-1','B-2','B-3','B-4','B-5']:
   svg=re.search(r'<span data-brand-symbol="'+name+r'">(.*?)</span>',(ROOT/'index.html').read_text(),re.S)[1]
   p.set_content('<style>body{margin:0;background:#11151b;color:#f0f1f3}svg{display:block;width:auto;height:300px}</style>'+svg);p.locator('svg').screenshot(path=str(OUT/f'svg-{name}.png'))
  b.close()
 for s in servers:s.shutdown()
-(OUT/'metrics.json').write_text(json.dumps(records,indent=2));print('PASS 72 width/language/variant/source-dist cases, text enlargement, preview opt-in, original C-1 bytes unchanged')
+(OUT/'metrics.json').write_text(json.dumps(records,indent=2));print('PASS 120 width/language/variant/source-dist cases, text enlargement, preview opt-in, default B-3')
