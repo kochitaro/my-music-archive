@@ -9,10 +9,12 @@
 .brand{display:flex;align-items:center;gap:12px;margin:5px 0 16px;max-width:100%;min-width:0;color:#f0f1f3}
 .brandmark{display:grid;place-items:center;flex:none;width:42px;height:40px;padding:0;background:none;border:0;border-radius:0}
 .brandmark>span{display:none;align-items:center;justify-content:center;width:100%;height:40px}
-.brandmark:not([data-brand-choice])>[data-brand-symbol="C-1"],
-.brandmark[data-brand-choice="C-1"]>[data-brand-symbol="C-1"],
-.brandmark[data-brand-choice="B"]>[data-brand-symbol="B"],
-.brandmark[data-brand-choice="E"]>[data-brand-symbol="E"]{display:flex}
+.brandmark:not([data-brand-choice])>[data-brand-symbol="B-3"],
+.brandmark[data-brand-choice="B-1"]>[data-brand-symbol="B-1"],
+.brandmark[data-brand-choice="B-2"]>[data-brand-symbol="B-2"],
+.brandmark[data-brand-choice="B-3"]>[data-brand-symbol="B-3"],
+.brandmark[data-brand-choice="B-4"]>[data-brand-symbol="B-4"],
+.brandmark[data-brand-choice="B-5"]>[data-brand-symbol="B-5"]{display:flex}
 .brandmark svg{display:block;width:auto;height:40px}
 .brand h1{font-family:"Josefin Sans","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:28px;font-weight:400;letter-spacing:.02em;line-height:1.25;margin:0;min-width:0;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:540px){
@@ -21,7 +23,7 @@
 }
 
 /* Temporary opt-in Preview comparison panel. Remove after symbol selection. */
-.brand-comparison{position:fixed;right:12px;bottom:max(calc(94px + env(safe-area-inset-bottom)),calc(var(--archive-toolbar-occupied,0px) + 12px));z-index:4;display:flex;align-items:center;gap:4px;padding:5px 7px;background:#202a35;border:1px solid #536171;border-radius:10px;color:#f0f1f3;font:12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.brand-comparison{position:fixed;right:12px;bottom:max(calc(94px + env(safe-area-inset-bottom)),calc(var(--archive-toolbar-occupied,0px) + 12px));z-index:4;display:flex;flex-wrap:wrap;max-width:calc(100vw - 24px);align-items:center;gap:4px;padding:5px 7px;background:#202a35;border:1px solid #536171;border-radius:10px;color:#f0f1f3;font:12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 .brand-comparison span{margin-right:4px}
 .brand-comparison button{min-width:44px;min-height:44px;padding:6px;border:1px solid transparent;border-radius:6px;background:transparent;color:inherit;font:inherit}
 .brand-comparison button[aria-pressed="true"]{background:#c6e7ef;color:#12222c}
