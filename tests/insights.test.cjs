@@ -10,7 +10,7 @@ test('pie preserves sums and top fifteen across boundaries',()=>{
  for(const n of [0,1,10,15,16,100]){const entries=Array.from({length:n},(_,i)=>({name:String(i),count:n-i}));const result=I.pie(entries);assert.equal(result.length,Math.min(n,16));assert.equal(result.reduce((n,r)=>n+r.count,0),entries.reduce((n,r)=>n+r.count,0));assert.equal(result.filter(r=>r.other).length,n>15?1:0)}
 });
 test('strict date precision and leap boundaries',()=>{for(const d of ['',null,'bad','2026-00','2026-13','2025-02-29','1900-02-29','2026-04-31','0000','2026-01-00'])assert.equal(I.dateParts(d),null,d);for(const d of ['2026','2026-11','2024-02-29','2000-02-29'])assert.ok(I.dateParts(d),d)});
-test('time includes year-only yearly, no invented January; periods and boundaries',()=>{const s=I.aggregate(rows,'listening');assert.equal(s.years.get(2025),1);assert.equal(s.months.get(2025*12),undefined);const now=new Date(2026,10,6);const m=I.timeline(s,'monthly',12,now);assert.equal(m.rows.length,12);assert.equal(m.rows[0].name,'2026-11');assert.equal(m.rows[0].count,1);assert.equal(m.rows[11].name,'2025-12');assert.equal(I.timeline(s,'monthly',24,now).rows.length,12);assert.equal(I.timeline(s,'yearly',5,now).rows.length,3);assert.equal(I.timeline(s,'monthly',12,new Date(2027,0,1)).rows[0].name,'2027-01')});
+test('time includes year-only yearly, no invented January; periods and boundaries',()=>{const s=I.aggregate(rows,'listening');assert.equal(s.years.get(2025),1);assert.equal(s.months.get(2025*12),undefined);const now=new Date(2026,10,6);const m=I.timeline(s,'monthly',12,now);assert.equal(m.rows.length,12);assert.equal(m.rows[0].name,'2026-11');assert.equal(m.rows[0].count,1);assert.equal(m.rows[11].name,'2025-12');assert.equal(I.timeline(s,'monthly',24,now).rows.length,24);assert.equal(I.timeline(s,'yearly',5,now).rows.length,3);assert.equal(I.timeline(s,'monthly',12,new Date(2027,0,1)).rows[0].name,'2027-01')});
 test('future and empty dates never become current; year pagination',()=>{const s=I.aggregate([{date:'2010'},{date:'2099-01-01'},{date:'invalid'}],'live');assert.equal(I.timeline(s,'yearly',5,new Date(2026,0,1)).rows[0].count,0);assert.equal(I.timeline(s,'yearly',10,new Date(2026,0,1)).rows.length,10);assert.equal(I.timeline(s,'monthly',12,new Date(2026,0,1)).rows.length,0)});
 test('release year and decade boundaries; unknown excluded',()=>{const s=I.aggregate(rows,'collection');assert.deepEqual(I.releaseRows(s),[{name:'2000',count:1},{name:'1999',count:1}]);assert.deepEqual(I.releaseRows(s,true),[{name:'2000',count:1},{name:'1990',count:1}]);assert.equal(I.releaseRows(I.aggregate(Array.from({length:25},(_,i)=>({release:String(1980+i)})),'listening')).length,25)});
 
@@ -51,4 +51,28 @@ test('score ranking zero, unknown dates, ties, duplicate records and available y
  const before=JSON.stringify(rows),all=I.scoreRanking(rows);
  assert.deepEqual(all.years,[2025,2020]);assert.deepEqual(all.rows.map(r=>r.rank),[1,1,3,4]);assert.deepEqual(all.rows.map(r=>r.score),[5,5,4,0]);assert.equal(all.rows[0].record,rows[1]);
  assert.equal(I.scoreRanking(rows,'release','2025').rows.length,2);assert.equal(I.scoreRanking(rows,'date','2026').rows[0].score,0);assert.deepEqual(I.scoreRanking(rows,'date').years,[2026,2024]);assert.equal(JSON.stringify(rows),before);
+});
+
+test('layout defaults, independent areas, unknown/duplicate IDs and future additions',()=>{
+ assert.deepEqual(I.sectionIds('listening'),['artists','score','genre','tags','label','time','release']);
+ assert.deepEqual(I.sectionIds('collection'),['artists','genre','tags','label','store','format','time','release']);
+ assert.deepEqual(I.sectionIds('live'),['artists','venue','time']);
+ for(const area of ['listening','collection','live'])for(const value of [null,{},[],{version:1,items:[{id:'time',visible:'false'}]}])assert.deepEqual(I.normalizeLayout(value,area),I.sectionIds(area).map(id=>({id,visible:true})));
+ const value={version:1,items:[{id:'score',visible:false},{id:'obsolete',visible:true},{id:'score',visible:true},{id:'artists',visible:false}]};
+ const result=I.normalizeLayout(value,'listening');assert.deepEqual(result.slice(0,2),[{id:'score',visible:false},{id:'artists',visible:false}]);assert.equal(result.length,7);assert.equal(result.at(-1).id,'release');
+ assert.ok(result.slice(2).every(x=>x.visible));assert.equal(new Set(result.map(x=>x.id)).size,result.length);
+ assert.ok(I.normalizeLayout({version:1,items:[]},'live').every(x=>x.visible));
+});
+test('monthly paging reaches record start; gaps and scale inputs remain intact',()=>{
+ const s=I.aggregate([{date:'1986-03-01'},{date:'2026-11-01'}],'listening'),now=new Date(2026,10,27);
+ assert.equal(I.timeline(s,'monthly',12,now).more,true);assert.equal(I.timeline(s,'monthly',24,now).rows.length,24);
+ const all=I.timeline(s,'monthly',9999,now);assert.equal(all.rows.at(-1).name,'1986-03');assert.equal(all.more,false);assert.equal(all.rows.reduce((n,r)=>n+r.count,0),2);
+});
+test('live month boundaries distinguish unknown periods, gaps, future, year-only and empty years',()=>{
+ const now=new Date(2026,10,27),s=I.aggregate([{date:'2024-05-01'},{date:'2026-11-01'}],'live');
+ assert.deepEqual(I.liveMonths(s,2025,now).years,[2026,2025,2024]);assert.ok(I.liveMonths(s,2025,now).rows.every(x=>x.count===0&&!x.unavailable));
+ assert.equal(I.liveMonths(s,2024,now).rows.filter(x=>x.unavailable).length,4);
+ assert.equal(I.liveMonths(s,2026,now).rows[11].unavailable,true);assert.equal(I.liveMonths(s,2026,now).rows[10].count,1);
+ assert.deepEqual(I.liveMonths(I.aggregate([],'live'),2026,now).rows,[]);
+ assert.ok(I.liveMonths(I.aggregate([{date:'2024'}],'live'),2024,now).rows.every(x=>x.unavailable));
 });

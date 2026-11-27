@@ -1,0 +1,16 @@
+[
+  {
+    "phase": "previous",
+    "headerBefore": 82.5,
+    "headerAfter": 82.5,
+    "headingRetained": false,
+    "artistRetained": false
+  },
+  {
+    "phase": "current",
+    "headerBefore": 83,
+    "headerAfter": 83,
+    "headingRetained": true,
+    "artistRetained": true
+  }
+]
