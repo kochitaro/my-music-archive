@@ -6,10 +6,12 @@ for(const area of ['listening','collection','live'])test(area+' independent tota
 test('classifications trim, fold case and deduplicate each record',()=>{const s=I.aggregate(rows,'collection');assert.deepEqual(s.categories.genre,[{name:'Jazz',count:2},{name:'Rock',count:1}]);assert.equal(s.categories.tags[0].count,2);for(const f of ['label','store'])assert.equal(s.categories[f][0].count,2);assert.deepEqual(s.categories.format.map(x=>x.name),['CD','Digital'])});
 test('live artists count shows, never infer from title',()=>{const s=I.aggregate([{artists:['A',' A ','a','B',''],venue:'Tokyo'},{artists:['a','C'],venue:' Tokyo '},{title:'A'},{artists:[' ','']}],'live');assert.deepEqual(s.artists,[{name:'A',count:2},{name:'B',count:1},{name:'C',count:1}]);assert.equal(s.categories.venue[0].count,2)});
 test('stable top 30, short and empty rankings',()=>{const r=Array.from({length:40},(_,i)=>({artist:'Artist '+String(i).padStart(2,'0')}));const s=I.aggregate(r,'listening');assert.equal(s.artists.slice(0,30).length,30);assert.equal(s.artists[0].name,'Artist 00');assert.equal(s.artists[29].name,'Artist 29');assert.equal(I.aggregate([],'live').artists.length,0)});
-test('pie keeps ten and merges remainder; rankings keep everything',()=>{const entries=Array.from({length:42},(_,i)=>({name:String(i),count:42-i}));assert.equal(I.pie(entries).length,11);assert.equal(I.pie(entries)[10].count,528);assert.equal(I.pie(entries.slice(0,10)).length,10);assert.equal(entries.length,42)});
+test('pie preserves sums and top fifteen across boundaries',()=>{
+ for(const n of [0,1,10,15,16,100]){const entries=Array.from({length:n},(_,i)=>({name:String(i),count:n-i}));const result=I.pie(entries);assert.equal(result.length,Math.min(n,16));assert.equal(result.reduce((n,r)=>n+r.count,0),entries.reduce((n,r)=>n+r.count,0));assert.equal(result.filter(r=>r.other).length,n>15?1:0)}
+});
 test('strict date precision and leap boundaries',()=>{for(const d of ['',null,'bad','2026-00','2026-13','2025-02-29','1900-02-29','2026-04-31','0000','2026-01-00'])assert.equal(I.dateParts(d),null,d);for(const d of ['2026','2026-11','2024-02-29','2000-02-29'])assert.ok(I.dateParts(d),d)});
-test('time includes year-only yearly, no invented January; periods and boundaries',()=>{const s=I.aggregate(rows,'listening');assert.equal(s.years.get(2025),1);assert.equal(s.months.get(2025*12),undefined);const now=new Date(2026,10,6);const m=I.timeline(s,'monthly',12,now);assert.equal(m.rows.length,12);assert.equal(m.rows[0].name,'2026-11');assert.equal(m.rows[0].count,1);assert.equal(m.rows[11].name,'2025-12');assert.equal(I.timeline(s,'monthly',24,now).rows.length,24);assert.equal(I.timeline(s,'yearly',5,now).rows.length,5);assert.equal(I.timeline(s,'monthly',12,new Date(2027,0,1)).rows[0].name,'2027-01')});
-test('future and empty dates never become current; year pagination',()=>{const s=I.aggregate([{date:'2010'},{date:'2099-01-01'},{date:'invalid'}],'live');assert.equal(I.timeline(s,'yearly',5,new Date(2026,0,1)).rows[0].count,0);assert.equal(I.timeline(s,'yearly',10,new Date(2026,0,1)).rows.length,10);assert.equal(I.timeline(s,'monthly',12,new Date(2026,0,1)).rows.length,12)});
+test('time includes year-only yearly, no invented January; periods and boundaries',()=>{const s=I.aggregate(rows,'listening');assert.equal(s.years.get(2025),1);assert.equal(s.months.get(2025*12),undefined);const now=new Date(2026,10,6);const m=I.timeline(s,'monthly',12,now);assert.equal(m.rows.length,12);assert.equal(m.rows[0].name,'2026-11');assert.equal(m.rows[0].count,1);assert.equal(m.rows[11].name,'2025-12');assert.equal(I.timeline(s,'monthly',24,now).rows.length,12);assert.equal(I.timeline(s,'yearly',5,now).rows.length,3);assert.equal(I.timeline(s,'monthly',12,new Date(2027,0,1)).rows[0].name,'2027-01')});
+test('future and empty dates never become current; year pagination',()=>{const s=I.aggregate([{date:'2010'},{date:'2099-01-01'},{date:'invalid'}],'live');assert.equal(I.timeline(s,'yearly',5,new Date(2026,0,1)).rows[0].count,0);assert.equal(I.timeline(s,'yearly',10,new Date(2026,0,1)).rows.length,10);assert.equal(I.timeline(s,'monthly',12,new Date(2026,0,1)).rows.length,0)});
 test('release year and decade boundaries; unknown excluded',()=>{const s=I.aggregate(rows,'collection');assert.deepEqual(I.releaseRows(s),[{name:'2000',count:1},{name:'1999',count:1}]);assert.deepEqual(I.releaseRows(s,true),[{name:'2000',count:1},{name:'1990',count:1}]);assert.equal(I.releaseRows(I.aggregate(Array.from({length:25},(_,i)=>({release:String(1980+i)})),'listening')).length,25)});
 
 for(const area of ['listening','collection'])test(area+' decade cases: numeric descending, unchanged sums and immutable inputs',()=>{
@@ -32,4 +34,21 @@ for(const area of ['listening','collection'])test(area+' decade cases: numeric d
 test('area counts remain independent',()=>{
  assert.equal(I.releaseRows(I.aggregate([{release:'2020'},{release:'2021'}],'listening'),true)[0].count,2);
  assert.equal(I.releaseRows(I.aggregate([{release:'2020'}],'collection'),true)[0].count,1);
+});
+
+test('timeline excludes prehistory but retains gaps and empty states',()=>{
+ const now=new Date(2026,10,27);
+ for(const area of ['listening','collection','live']){
+  const s=I.aggregate([{date:'2026-09-01'},{date:'2026-11-01'}],area),m=I.timeline(s,'monthly',12,now);
+  assert.deepEqual(m.rows.map(r=>r.count),[1,0,1]);assert.equal(m.more,false);
+  assert.deepEqual(I.timeline(I.aggregate([],area),'yearly',5,now).rows,[]);
+  assert.deepEqual(I.timeline(I.aggregate([{date:'2099-01-01'}],area),'monthly',12,now).rows,[]);
+  assert.deepEqual(I.timeline(I.aggregate([{date:'2024'},{date:'2026'}],area),'yearly',5,now).rows.map(r=>r.count),[1,0,1]);
+ }
+});
+test('score ranking zero, unknown dates, ties, duplicate records and available years',()=>{
+ const rows=[{title:'duplicate',rating:'0',date:'2026',release:''},{title:'duplicate',rating:'10',release:'2025'}, {title:'second',rating:'10',date:'2024',release:'2025'}, {rating:''},{rating:null},{rating:undefined},{rating:'8',release:'2020'}];
+ const before=JSON.stringify(rows),all=I.scoreRanking(rows);
+ assert.deepEqual(all.years,[2025,2020]);assert.deepEqual(all.rows.map(r=>r.rank),[1,1,3,4]);assert.deepEqual(all.rows.map(r=>r.score),[5,5,4,0]);assert.equal(all.rows[0].record,rows[1]);
+ assert.equal(I.scoreRanking(rows,'release','2025').rows.length,2);assert.equal(I.scoreRanking(rows,'date','2026').rows[0].score,0);assert.deepEqual(I.scoreRanking(rows,'date').years,[2026,2024]);assert.equal(JSON.stringify(rows),before);
 });
