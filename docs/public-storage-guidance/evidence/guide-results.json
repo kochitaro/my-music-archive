@@ -1,0 +1,338 @@
+[
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 320,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 320,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 320,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 375,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 375,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 375,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 390,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 390,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 390,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 430,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 430,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "ja",
+    "width": 430,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 320,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 320,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 320,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 375,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 375,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 375,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 390,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 390,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 390,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 430,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 430,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "source",
+    "lang": "en",
+    "width": 430,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 320,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 320,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 320,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 375,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 375,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 375,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 390,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 390,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 390,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 430,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 430,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "ja",
+    "width": 430,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 320,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 320,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 320,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 375,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 375,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 375,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 390,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 390,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 390,
+    "area": "live",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 430,
+    "area": "listening",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 430,
+    "area": "collection",
+    "status": "PASS"
+  },
+  {
+    "source": "dist",
+    "lang": "en",
+    "width": 430,
+    "area": "live",
+    "status": "PASS"
+  }
+]

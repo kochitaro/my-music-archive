@@ -323,9 +323,9 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
 </section>
 <section>
 <h3>「保存できませんでした」と表示されたら</h3>
-<p>保存失敗と表示された場合は、保存できたと判断せず、画面の案内を確認してください。</p>
+<p>保存失敗と表示された場合は、保存できたと判断せず、画面の案内を確認してください。複数のタブでMLAを開いている場合は、他のタブでの保存処理が終わってから再試行してください。</p>
 <p>入力フォームに内容が残っている場合は、「入力に戻る」で必要な文章を選択してコピーしてください。「やり直す」で確認し、「破棄して再読み込み」を選ぶと未保存の変更は失われます。</p>
-<p>写真は元ファイルを保管し、入力し直す際に選び直してください。</p>
+<p>問題が続く場合は、未保存の文章や写真の元ファイルを別途保管し、他のMLAのタブを閉じてから、画面の案内に従ってください。ブラウザのサイトデータは削除しないでください。写真は入力し直す際に選び直してください。</p>
 <p>再読み込み後は最新の保存済み記録を確認してから入力し直してください。Safariの終了やページの喪失後まで未保存入力が保持される保証はありません。</p>
 <p>バックアップの復元に失敗した場合は、選択した元ファイルを保管してください。保存済みデータを読み込めない場合の原本回収ファイルは、通常のバックアップではなく、そのまま正常に復元できるとは限りません。原本を保持し、復元には正常なMLAバックアップを使用してください。</p>
 </section>
@@ -333,12 +333,12 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
 <h3>記録の保存について</h3>
 <p>MLAはアカウント不要で、記録を利用中のブラウザ内に保存します。MLAによるクラウド同期や、運営者による記録のバックアップはありません。</p>
 <p>端末やブラウザが違うと、同じ記録は自動的には表示されません。アプリ内ブラウザやホーム画面からの利用でも、保存領域が分かれる場合があります。</p>
-<p>継続して使用するブラウザを決め、記録を移すときはJSONバックアップを使用してください。</p>
+<p>継続してご利用いただく際は、同じブラウザからMLAの正式URL（https://mylisteningarchive.com/）を開くことをおすすめします。端末やブラウザを変更する際は、JSONバックアップをご利用ください。安全な保存に必要なブラウザ機能が利用できない場合は、保存できません。</p>
 <p>ブラウザのサイトデータ消去や端末の故障などによって、記録を失う可能性があります。プライベートブラウズでの継続利用は避け、定期的にバックアップしてください。</p>
-<p>保存容量には限りがあります。写真などのデータが蓄積すると、新しい記録や変更を保存できなくなる場合があります。</p>
+<p>保存できるデータの容量は、お使いの端末やブラウザによって異なります。写真などのデータが蓄積すると、新しい記録や変更を保存できなくなる場合があります。また、復旧用データなどが保持されるため、記録や写真を削除しても使用容量がすぐに減るとは限りません。</p>
 <p>保存完了前の入力は、Safariの終了やOSによるページ破棄の後まで保持されることを保証していません。保存失敗時には、画面を閉じる前に必要な文章をコピーしてください。</p>
-<p>小規模β版では、Safariで実際に保存容量が不足した場合や、OSによるページ破棄・強制終了など、一部の条件について検証が完了していません。</p>
-<p>大切な音楽の記録を長く残すため、定期的なJSONバックアップをおすすめします。</p>
+<p>MLAでは、保存時のエラーや複数タブ間の競合に備えたデータ保護機能を設けています。</p>
+<p>大切な記録を長く残していただくため、定期的なJSONバックアップをおすすめします。</p>
 </section>
 </div>
 <div lang="en">
@@ -364,9 +364,9 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
 </section>
 <section>
 <h3>If You See a Save Failure</h3>
-<p>If a save failure is displayed, do not assume that your changes were saved. Check the on-screen guidance.</p>
+<p>If a save failure is displayed, do not assume that your changes were saved. Check the on-screen guidance. If MLA is open in multiple tabs, wait for any saving in other tabs to finish before trying again.</p>
 <p>If your input is still in the form, use Return to Editing to select and copy any text you want to keep. Start Again opens a confirmation; Discard and Reload loses your unsaved changes.</p>
-<p>Keep the original photo files and select them again when entering your changes.</p>
+<p>If the problem persists, keep a separate copy of any unsaved text and original photos, close the other MLA tabs, and follow the on-screen guidance. Do not clear your browser’s site data. Select the photos again when entering your changes.</p>
 <p>After reloading, check the latest saved records before entering your changes again. Unsaved input is not guaranteed to survive Safari closing or the page being lost.</p>
 <p>If restoring a backup fails, keep the original file you selected. A recovered original of unreadable saved data is not a regular backup and may not be restorable as-is. Keep the original and use a valid MLA backup to restore records.</p>
 </section>
@@ -374,12 +374,12 @@ html:lang(ja) #search-panel #search-modes .tab.active{text-underline-offset:5px}
 <h3>About Data Storage</h3>
 <p>MLA does not require an account and stores records in the browser you are using. MLA does not provide cloud synchronization, and the operator does not back up your records.</p>
 <p>The same records do not automatically appear on a different device or in a different browser. Storage may also be separate when using an in-app browser or opening the app from the Home Screen.</p>
-<p>Choose a browser for ongoing use, and use JSON backups when moving your records.</p>
+<p>For ongoing use, we recommend accessing MLA’s official URL (https://mylisteningarchive.com/) using the same browser. Use JSON backups when moving your records to another device or browser. Saving is unavailable if the browser features needed to save safely are not available.</p>
 <p>You may lose records if browser site data is cleared, your device fails, or similar problems occur. Avoid ongoing use in private browsing mode, and back up regularly.</p>
-<p>Storage capacity is limited. As data such as photos accumulates, you may become unable to save new records or changes.</p>
+<p>Available storage capacity varies depending on your device and browser. As data such as photos accumulates, you may become unable to save new records or changes. Because recovery data and other stored data may be retained, deleting records or photos may not immediately reduce storage usage.</p>
 <p>Input whose save has not completed is not guaranteed to be retained after Safari closes or the OS discards the page. If saving fails, copy any text you want to keep before closing the screen.</p>
-<p>In this small-scale beta, testing has not been completed for some conditions, including actual storage exhaustion in Safari and page discarding or forced termination by the OS.</p>
-<p>We recommend regular JSON backups to preserve your important music records over time.</p>
+<p>MLA includes safeguards designed to protect your records against save errors and conflicts between multiple tabs.</p>
+<p>To help preserve your listening memories over time, we recommend making regular JSON backups.</p>
 </section>
 </div>
 </details>
