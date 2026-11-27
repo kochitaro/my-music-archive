@@ -1,0 +1,90 @@
+[
+  {
+    "months": 287,
+    "records": 918,
+    "renderCallMs": 6,
+    "initialFrameMs": 43,
+    "years": 24,
+    "width": 390,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 33.0,
+    "scrollTwoFramesMaxMs": 43
+  },
+  {
+    "months": 359,
+    "records": 1145,
+    "renderCallMs": 8,
+    "initialFrameMs": 36,
+    "years": 30,
+    "width": 390,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 31.5,
+    "scrollTwoFramesMaxMs": 40
+  },
+  {
+    "months": 479,
+    "records": 1527,
+    "renderCallMs": 6,
+    "initialFrameMs": 40,
+    "years": 40,
+    "width": 390,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 32.0,
+    "scrollTwoFramesMaxMs": 38
+  },
+  {
+    "months": 659,
+    "records": 2105,
+    "renderCallMs": 12,
+    "initialFrameMs": 40,
+    "years": 55,
+    "width": 390,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 32.0,
+    "scrollTwoFramesMaxMs": 38
+  },
+  {
+    "months": 659,
+    "records": 2105,
+    "renderCallMs": 9,
+    "initialFrameMs": 43,
+    "years": 55,
+    "width": 320,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 32.0,
+    "scrollTwoFramesMaxMs": 40
+  },
+  {
+    "months": 659,
+    "records": 2105,
+    "renderCallMs": 8,
+    "initialFrameMs": 46,
+    "years": 55,
+    "width": 375,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 31.0,
+    "scrollTwoFramesMaxMs": 40
+  },
+  {
+    "months": 659,
+    "records": 2105,
+    "renderCallMs": 8,
+    "initialFrameMs": 46,
+    "years": 55,
+    "width": 393,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 32.0,
+    "scrollTwoFramesMaxMs": 40
+  },
+  {
+    "months": 659,
+    "records": 2105,
+    "renderCallMs": 13,
+    "initialFrameMs": 43,
+    "years": 55,
+    "width": 430,
+    "maxRenderedBars": 17,
+    "scrollTwoFramesMedianMs": 32.0,
+    "scrollTwoFramesMaxMs": 37
+  }
+]

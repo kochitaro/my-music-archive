@@ -1,0 +1,12 @@
+PASS 320 ja 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 320 en 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 375 ja 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 375 en 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 390 ja 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 390 en 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 393 ja 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 393 en 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 430 ja 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS 430 en 3 areas / chart forms / periods / ranking paging and selection / no overflow / no archive writes
+PASS score create / edit to 0.0 / delete / real JSON restore / live language update
+PASS renderer empty / 1 / 10 / 15 / 16 / 70 categories

@@ -1,0 +1,10 @@
+PASS history {"months": 287, "records": 918, "renderCallMs": 7, "initialFrameMs": 62, "years": 24, "width": 390, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 34.5, "scrollTwoFramesMaxMs": 55}
+PASS history {"months": 359, "records": 1145, "renderCallMs": 9, "initialFrameMs": 37, "years": 30, "width": 390, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 32.0, "scrollTwoFramesMaxMs": 42}
+PASS history {"months": 479, "records": 1527, "renderCallMs": 6, "initialFrameMs": 93, "years": 40, "width": 390, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 50.5, "scrollTwoFramesMaxMs": 97}
+PASS history {"months": 659, "records": 2105, "renderCallMs": 16, "initialFrameMs": 77, "years": 55, "width": 390, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 37.0, "scrollTwoFramesMaxMs": 48}
+PASS history {"months": 659, "records": 2105, "renderCallMs": 12, "initialFrameMs": 63, "years": 55, "width": 320, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 38.5, "scrollTwoFramesMaxMs": 84}
+PASS history {"months": 659, "records": 2105, "renderCallMs": 45, "initialFrameMs": 156, "years": 55, "width": 375, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 32.5, "scrollTwoFramesMaxMs": 97}
+PASS history {"months": 659, "records": 2105, "renderCallMs": 22, "initialFrameMs": 106, "years": 55, "width": 393, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 34.0, "scrollTwoFramesMaxMs": 75}
+PASS history {"months": 659, "records": 2105, "renderCallMs": 19, "initialFrameMs": 182, "years": 55, "width": 430, "maxRenderedBars": 17, "scrollTwoFramesMedianMs": 47.0, "scrollTwoFramesMaxMs": 72}
+PASS Live score real edit to zero, delete and create refresh ranking
+PASS Live layout migration, reset, persistence, no IDB change; score zero/unrated/photo/no-photo; defensive ordered-artist fallback

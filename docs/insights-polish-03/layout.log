@@ -1,0 +1,7 @@
+PASS settings IDB byte-equivalence; independent area updates; same-area conflict blocks stale draft
+PASS quota failure session fallback and unchanged archive/photos/meta/settings; reload returns persisted settings
+PASS real JSON restore preserves layout, JSON export schema unchanged, live Japanese/English
+PASS real score edit to 0.0, deletion removes year option, new score creation refreshes ranking
+PASS corrupt/missing settings; retired/duplicate IDs; appended new items; single visible score shrink retains scroll position
+PASS real Chromium process restart preserves order/visibility
+PASS measured prior/current renderer DOM/scroll comparison [{'phase': 'previous', 'headerBefore': 82.5, 'headerAfter': 82.5, 'headingRetained': False, 'artistRetained': False}, {'phase': 'current', 'headerBefore': 83, 'headerAfter': 83, 'headingRetained': True, 'artistRetained': True}]
