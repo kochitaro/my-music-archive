@@ -1,4 +1,4 @@
-/* Read-only Insights. Inputs are never mutated; UI state exists only in memory. */
+/* Read-only Insights records. View state is in memory; layout uses separate browser preferences. */
 (function(root){
 'use strict';
 const clean=v=>typeof v==='string'?v.trim():'';
@@ -56,7 +56,7 @@ function scoreRanking(records,mode='release',year='',score=recordScore){
 function recordScore(r){if(r.rating===''||r.rating===undefined||r.rating===null)return null;const n=Number(r.rating);return Number.isFinite(n)?Math.round(n*5)/10:null}
 
 function releaseRows(stats,decades=false){const map=new Map();for(const [year,count] of stats.release){const k=decades?Math.floor(year/10)*10:year;map.set(k,(map.get(k)||0)+count)}return [...map].sort((a,b)=>b[0]-a[0]).map(([year,count])=>({name:String(year),count}))}
-const sectionIds=area=>['artists',...(area==='listening'?['score']:[]),...(area==='live'?['venue']:['genre','tags','label',...(area==='collection'?['store','format']:[])]),'time',...(area==='live'?[]:['release'])];
+const sectionIds=area=>['artists',...(area!=='collection'?['score']:[]),...(area==='live'?['venue']:['genre','tags','label',...(area==='collection'?['store','format']:[])]),'time',...(area==='live'?[]:['release'])];
 const layoutKey=area=>'mla-insights-layout-v1:'+area;
 function normalizeLayout(value,area){
  const ids=sectionIds(area),defaults=()=>ids.map(id=>({id,visible:true}));
@@ -75,15 +75,22 @@ if(root.addEventListener)root.addEventListener('storage',e=>{
   if(activeView&&(e.key===null||e.key===layoutKey(activeView.area)))activeView.refresh();
  }
 });
-function liveMonths(stats,year,now=new Date()){
+function liveMonthRows(stats,now=new Date()){
  const current=now.getFullYear()*12+now.getMonth(),keys=[...stats.months.keys()].filter(k=>k<=current);
- // A year-only date belongs to the yearly series, not an invented January.
- const yearKeys=[...stats.years.keys()].filter(y=>y<=now.getFullYear());
- if(!yearKeys.length)return {years:[],rows:[]};
- const firstYear=Math.min(...yearKeys),first=keys.length?Math.min(...keys):null;
- const years=Array.from({length:now.getFullYear()-firstYear+1},(_,i)=>now.getFullYear()-i);
- const rows=Array.from({length:12},(_,i)=>{const k=year*12+i;return {name:year+'-'+String(i+1).padStart(2,'0'),count:stats.months.get(k)||0,unavailable:k>current||year===firstYear&&(first===null||k<first)}});
- return {years,rows};
+ if(!keys.length)return [];
+ const first=Math.min(...keys);
+ return Array.from({length:current-first+1},(_,i)=>{const k=first+i;return {name:String(Math.floor(k/12)).padStart(4,'0')+'-'+String(k%12+1).padStart(2,'0'),count:stats.months.get(k)||0}});
+}
+function columnColor(name,kind='year'){
+ const p=dateParts(name),index=kind==='month'&&p?.month?p.year*12+p.month-1:kind==='decade'?Math.floor(Number(name)/10):Number(name);
+ return colors[((index%colors.length)+colors.length)%colors.length];
+}
+const chartCleanups=new WeakMap();
+function disposeCharts(node){for(const chart of node.querySelectorAll('[data-monthly-chart]')){chartCleanups.get(chart)?.();chartCleanups.delete(chart)}}
+function chartScale(rows){
+ const max=Math.max(1,...rows.map(r=>r.count)),rough=max/4,power=10**Math.floor(Math.log10(rough));
+ const step=Math.max(1,[1,2,5,10].find(n=>n*power>=rough)*power);
+ return {step,top:Math.ceil(max/step)*step};
 }
 const states=new Map();
 // Every accepted save/restore replaces db with validated data (index.html commitDB).
@@ -120,40 +127,79 @@ function render(container,records,area,ja,now=new Date(),ui={},onlyId=null){
  const empty=node=>node.append(el('p','insight-note',t('集計できる登録データがありません。','No registered data to summarize.')));
  const bars=(node,rows,rank=false,horizontal=false,scale=null)=>{if(!rows.length){empty(node);return}const max=scale||Math.max(1,...rows.map(x=>x.count));const list=el('ol','insight-bars'+(horizontal?' insight-horizontal':'')+(horizontal&&rows.some(r=>r.name.length>4)?' insight-wide-label':''));for(const [i,row] of rows.entries()){const li=el('li','insight-bar');li.append(el('span','insight-name',(rank?(i+1)+'. ':'')+row.name),el('span','insight-count',String(row.count)));const track=el('div','insight-track'),fill=el('div','insight-fill');fill.style.width=(row.count/max*100)+'%';track.append(fill);li.append(track);list.append(li)}node.append(list)};
  const svgNode=(tag,attrs={},value)=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,v);if(value!==undefined)n.textContent=value;return n};
- const columns=(node,source,monthly=false,interactive=null)=>{
+ const columns=(node,source,kind='year',interactive=null)=>{
   if(!source.length){empty(node);return}
-  const rows=[...source].reverse(),max=Math.max(1,...rows.filter(r=>!r.unavailable).map(r=>r.count));
-  const rough=max/4,power=10**Math.floor(Math.log10(rough)),step=Math.max(1,[1,2,5,10].find(n=>n*power>=rough)*power),top=Math.ceil(max/step)*step;
-  const width=Math.max(260,widthHint),left=String(top).length*7+10,right=15,plot=width-left-right,height=154;
-  const dense=monthly&&String(max).length>2,base=height+(dense?String(max).length*7+16:40);
-  const svg=svgNode('svg',{viewBox:`0 0 ${width} ${base+42}`,class:'insight-columns',...(interactive?{role:'slider',tabindex:0,'aria-label':t('公演年を選択','Select show year'),'aria-valuemin':rows[0].name,'aria-valuemax':rows.at(-1).name}:{role:'img','aria-label':rows.map(r=>r.name+': '+(r.unavailable?t('対象期間外','Outside recorded period'):r.count)).join(', ')})});
-  for(let tick=0;tick<=top;tick+=step){const y=base-tick/top*height;svg.append(svgNode('line',{x1:left,x2:width-right,y1:y,y2:y,class:'insight-gridline'}),svgNode('text',{x:left-7,y:y+4,'text-anchor':'end',class:'insight-axis'},tick))}
-  const slot=plot/rows.length,marks=[];
-  const minYears=Math.ceil(48/slot),labelStep=[1,2,5,10,20,25,50,100,200,500,1000,2000,5000,10000].find(n=>n>=minYears)||10000;
-  rows.forEach((r,i)=>{const x=left+slot*(i+.5),h=r.unavailable?0:r.count/top*height,w=Math.min(24,slot*.65);
-   const mark=svgNode('rect',{x:x-w/2,y:base-h,width:w,height:h,rx:Math.min(2,w/4),class:'insight-column'});svg.append(mark);marks.push(mark);
-   if(monthly){
-    svg.append(svgNode('text',{x,y:base+19,'text-anchor':'middle',class:'insight-axis'},Number(r.name.slice(5))));
-    svg.append(svgNode('text',{x,y:r.unavailable?base-7:base-h-7,'text-anchor':dense&&!r.unavailable?'start':'middle',class:'insight-column-count',...(dense&&!r.unavailable?{transform:`rotate(-90 ${x} ${base-h-7})`}:{})},r.unavailable?'—':r.count));
-   }else if(Number(r.name)%labelStep===0||rows.length===1)svg.append(svgNode('text',{x,y:base+21,'text-anchor':'middle',class:'insight-axis'},r.name));
-  });
-  node.append(svg);
-  if(interactive){
-   const detail=el('p','insight-year-detail');detail.setAttribute('role','status');detail.setAttribute('aria-live','polite');
-   const label=el('label','insight-year-label',t('年の詳細','Year details')),select=el('select','field insight-year');
-   for(const row of [...rows].reverse()){const option=el('option','',row.name);option.value=row.name;select.append(option)}label.append(select);node.append(detail,label);
-   const indicator=svgNode('rect',{y:base-height,width:Math.max(slot,2),height:height+4,fill:'#97C4CE','fill-opacity':'.14','pointer-events':'none'});svg.insertBefore(indicator,svg.firstChild);
-   const choose=index=>{const i=Math.max(0,Math.min(rows.length-1,index)),row=rows[i];interactive.selected=row.name;select.value=row.name;detail.textContent=ja?row.name+'年　'+row.count+'件':row.name+' · '+row.count+' shows';svg.setAttribute('aria-valuenow',row.name);svg.setAttribute('aria-valuetext',detail.textContent);marks.forEach((m,j)=>m.classList.toggle('is-selected',j===i));indicator.setAttribute('x',left+slot*i)};
-   choose(Math.max(0,rows.findIndex(r=>r.name===(interactive.selected||rows.at(-1).name))));
-   select.onchange=()=>choose(rows.findIndex(r=>r.name===select.value));
-   svg.onclick=e=>{const x=(e.clientX-svg.getBoundingClientRect().left)/svg.getBoundingClientRect().width*width;choose(Math.floor((x-left)/slot))};
-   svg.onkeydown=e=>{let i=rows.findIndex(r=>r.name===interactive.selected);if(e.key==='ArrowLeft'||e.key==='ArrowDown')i--;else if(e.key==='ArrowRight'||e.key==='ArrowUp')i++;else if(e.key==='Home')i=0;else if(e.key==='End')i=rows.length-1;else return;e.preventDefault();choose(i)};
+  const rows=[...source].reverse(),{step,top}=chartScale(rows),width=Math.max(260,widthHint),left=String(top).length*7+10,right=15,plot=width-left-right,height=154;
+  const parts=kind==='decade'?Array.from({length:Math.ceil(rows.length/8)},(_,i)=>rows.slice(i*8,i*8+8)):[rows];
+  for(const part of parts){
+   const slot=plot/part.length,dense=kind==='decade'&&(String(top).length>2||slot<35),base=height+(dense?String(top).length*7+16:40);
+   const svg=svgNode('svg',{viewBox:`0 0 ${width} ${base+42}`,class:'insight-columns',...(interactive?{role:'slider',tabindex:0,'aria-label':t('公演年を選択','Select show year'),'aria-valuemin':rows[0].name,'aria-valuemax':rows.at(-1).name}:{role:'img','aria-label':part.map(r=>r.name+t('年代','s')+': '+r.count).join(', ')})});
+   for(let tick=0;tick<=top;tick+=step){const y=base-tick/top*height;svg.append(svgNode('line',{x1:left,x2:width-right,y1:y,y2:y,class:'insight-gridline'}),svgNode('text',{x:left-7,y:y+4,'text-anchor':'end',class:'insight-axis'},tick))}
+   const marks=[],minYears=Math.ceil(48/slot),labelStep=[1,2,5,10,20,25,50,100,200,500,1000,2000,5000,10000].find(n=>n>=minYears)||10000;
+   part.forEach((r,i)=>{const x=left+slot*(i+.5),h=r.count/top*height,w=Math.min(24,slot*.65);
+    const mark=svgNode('rect',{x:x-w/2,y:base-h,width:w,height:h,rx:Math.min(2,w/4),class:'insight-column',fill:columnColor(r.name,kind),'data-period':r.name});svg.append(mark);marks.push(mark);
+    if(kind==='decade'){
+     svg.append(svgNode('text',{x,y:base-h-7,'text-anchor':dense?'start':'middle',class:'insight-column-count',...(dense?{transform:`rotate(-90 ${x} ${base-h-7})`}:{})},r.count));
+     svg.append(svgNode('text',{x,y:base+21,'text-anchor':'middle',class:'insight-axis'},r.name));
+    }else if(Number(r.name)%labelStep===0||rows.length===1)svg.append(svgNode('text',{x,y:base+21,'text-anchor':'middle',class:'insight-axis'},r.name));
+   });
+   node.append(svg);
+   if(interactive){
+    const controls=el('div','insight-year-selection'),select=el('select','field insight-year'),detail=el('span','insight-year-detail');select.setAttribute('aria-label',t('公演年を選択','Select show year'));detail.setAttribute('role','status');detail.setAttribute('aria-live','polite');
+    for(const row of [...rows].reverse()){const option=el('option','',row.name+t('年',''));option.value=row.name;select.append(option)}controls.append(select,detail);node.append(controls);
+    const indicator=svgNode('rect',{y:base-height,width:Math.max(slot,2),height:height+4,'fill-opacity':'.18','pointer-events':'none'});svg.insertBefore(indicator,svg.firstChild);
+    const choose=index=>{const i=Math.max(0,Math.min(rows.length-1,index)),row=rows[i];interactive.selected=row.name;select.value=row.name;detail.textContent=ja?row.count+'件':row.count+(row.count===1?' show':' shows');const description=ja?row.name+'年　'+row.count+'件':row.name+' · '+detail.textContent;detail.setAttribute('aria-label',description);svg.setAttribute('aria-valuenow',row.name);svg.setAttribute('aria-valuetext',description);marks.forEach((m,j)=>m.classList.toggle('is-selected',j===i));indicator.setAttribute('x',left+slot*i);indicator.setAttribute('fill',columnColor(row.name,'year'))};
+    choose(Math.max(0,rows.findIndex(r=>r.name===(interactive.selected||rows.at(-1).name))));
+    select.onchange=()=>choose(rows.findIndex(r=>r.name===select.value));
+    svg.onclick=e=>{const x=(e.clientX-svg.getBoundingClientRect().left)/svg.getBoundingClientRect().width*width;choose(Math.floor((x-left)/slot))};
+    svg.onkeydown=e=>{let i=rows.findIndex(r=>r.name===interactive.selected);if(e.key==='ArrowLeft'||e.key==='ArrowDown')i--;else if(e.key==='ArrowRight'||e.key==='ArrowUp')i++;else if(e.key==='Home')i=0;else if(e.key==='End')i=rows.length-1;else return;e.preventDefault();choose(i)};
+   }
   }
+ };
+ const monthlyHistory=(node,rows,s)=>{
+  if(!rows.length){empty(node);return}
+  const {step,top}=chartScale(rows),first=dateParts(rows[0].name),firstKey=first.year*12+first.month-1,lastYear=dateParts(rows.at(-1).name).year;
+  const height=154,base=height+Math.max(40,String(top).length*7+16),chartHeight=base+48,axisWidth=Math.max(42,String(top).length*7+8);
+  const controls=el('div','insight-month-controls'),jump=el('select','field insight-year'),range=el('span','insight-month-range');jump.setAttribute('aria-label',t('公演年へ移動','Jump to show year'));
+  const all=el('option','',t('年を指定して移動','Jump to year'));all.value='';jump.append(all);
+  for(let year=lastYear;year>=first.year;year--){const option=el('option','',year+t('年',''));option.value=year;jump.append(option)}controls.append(jump,range);node.append(controls);
+  const chart=el('div','insight-month-chart'),axis=svgNode('svg',{width:axisWidth,height:chartHeight,viewBox:`0 0 ${axisWidth} ${chartHeight}`,class:'insight-month-axis','aria-hidden':'true'}),viewport=el('div','insight-month-viewport'),spacer=el('div','insight-month-spacer');chart.dataset.monthlyChart='';
+  viewport.tabIndex=0;viewport.setAttribute('role','region');viewport.setAttribute('aria-label',t('公演月別グラフ。左右キーで移動できます。','Monthly shows chart. Use left and right arrow keys to scroll.'));viewport.append(spacer);chart.append(axis,viewport);node.append(chart);
+  spacer.style.height=chartHeight+'px';for(let tick=0;tick<=top;tick+=step){const y=base-tick/top*height;axis.append(svgNode('text',{x:axisWidth-7,y:y+4,'text-anchor':'end',class:'insight-axis'},tick))}
+  let slot=20,windowStart=-1,windowEnd=-1,windowSvg=null,observer=null,frame=0;
+  const draw=()=>{
+   if(!viewport.isConnected||!viewport.clientWidth)return;
+   const start=Math.max(0,Math.floor(viewport.scrollLeft/slot)-2),end=Math.min(rows.length,Math.ceil((viewport.scrollLeft+viewport.clientWidth)/slot)+2);
+   const visibleStart=Math.min(rows.length-1,Math.floor((viewport.scrollLeft+1)/slot)),visibleEnd=Math.min(rows.length-1,Math.ceil((viewport.scrollLeft+viewport.clientWidth-1)/slot)-1);
+   s.monthPosition=firstKey+viewport.scrollLeft/slot;range.textContent=rows[visibleStart].name+'–'+rows[visibleEnd].name;
+   if(start===windowStart&&end===windowEnd)return;windowStart=start;windowEnd=end;
+   const width=(end-start)*slot,svg=svgNode('svg',{width,height:chartHeight,viewBox:`0 0 ${width} ${chartHeight}`,class:'insight-month-window',role:'img','aria-label':rows.slice(start,end).map(r=>r.name+': '+r.count).join(', ')});svg.style.left=start*slot+'px';
+   for(let tick=0;tick<=top;tick+=step){const y=base-tick/top*height;svg.append(svgNode('line',{x1:0,x2:width,y1:y,y2:y,class:'insight-gridline'}))}
+   const dense=String(top).length>2;
+   for(let i=start;i<end;i++){const r=rows[i],x=(i-start+.5)*slot,h=r.count/top*height,w=Math.min(24,slot*.65);
+    const bar=svgNode('rect',{x:x-w/2,y:base-h,width:w,height:h,rx:2,class:'insight-column',fill:columnColor(r.name,'month'),'data-period':r.name});const title=svgNode('title',{},r.name+': '+r.count);bar.append(title);svg.append(bar);
+    svg.append(svgNode('text',{x,y:base-h-7,'text-anchor':dense?'start':'middle',class:'insight-column-count',...(dense?{transform:`rotate(-90 ${x} ${base-h-7})`}:{})},r.count));
+    svg.append(svgNode('text',{x,y:base+19,'text-anchor':'middle',class:'insight-axis'},Number(r.name.slice(5))));
+   }
+   // Place each visible year's label under its month group, keeping full four-digit labels inside the viewport.
+   for(let begin=visibleStart;begin<=visibleEnd;){let endYear=begin+1;const year=rows[begin].name.slice(0,4);while(endYear<=visibleEnd&&rows[endYear].name.startsWith(year+'-'))endYear++;
+    const worldX=Math.max(viewport.scrollLeft+15,Math.min(viewport.scrollLeft+viewport.clientWidth-15,(begin+endYear)*slot/2));
+    svg.append(svgNode('text',{x:worldX-start*slot,y:base+36,'text-anchor':'middle',class:'insight-axis'},year));begin=endYear;
+   }
+   if(windowSvg)windowSvg.replaceWith(svg);else spacer.append(svg);windowSvg=svg;
+  };
+  const resize=()=>{if(!viewport.isConnected||!viewport.clientWidth)return;const position=s.monthPosition??null;slot=viewport.clientWidth/Math.min(12,rows.length);spacer.style.width=rows.length*slot+'px';windowStart=-1;
+   viewport.scrollLeft=position===null||position===undefined?viewport.scrollWidth-viewport.clientWidth:Math.max(0,(position-firstKey)*slot);draw()};
+  viewport.onscroll=()=>{if(frame)cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{frame=0;draw()})};
+  viewport.onkeydown=e=>{let left=viewport.scrollLeft;if(e.key==='ArrowLeft')left-=slot;else if(e.key==='ArrowRight')left+=slot;else if(e.key==='PageUp')left-=slot*12;else if(e.key==='PageDown')left+=slot*12;else if(e.key==='Home')left=0;else if(e.key==='End')left=viewport.scrollWidth;else return;e.preventDefault();viewport.scrollTo({left,behavior:'instant'})};
+  jump.onchange=()=>{if(!jump.value)return;viewport.scrollTo({left:Math.max(0,(Number(jump.value)*12-firstKey)*slot),behavior:'instant'});draw()};
+  requestAnimationFrame(()=>{if(!chart.isConnected)return;resize();observer=new ResizeObserver(resize);observer.observe(viewport)});
+  chartCleanups.set(chart,()=>{observer?.disconnect();if(frame)cancelAnimationFrame(frame)});
  };
  const paging=(node,s,total,step,more=s.limit<total)=>{const controls=el('div','insight-actions');if(more)controls.append(button(t('さらに表示','Show more'),()=>{s.limit+=step;redraw(node.dataset.insight)}));if(s.limit>step)controls.append(button(t('折りたたむ','Collapse'),()=>{s.limit=step;redraw(node.dataset.insight)}));node.append(controls)};
  let settingsButton;
  if(!onlyId){
- container.replaceChildren();const heading=el('div','insight-heading');heading.append(el('h2','',({listening:t('リスニング','Listening'),collection:t('購入','Collection'),live:t('ライブ','Live')})[area]+t('の統計',' Insights')));container.append(heading);
+ disposeCharts(container);container.replaceChildren();const heading=el('div','insight-heading');heading.append(el('h2','',({listening:t('リスニング','Listening'),collection:t('購入','Collection'),live:t('ライブ','Live')})[area]+t('の統計',' Insights')));container.append(heading);
  settingsButton=button('',()=>openSettings());settingsButton.className='btn ghost insight-settings';settingsButton.setAttribute('aria-label',t('表示設定','Display Settings'));settingsButton.setAttribute('aria-haspopup','dialog');
  const icon=svgNode('svg',{viewBox:'0 0 24 24','aria-hidden':'true'});icon.append(svgNode('path',{d:'M4 6h16M4 12h16M4 18h16M8 3v6M16 9v6M10 15v6'}));settingsButton.append(icon);heading.append(settingsButton);
  const metrics=el('div','insight-metrics');for(const [name,value] of [[area==='live'?t('ライブ公演数','Live shows'):area==='collection'?t('所有作品数','Owned records'):t('鑑賞作品数','Listening records'),stats.total],[area==='live'?t('観たアーティスト数','Artists seen'):t('アーティスト数','Artists'),stats.artists.length]]){const metric=el('div','');metric.append(el('strong','',String(value)),el('span','',name));metrics.append(metric)}container.append(metrics);
@@ -179,18 +225,11 @@ function render(container,records,area,ja,now=new Date(),ui={},onlyId=null){
  if(!onlyId||onlyId==='time'){const time=block('time',area==='live'?t('公演時期','Show dates'):area==='collection'?t('購入時期','Purchase dates'):t('鑑賞時期','Listening dates')),ts=state('time','monthly',12);
  switches(time,ts,[['monthly',t('月別','Monthly')],['yearly',t('年別','Yearly')]],value=>value==='monthly'?12:5);
  if(area==='live'){
-  if(ts.mode==='monthly'){
-   const months=liveMonths(stats,Number(ts.year)||now.getFullYear(),now);
-   if(!months.years.includes(Number(ts.year)))ts.year=now.getFullYear();
-   if(months.years.length){const label=el('label','insight-year-label',t('対象年','Year')),select=el('select','field insight-year');
-    for(const year of months.years){const option=el('option','',String(year));option.value=year;select.append(option)}select.value=ts.year;select.onchange=e=>{ts.year=Number(e.target.value);redraw('time')};label.append(select);time.append(label);
-    columns(time,liveMonths(stats,ts.year,now).rows.slice().reverse(),true);
-    time.append(el('p','insight-note',t('— は記録開始前または未来の月です。','— marks months before records began or in the future.')));
-   }else empty(time);
+  if(ts.mode==='monthly'){monthlyHistory(time,liveMonthRows(stats,now),ts);
   }else{
    const period=timeline(stats,'yearly',Infinity,now);
    if(period.rows.length)time.append(el('p','insight-period',period.rows.at(-1).name+'–'+period.rows[0].name));
-   columns(time,period.rows,false,ts);
+   columns(time,period.rows,'year',ts);
   }
  }else{
   const period=timeline(stats,ts.mode,ts.limit,now),map=ts.mode==='monthly'?stats.months:stats.years;
@@ -203,22 +242,25 @@ function render(container,records,area,ja,now=new Date(),ui={},onlyId=null){
   const rel=block('release',t('リリース年','Release years')),rs=state('release','yearly',10);switches(rel,rs,[['yearly',t('年別','Yearly')],['decade',t('年代別','By Decade')]],10);
   const rows=releaseRows(stats,rs.mode==='decade');
   if(rs.mode==='yearly'){bars(rel,rows.slice(0,rs.limit),false,true);paging(rel,rs,rows.length,10)}
-  else bars(rel,rows.map(r=>({...r,name:r.name+t('年代','s')})),false,true);
+  else columns(rel,rows,'decade');
  }
- if(area==='listening'&&(!onlyId||onlyId==='score')){
-  const node=block('score',t('スコアランキング','Score Ranking')),s=state('score','release',15);
-  switches(node,s,[['date',t('鑑賞年','Listening Year')],['release',t('リリース年','Release Year')]],15);
-  let ranking=scoreRanking(records,s.mode,s.year||'',ui.score||recordScore);
-  if(s.year&&!ranking.years.includes(Number(s.year))){s.year='';ranking=scoreRanking(records,s.mode,'',ui.score||recordScore)}
-  const label=el('label','insight-year-label',t('対象年','Year')),select=el('select','field insight-year');select.setAttribute('aria-label',t('対象年','Year'));
+ if(area!=='collection'&&(!onlyId||onlyId==='score')){
+  const node=block('score',t('スコアランキング','Score Ranking')),s=state('score',area==='live'?'date':'release',15);
+  if(area==='listening')switches(node,s,[['date',t('鑑賞年','Listening Year')],['release',t('リリース年','Release Year')]],15);
+  let ranking=scoreRanking(records,s.mode,area==='live'?'':s.year||'',ui.score||recordScore);
+  if(area==='listening'&&s.year&&!ranking.years.includes(Number(s.year))){s.year='';ranking=scoreRanking(records,s.mode,'',ui.score||recordScore)}
+  if(area==='listening'){const label=el('label','insight-year-label'),select=el('select','field insight-year');select.setAttribute('aria-label',t('対象年','Year'));
   for(const year of ['',...ranking.years]){const option=el('option','',year||t('すべての年','All Years'));option.value=year;select.append(option)}
-  select.value=s.year||'';select.onchange=e=>{s.year=e.target.value;s.limit=15;redraw(node.dataset.insight)};label.append(select);node.append(label);
+  select.value=s.year||'';select.onchange=e=>{s.year=e.target.value;s.limit=15;redraw(node.dataset.insight)};label.append(select);node.append(label);}
   if(!ranking.rows.length)node.append(el('p','insight-note',t('対象となるスコア設定済みの記録はありません。','No scored records for this selection.')));
   else{
    const list=el('ol','insight-scores');for(const {record,rank,score} of ranking.rows.slice(0,s.limit)){
     const li=el('li','insight-score-row'),info=el('div','insight-score-info');
-    info.append(el('div','insight-score-title',record.title||t('タイトル未設定','Untitled')),el('div','insight-score-artist',record.artist||t('アーティスト不明','Unknown Artist')));
-    li.append(el('span','insight-rank',String(rank)),ui.art?ui.art(record):el('div','art placeholder','♫'),info,ui.rating?ui.rating(record):el('span','',score.toFixed(1)));list.append(li);
+    if(area==='live'){
+     const artists=(Array.isArray(record.artists)?record.artists:[]).map(clean).filter(Boolean).join(' / ');
+     info.append(el('div','insight-score-title',clean(record.title)||artists||t('公演名未設定','Untitled show')),el('div','insight-score-date',record.date||t('日付不明','Unknown date')),el('div','insight-score-venue',record.venue||t('会場未設定','Venue not set')));
+    }else info.append(el('div','insight-score-title',record.title||t('タイトル未設定','Untitled')),el('div','insight-score-artist',record.artist||t('アーティスト不明','Unknown Artist')));
+    li.append(el('span','insight-rank',String(rank)),ui.art?ui.art(area==='live'?{...record,id:''}:record):el('div','art placeholder','♫'),info,ui.rating?ui.rating(record):el('span','',score.toFixed(1)));list.append(li);
    }node.append(list);paging(node,s,ranking.rows.length,15);
   }
  }
@@ -249,15 +291,15 @@ function render(container,records,area,ja,now=new Date(),ui={},onlyId=null){
   const oldTitle=old.querySelector('h3');next.querySelector('h3').replaceWith(oldTitle);
   // Retain the native year select itself (including Safari focus/picker identity).
   const oldSelect=old.querySelector(':scope > .insight-year-label select'),nextSelect=next.querySelector(':scope > .insight-year-label select');
-  if(oldSelect&&nextSelect&&(onlyId==='score'||area==='live'&&next.querySelector('[role=img]'))){
+  if(oldSelect&&nextSelect&&onlyId==='score'){
    const selected=nextSelect.value;oldSelect.replaceChildren(...nextSelect.childNodes);oldSelect.value=selected;oldSelect.onchange=nextSelect.onchange;nextSelect.replaceWith(oldSelect);
   }
-  old.replaceChildren(...next.childNodes);return;
+  disposeCharts(old);old.replaceChildren(...next.childNodes);return;
  }
  const layout=readLayout(area);let visible=0;for(const item of layout){const node=container.querySelector('[data-insight="'+item.id+'"]');if(!node)continue;if(item.visible){container.append(node);visible++}else node.remove()}
  if(!visible)container.append(el('p','insight-note',t('表示する統計項目がありません。表示設定から選択できます。','No statistics selected. Choose items in Display Settings.')));
 
 }
-const api={counts,dateParts,aggregate,pie,timeline,releaseRows,scoreRanking,recordScore,colors,otherColor,sectionIds,normalizeLayout,liveMonths,render};if(typeof module==='object'&&module.exports)module.exports=api;else root.MLAInsights=api;
+const api={counts,dateParts,aggregate,pie,timeline,releaseRows,scoreRanking,recordScore,colors,otherColor,sectionIds,normalizeLayout,liveMonthRows,columnColor,chartScale,render};if(typeof module==='object'&&module.exports)module.exports=api;else root.MLAInsights=api;
 })(globalThis);
 
