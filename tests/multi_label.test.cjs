@@ -10,13 +10,13 @@ for(const area of ['listening','collection'])test(area+' labels count per record
  assert.equal(JSON.stringify(records),before);
  assert.equal(stats.categories.label.reduce((n,x)=>n+x.count,0),3);
 });
-test('label pie top ten/other and ranking retain all memberships',()=>{
+test('label pie top fifteen/other and ranking retain all memberships',()=>{
  const records=Array.from({length:22},(_,i)=>({label:'Shared, Label '+i+', SHARED'}));
  const entries=aggregate(records,'collection').categories.label;
  assert.equal(entries.length,23);
  assert.equal(entries[0].count,22);
  const slices=pie(entries);
- assert.equal(slices.length,11);
+ assert.equal(slices.length,16);
  assert.equal(slices.at(-1).other,true);
  assert.equal(slices.reduce((n,x)=>n+x.count,0),44);
 });

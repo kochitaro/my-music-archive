@@ -38,12 +38,12 @@ def main():
         page.goto(base+'/')
         assert page.evaluate('typeof MLAInsights.render')=='function'
         assert page.evaluate('typeof staleInsightsAsset')=='undefined'
-        assert '/insights.js?v=20261118-decade-bars' in requests
-        assert '/insights.css?v=20261118-decade-bars' in requests
+        assert '/insights.js?v=20261127-insights-01' in requests
+        assert '/insights.css?v=20261127-insights-01' in requests
         page.locator('#insights-screen').click()
         root=page.locator('#listening-insights [data-insight=genre]')
-        expect(root.locator('.insight-center')).to_have_text('1')
-        expect(root.locator('.insight-value')).to_have_text('1（100.0%）')
+        expect(root.locator('.insight-center strong')).to_have_text('1')
+        expect(root.locator('.insight-value')).to_have_text('1100.0%')
         expect(root.locator('.insight-legend .insight-name')).to_have_text('Electronic')
         assert page.evaluate('(k)=>localStorage.getItem(k)',KEY)==raw
         print('PASS stale unversioned assets primed; versioned JS/CSS loaded; numeric center/compact legend; saved data unchanged')
