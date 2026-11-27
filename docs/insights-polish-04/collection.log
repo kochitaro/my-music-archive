@@ -1,0 +1,12 @@
+PASS 320 ja Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 320 en Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 375 ja Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 375 en Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 390 ja Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 390 en Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 393 ja Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 393 en Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 430 ja Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS 430 en Collection independent rating/ranks/zero/unknown/duplicates/images/year filters/paging/scroll; Live title-venue-date and missing rows
+PASS Collection old layout migration, arbitrary ordering/hide/show/reset, reload, exact IDB invariance
+PASS Collection real CRUD to 0.0/5.0, deletion/year option refresh, actual JSON restore and layout retention

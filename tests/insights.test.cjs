@@ -55,7 +55,7 @@ test('score ranking zero, unknown dates, ties, duplicate records and available y
 
 test('layout defaults, independent areas, unknown/duplicate IDs and future additions',()=>{
  assert.deepEqual(I.sectionIds('listening'),['artists','score','genre','tags','label','time','release']);
- assert.deepEqual(I.sectionIds('collection'),['artists','genre','tags','label','store','format','time','release']);
+ assert.deepEqual(I.sectionIds('collection'),['artists','score','genre','tags','label','store','format','time','release']);
  assert.deepEqual(I.sectionIds('live'),['artists','score','venue','time']);
  for(const area of ['listening','collection','live'])for(const value of [null,{},[],{version:1,items:[{id:'time',visible:'false'}]}])assert.deepEqual(I.normalizeLayout(value,area),I.sectionIds(area).map(id=>({id,visible:true})));
  const value={version:1,items:[{id:'score',visible:false},{id:'obsolete',visible:true},{id:'score',visible:true},{id:'artists',visible:false}]};
@@ -86,4 +86,14 @@ test('existing Live layout gains score at end; reset defaults place score second
 test('Live all-period score ranking preserves duplicates, zero, stable ties and unknown dates',()=>{
  const records=[{title:'Festival',rating:'10',date:''},{title:'Festival',rating:'10',date:'2026-01-01'},{title:'Zero',rating:'0'},{title:'Unrated',rating:''}];
  const ranked=I.scoreRanking(records,'date');assert.deepEqual(ranked.rows.map(r=>r.rank),[1,1,3]);assert.equal(ranked.rows[2].score,0);assert.equal(ranked.rows[0].record,records[0]);
+});
+
+test('Collection score source and filters use independent purchase records',()=>{
+ const listening=[{rating:'10',release:'2020'}],collection=[{title:'Duplicate',rating:'0',date:'2026',release:'2020'},{title:'Duplicate',rating:'10',date:'2025',release:'2021'},{rating:'10',date:'',release:''},{rating:''},{rating:null},{rating:'8.6',date:'2026',release:'2021'}];
+ const before=JSON.stringify(collection),ranked=I.scoreRanking(collection);
+ assert.deepEqual(ranked.rows.map(r=>r.rank),[1,1,3,4]);assert.deepEqual(ranked.rows.map(r=>r.score),[5,5,4.3,0]);assert.equal(I.scoreRanking(collection,'date','2026').rows.length,2);assert.deepEqual(I.scoreRanking(collection,'date').years,[2026,2025]);assert.deepEqual(ranked.years,[2021,2020]);assert.equal(I.scoreRanking(listening).rows.length,1);assert.equal(JSON.stringify(collection),before);
+});
+test('saved Collection layout retains all eight items and appends score; reset places it second',()=>{
+ const items=['time','release','format','store','label','tags','genre','artists'].map((id,i)=>({id,visible:i%2===0}));const value={version:1,items};
+ assert.deepEqual(I.normalizeLayout(value,'collection'),[...items,{id:'score',visible:true}]);assert.equal(I.normalizeLayout(null,'collection')[1].id,'score');
 });

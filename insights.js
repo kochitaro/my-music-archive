@@ -56,7 +56,7 @@ function scoreRanking(records,mode='release',year='',score=recordScore){
 function recordScore(r){if(r.rating===''||r.rating===undefined||r.rating===null)return null;const n=Number(r.rating);return Number.isFinite(n)?Math.round(n*5)/10:null}
 
 function releaseRows(stats,decades=false){const map=new Map();for(const [year,count] of stats.release){const k=decades?Math.floor(year/10)*10:year;map.set(k,(map.get(k)||0)+count)}return [...map].sort((a,b)=>b[0]-a[0]).map(([year,count])=>({name:String(year),count}))}
-const sectionIds=area=>['artists',...(area!=='collection'?['score']:[]),...(area==='live'?['venue']:['genre','tags','label',...(area==='collection'?['store','format']:[])]),'time',...(area==='live'?[]:['release'])];
+const sectionIds=area=>['artists','score',...(area==='live'?['venue']:['genre','tags','label',...(area==='collection'?['store','format']:[])]),'time',...(area==='live'?[]:['release'])];
 const layoutKey=area=>'mla-insights-layout-v1:'+area;
 function normalizeLayout(value,area){
  const ids=sectionIds(area),defaults=()=>ids.map(id=>({id,visible:true}));
@@ -244,12 +244,12 @@ function render(container,records,area,ja,now=new Date(),ui={},onlyId=null){
   if(rs.mode==='yearly'){bars(rel,rows.slice(0,rs.limit),false,true);paging(rel,rs,rows.length,10)}
   else columns(rel,rows,'decade');
  }
- if(area!=='collection'&&(!onlyId||onlyId==='score')){
+ if(!onlyId||onlyId==='score'){
   const node=block('score',t('スコアランキング','Score Ranking')),s=state('score',area==='live'?'date':'release',15);
-  if(area==='listening')switches(node,s,[['date',t('鑑賞年','Listening Year')],['release',t('リリース年','Release Year')]],15);
+  if(area!=='live')switches(node,s,[['date',area==='collection'?t('購入年','Purchase Year'):t('鑑賞年','Listening Year')],['release',t('リリース年','Release Year')]],15);
   let ranking=scoreRanking(records,s.mode,area==='live'?'':s.year||'',ui.score||recordScore);
-  if(area==='listening'&&s.year&&!ranking.years.includes(Number(s.year))){s.year='';ranking=scoreRanking(records,s.mode,'',ui.score||recordScore)}
-  if(area==='listening'){const label=el('label','insight-year-label'),select=el('select','field insight-year');select.setAttribute('aria-label',t('対象年','Year'));
+  if(area!=='live'&&s.year&&!ranking.years.includes(Number(s.year))){s.year='';ranking=scoreRanking(records,s.mode,'',ui.score||recordScore)}
+  if(area!=='live'){const label=el('label','insight-year-label'),select=el('select','field insight-year');select.setAttribute('aria-label',t('対象年','Year'));
   for(const year of ['',...ranking.years]){const option=el('option','',year||t('すべての年','All Years'));option.value=year;select.append(option)}
   select.value=s.year||'';select.onchange=e=>{s.year=e.target.value;s.limit=15;redraw(node.dataset.insight)};label.append(select);node.append(label);}
   if(!ranking.rows.length)node.append(el('p','insight-note',t('対象となるスコア設定済みの記録はありません。','No scored records for this selection.')));
@@ -258,7 +258,9 @@ function render(container,records,area,ja,now=new Date(),ui={},onlyId=null){
     const li=el('li','insight-score-row'),info=el('div','insight-score-info');
     if(area==='live'){
      const artists=(Array.isArray(record.artists)?record.artists:[]).map(clean).filter(Boolean).join(' / ');
-     info.append(el('div','insight-score-title',clean(record.title)||artists||t('公演名未設定','Untitled show')),el('div','insight-score-date',record.date||t('日付不明','Unknown date')),el('div','insight-score-venue',record.venue||t('会場未設定','Venue not set')));
+     info.append(el('div','insight-score-title',clean(record.title)||artists||t('公演名未設定','Untitled show')));
+     if(clean(record.venue))info.append(el('div','insight-score-venue',record.venue));
+     if(clean(record.date))info.append(el('div','insight-score-date',record.date));
     }else info.append(el('div','insight-score-title',record.title||t('タイトル未設定','Untitled')),el('div','insight-score-artist',record.artist||t('アーティスト不明','Unknown Artist')));
     li.append(el('span','insight-rank',String(rank)),ui.art?ui.art(area==='live'?{...record,id:''}:record):el('div','art placeholder','♫'),info,ui.rating?ui.rating(record):el('span','',score.toFixed(1)));list.append(li);
    }node.append(list);paging(node,s,ranking.rows.length,15);

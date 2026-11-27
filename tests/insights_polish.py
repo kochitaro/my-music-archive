@@ -1,11 +1,11 @@
-"""Round-three Insights: isolated synthetic Chromium; never iPhone Safari."""
+"""Round-four Insights: isolated synthetic Chromium; never iPhone Safari."""
 import json,threading,subprocess
 from datetime import datetime,timezone
 from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright,expect
 from data_preservation import PHOTO
 from ui_v0322 import ROOT,KEY,QuietHandler
-E=ROOT/'docs/insights-polish-03';E.mkdir(exist_ok=True)
+E=ROOT/'docs/insights-polish-04';E.mkdir(exist_ok=True)
 SNAP='''async()=>{const db=await new Promise((res,rej)=>{const q=indexedDB.open('mla-archive-v1');q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)});const out={};for(const store of ['archive','photos','settings','meta'])out[store]=await new Promise((res,rej)=>{const tx=db.transaction(store),s=tx.objectStore(store),k=s.getAllKeys(),v=s.getAll();tx.oncomplete=()=>res([k.result,v.result]);tx.onerror=()=>rej(tx.error)});db.close();return JSON.stringify(out)}'''
 SEED=dict(version=3,listening=[dict(entryId='album'+str(i),id='',title='Album '+str(i),artist='Artist '+str(i),genre='Genre '+str(i),label='Label '+str(i),tags=['Tag '+str(i)],rating=str(10-i%11),date='2024-09-01' if i<20 else '2026-11-01',release='2020' if i==39 else '2000',photo=PHOTO if i==0 else '') for i in range(40)],collection=[],live=[])
 SEED['listening'][0].update(title='長い作品名 Long album title '*8,artist='長いアーティスト Long artist '*8)
