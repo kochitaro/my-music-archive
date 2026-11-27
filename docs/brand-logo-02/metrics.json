@@ -1,0 +1,722 @@
+[
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "20px",
+    "weight": "400",
+    "spacing": "0.4px",
+    "heading": [
+      56.046875,
+      31.5,
+      197.984375,
+      25
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "20px",
+    "weight": "400",
+    "spacing": "0.4px",
+    "heading": [
+      56.046875,
+      31.5,
+      197.984375,
+      25
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22px",
+    "weight": "400",
+    "spacing": "0.44px",
+    "heading": [
+      56.046875,
+      30.25,
+      217.78125,
+      27.5
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22px",
+    "weight": "400",
+    "spacing": "0.44px",
+    "heading": [
+      56.046875,
+      30.25,
+      217.78125,
+      27.5
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.5455px",
+    "weight": "400",
+    "spacing": "0.450909px",
+    "heading": [
+      56.046875,
+      29.90625,
+      223.046875,
+      28.171875
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.5455px",
+    "weight": "400",
+    "spacing": "0.450909px",
+    "heading": [
+      56.046875,
+      29.90625,
+      223.046875,
+      28.171875
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.6546px",
+    "weight": "400",
+    "spacing": "0.453091px",
+    "heading": [
+      56.046875,
+      29.84375,
+      224.140625,
+      28.3125
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.6546px",
+    "weight": "400",
+    "spacing": "0.453091px",
+    "heading": [
+      56.046875,
+      29.84375,
+      224.140625,
+      28.3125
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "24px",
+    "weight": "400",
+    "spacing": "0.48px",
+    "heading": [
+      56.046875,
+      29,
+      237.578125,
+      30
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "24px",
+    "weight": "400",
+    "spacing": "0.48px",
+    "heading": [
+      56.046875,
+      29,
+      237.578125,
+      30
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "28px",
+    "weight": "400",
+    "spacing": "0.56px",
+    "heading": [
+      68.859375,
+      35.5,
+      277.1875,
+      35
+    ],
+    "symbol": [
+      40.859375,
+      48
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "28px",
+    "weight": "400",
+    "spacing": "0.56px",
+    "heading": [
+      68.859375,
+      35.5,
+      277.1875,
+      35
+    ],
+    "symbol": [
+      40.859375,
+      48
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "20px",
+    "weight": "400",
+    "spacing": "0.4px",
+    "heading": [
+      56.046875,
+      31.5,
+      197.984375,
+      25
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "20px",
+    "weight": "400",
+    "spacing": "0.4px",
+    "heading": [
+      56.046875,
+      31.5,
+      197.984375,
+      25
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22px",
+    "weight": "400",
+    "spacing": "0.44px",
+    "heading": [
+      56.046875,
+      30.25,
+      217.78125,
+      27.5
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22px",
+    "weight": "400",
+    "spacing": "0.44px",
+    "heading": [
+      56.046875,
+      30.25,
+      217.78125,
+      27.5
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.5455px",
+    "weight": "400",
+    "spacing": "0.450909px",
+    "heading": [
+      56.046875,
+      29.90625,
+      223.046875,
+      28.171875
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.5455px",
+    "weight": "400",
+    "spacing": "0.450909px",
+    "heading": [
+      56.046875,
+      29.90625,
+      223.046875,
+      28.171875
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.6546px",
+    "weight": "400",
+    "spacing": "0.453091px",
+    "heading": [
+      56.046875,
+      29.84375,
+      224.140625,
+      28.3125
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "22.6546px",
+    "weight": "400",
+    "spacing": "0.453091px",
+    "heading": [
+      56.046875,
+      29.84375,
+      224.140625,
+      28.3125
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "24px",
+    "weight": "400",
+    "spacing": "0.48px",
+    "heading": [
+      56.046875,
+      29,
+      237.578125,
+      30
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "24px",
+    "weight": "400",
+    "spacing": "0.48px",
+    "heading": [
+      56.046875,
+      29,
+      237.578125,
+      30
+    ],
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "ja",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "28px",
+    "weight": "400",
+    "spacing": "0.56px",
+    "heading": [
+      68.859375,
+      35.5,
+      277.1875,
+      35
+    ],
+    "symbol": [
+      40.859375,
+      48
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "en",
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "size": "28px",
+    "weight": "400",
+    "spacing": "0.56px",
+    "heading": [
+      68.859375,
+      35.5,
+      277.1875,
+      35
+    ],
+    "symbol": [
+      40.859375,
+      48
+    ],
+    "headingOverflow": false,
+    "overflow": false,
+    "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fonts": [
+      {
+        "familyName": "Josefin Sans Thin",
+        "postScriptName": "JosefinSans-Thin",
+        "isCustomFont": true,
+        "glyphCount": 20
+      }
+    ]
+  }
+]

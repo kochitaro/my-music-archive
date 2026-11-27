@@ -10,7 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ['index.html', 'insights.css', 'archive-toolbar.css', 'insights.js',
         'search.js', 'photo-store.js', 'archive-toolbar.js', 'mobile-navigation.js',
-        'archive-store.js', 'recovery-export.js', 'photo-lifecycle.js', '404.html']
+        'archive-store.js', 'recovery-export.js', 'photo-lifecycle.js', '404.html',
+        'brand.css', 'josefin-sans.woff2', 'JosefinSans-OFL.txt']
 LEGAL = ['terms.html', 'privacy.html', 'legal.css', 'legal.js']
 
 
@@ -78,6 +79,14 @@ class StaticBuild(unittest.TestCase):
             with self.subTest(ref=ref):
                 (self.root / 'index.html').write_text('<script src="' + ref + '"></script>')
                 self.build(False)
+
+    def test_font_css_dependency_is_checked(self):
+        for ref in ['unlisted.woff2', '/josefin-sans.woff2']:
+            (self.root / 'brand.css').write_text('@font-face{src:url("' + ref + '")}')
+            self.build(False)
+        (self.root / 'brand.css').write_text('@font-face{src:url("josefin-sans.woff2")}')
+        (self.root / 'josefin-sans.woff2').unlink()
+        self.build(False)
 
     def test_symlinks_cannot_publish_or_redirect_output(self):
         outside = self.root / 'outside'

@@ -1,0 +1,11 @@
+PASS 320 ja all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 320 en all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 375 ja all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 375 en all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 390 ja all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 390 en all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 393 ja all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 393 en all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 430 ja all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 430 en all chart forms; month paging/stable scale; 55 years/tap/keyboard/zero; bounded continuous monthly SVG; Live score; score scroll anchors; settings/order/hide/reset/reload/independence/no IDB writes
+PASS 1/5/24/30/40/55 years at all five widths, single untruncated chart

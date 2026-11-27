@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/my-music-archive/tests/indexeddb_photos.py", line 162, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/my-music-archive/tests/indexeddb_photos.py", line 48, in main
+    assert p.evaluate('probe.db()')==original
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
