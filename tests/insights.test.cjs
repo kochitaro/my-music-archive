@@ -56,7 +56,7 @@ test('score ranking zero, unknown dates, ties, duplicate records and available y
 test('layout defaults, independent areas, unknown/duplicate IDs and future additions',()=>{
  assert.deepEqual(I.sectionIds('listening'),['artists','score','genre','tags','label','time','release']);
  assert.deepEqual(I.sectionIds('collection'),['artists','genre','tags','label','store','format','time','release']);
- assert.deepEqual(I.sectionIds('live'),['artists','venue','time']);
+ assert.deepEqual(I.sectionIds('live'),['artists','score','venue','time']);
  for(const area of ['listening','collection','live'])for(const value of [null,{},[],{version:1,items:[{id:'time',visible:'false'}]}])assert.deepEqual(I.normalizeLayout(value,area),I.sectionIds(area).map(id=>({id,visible:true})));
  const value={version:1,items:[{id:'score',visible:false},{id:'obsolete',visible:true},{id:'score',visible:true},{id:'artists',visible:false}]};
  const result=I.normalizeLayout(value,'listening');assert.deepEqual(result.slice(0,2),[{id:'score',visible:false},{id:'artists',visible:false}]);assert.equal(result.length,7);assert.equal(result.at(-1).id,'release');
@@ -68,11 +68,22 @@ test('monthly paging reaches record start; gaps and scale inputs remain intact',
  assert.equal(I.timeline(s,'monthly',12,now).more,true);assert.equal(I.timeline(s,'monthly',24,now).rows.length,24);
  const all=I.timeline(s,'monthly',9999,now);assert.equal(all.rows.at(-1).name,'1986-03');assert.equal(all.more,false);assert.equal(all.rows.reduce((n,r)=>n+r.count,0),2);
 });
-test('live month boundaries distinguish unknown periods, gaps, future, year-only and empty years',()=>{
- const now=new Date(2026,10,27),s=I.aggregate([{date:'2024-05-01'},{date:'2026-11-01'}],'live');
- assert.deepEqual(I.liveMonths(s,2025,now).years,[2026,2025,2024]);assert.ok(I.liveMonths(s,2025,now).rows.every(x=>x.count===0&&!x.unavailable));
- assert.equal(I.liveMonths(s,2024,now).rows.filter(x=>x.unavailable).length,4);
- assert.equal(I.liveMonths(s,2026,now).rows[11].unavailable,true);assert.equal(I.liveMonths(s,2026,now).rows[10].count,1);
- assert.deepEqual(I.liveMonths(I.aggregate([],'live'),2026,now).rows,[]);
- assert.ok(I.liveMonths(I.aggregate([{date:'2024'}],'live'),2024,now).rows.every(x=>x.unavailable));
+test('live continuous months start at first dated month and retain gaps through now',()=>{
+ const now=new Date(2026,10,27),s=I.aggregate([{date:'2024-05-01'},{date:'2026-11-01'},{date:'1980'},{date:'2099-01-01'}],'live');
+ const rows=I.liveMonthRows(s,now);assert.equal(rows.length,31);assert.equal(rows[0].name,'2024-05');assert.equal(rows.at(-1).name,'2026-11');assert.equal(rows[1].count,0);assert.equal(rows.reduce((n,r)=>n+r.count,0),2);
+ for(const records of [[],[{date:'2024'}],[{date:'2099-01-01'}]])assert.deepEqual(I.liveMonthRows(I.aggregate(records,'live'),now),[]);
+});
+test('period colors are stable identities, adjacent periods differ, palette cycles',()=>{
+ for(const kind of ['year','decade','month']){const names=kind==='month'?['2025-12','2026-01','2026-02']:kind==='decade'?['1990','2000','2010']:['2024','2025','2026'];
+  const colors=names.map(n=>I.columnColor(n,kind));assert.equal(new Set(colors).size,3);assert.ok(colors.every(c=>I.colors.includes(c)));assert.equal(I.columnColor(names[1],kind),colors[1]);
+ }
+ assert.equal(I.columnColor('2000'),I.columnColor('2015'));assert.equal(I.columnColor('1900','decade'),I.columnColor('2050','decade'));assert.equal(I.columnColor('2025-01','month'),I.columnColor('2026-04','month'));
+});
+test('existing Live layout gains score at end; reset defaults place score second',()=>{
+ const items=[{id:'time',visible:true},{id:'artists',visible:false},{id:'venue',visible:false}];const value={version:1,items};const before=JSON.stringify(value);
+ assert.deepEqual(I.normalizeLayout(value,'live'),[...items,{id:'score',visible:true}]);assert.equal(JSON.stringify(value),before);assert.equal(I.normalizeLayout(null,'live')[1].id,'score');
+});
+test('Live all-period score ranking preserves duplicates, zero, stable ties and unknown dates',()=>{
+ const records=[{title:'Festival',rating:'10',date:''},{title:'Festival',rating:'10',date:'2026-01-01'},{title:'Zero',rating:'0'},{title:'Unrated',rating:''}];
+ const ranked=I.scoreRanking(records,'date');assert.deepEqual(ranked.rows.map(r=>r.rank),[1,1,3]);assert.equal(ranked.rows[2].score,0);assert.equal(ranked.rows[0].record,records[0]);
 });
