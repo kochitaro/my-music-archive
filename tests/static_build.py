@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CORE = ['index.html', 'insights.css', 'archive-toolbar.css', 'insights.js',
         'search.js', 'photo-store.js', 'archive-toolbar.js', 'mobile-navigation.js',
         'archive-store.js', 'recovery-export.js', 'photo-lifecycle.js', '404.html',
-        'brand.css', 'josefin-sans.woff2', 'JosefinSans-OFL.txt']
+        'brand.css', 'brand-compare.js', 'josefin-sans.woff2', 'JosefinSans-OFL.txt']
 LEGAL = ['terms.html', 'privacy.html', 'legal.css', 'legal.js']
 
 

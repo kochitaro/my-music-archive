@@ -1,10 +1,10 @@
 """C-1 header acceptance: isolated Chromium, synthetic/empty data, local requests only."""
-import functools,json,re,threading
+import functools,json,re,threading,os
 from pathlib import Path
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright,expect
 from static_distribution import SNAPSHOT
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'docs/brand-logo-02';OUT.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/os.environ.get('MLA_BRAND_OUTPUT','docs/brand-logo-02');OUT.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
 servers=[];results=[]
@@ -19,8 +19,8 @@ with sync_playwright() as pw:
     page.locator('#ui-language').select_option(lang)
     expect(page.locator('#page-heading')).to_have_text('My Listening Archive')
     assert page.locator('#page-heading').get_attribute('tabindex')=='-1'
-    assert page.locator('.brand svg').get_attribute('aria-hidden')=='true'
-    assert page.locator('.brand svg path').count()==1
+    assert page.locator('[data-brand-symbol="C-1"] svg').get_attribute('aria-hidden')=='true'
+    assert page.locator('[data-brand-symbol="C-1"] svg path').count()==1
     metrics=page.locator('.brand').evaluate('''e=>{const h=e.querySelector('h1'),s=e.querySelector('svg'),r=h.getBoundingClientRect(),b=s.getBoundingClientRect(),style=getComputedStyle(h);return {font:style.fontFamily,size:style.fontSize,weight:style.fontWeight,spacing:style.letterSpacing,heading:[r.x,r.y,r.width,r.height],symbol:[b.width,b.height],headingOverflow:h.scrollWidth>h.clientWidth,overflow:[...e.querySelectorAll('*')].some(n=>n.getBoundingClientRect().right>innerWidth),bodyFont:getComputedStyle(document.body).fontFamily}}''')
     assert not metrics['overflow'] and not metrics['headingOverflow'],metrics
     assert abs(metrics['symbol'][0]/metrics['symbol'][1]-326.425/383.444)<.002
