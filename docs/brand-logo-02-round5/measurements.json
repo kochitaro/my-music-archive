@@ -1,0 +1,202 @@
+{
+  "B-4": {
+    "geometry": "B-4",
+    "targetWidthFactor": null,
+    "displayHeight": 40,
+    "viewportSize": [
+      26.118702429274435,
+      40
+    ],
+    "whiteAreaSourcePx2": 6833.515175000011,
+    "whiteAreaDisplayPx2": 245.27422295785263,
+    "minimumCurveGapSourcePx": 11.175369742826808,
+    "minimumCurveGapDisplayPx": 2.117218955412334,
+    "inkBoundsSourceXYXY": [
+      0.662,
+      0.0,
+      137.237,
+      211.125
+    ],
+    "inkSizeDisplay": [
+      25.874685624701016,
+      39.998484367673456
+    ],
+    "verticalSectionX400WidthsSourcePx": [],
+    "whiteAreaDisplayRelativeToF1": 0.5732859305148704
+  },
+  "F-1": {
+    "geometry": "F-1",
+    "targetWidthFactor": 1,
+    "displayHeight": 40,
+    "viewportSize": [
+      37.90130530563805,
+      40
+    ],
+    "whiteAreaSourcePx2": 125797.89775949989,
+    "whiteAreaDisplayPx2": 427.83925071660286,
+    "minimumCurveGapSourcePx": 25.899377941907748,
+    "minimumCurveGapDisplayPx": 1.5104033977257532,
+    "inkBoundsSourceXYXY": [
+      0.036,
+      0.0,
+      649.893,
+      685.893
+    ],
+    "inkSizeDisplay": [
+      37.89844771706374,
+      40.0
+    ],
+    "verticalSectionX400WidthsSourcePx": [
+      40.22969583333334,
+      50.43099793956043,
+      190.75805257405977
+    ],
+    "whiteAreaDisplayRelativeToF1": 1.0,
+    "geometryWhiteAreaRelativeToF1": 1.0,
+    "verticalWidthRatiosAtX400": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "F-2": {
+    "geometry": "F-2",
+    "targetWidthFactor": 0.9,
+    "displayHeight": 40,
+    "viewportSize": [
+      37.90130530563805,
+      40
+    ],
+    "whiteAreaSourcePx2": 113159.43354649999,
+    "whiteAreaDisplayPx2": 384.85577360448127,
+    "minimumCurveGapSourcePx": 26.087459737497543,
+    "minimumCurveGapDisplayPx": 1.521371977115821,
+    "inkBoundsSourceXYXY": [
+      2.75,
+      2.155,
+      645.323,
+      685.833
+    ],
+    "inkSizeDisplay": [
+      37.47365842777226,
+      39.8708253328143
+    ],
+    "verticalSectionX400WidthsSourcePx": [
+      36.3380771582246,
+      45.2468097568476,
+      184.0942081937157
+    ],
+    "whiteAreaDisplayRelativeToF1": 0.8995335817363015,
+    "geometryWhiteAreaRelativeToF1": 0.8995335817363015,
+    "verticalWidthRatiosAtX400": [
+      0.9032650236474262,
+      0.897202347870929,
+      0.9650665107426755
+    ]
+  },
+  "F-3": {
+    "geometry": "F-3",
+    "targetWidthFactor": 0.8,
+    "displayHeight": 40,
+    "viewportSize": [
+      37.90130530563805,
+      40
+    ],
+    "whiteAreaSourcePx2": 100793.149882,
+    "whiteAreaDisplayPx2": 342.7979838369325,
+    "minimumCurveGapSourcePx": 26.419689627245813,
+    "minimumCurveGapDisplayPx": 1.5407470044013167,
+    "inkBoundsSourceXYXY": [
+      5.333,
+      4.148,
+      640.803,
+      685.833
+    ],
+    "inkSizeDisplay": [
+      37.059424720765485,
+      39.75459729141426
+    ],
+    "verticalSectionX400WidthsSourcePx": [
+      32.33906342910179,
+      40.1462650469868,
+      176.9370518436985
+    ],
+    "whiteAreaDisplayRelativeToF1": 0.8012307969938901,
+    "geometryWhiteAreaRelativeToF1": 0.8012307969938901,
+    "verticalWidthRatiosAtX400": [
+      0.8038605005386702,
+      0.7960632683711816,
+      0.9275469604356785
+    ]
+  },
+  "F-4": {
+    "geometry": "F-1",
+    "targetWidthFactor": 1,
+    "displayHeight": 36,
+    "viewportSize": [
+      34.11117477507425,
+      36
+    ],
+    "whiteAreaSourcePx2": 125797.89775949989,
+    "whiteAreaDisplayPx2": 346.5497930804483,
+    "minimumCurveGapSourcePx": 25.899377941907748,
+    "minimumCurveGapDisplayPx": 1.3593630579531777,
+    "inkBoundsSourceXYXY": [
+      0.036,
+      0.0,
+      649.893,
+      685.893
+    ],
+    "inkSizeDisplay": [
+      34.10860294535737,
+      36.0
+    ],
+    "verticalSectionX400WidthsSourcePx": [
+      40.22969583333334,
+      50.43099793956043,
+      190.75805257405977
+    ],
+    "whiteAreaDisplayRelativeToF1": 0.8099999999999999,
+    "geometryWhiteAreaRelativeToF1": 1.0,
+    "verticalWidthRatiosAtX400": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "F-5": {
+    "geometry": "F-2",
+    "targetWidthFactor": 0.9,
+    "displayHeight": 36,
+    "viewportSize": [
+      34.11117477507425,
+      36
+    ],
+    "whiteAreaSourcePx2": 113159.43354649999,
+    "whiteAreaDisplayPx2": 311.7331766196298,
+    "minimumCurveGapSourcePx": 26.087459737497543,
+    "minimumCurveGapDisplayPx": 1.3692347794042388,
+    "inkBoundsSourceXYXY": [
+      2.75,
+      2.155,
+      645.323,
+      685.833
+    ],
+    "inkSizeDisplay": [
+      33.726292584995036,
+      35.88374279953287
+    ],
+    "verticalSectionX400WidthsSourcePx": [
+      36.3380771582246,
+      45.2468097568476,
+      184.0942081937157
+    ],
+    "whiteAreaDisplayRelativeToF1": 0.7286222012064041,
+    "geometryWhiteAreaRelativeToF1": 0.8995335817363015,
+    "verticalWidthRatiosAtX400": [
+      0.9032650236474262,
+      0.897202347870929,
+      0.9650665107426755
+    ]
+  }
+}

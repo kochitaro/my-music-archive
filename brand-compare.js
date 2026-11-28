@@ -5,7 +5,7 @@
  const local = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
  if (!(preview || local) || new URLSearchParams(location.search).get('logo-compare') !== '1') return;
  const symbols = [...document.querySelectorAll('[data-brand-symbol]')];
- if (symbols.length !== 2) return;
+ if (symbols.length !== 6) return;
  const mark = document.querySelector('.brandmark');
  const panel = document.createElement('aside');
  // Keep the app's outside-click handlers from changing open archive panels.
@@ -15,7 +15,7 @@
  const label = document.createElement('span');
  label.textContent = 'Logo';
  panel.append(label);
- for (const name of ['B-4', 'F-1']) {
+ for (const name of ['B-4', 'F-1', 'F-2', 'F-3', 'F-4', 'F-5']) {
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = name;

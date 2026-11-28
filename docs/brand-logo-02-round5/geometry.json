@@ -1,0 +1,92 @@
+{
+  "source": "committed F-1 SVG only",
+  "sourceCommit": "97293a0056ab4cc9cba1c71baab24874864c6a7e",
+  "viewBoxWH": [
+    649.906,
+    685.893
+  ],
+  "sampling": 3,
+  "toleranceSourcePx": 0.2,
+  "endCapsXY": [
+    [
+      603,
+      98
+    ],
+    [
+      496,
+      684
+    ],
+    [
+      241,
+      455
+    ],
+    [
+      312,
+      472
+    ]
+  ],
+  "fixedRadiusSourcePx": 16,
+  "transitionOuterRadiusSourcePx": 48,
+  "F1_SVGSHA256": "4fe437be03f71c154b67b591f1208616b44ba0acf6f6f5c5c76a30839e28d8c8",
+  "B4_SVGSHA256": "4f80dbfc448838ed480d2e377936fdfbd52e4b6202f3ccf63c2f4e1f1858abbd",
+  "geometry": {
+    "F-2": {
+      "targetFactor": 0.9,
+      "areaRatio": 0.8994030159222252,
+      "vertices": 559,
+      "areaSourcePx2": 113144.0,
+      "components": 2,
+      "minGapSourcePx": 26.087459737497543,
+      "inkBoundsXYXY": [
+        3.0,
+        2.3333333333333335,
+        645.0,
+        685.6666666666666
+      ],
+      "displayAreaAt40px": 384.8032840391701,
+      "minGapAt40px": 1.521371977115821,
+      "endCapBoundaryMaxDeviationsSourcePx": [
+        0.13608765444755672,
+        0.28113178737752204,
+        0.1845085296923154,
+        0.1359335805621977
+      ]
+    },
+    "F-3": {
+      "targetFactor": 0.8,
+      "areaRatio": 0.8012252349647718,
+      "vertices": 507,
+      "areaSourcePx2": 100793.33333333333,
+      "components": 2,
+      "minGapSourcePx": 26.419689627245813,
+      "inkBoundsXYXY": [
+        5.333333333333333,
+        4.333333333333333,
+        640.6666666666666,
+        685.6666666666666
+      ],
+      "displayAreaAt40px": 342.7986077557928,
+      "minGapAt40px": 1.5407470044013167,
+      "endCapBoundaryMaxDeviationsSourcePx": [
+        0.13608765444755672,
+        0.28113178737752204,
+        0.1845085296923154,
+        0.1359335805621977
+      ]
+    },
+    "F-1": {
+      "areaSourcePx2": 125799.0,
+      "areaRatio": 1.0,
+      "components": 2,
+      "minGapSourcePx": 25.899377941907748,
+      "inkBoundsXYXY": [
+        0.3333333333333333,
+        0.3333333333333333,
+        649.6666666666666,
+        685.6666666666666
+      ],
+      "displayAreaAt40px": 427.84299944180475,
+      "minGapAt40px": 1.5104033977257532
+    }
+  }
+}
