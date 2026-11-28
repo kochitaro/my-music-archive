@@ -9,12 +9,9 @@
 .brand{display:flex;align-items:center;gap:12px;margin:5px 0 16px;max-width:100%;min-width:0;color:#f0f1f3}
 .brandmark{display:grid;place-items:center;flex:none;width:42px;height:40px;padding:0;background:none;border:0;border-radius:0}
 .brandmark>span{display:none;align-items:center;justify-content:center;width:100%;height:40px}
-.brandmark:not([data-brand-choice])>[data-brand-symbol="B-3"],
-.brandmark[data-brand-choice="B-1"]>[data-brand-symbol="B-1"],
-.brandmark[data-brand-choice="B-2"]>[data-brand-symbol="B-2"],
-.brandmark[data-brand-choice="B-3"]>[data-brand-symbol="B-3"],
+.brandmark:not([data-brand-choice])>[data-brand-symbol="F-1"],
 .brandmark[data-brand-choice="B-4"]>[data-brand-symbol="B-4"],
-.brandmark[data-brand-choice="B-5"]>[data-brand-symbol="B-5"]{display:flex}
+.brandmark[data-brand-choice="F-1"]>[data-brand-symbol="F-1"]{display:flex}
 .brandmark svg{display:block;width:auto;height:40px}
 .brand h1{font-family:"Josefin Sans","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:28px;font-weight:400;letter-spacing:.02em;line-height:1.25;margin:0;min-width:0;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:540px){

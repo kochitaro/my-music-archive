@@ -5,7 +5,7 @@
  const local = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
  if (!(preview || local) || new URLSearchParams(location.search).get('logo-compare') !== '1') return;
  const symbols = [...document.querySelectorAll('[data-brand-symbol]')];
- if (symbols.length !== 5) return;
+ if (symbols.length !== 2) return;
  const mark = document.querySelector('.brandmark');
  const panel = document.createElement('aside');
  // Keep the app's outside-click handlers from changing open archive panels.
@@ -15,11 +15,11 @@
  const label = document.createElement('span');
  label.textContent = 'Logo';
  panel.append(label);
- for (const name of ['B-1', 'B-2', 'B-3', 'B-4', 'B-5']) {
+ for (const name of ['B-4', 'F-1']) {
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = name;
-  button.setAttribute('aria-pressed', String(name === 'B-3'));
+  button.setAttribute('aria-pressed', String(name === 'F-1'));
   // Pointer selection must not move focus/scroll away from the current screen.
   button.addEventListener('pointerdown', event => event.preventDefault());
   button.addEventListener('click', () => {

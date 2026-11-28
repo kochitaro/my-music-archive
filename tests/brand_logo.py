@@ -19,11 +19,11 @@ with sync_playwright() as pw:
     page.locator('#ui-language').select_option(lang)
     expect(page.locator('#page-heading')).to_have_text('My Listening Archive')
     assert page.locator('#page-heading').get_attribute('tabindex')=='-1'
-    assert page.locator('[data-brand-symbol="B-3"] svg').get_attribute('aria-hidden')=='true'
-    assert page.locator('[data-brand-symbol="B-3"] svg path').count()==1
-    metrics=page.locator('.brand').evaluate('''e=>{const h=e.querySelector('h1'),s=e.querySelector('[data-brand-symbol="B-3"] svg'),r=h.getBoundingClientRect(),b=s.getBoundingClientRect(),style=getComputedStyle(h);return {font:style.fontFamily,size:style.fontSize,weight:style.fontWeight,spacing:style.letterSpacing,heading:[r.x,r.y,r.width,r.height],symbol:[b.width,b.height],headingOverflow:h.scrollWidth>h.clientWidth,overflow:[...e.querySelectorAll('*')].some(n=>n.getBoundingClientRect().right>innerWidth),bodyFont:getComputedStyle(document.body).fontFamily}}''')
+    assert page.locator('[data-brand-symbol="F-1"] svg').get_attribute('aria-hidden')=='true'
+    assert page.locator('[data-brand-symbol="F-1"] svg path').count()==1
+    metrics=page.locator('.brand').evaluate('''e=>{const h=e.querySelector('h1'),s=e.querySelector('[data-brand-symbol="F-1"] svg'),r=h.getBoundingClientRect(),b=s.getBoundingClientRect(),style=getComputedStyle(h);return {font:style.fontFamily,size:style.fontSize,weight:style.fontWeight,spacing:style.letterSpacing,heading:[r.x,r.y,r.width,r.height],symbol:[b.width,b.height],headingOverflow:h.scrollWidth>h.clientWidth,overflow:[...e.querySelectorAll('*')].some(n=>n.getBoundingClientRect().right>innerWidth),bodyFont:getComputedStyle(document.body).fontFamily}}''')
     assert not metrics['overflow'] and not metrics['headingOverflow'],metrics
-    assert abs(metrics['symbol'][0]/metrics['symbol'][1]-137.863/211.133)<.002
+    assert abs(metrics['symbol'][0]/metrics['symbol'][1]-649.906/685.893)<.002
     assert metrics['heading'][3]<38,metrics # one line at normal text size
     assert 'Josefin' not in metrics['bodyFont']
     session=ctx.new_cdp_session(page);session.send('DOM.enable');session.send('CSS.enable');doc=session.send('DOM.getDocument');node=session.send('DOM.querySelector',{'nodeId':doc['root']['nodeId'],'selector':'#page-heading'});fonts=session.send('CSS.getPlatformFontsForNode',{'nodeId':node['nodeId']})['fonts'];session.detach();assert any(f['isCustomFont'] and 'Josefin' in f['familyName'] for f in fonts),fonts
@@ -47,7 +47,7 @@ with sync_playwright() as pw:
  if old.exists():
   for width in [390,1280]:
    ctx=browser.new_context(viewport={'width':width,'height':900});p=ctx.new_page();ctx.route(base,lambda r:r.fulfill(body=old.read_text(),content_type='text/html'));p.goto(base);p.locator('.brand').screenshot(path=str(OUT/f'before-{width}.png'));ctx.close()
- p=browser.new_page(viewport={'width':400,'height':460});svg=re.search(r'<span data-brand-symbol="B-3">(.*?)</span>',(ROOT/'index.html').read_text(),re.S)[1];p.set_content('<style>body{margin:0;background:#11151b;color:#f0f1f3}svg{display:block;width:auto;height:300px}</style>'+svg);p.locator('svg').screenshot(path=str(OUT/'svg-symbol.png'))
+ p=browser.new_page(viewport={'width':400,'height':460});svg=re.search(r'<span data-brand-symbol="F-1">(.*?)</span>',(ROOT/'index.html').read_text(),re.S)[1];p.set_content('<style>body{margin:0;background:#11151b;color:#f0f1f3}svg{display:block;width:auto;height:300px}</style>'+svg);p.locator('svg').screenshot(path=str(OUT/'svg-symbol.png'))
  browser.close()
 for s in servers:s.shutdown()
 (OUT/'metrics.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
