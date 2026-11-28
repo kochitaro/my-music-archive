@@ -1,0 +1,38 @@
+{
+  "terms.html": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "5d6088f9e36ebb4173ad2400f1a4c70b5effbb649c7c677b11c17107638d75b5"
+  },
+  "privacy.html": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "152e4887674defdb1f528f98066f9eddc849ce17967bbf7bc9c7113a1823e400"
+  },
+  "docs/brand-symbols/archive/B-4.svg": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "4f80dbfc448838ed480d2e377936fdfbd52e4b6202f3ccf63c2f4e1f1858abbd"
+  },
+  "docs/brand-symbols/f-series/F-1-reference.jpg": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "373e88dba8c639f3f329761f2bb59c7efa4985b583fd6f4306028d9e22a84651"
+  },
+  "docs/brand-symbols/f-series/F-1.svg": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "4fe437be03f71c154b67b591f1208616b44ba0acf6f6f5c5c76a30839e28d8c8"
+  },
+  "docs/brand-symbols/f-series/F-2.svg": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "9a0287da60f355ca1d55bda899658425c94c1c65d46c9ce1708d810699a76746"
+  },
+  "docs/brand-symbols/f-series/F-3.svg": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "f22b036ffb99991306fe83888e4ab6d089dc8a3e596d253bee2f40fcd83e4090"
+  },
+  "docs/brand-symbols/f-series/README.md": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "cb2dea2085e683412895ac3a9bc4a7db5264412247b0d856cfdf13af932de517"
+  },
+  "docs/brand-symbols/f-series/sha256.json": {
+    "unchangedFrom": "3c346197a545a44368a6cfd63043cd429596ab11",
+    "sha256": "856aa03cc07cce7b6d7173bd0d4e8ac431faf578999b26fc0749e2d82a8fda75"
+  }
+}

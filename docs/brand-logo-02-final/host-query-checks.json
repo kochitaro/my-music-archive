@@ -1,0 +1,162 @@
+[
+  {
+    "kind": "source",
+    "host": "deploy-preview.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "deploy-preview.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "ceb7ebd5.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "ceb7ebd5.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "localhost",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "localhost",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "kochitaro.github.io",
+    "prefix": "/my-music-archive/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "source",
+    "host": "kochitaro.github.io",
+    "prefix": "/my-music-archive/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "deploy-preview.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "deploy-preview.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "ceb7ebd5.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "ceb7ebd5.my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "localhost",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "localhost",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "my-listening-archive.pages.dev",
+    "prefix": "/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "kochitaro.github.io",
+    "prefix": "/my-music-archive/",
+    "suffix": "",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  },
+  {
+    "kind": "dist",
+    "host": "kochitaro.github.io",
+    "prefix": "/my-music-archive/",
+    "suffix": "?logo-compare=1",
+    "comparisonRequests": 0,
+    "panelCount": 0
+  }
+]

@@ -1,0 +1,5 @@
+PASS state retention archive {'reads': 0, 'writes': 0, 'storage': 0, 'requests': 0, 'mutations': 0, 'nodes': True, 'y': True}
+PASS state retention insights {'reads': 0, 'writes': 0, 'storage': 0, 'requests': 0, 'mutations': 0, 'nodes': True, 'y': True}
+PASS state retention archive-large {'reads': 0, 'writes': 0, 'storage': 0, 'requests': 0, 'mutations': 0, 'nodes': True, 'y': True}
+PASS state retention insights-large {'reads': 0, 'writes': 0, 'storage': 0, 'requests': 0, 'mutations': 0, 'nodes': True, 'y': True}
+PASS 144 wordmark cases, 200% text, no symbol/slot, stable 40px header and following UI, archived original SVGs, preview opt-in, default T-5

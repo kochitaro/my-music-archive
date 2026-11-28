@@ -1,0 +1,138 @@
+{
+  "B-1": {
+    "nominalFactor": 0.8,
+    "components": 2,
+    "areaRatio": 0.7993534602224339,
+    "vertices": 661,
+    "minimumRibbonGapSourcePx": 13.998325792751075,
+    "bboxYX": [
+      69,
+      106,
+      1757,
+      1177
+    ],
+    "verticalSectionAtCommonX54_WidthsPx": [
+      15.906256872727262,
+      2.36771499999999,
+      16.314873803921557,
+      2.1778864000000056
+    ]
+  },
+  "B-2": {
+    "nominalFactor": 0.9,
+    "components": 2,
+    "areaRatio": 0.8981561270100433,
+    "vertices": 823,
+    "minimumRibbonGapSourcePx": 12.976541334269314,
+    "bboxYX": [
+      69,
+      104,
+      1757,
+      1180
+    ],
+    "verticalSectionAtCommonX54_WidthsPx": [
+      17.908160857142853,
+      2.605678999999995,
+      18.34146164705882,
+      2.426608000000016
+    ]
+  },
+  "B-3": {
+    "nominalFactor": 1.0,
+    "components": 2,
+    "areaRatio": 0.9995162290050947,
+    "vertices": 381,
+    "minimumRibbonGapSourcePx": 12.126932835634904,
+    "bboxYX": [
+      69,
+      101,
+      1757,
+      1182
+    ],
+    "verticalSectionAtCommonX54_WidthsPx": [
+      19.95414911515151,
+      2.911161116279061,
+      20.426552000000015,
+      2.7681864132890155
+    ]
+  },
+  "B-4": {
+    "nominalFactor": 1.1,
+    "components": 2,
+    "areaRatio": 1.10190434436432,
+    "vertices": 810,
+    "minimumRibbonGapSourcePx": 11.096170510586074,
+    "bboxYX": [
+      69,
+      96,
+      1757,
+      1187
+    ],
+    "verticalSectionAtCommonX54_WidthsPx": [
+      21.999573428571438,
+      3.189391999999998,
+      22.50636654636594,
+      3.072891999999996
+    ]
+  },
+  "B-5": {
+    "nominalFactor": 1.2,
+    "components": 2,
+    "areaRatio": 1.1994900247428706,
+    "vertices": 644,
+    "minimumRibbonGapSourcePx": 10.765250809897557,
+    "bboxYX": [
+      69,
+      90,
+      1757,
+      1192
+    ],
+    "verticalSectionAtCommonX54_WidthsPx": [
+      24.02189885714285,
+      3.462341913043474,
+      24.544574707692277,
+      3.306757142857151
+    ]
+  },
+  "reference": {
+    "sourceSHA256": "b13a81dd63e647df283dac2faab4b2628af11d2f9648002f684c5f48cfad5aa8",
+    "cropBox": [
+      85,
+      105,
+      245,
+      335
+    ],
+    "threshold": 128,
+    "supersampling": 8,
+    "simplificationSourcePx": 0.06,
+    "endCapsSourceXY": [
+      [
+        180,
+        115
+      ],
+      [
+        164,
+        239
+      ],
+      [
+        167,
+        201
+      ],
+      [
+        164,
+        324
+      ]
+    ],
+    "commonBoxOriginalXYXY": [
+      96.28510648850107,
+      113.625,
+      234.14822852648942,
+      324.7582547169811
+    ],
+    "viewBoxWH": [
+      137.86312203798835,
+      211.13325471698113
+    ],
+    "B3_IoU": 0.9972818290270458
+  }
+}

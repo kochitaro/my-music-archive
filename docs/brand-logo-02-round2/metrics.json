@@ -1,0 +1,1442 @@
+[
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 320,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 375,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 390,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 393,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 430,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "source",
+    "width": 1280,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 320,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 29,
+    "height": 30,
+    "size": 24,
+    "weight": "400",
+    "spacing": "0.48px",
+    "lineHeight": "30px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 375,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 27.109375,
+    "height": 33.765625,
+    "size": 27.0137,
+    "weight": "400",
+    "spacing": "0.540274px",
+    "lineHeight": "33.7671px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 390,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.609375,
+    "height": 34.78125,
+    "size": 27.8356,
+    "weight": "400",
+    "spacing": "0.556712px",
+    "lineHeight": "34.7945px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 393,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 430,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 64,
+    "y": 26.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "ja",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "ja",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "ja",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "en",
+    "symbol": [
+      34.046875,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.8513196082760386,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "C-1"
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "en",
+    "symbol": [
+      30.015625,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 0.7504624123916268,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "B"
+  },
+  {
+    "kind": "dist",
+    "width": 1280,
+    "lang": "en",
+    "symbol": [
+      41.953125,
+      40
+    ],
+    "x": 70,
+    "y": 31.5,
+    "height": 35,
+    "size": 28,
+    "weight": "400",
+    "spacing": "0.56px",
+    "lineHeight": "35px",
+    "ratio": 1.0491903438564845,
+    "overflow": false,
+    "font": "\"Josefin Sans\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+    "variant": "E"
+  }
+]

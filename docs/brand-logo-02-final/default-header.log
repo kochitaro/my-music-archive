@@ -1,0 +1,3 @@
+PASS font blocked: adopted T-6 with and without former query source
+PASS font blocked: adopted T-6 with and without former query dist
+PASS 24 width/language/source-dist cases; custom font, fallback, 200%+ text, navigation, no external requests, unchanged archive/photo data (language settings intentionally persist)

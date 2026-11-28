@@ -1,0 +1,3 @@
+PASS state retention archive {'reads': 0, 'writes': 0, 'storage': 0, 'requests': 0, 'mutations': 0, 'nodes': True, 'y': True}
+PASS state retention insights {'reads': 0, 'writes': 0, 'storage': 0, 'requests': 0, 'mutations': 0, 'nodes': True, 'y': True}
+PASS 72 width/language/variant/source-dist cases, text enlargement, preview opt-in, original C-1 bytes unchanged

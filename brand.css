@@ -1,0 +1,10 @@
+/* Official Josefin Sans 2.001, lossless WOFF2 packaging. See JosefinSans-OFL.txt. */
+@font-face{
+ font-family:"Josefin Sans";
+ src:url("josefin-sans.woff2") format("woff2");
+ font-style:normal;
+ font-weight:100 700;
+ font-display:swap;
+}
+.brand{display:flex;align-items:center;justify-content:center;text-align:center;min-height:40px;gap:0;margin:5px 0 16px;max-width:100%;min-width:0;color:#f0f1f3}
+.brand h1{font-family:"Josefin Sans","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:1.466666667rem;font-weight:400;letter-spacing:.02em;line-height:1.25;margin:0;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
