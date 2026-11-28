@@ -4,7 +4,8 @@ from pathlib import Path
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright,expect
 from static_distribution import SNAPSHOT
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/os.environ.get('MLA_BRAND_OUTPUT','docs/brand-logo-02');OUT.mkdir(exist_ok=True)
+from brand_text_metrics import measure,check
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/os.environ.get('MLA_BRAND_OUTPUT','docs/brand-logo-02-round6/default');OUT.mkdir(parents=True,exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
 servers=[];results=[]
@@ -19,13 +20,7 @@ with sync_playwright() as pw:
     page.locator('#ui-language').select_option(lang)
     expect(page.locator('#page-heading')).to_have_text('My Listening Archive')
     assert page.locator('#page-heading').get_attribute('tabindex')=='-1'
-    assert page.locator('[data-brand-symbol="F-1"] svg').get_attribute('aria-hidden')=='true'
-    assert page.locator('[data-brand-symbol="F-1"] svg path').count()==1
-    metrics=page.locator('.brand').evaluate('''e=>{const h=e.querySelector('h1'),s=e.querySelector('[data-brand-symbol="F-1"] svg'),r=h.getBoundingClientRect(),b=s.getBoundingClientRect(),style=getComputedStyle(h);return {font:style.fontFamily,size:style.fontSize,weight:style.fontWeight,spacing:style.letterSpacing,heading:[r.x,r.y,r.width,r.height],symbol:[b.width,b.height],headingOverflow:h.scrollWidth>h.clientWidth,overflow:[...e.querySelectorAll('*')].some(n=>n.getBoundingClientRect().right>innerWidth),bodyFont:getComputedStyle(document.body).fontFamily}}''')
-    assert not metrics['overflow'] and not metrics['headingOverflow'],metrics
-    assert abs(metrics['symbol'][0]/metrics['symbol'][1]-649.906/685.893)<.002
-    assert metrics['heading'][3]<38,metrics # one line at normal text size
-    assert 'Josefin' not in metrics['bodyFont']
+    metrics=measure(page);check(metrics,'T-5')
     session=ctx.new_cdp_session(page);session.send('DOM.enable');session.send('CSS.enable');doc=session.send('DOM.getDocument');node=session.send('DOM.querySelector',{'nodeId':doc['root']['nodeId'],'selector':'#page-heading'});fonts=session.send('CSS.getPlatformFontsForNode',{'nodeId':node['nodeId']})['fonts'];session.detach();assert any(f['isCustomFont'] and 'Josefin' in f['familyName'] for f in fonts),fonts
     if kind=='source':page.screenshot(path=str(OUT/f'header-{width}-{lang}.png'))
     for area in ['listening','collection','live']:
@@ -35,19 +30,12 @@ with sync_playwright() as pw:
     for name in before:
      assert after[name]['archive']['values'][0]==before[name]['archive']['values'][0]
      assert after[name]['photos']==before[name]['photos']
-    results.append({'kind':kind,'width':width,'lang':lang,**metrics,'fonts':fonts})
+    results.append({'kind':kind,'viewportWidth':width,'lang':lang,**metrics,'fonts':fonts})
    # Text enlargement must wrap without clipping the service name.
-   page.add_style_tag(content=':root{font-size:30px}.brand h1{font-size:2rem}')
-   assert page.locator('#page-heading').evaluate('(e)=>e.scrollWidth<=e.clientWidth && e.getBoundingClientRect().right<=innerWidth')
+   page.add_style_tag(content=':root{font-size:30px}');check(measure(page),'T-5',2)
    assert not external,external
    ctx.close()
   ctx=browser.new_context(viewport={'width':320,'height':900});ctx.route('**/*.woff2',lambda r:r.abort());p=ctx.new_page();p.goto(base);p.evaluate('document.fonts.ready');expect(p.locator('#page-heading')).to_be_visible();assert p.locator('#page-heading').evaluate('(e)=>e.scrollWidth<=e.clientWidth');p.screenshot(path=str(OUT/f'fallback-{kind}-320.png'));ctx.close()
- # Compare original and new header using the actual previous markup at equal viewport.
- old=Path('/tmp/mla-logo-work/before.html')
- if old.exists():
-  for width in [390,1280]:
-   ctx=browser.new_context(viewport={'width':width,'height':900});p=ctx.new_page();ctx.route(base,lambda r:r.fulfill(body=old.read_text(),content_type='text/html'));p.goto(base);p.locator('.brand').screenshot(path=str(OUT/f'before-{width}.png'));ctx.close()
- p=browser.new_page(viewport={'width':400,'height':460});svg=re.search(r'<span data-brand-symbol="F-1">(.*?)</span>',(ROOT/'index.html').read_text(),re.S)[1];p.set_content('<style>body{margin:0;background:#11151b;color:#f0f1f3}svg{display:block;width:auto;height:300px}</style>'+svg);p.locator('svg').screenshot(path=str(OUT/'svg-symbol.png'))
  browser.close()
 for s in servers:s.shutdown()
 (OUT/'metrics.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
