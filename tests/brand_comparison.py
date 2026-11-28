@@ -5,11 +5,12 @@ from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright,expect
 from static_distribution import SNAPSHOT
 from data_preservation import seed_data
-from brand_text_metrics import SPECS,measure,check
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'docs/brand-logo-02-round6';OUT.mkdir(exist_ok=True)
+from brand_text_metrics import SPECS,measure,check,accessible_heading
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'docs/brand-logo-02-round7';OUT.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
 records=[];servers=[]
+baseline=json.loads((ROOT/'docs/brand-logo-02-round6/metrics.json').read_text())
 with sync_playwright() as pw:
  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
  for kind in ['source','dist']:
@@ -23,14 +24,18 @@ with sync_playwright() as pw:
     positions=[]
     expect(p.locator('.brand-comparison button[aria-pressed="true"]')).to_have_count(1)
     controls=p.locator('.brand-comparison button').evaluate_all('(nodes)=>nodes.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom}})')
-    assert len(controls)==6 and all(r['w']>=44 and r['h']>=44 and r['x']>=0 and r['right']<=width for r in controls),controls
+    assert len(controls)==4 and all(r['w']>=44 and r['h']>=44 and r['x']>=0 and r['right']<=width for r in controls),controls
     for i,r in enumerate(controls):
      for q in controls[i+1:]:assert r['right']<=q['x']+.1 or q['right']<=r['x']+.1 or r['bottom']<=q['y']+.1 or q['bottom']<=r['y']+.1
     for name in list(SPECS):
      button=p.locator('.brand-comparison button').filter(has_text=re.compile('^'+re.escape(name)+'$'));button.tap() if width<600 else button.click()
      expect(button).to_have_attribute('aria-pressed','true')
      info=measure(p);check(info,name)
+     info["accessibility"]=accessible_heading(p)
      positions.append((tuple(info['brand']),info['sections'][1]))
+     if name=='T-6':
+      old=next(m for m in baseline if m['kind']==kind and m['viewportWidth']==width and m['lang']==lang and m['variant']=='T-6')
+      for field in ['x','y','width','height','size']:assert abs(info[field]-old[field])<.02,(field,info,old)
      if kind=='source':
       p.locator('.brand').screenshot(path=str(OUT/f'header-{width}-{lang}-{name}.png'))
       if width in [320,393,1280]:p.screenshot(path=str(OUT/f'top-{width}-{lang}-{name}.png'))
@@ -50,8 +55,22 @@ with sync_playwright() as pw:
     c.route(url+'**',lambda r:r.fulfill(body=(root/'index.html').read_text(),content_type='text/html') if r.request.resource_type=='document' else r.fulfill(body=(root/'brand-compare.js').read_text(),content_type='text/javascript') if 'brand-compare.js' in r.request.url else r.abort());p.goto(url+'?logo-compare=1')
    assert p.locator('.brand-comparison').count()==int(enabled),(kind,host)
    if host=='127.0.0.1':
-    check(measure(p),'T-5')
+    check(measure(p),'T-6')
    c.close()
+ # Names and selection must survive language/area/screen transitions.
+ c=b.new_context(viewport={'width':393,'height':852});c.route('https://**/*',lambda r:r.abort());p=c.new_page();p.goto(base+'?logo-compare=1');p.evaluate('MLAReady');p.evaluate('document.fonts.ready')
+ official_before={name:(ROOT/(name+'.html')).read_bytes() for name in ['terms','privacy']}
+ for name in SPECS:
+  p.locator('.brand-comparison button').filter(has_text=re.compile('^'+name+'$')).click()
+  for lang in ['ja','en']:
+   p.locator('#ui-language').select_option(lang)
+   for area in ['listening','collection','live']:
+    p.locator(f'[data-section={area}]').click()
+    for screen in ['insights','archive']:
+     p.locator('#'+screen+'-screen').click();check(measure(p),name);accessible_heading(p)
+     expect(p.locator('.brand-comparison button[aria-pressed="true"]')).to_have_text(name)
+ assert all((ROOT/(name+'.html')).read_bytes()==data for name,data in official_before.items())
+ c.close();print('PASS all four candidates survive JA/EN and three areas/archive/Insights; accessible official name',flush=True)
  # Synthetic state retention in actual search/archive/Insights, with read/write instrumentation.
  c=b.new_context(viewport={'width':393,'height':852},is_mobile=True,has_touch=True);p=c.new_page();c.route('https://**/*',lambda r:r.abort());p.goto(base+'?logo-compare=1');p.evaluate('MLAReady');p.on('dialog',lambda d:d.accept())
  seed=seed_data();seed['listening']=[dict(seed['listening'][0],entryId='synthetic-'+str(i),title='Synthetic album '+str(i)) for i in range(35)]
@@ -73,21 +92,21 @@ with sync_playwright() as pw:
   before=p.evaluate(SNAPSHOT)
   panel_state=p.locator('#filters-wrap').get_attribute('class')
   p.evaluate('''()=>{window.logoOriginalNodes=[document.querySelector('#library').firstChild,document.querySelector('#results').firstChild,document.querySelector('#listening-insights').firstChild];window.logoReads=window.logoWrites=window.logoStorageWrites=window.logoRequests=window.logoMutations=0;window.logoObserver=new MutationObserver(m=>logoMutations+=m.length);for(const id of ['library','results','listening-insights'])logoObserver.observe(document.getElementById(id),{childList:true,subtree:true,attributes:true});window.logoY=scrollY}''')
-  for name in list(SPECS)+['T-5']:
+  for name in list(SPECS)+['T-6']:
    p.locator('.brand-comparison button').filter(has_text=re.compile('^'+re.escape(name)+'$')).tap()
    assert p.evaluate('scrollY===logoY'),(screen,name)
   # Keyboard activation is also local and must not scroll.
-  btn=p.locator('.brand-comparison button').filter(has_text='T-1');btn.evaluate('(e)=>e.focus({preventScroll:true})');btn.press('Space')
+  btn=p.locator('.brand-comparison button').filter(has_text='T-6');btn.evaluate('(e)=>e.focus({preventScroll:true})');btn.press('Space')
   counters=p.evaluate('''()=>({reads:logoReads,writes:logoWrites,storage:logoStorageWrites,requests:logoRequests,mutations:logoMutations,nodes:logoOriginalNodes.every((n,i)=>n===[document.querySelector('#library').firstChild,document.querySelector('#results').firstChild,document.querySelector('#listening-insights').firstChild][i]),y:scrollY===logoY})''')
   assert counters==dict(reads=0,writes=0,storage=0,requests=0,mutations=0,nodes=True,y=True),counters
   assert p.locator('#filters-wrap').get_attribute('class')==panel_state
   assert p.evaluate(SNAPSHOT)==before;expect(p.locator('#results .result')).to_have_count(1);assert p.locator('#query').input_value()=='Synthetic search'
   p.evaluate('logoObserver.disconnect()')
-  p.locator('.brand-comparison button').filter(has_text='T-5').tap()
+  p.locator('.brand-comparison button').filter(has_text='T-6').tap()
   if screen=='archive':p.locator('#filters-toggle').click()
-  p.evaluate("document.activeElement?.blur();scrollTo({top:0,behavior:'instant'})");p.wait_for_function('scrollY===0');p.screenshot(path=str(OUT/f'T5-{screen}-393.png'))
+  p.evaluate("document.activeElement?.blur();scrollTo({top:0,behavior:'instant'})");p.wait_for_function('scrollY===0');p.screenshot(path=str(OUT/f'T6-{screen}-393.png'))
   print('PASS state retention',screen,counters,flush=True)
- p.reload();p.evaluate('document.fonts.ready');check(measure(p),'T-5');c.close()
+ p.reload();p.evaluate('document.fonts.ready');check(measure(p),'T-6');c.close()
  # Archive the exact original geometry without shipping it in the app.
  previous=subprocess.check_output(['git','show','294ee4c:index.html'],cwd=ROOT,text=True)
  for name in ['B-4','F-1','F-2','F-3']:
@@ -102,4 +121,4 @@ with sync_playwright() as pw:
  assert 'data-brand-symbol' not in (ROOT/'dist/index.html').read_text()
  b.close()
 for s in servers:s.shutdown()
-(OUT/'metrics.json').write_text(json.dumps(records,indent=2));print('PASS 144 wordmark cases, 200% text, no symbol/slot, stable 40px header and following UI, archived original SVGs, preview opt-in, default T-5')
+(OUT/'metrics.json').write_text(json.dumps(records,indent=2));print('PASS 96 candidate cases, 200% text, T-6 baseline unchanged, no symbol/slot, stable header and following UI, official accessible name, default T-6')
