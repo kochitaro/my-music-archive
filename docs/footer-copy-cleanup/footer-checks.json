@@ -1,0 +1,206 @@
+{
+  "cases": [
+    {
+      "kind": "source",
+      "width": 320,
+      "lang": "ja",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 320,
+      "lang": "ja",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 320,
+      "lang": "en",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 320,
+      "lang": "en",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 393,
+      "lang": "ja",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 393,
+      "lang": "ja",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 393,
+      "lang": "en",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 393,
+      "lang": "en",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 1280,
+      "lang": "ja",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 1280,
+      "lang": "ja",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 1280,
+      "lang": "en",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "source",
+      "width": 1280,
+      "lang": "en",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 320,
+      "lang": "ja",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 320,
+      "lang": "ja",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 320,
+      "lang": "en",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 320,
+      "lang": "en",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 393,
+      "lang": "ja",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 393,
+      "lang": "ja",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 393,
+      "lang": "en",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 393,
+      "lang": "en",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 1280,
+      "lang": "ja",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 1280,
+      "lang": "ja",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 1280,
+      "lang": "en",
+      "textScale": 1,
+      "exactCopy": true,
+      "noOverflow": true
+    },
+    {
+      "kind": "dist",
+      "width": 1280,
+      "lang": "en",
+      "textScale": 2,
+      "exactCopy": true,
+      "noOverflow": true
+    }
+  ],
+  "preservation": {
+    "idbAndRecordsPhotosUnchanged": true,
+    "jsonBytesUnchanged": true,
+    "jsonSHA256": "00407fa3207059d739984c5a434917d68c649b707f56d7dd4f122d02087a3765",
+    "syntheticCounts": {
+      "listening": 2,
+      "collection": 2,
+      "live": 2
+    }
+  }
+}
