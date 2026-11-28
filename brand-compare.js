@@ -14,11 +14,11 @@
  const label = document.createElement('span');
  label.textContent = 'Logo';
  panel.append(label);
- for (const name of ['T-1', 'T-2', 'T-3', 'T-4', 'T-5', 'T-6']) {
+ for (const name of ['T-6', 'M-1', 'M-2', 'M-3']) {
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = name;
-  button.setAttribute('aria-pressed', String(name === 'T-5'));
+  button.setAttribute('aria-pressed', String(name === 'T-6'));
   // Pointer selection must not move focus/scroll away from the current screen.
   button.addEventListener('pointerdown', event => event.preventDefault());
   button.addEventListener('click', () => {

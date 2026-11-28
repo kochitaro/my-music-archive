@@ -6,12 +6,12 @@
  font-weight:100 700;
  font-display:swap;
 }
-.brand{--brand-size:1.6rem;--brand-align:center;display:flex;align-items:center;justify-content:var(--brand-align);min-height:40px;gap:0;margin:5px 0 16px;max-width:100%;min-width:0;color:#f0f1f3}
-.brand[data-brand-choice="T-1"],.brand[data-brand-choice="T-4"]{--brand-size:1.733333333rem}
-.brand[data-brand-choice="T-2"],.brand[data-brand-choice="T-5"]{--brand-size:1.6rem}
-.brand[data-brand-choice="T-3"],.brand[data-brand-choice="T-6"]{--brand-size:1.466666667rem}
-.brand[data-brand-choice="T-1"],.brand[data-brand-choice="T-2"],.brand[data-brand-choice="T-3"]{--brand-align:flex-start;text-align:left}
-.brand:not([data-brand-choice]),.brand[data-brand-choice="T-4"],.brand[data-brand-choice="T-5"],.brand[data-brand-choice="T-6"]{text-align:center}
+.brand{--brand-size:1.466666667rem;display:flex;align-items:center;justify-content:center;text-align:center;min-height:40px;gap:0;margin:5px 0 16px;max-width:100%;min-width:0;color:#f0f1f3}
+.brand[data-brand-choice="M-2"]{--brand-size:1.6rem}
+.brand[data-brand-choice="M-3"]{--brand-size:1.733333333rem}
+.brand-short-name{display:none}
+.brand[data-brand-choice="M-1"] .brand-full-name,.brand[data-brand-choice="M-2"] .brand-full-name,.brand[data-brand-choice="M-3"] .brand-full-name{display:none}
+.brand[data-brand-choice="M-1"] .brand-short-name,.brand[data-brand-choice="M-2"] .brand-short-name,.brand[data-brand-choice="M-3"] .brand-short-name{display:inline}
 .brand h1{font-family:"Josefin Sans","Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:var(--brand-size);font-weight:400;letter-spacing:.02em;line-height:1.25;margin:0;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
 
 /* Temporary opt-in Preview comparison panel. Remove after header selection. */
@@ -21,6 +21,6 @@
 .brand-comparison button[aria-pressed="true"]{background:#c6e7ef;color:#12222c}
 .brand-comparison button:focus-visible{outline:2px solid #9fcfdc;outline-offset:1px}
 @media(max-width:360px){
- .brand-comparison{display:grid;grid-template-columns:auto repeat(3,44px)}
+ .brand-comparison{display:grid;grid-template-columns:auto repeat(2,44px)}
  .brand-comparison>span{grid-row:1 / 3;align-self:center}
 }
