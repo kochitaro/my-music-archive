@@ -1,0 +1,12 @@
+{
+  "from": "1504a21fe5f26f13230dde8b6bd2988e6b377db8",
+  "archiveCounts": {
+    "listening": 35,
+    "collection": 2,
+    "live": 2
+  },
+  "allIdbLocalUnchangedAfterUpgrade": true,
+  "portableJsonSHA256": "05efe636a90ad8298c7b93efbcfd092ffcbec72096ab6c5b4066e04f2b7b02ce",
+  "portableJsonUnchanged": true,
+  "comparisonRequests": 0
+}

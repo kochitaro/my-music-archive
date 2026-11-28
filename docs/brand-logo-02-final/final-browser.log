@@ -1,0 +1,3 @@
+/workspace/my-music-archive/tests/brand_final.py:42: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  diff=ImageChops.difference(a,b);changed=sum(pixel!=(0,0,0) for pixel in diff.getdata());assert changed==0,(kind,width,lang,changed)
+PASS 24 exact baseline cases with zero differing header pixels; 48 retired query cases; 20 host/query cases; 200% text; old->new synthetic DB/local/JSON/photos unchanged; no comparison runtime/assets
