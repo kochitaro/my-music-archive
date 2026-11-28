@@ -1,0 +1,27 @@
+{
+  "sourceSHA256": "373e88dba8c639f3f329761f2bb59c7efa4985b583fd6f4306028d9e22a84651",
+  "threshold": 128,
+  "simplificationSourcePx": 0.18,
+  "contours": 2,
+  "vertices": 472,
+  "sourceBoundsXYXY": [
+    279.375,
+    286.5609756097561,
+    929.281179138322,
+    972.4539877300614
+  ],
+  "viewBoxWH": [
+    649.906179138322,
+    685.8930121203052
+  ],
+  "IoU": 0.9983405850033347,
+  "sourceComponents": 2,
+  "svgComponents": 2,
+  "sourceHoles": 0,
+  "displayWidthAt40px": 37.90131508290269,
+  "sourceRawComponents": 3,
+  "discardedIsolatedPixels": 1,
+  "B4_SVGSHA256": "4f80dbfc448838ed480d2e377936fdfbd52e4b6202f3ccf63c2f4e1f1858abbd",
+  "minimumMajorContourGapSourcePx": 26.076809620810597,
+  "minimumMajorContourGapAt40px": 1.520750855309005
+}
